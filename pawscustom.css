@@ -3,9 +3,9 @@
 	background-color: #c553d6 ;
 }*/
 
-a.navbar-item:hover{
-	color: white;
-	background-color: #a72cba !important ;
+navbar-item:hover{
+	color: white !important;
+	background-color: #a72cba !important;
 }
 
 a.navbar-item.right{
@@ -14,7 +14,7 @@ a.navbar-item.right{
 }
 
 a.navbar-item{
-	color: white;
+	color: #ffffff !important;
 }
 
 #navbarDesktop.navbar-brand{
