@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PAWS motherhood Database</title>
+	
+    <link rel="stylesheet" href="bulma.css">
+	<link rel="stylesheet" href="pawscustom10-12-2018.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="dialog.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+
+	<div id="navbarDesktop " class="navbar-brand">
+		<img src="pawslogo.png" alt="PAWS Logo" >
+		<a class="navbar-item ">
+		Mom
+		</a>
+		<a class="navbar-item ">
+		Puppies
+		</a>
+		<a class="navbar-item ">
+		Miscellaneous
+		</a>	
+	</div>
+	
+
+	
+	<!--<div id="navbarSearch" class="navbar-end">
+			
+	</div>-->
+</nav>
+	<div class="field">
+	<div class="control">
+	<input class="input" type="text" placeholder="Search">
+	</div>
+	</div>
+			
+<section class="section">
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-8">
+    <div class="tile">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification is-primary is-12">
+          <p class="title">Ein</p>
+		  		  <p class="subtitle">
+		  <div class="dropdown">
+		  <button onclick="myFunction()" class="dropbtn">Select Litter</button>
+		  <div id="myDropdown" class="dropdown-content">
+			<a onclick="addMed('Litter 1')">1</a>
+			<a onclick="addMed('Litter 2')">2</a>
+			<a onclick="addMed('Litter 3')">3</a>
+		  </div>
+		  </div>
+		  <p id="test"></p>
+		  </p>
+        </article>
+        <article class="tile is-child notification is-warning" style="color: #ffffff">
+          <p class="title">Important Dates</p>
+          <p class="subtitle"><table class="table is-striped">
+			<thead>
+			<tr>
+			<th width="90%">Event</th>
+			<th width="50%">Date</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr><td>Start of Whelp</td>
+			<td>10/03/2018</td></tr>
+			<tr><td>End of Whelp</td>
+			<td></td></tr>
+			<tr><td>Birthdate of Litter</td>
+			<td></td></tr>
+			<tr><td>Start of Ween</td>
+			<td></td></tr>
+			<tr><td>End of Ween</td>
+			<td></td></tr>
+			<tr><td>Deworm</td>
+			<td></td></tr>
+			</tbody>
+			</table></p>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-info">
+          <p class="title">Notes</p>
+          <p class="subtitle">With an image</p>
+          <p class="subtitle"><table class="table is-striped">
+			<thead>
+			<tr>
+			<th>Date</th>
+			<th width="90%">Notes</th>
+			</tr>
+			</thead>
+			<tbody>
+			<td>10/9/2018</td>
+			<td>Blue pup threw up</td>
+			</tbody>
+			</table></p>
+        </article>
+      </div>
+    </div>
+	<div class="tile is-parent">
+      <article class="tile is-child notification is-danger">
+        <p class="title">Litter</p>
+        <div class="content">
+          <table class="table is-striped">
+			<thead>
+			<tr>
+			<th>Name</th>
+			<th>Color</th>
+			<th>Sex</th>
+			</tr>
+			</thead>
+			<tbody><tr>
+			<td>Puppy #1</td>
+			<td>White</td>
+			<td>Male</td></tr>
+			<tr>
+			<td>Puppy #2</td>
+			<td>Light Blue</td>
+			<td>Female</td></tr>
+			<tr>
+			<td>Puppy #3</td>
+			<td>Red</td>
+			<td>Female</td></tr>
+			</tbody>
+			</table></p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child notification is-success">
+          <p class="subtitle"><table class="table is-striped">
+			<p class="title">Litter Information</p>
+			<table class="table is-striped">
+			<tbody><tr>
+			<td width="80%">Father</td>
+			<td>(ID or Name)</td></tr>
+			<tr>
+			<td>Stillborns</td>
+			<td>1</td></tr>
+			<tr>
+			<td>Deaths</td>
+			<td>0</td>
+			</tbody>
+			</table></p>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</section>
+</body>
+</html>

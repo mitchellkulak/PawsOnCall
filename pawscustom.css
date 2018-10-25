@@ -1,0 +1,77 @@
+/*custom css page for paws website*/
+/*.navbar {
+	background-color: #c553d6 ;
+}*/
+
+a.navbar-item:hover{
+	color: white;
+	background-color: #a72cba !important ;
+}
+
+a.navbar-item.right{
+	margin-left:auto; 
+	margin-right:0;
+}
+
+a.navbar-item{
+	color: white;
+}
+
+#navbarDesktop.navbar-brand{
+	width: 100%;
+}
+
+div.control{
+	background-color: #c553d6;
+	padding: 10px;
+}
+
+article {
+	box-shadow: 5px 5px 5px #808080;
+}
+
+#navbarDesktopTitle {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #000000;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}

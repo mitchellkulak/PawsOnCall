@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PAWS motherhood Database</title>
+	
+    <link rel="stylesheet" href="bulma.css">
+	<link rel="stylesheet" href="pawscustom10-12-2018.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="dialog.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+
+	<div id="navbarDesktop " class="navbar-brand">
+		<img src="pawslogo.png" alt="PAWS Logo" >
+		<a class="navbar-item ">
+		Mom
+		</a>
+		<a class="navbar-item ">
+		Puppies
+		</a>
+		<a class="navbar-item ">
+		Miscellaneous
+		</a>	
+	</div>
+	
+
+	
+	<!--<div id="navbarSearch" class="navbar-end">
+			
+	</div>-->
+</nav>
+	<div class="field">
+	<div class="control">
+	<input class="input" type="text" placeholder="Search">
+	</div>
+	</div>
+			
+<section class="section">
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-8">
+    <div class="tile">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child notification is-primary is-12">
+          <p class="title">Ein</p>
+        </article>
+        <article class="tile is-child notification is-warning">
+          <p class="title">Feedback</p>
+		  <p class="subtitle">
+		  <button onclick="addNote()">Add Note</button>
+<p id="demo"></p>
+</p>
+          <p class="subtitle"><table class="table is-striped">
+			<thead>
+			<tr>
+			<th>Date</th>
+			<th width="90%">Notes</th>
+			</tr>
+			</thead>
+			<tbody>
+			<td>10/9/2018</td>
+			<td>Threw up at 7:30pm</td>
+			</tbody>
+			</table></p>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-info">
+          <p class="title">Temperature</p>
+          <p class="subtitle">With an image</p>
+          <figure class="image is-4by3">
+            <img src="https://bulma.io/images/placeholders/640x480.png">
+          </figure>
+        </article>
+      </div>
+    </div>
+	<div class="tile is-parent">
+      <article class="tile is-child notification is-danger">
+        <p class="title">Important Dates</p>
+        <div class="content">
+          <table class="table is-striped">
+			<thead>
+			<tr>
+			<th>Whelp Start</th>
+			<th>Whelp End</th>
+			</tr>
+			</thead>
+			<tbody>
+			<td>9/25/2018</td>
+			<td>10/9/2018</td>
+			</tbody>
+			</table></p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child notification is-success">
+      <div class="content">
+        <p class="title">Medical History</p>
+        <p class="subtitle">
+		<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">Medication</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a onclick="addMed('Probiotic Powder')">Probiotic Powder</a>
+    <a onclick="addMed('Benebac')">Benebac</a>
+    <a onclick="addMed('Tylan Powder')">Tylan Powder</a>
+	<a onclick="addMed('Cephlexin')">Cephlexin</a>
+    <a onclick="addMed('Amoxicillin)">Amoxicillin</a>
+    <a onclick="addMed('Valium')">Valium</a>
+	<a onclick="addMed('Clavamox')">Clavamox</a>
+    <a onclick="addMed('Oral Calcium')">Oral Calcium</a>
+    <a onclick="addMed('Albon')">Albon</a>
+	<a onclick="addMed('Pyrantel')">Pyrantel</a>
+	<a onclick="addMed('Panacure')">Panacure</a>
+	<a onclick="addMed('Metronid')">Metronid</a>
+	<a onclick="addMed('Other')">Other</a>
+  </div>
+</div>
+<p id="test"></p>
+		</p>
+        <div class="content">
+          <p class="subtitle"><table class="table is-striped">
+			<thead>
+			<tr>
+			<th>Time</th>
+			<th width="45%">Medication</th>
+			<th width="20%">Dosage</th>
+			</tr>
+			</thead>
+			<tbody>
+			<td>10/9/2018 10:50PM</td>
+			<td>Cephalexin</td>
+			<td>20mg</td>
+			</tbody>
+			</table></p>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</section>
+</body>
+</html>
