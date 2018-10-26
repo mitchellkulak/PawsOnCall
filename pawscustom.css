@@ -75,3 +75,7 @@ article {
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+p.title, p.subtitle{
+	color: white !important;
+}
