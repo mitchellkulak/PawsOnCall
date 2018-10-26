@@ -3,7 +3,7 @@
 	background-color: #c553d6 ;
 }*/
 
-navbar-item:hover{
+a.navbar-item:hover{
 	color: white !important;
 	background-color: #a72cba !important;
 }
@@ -75,3 +75,7 @@ article {
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+
+p.title, p.subtitle{
+	color: white !important;
+}
