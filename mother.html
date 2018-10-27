@@ -51,6 +51,19 @@
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
+		
+		function resizeChart () {
+			chart.draw(data, options);
+		}
+		if (document.addEventListener) {
+			window.addEventListener('resize', resizeChart);
+		}
+		else if (document.attachEvent) {
+			window.attachEvent('onresize', resizeChart);
+		}
+		else {
+			window.resize = resizeChart;
+		}
       }
     </script>
 	<!--google charts code-->
@@ -75,7 +88,9 @@
 	</div>-->
 </nav>
 	<div class="field">
+	
 	<div class="control">
+	<button onclick="addNote()">Search</button> 
 	<input class="input" type="text" placeholder="Search">
 	</div>
 	</div>
@@ -112,7 +127,7 @@
         <article class="tile is-child notification is-info">
           <p class="title">Temperature</p>
           <p class="subtitle">With an image</p>      
-		   <div id="chart_div" style="width: 640px; height: 480px;"></div>       
+		   <div id="chart_div" style="width: 100%;"></div>
         </article>
       </div>
     </div>
@@ -162,20 +177,7 @@
 <p id="test"></p>
 		</p>
         <div class="content">
-          <p class="subtitle"><table class="table is-striped">
-			<thead>
-			<tr>
-			<th>Time</th>
-			<th width="45%">Medication</th>
-			<th width="20%">Dosage</th>
-			</tr>
-			</thead>
-			<tbody>
-			<td>10/9/2018 10:50PM</td>
-			<td>Cephalexin</td>
-			<td>20mg</td>
-			</tbody>
-			</table></p>
+			<p> medical history table</p>
         </div>
       </div>
     </article>
