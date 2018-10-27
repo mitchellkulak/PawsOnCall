@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $host = "localhost";
 $username = "pawswhelp";
-$password = "Ireallylikepuppies!";
+$password = "Ireallylikepuppies1!";
 $db_name = "pawswhelpdb";
 $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
@@ -22,7 +22,7 @@ else {
     FROM Dogs"
     );
     while ($result = $dog_data->fetch_assoc()){
-        $theMasterArray[i] = $result;
+        $theMasterArray[$i] = $result;
         $i++;
     }
     echo json_encode($theMasterArray);
