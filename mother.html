@@ -82,21 +82,32 @@
 	</div>
 </nav>
 <!-- Navbar and logo -->
+
+<!-- Searchbar and button-->
+
 	<div class="field">
 	<div class="control">
 	<button class="button is-link searchbutton" onclick="searchForDogs()">Search</button> 
 	<input class="input" id="searchBar" type="text" placeholder="Search">
 	</div>
 	</div>
-			
+<!-- Searchbar and button-->
+
+
+	
 <section class="section">
 <div class="tile is-ancestor">
   <div class="tile is-vertical is-8">
     <div class="tile">
       <div class="tile is-parent is-vertical">
+		
+		<!-- Dog name tile-->
         <article class="tile is-child notification is-primary is-12">
           <p class="title">Ein</p>
         </article>
+		<!-- Dog name tile-->
+		
+		<!-- Notes tile -->
         <article class="tile is-child notification is-warning">
           <p class="title">Feedback</p>
 		  <p class="subtitle">
@@ -116,7 +127,11 @@
 			</tbody>
 			</table></p>
         </article>
+		<!-- notes tile -->
+		
       </div> 
+	  
+	  <!--temp graph tile-->
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
           <p class="title">Temperature</p>
@@ -124,9 +139,12 @@
 		   <div id="chart_div" style="width: 100%;"></div>
         </article>
       </div>
+	  <!--temp graph tile-->
     </div>
+	
+	<!--date tile-->
 	<div class="tile is-parent">
-      <article class="tile is-child notification is-danger">
+		<article class="tile is-child notification is-danger">
         <p class="title">Important Dates</p>
         <div class="content">
           <table class="table is-striped">
@@ -142,9 +160,12 @@
 			</tbody>
 			</table></p>
         </div>
-      </article>
+      </article>	  
     </div>
+	<!--date tile-->
   </div>
+  
+  <!--medications tile-->
   <div class="tile is-parent">
     <article class="tile is-child notification is-success">
       <div class="content">
@@ -176,6 +197,8 @@
       </div>
     </article>
   </div>
+  
+  <!--medications tile-->
 </div>
 </section>
 </body>
