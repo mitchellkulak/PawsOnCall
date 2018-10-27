@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="bulma.css">
 	<link rel="stylesheet" href="pawscustom.css">
 	
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="dialog.js"></script>
+	
 	<!-- favicon stuff-->
 	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -18,8 +21,40 @@
 	<meta name="theme-color" content="#ffffff">
 	<!-- favicon stuff-->
 	
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-	<script src="dialog.js"></script>
+	<!--google charts code-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable
+            ([['X', '1', '2', '3', '4', '5', '6'],
+              [1, 2, 3, 4, 5, 6, 7],
+              [2, 3, 4, 5, 6, 7, 8],
+              [3, 4, 5, 6, 7, 8, 9],
+              [4, 5, 6, 7, 8, 9, 10],
+              [5, 6, 7, 8, 9, 10, 11],
+              [6, 7, 8, 9, 10, 11, 12]
+        ]);
+
+        var options = {
+          legend: 'none',
+          series: {
+            0: { color: '#e2431e' },
+            1: { color: '#e7711b' },
+            2: { color: '#f1ca3a' },
+            3: { color: '#6f9654' },
+            4: { color: '#1c91c0' },
+            5: { color: '#43459d' },
+          }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+	<!--google charts code-->
+	
 </head>
 <body>
 
@@ -81,10 +116,8 @@
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
           <p class="title">Temperature</p>
-          <p class="subtitle">With an image</p>
-          <figure class="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/640x480.png">
-          </figure>
+          <p class="subtitle">With an image</p>      
+		   <div id="chart_div" style="width: 640px; height: 480px;"></div>       
         </article>
       </div>
     </div>
