@@ -95,6 +95,11 @@ article {
 	margin: 0 !important;
 }
 
-imput.input{
-		width: 95% !important;
+input.input{
+		width: 90% !important;
+		height: auto !important;
+}
+
+button.button.is-link.searchbutton{
+	width: 9.5%;
 }

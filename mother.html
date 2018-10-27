@@ -71,6 +71,7 @@
 </head>
 <body>
 
+<!-- Navbar and logo -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
 
 	<div id="navbarDesktop " class="navbar-brand">
@@ -79,18 +80,11 @@
 		<a class="navbar-item" href="puppies.html">Puppies</a>
 		<a class="navbar-item" href="misc.html">Misc</a>
 	</div>
-
-	
-
-	
-	<!--<div id="navbarSearch" class="navbar-end">
-			
-	</div>-->
 </nav>
+<!-- Navbar and logo -->
 	<div class="field">
-	
 	<div class="control">
-	<button onclick="searchForDogs()">Search</button> 
+	<button class="button is-link searchbutton" onclick="searchForDogs()">Search</button> 
 	<input class="input" id="searchBar" type="text" placeholder="Search">
 	</div>
 	</div>
@@ -106,7 +100,7 @@
         <article class="tile is-child notification is-warning">
           <p class="title">Feedback</p>
 		  <p class="subtitle">
-		  <button onclick="addNote()">Add Note</button>
+		  <button onclick="addNote()" class= "button is-link">Add Note</button>
 <p id="demo"></p>
 </p>
           <p class="subtitle"><table class="table is-striped">
