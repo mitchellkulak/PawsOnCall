@@ -17,7 +17,7 @@ if ($db->connect_error)
 else {
     $i = 0;
     $theMasterArray = array();
-    $dog_name = wendy;
+    $dog_name = "wendy";
     $dog_data = $db->query(
     "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
     FROM Volunteer AS v, Dogs AS d 
