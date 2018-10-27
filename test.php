@@ -21,7 +21,7 @@ else {
     "SELECT * 
     FROM Dogs"
     );
-    while ($result = $dog-data->fetch_assoc()){
+    while ($result = $dog_data->fetch_assoc()){
         $theMasterArray[i] = $result;
         $i++;
     }
