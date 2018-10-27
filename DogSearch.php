@@ -17,11 +17,11 @@ if ($db->connect_error)
 else {
     $i = 0;
     $theMasterArray = array();
-    $dog_name = "wendy";
+    $dog_name = urldecode($_GET['dog_name']);
     $dog_data = $db->query(
     "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
     FROM Volunteer AS v, Dogs AS d 
-    WHERE d.name LIKE '%Wendy%' AND d.Sex = 'F'"
+    WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F'"
     );
     while ($result = $dog_data->fetch_assoc()){
         $theMasterArray[$i] = $result;
