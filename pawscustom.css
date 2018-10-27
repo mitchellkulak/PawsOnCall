@@ -79,3 +79,22 @@ article {
 p.title, p.subtitle{
 	color: white !important;
 }
+
+article {
+	width: 100% !important;
+	height: auto !important;
+	padding: 5% 10% !important;
+}
+
+.chart {
+	width: 100%;
+	min-height: 450px;
+}
+
+.row {
+	margin: 0 !important;
+}
+
+imput.input{
+		width: 95% !important;
+}
