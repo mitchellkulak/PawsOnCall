@@ -26,6 +26,19 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+function searchForDogs(){
+    var dogName = document.getElementById("searchBar").value;
+    fetch('http://server.246valley.com:1338/PawsOnCall/DogSearch.php?dog_name=' + dogName) //Add the file name
+    .then(response => response.json())
+    .then((data) => {
+        var obj = JSON.parse(JSON.stringify(data));
+        obj.forEach(function(element) {
+            console.log(element.DogId);
+        });
+    });
+    console.log("searched");
+}
+
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
