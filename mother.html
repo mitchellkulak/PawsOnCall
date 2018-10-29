@@ -85,17 +85,24 @@
 </nav>
 <!-- Navbar and logo -->
 
-<!-- Searchbar and button-->
-
-	<div class="field">
-	<div class="control">
-	<input class="input" id="searchBar" type="text" placeholder="Search">
-	<button class="button is-link searchbutton" onclick="searchForDogs()">Search</button> 
-	</div>
-	</div>
-<!-- Searchbar and button-->
-
-
+<!-- searchbar-->
+<div class="field">
+<div class="is-hidden-touch">
+<div class="control">
+<input class="input" type="text">
+<button class="button is-link searchbutton" class="searchbutton" onclick="addNote()">Search</button> 
+</div>
+</div>
+<div class="is-hidden-desktop" style="display: block;">
+<div class="control is-expanded"  style="width: 107vw;">
+   <input class="input" type="text">
+</div>
+<div class="control">
+<button class="button is-link searchbutton" class="searchbutton" onclick="addNote()" style="width: 100%; padding: 0;">Search</button> 
+</div>
+</div>
+</div>
+<!--searchbar-->
 	
 <section class="section">
 <div class="tile is-ancestor">
