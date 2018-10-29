@@ -7,6 +7,7 @@
 	
     <link rel="stylesheet" href="bulma.css">
 	<link rel="stylesheet" href="pawscustom.css">
+	<script src="scripts.js"></script>
 
 	<!-- favicon stuff-->
 	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
@@ -20,7 +21,7 @@
 	
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
-<body>
+<body onload="searchForDogs()">
 <!-- navbar-->
 <nav class="navbar" role="navigation" aria-label="main navigation">
 
@@ -43,16 +44,13 @@
 	</div>
 	<!--searchbar-->
 		
-<section class="section">
+<section class="section" id="searchResults">
 	<!-- search result tile-->
 	<article class="tile is-child notification is-primary search">
-		<table>
-			<tr>
-				<td>Jill</td>
-				<td>Smith</td> 
-				<td>50</td>
-			</tr>
-		</table>
+				<div class="dogName">Leo</div>
+				<div class="breed">Husky</div> 
+				<div class="volunteerName">Jill Smith</div>
+				<button class="selectButton">Select</button>
 	</article>
 	<!-- Dog name tile-->
 </section>		
