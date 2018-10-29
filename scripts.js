@@ -36,7 +36,7 @@ function searchForDogs(){
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
     console.log(searchResultSection.innerHTML);
-    fetch('http://server.246valley.com:1338/PawsOnCall/DogSearch.php?dog_name=' + dogName) //Add the file name
+    fetch('DogSearch.php?dog_name=' + dogName) //Add the file name
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
