@@ -101,7 +101,14 @@ input.input{
 }
 
 button.button.is-link.searchbutton{
-	width: 9.5%;
+	width: 8%;
+	float: right;
+}
+
+button.button.is-link.logout{
+	width: 60px;
+	float: right !important;
+	vertical-align: baseline !important;
 }
 
 article.tile.is-child.notification.is-primary.search{
@@ -109,13 +116,4 @@ article.tile.is-child.notification.is-primary.search{
 	padding: 10px 15px 10px 15px !important;
 }
 
-table.search{
-	width:100%;
-	height:30px;
-	padding:0;
-	border-collapse: collapse;
-}
 
-table, th, td .search{
-    border: 1px solid black;
-}
