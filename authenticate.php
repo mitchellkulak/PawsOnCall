@@ -1,4 +1,5 @@
 <?php
+authenticate('XamUpyJniQzJntrCLbFB');
 function authenticate($sessionKey){
     $host = "localhost";
     $username = "pawswhelp";
@@ -16,11 +17,11 @@ function authenticate($sessionKey){
             $userID = $sessionrow["UserID"];
             $db->query("UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = '$userID'"); //updates session last used time
             $arr = array('userID' => $userID, 'sessionKey' => $sessionKey, 'error' => 'none');
-	    echo json_encode($arr);
+	    return json_encode($arr);
         }
         else{
 	    $error = array('error' => 'auth error');
-            echo json_encode($error);
+            return json_encode($error);
         }
     }
     $db->close();
