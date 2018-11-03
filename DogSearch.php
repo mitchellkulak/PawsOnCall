@@ -1,4 +1,5 @@
 <?php
+include 'authenticate.php';
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 ini_set('display_errors', 1);
@@ -10,9 +11,13 @@ $password = "Ireallylikepuppies1!";
 $db_name = "pawswhelpdb";
 $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
+authenticate('wxtK1rMqQLRQ1bhvLRib');
 if ($db->connect_error)
 {
     die("Can't connect");
+}
+else if (authenticate('wxtK1rMqQLRQ1bhvLRib') = 'auth error') {
+    echo('Error: cannot authenicate');
 }
 else {
     $i = 0;
