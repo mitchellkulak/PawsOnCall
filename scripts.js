@@ -148,7 +148,7 @@ function loadMotherInfo(){
         var obj = JSON.parse(JSON.stringify(data));
         obj.forEach(function(element) {
             console.log(element.Name);
-            dogNameDiv.value = element.Name;
+            dogNameDiv.textContent = element.Name;
         });
     });
     
