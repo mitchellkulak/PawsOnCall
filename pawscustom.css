@@ -121,7 +121,13 @@ input.input.create{
 
 }
 
-.center{
-	
+.center{	
     width: 90%;
+}
+
+div.buttons{
+	position:absolute !important;
+	top: 25px !important;
+	right: 2% !important;
+	z-index: +5 !important;
 }
