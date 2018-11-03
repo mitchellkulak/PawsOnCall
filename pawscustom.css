@@ -131,3 +131,12 @@ div.buttons{
 	right: 2% !important;
 	z-index: +5 !important;
 }
+
+.result{
+	float: left;
+    width: 28%;
+}
+
+.selectButton{
+	width: 15%;
+}

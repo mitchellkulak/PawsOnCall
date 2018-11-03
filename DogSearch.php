@@ -3,7 +3,8 @@
 include 'authenticate.php';
 $input = json_decode(authenticate('XamUpyJniQzJntrCLbFB'), true);
 if ($input['error'] == 'auth error') {
-    echo('Error: cannot authenicate');
+    $error = array('error' => 'auth error');
+    echo json_encode($error);
 }
 else{
 $host = "localhost";
