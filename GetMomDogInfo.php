@@ -22,11 +22,11 @@ if ($db->connect_error)
 else {
     $i = 0;
     $theMasterArray = array();
-    //$dog_id = mysqli_real_escape_string($db,urldecode($_GET['dog_id']));
+    $dog_id = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $dog_data = $db->query(
     "SELECT *
     FROM Dogs 
-    WHERE id = 1"
+    WHERE id = $dog_id"
     );
     while ($result = $dog_data->fetch_assoc()){
         $theMasterArray[$i] = $result;
