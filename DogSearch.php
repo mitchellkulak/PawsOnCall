@@ -1,7 +1,7 @@
 <?php
 
 include 'authenticate.php';
-$input = json_decode(authenticate('AdqpQ9RNNGoz80oEgQQb'));
+$input = json_decode(authenticate('XamUpyJniQzJntrCLbFB'));
 if ($input['error'] == 'auth error') {
     echo('Error: cannot authenicate');
 }
