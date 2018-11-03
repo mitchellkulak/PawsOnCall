@@ -1,5 +1,4 @@
 <?php
-authenticate("AdqpQ9RNNGoz80oEgQQb");
 function authenticate($sessionKey){
     $host = "localhost";
     $username = "pawswhelp";
