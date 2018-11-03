@@ -25,7 +25,7 @@ else {
     //$dog_id = mysqli_real_escape_string($db,urldecode($_GET['dog_id']));
     $dog_data = $db->query(
     "SELECT *
-    FROM Dogs 
+    FROM Litter 
     WHERE id = 1"
     );
     while ($result = $dog_data->fetch_assoc()){
