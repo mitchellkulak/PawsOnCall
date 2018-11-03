@@ -14,7 +14,7 @@ $password = "Ireallylikepuppies1!";
 $db_name = "pawswhelpdb";
 $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
-authenticate('wxtK1rMqQLRQ1bhvLRib');
+
 if ($db->connect_error)
 {
     die("Can't connect");
