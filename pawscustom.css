@@ -95,7 +95,7 @@ article {
 	margin: 0 !important;
 }
 
-input.input{
+input.input.searchbar{
 		width: 90% !important;
 		height: auto !important;
 }
@@ -116,4 +116,12 @@ article.tile.is-child.notification.is-primary.search{
 	padding: 10px 15px 10px 15px !important;
 }
 
+input.input.create{
+	width:100%!important;
 
+}
+
+.center{
+	
+    width: 90%;
+}
