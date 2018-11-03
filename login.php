@@ -31,7 +31,8 @@ else {
 			}while($keyMatch->num_rows > 0); //creates new session key repeatedly, until a unique key is created
 			$db->query("UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = '$userID'"); //sets session key in database, time is updated automatically
 		}
-		echo json_encode($userID,$sessionKey); //RETURN USER AND SESSION ID **NEEDS EDITING**
+		$arr = array($userID,$sessionKey); 
+		echo json_encode($arr); //RETURN USER AND SESSION ID **NEEDS EDITING**
     }else{
 	$error = 'auth error';
     	echo json_encode($error); //RETURN ERROR VALUE **NEEDS EDITING**
