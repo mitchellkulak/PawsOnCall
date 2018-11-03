@@ -57,12 +57,9 @@ function loginUser(){
     .then((data) => {
         console.log("START");
         console.log(data);
-        console.log("END");
+        document.cookie = "session=" + data.sessionKey;
+        console.log(document.cookie);
     });
-
-
-
-
 }
 
 function searchForDogs(){
