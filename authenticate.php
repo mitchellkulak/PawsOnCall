@@ -23,7 +23,8 @@ function authenticate($sessionKey){
             echo json_encode($userID,$sessionKey);
         }
         else{
-            echo json_encode(string $error = "auth error");
+	    $error = "auth error";
+            echo json_encode($error);
         }
     }
     $db->close();
