@@ -14,8 +14,8 @@ if ($db->connect_error)
     die("Can't connect");
 }
 else {
-    $user_name = "no@nomail.com";//mysqli_real_escape_string($db,$_POST['user_name']);
-    $hashed_password = "steve";//mysqli_real_escape_string($db,$_POST['hashed_password']);
+    $user_name = mysqli_real_escape_string($db,$_POST['user_name']);
+    $hashed_password = mysqli_real_escape_string($db,$_POST['hashed_password']);
     $users = $db->query("SELECT email, id, password FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
 	if($users->num_rows == 1){ //continues if and only if 1 matching user is returned
 		$userrow = $users->fetch_assoc();//pulls a row from the SQL return value
@@ -30,9 +30,9 @@ else {
 			}while($keyMatch->num_rows > 0); //creates new session key repeatedly, until a unique key is created
 			$db->query("UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = '$userID'"); //sets session key in database, time is updated automatically
 		}
-		echo $userID . "," . $sessionKey . "\n"; //RETURN USER AND SESSION ID **NEEDS EDITING**
+		echo json_encode($userID,$sessionKey); //RETURN USER AND SESSION ID **NEEDS EDITING**
     }else{
-    	echo "Authentication Error\n"; //RETURN ERROR VALUE **NEEDS EDITING**
+    	echo json_encode(string $error = 'auth error'); //RETURN ERROR VALUE **NEEDS EDITING**
     }
 }
 $db->close();
