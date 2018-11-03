@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PAWS Motherhood Database</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PAWS Motherhood Database</title>
 	
-    <link rel="stylesheet" href="bulma.css">
+  <link rel="stylesheet" href="bulma.css">
 	<link rel="stylesheet" href="pawscustom.css">
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
+	<script src="googleChartsCode.js"></script>
 	
 	<!-- favicon stuff-->
 	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
@@ -40,11 +41,6 @@
         var options = {
           legend: 'none',
           series: {
-            0: { color: '#e2431e' },
-            1: { color: '#e7711b' },
-            2: { color: '#f1ca3a' },
-            3: { color: '#6f9654' },
-            4: { color: '#1c91c0' },
             5: { color: '#43459d' },
           }
         };
@@ -64,9 +60,9 @@
 		else {
 			window.resize = resizeChart;
 		}
-      }
+      } 	
     </script>
-	<!--google charts code-->
+<!--googleChartsCode	-->
 	
 </head>
 <body>
@@ -79,20 +75,29 @@
 		<a class="navbar-item" href="mother.html">Mom</a>
 		<a class="navbar-item" href="puppies.html">Puppies</a>
 		<a class="navbar-item" href="misc.html">Misc</a>
-		<button class="navbar-item button is-link logout" onclick="placeholder()">Log out</button> 
 	</div>
 	
+	<div class="navbar-end">
+		<div class="navbar-item">
+			<div class="buttons">
+				<a class="button is-primary">
+				Log out
+				</a>
+			</div>
+		</div>
+	</div>
 </nav>
 <!-- Navbar and logo -->
 
 <!-- Searchbar and button-->
 	<div class="field">
-	<div class="control">
-	<input class="input" id="searchBar" type="text" placeholder="Search">
-	<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+		<div class="control">
+			<input class="input searchbar" type="text" placeholder="Search">
+			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+		</div>
 	</div>
-	</div>
-	
+<!--sarchbar and button-->	
+
 <section class="section">
 <div class="tile is-ancestor">
   <div class="tile is-vertical is-8">
@@ -126,15 +131,14 @@
 			</table></p>
         </article>
 		<!-- notes tile -->
-		
-      </div> 
+	
+      </div> <!--I don't know what this does but I'm sure it will break thigns if deleted-->
 	  
 	  <!--temp graph tile-->
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
-          <p class="title">Temperature</p>
-          <p class="subtitle">With an image</p>      
-		   <div id="chart_div" style="width: 100%;"></div>
+        <p class="title">Temperature</p>
+		   	<div id="chart_div" style="width: 100%;"></div>
         </article>
       </div>
 	  <!--temp graph tile-->
@@ -176,7 +180,7 @@
     <a onclick="addMed('Benebac')">Benebac</a>
     <a onclick="addMed('Tylan Powder')">Tylan Powder</a>
 	<a onclick="addMed('Cephlexin')">Cephlexin</a>
-    <a onclick="addMed('Amoxicillin)">Amoxicillin</a>
+    <a onclick="addMed('Amoxicillin')">Amoxicillin</a>
     <a onclick="addMed('Valium')">Valium</a>
 	<a onclick="addMed('Clavamox')">Clavamox</a>
     <a onclick="addMed('Oral Calcium')">Oral Calcium</a>
