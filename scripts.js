@@ -137,6 +137,21 @@ function redirectToSearch(){
     window.location.href = "searchresult.html?search=" + dogName;
 }
 
+function loadMotherInfo(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const dogID = urlParams.get('dogID');
+
+    fetch('GetMomDogInfo.php?dogID=' + dogID) //Add the file name
+    .then(response => response.json())
+    .then((data) => {
+        var obj = JSON.parse(JSON.stringify(data));
+        obj.forEach(function(element) {
+            console.log(element.Name);
+        });
+    });
+    
+
+}
 
 /**
 * Secure Hash Algorithm (SHA1)
