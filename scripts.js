@@ -26,11 +26,6 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
-function redirectToSearch(){
-    var dogName = document.getElementById("searchBar").value;
-    window.location.href = "searchresult.html?search=" + dogName;
-}
-
 function loginUser(){
     // Call login.php with username and SHA-1 hashed password in the POST data.
     var url = "login.php"
@@ -99,6 +94,7 @@ function searchForDogs(){
             var selectButton = document.createElement("button");
             selectButton.classList.add("selectButton");
             selectButton.innerHTML = "Select";
+            selectButton.onclick = function() { redirectToMother(element.DogId); };
             //Need to add onclick with access to dogID
 
             outerArticle.appendChild(dogNameDiv);
@@ -131,6 +127,16 @@ window.onclick = function(event) {
     }
   }
 }
+
+function redirectToMother(dogId){
+    window.location.href = "mother.html?dogID=" + dogId;
+}
+
+function redirectToSearch(){
+    var dogName = document.getElementById("searchBar").value;
+    window.location.href = "searchresult.html?search=" + dogName;
+}
+
 
 /**
 * Secure Hash Algorithm (SHA1)
