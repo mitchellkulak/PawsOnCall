@@ -1,7 +1,7 @@
 <?php
 
 include 'authenticate.php';
-$input = json_decode(authenticate('XamUpyJniQzJntrCLbFB'));
+$input = json_decode(authenticate('XamUpyJniQzJntrCLbFB'), true);
 if ($input['error'] == 'auth error') {
     echo('Error: cannot authenicate');
 }
@@ -10,7 +10,7 @@ $host = "localhost";
 $username = "pawswhelp";
 $password = "Ireallylikepuppies1!";
 $db_name = "pawswhelpdb";
-$theMasterArray = array();
+$MasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
 
 if ($db->connect_error)
@@ -19,8 +19,7 @@ if ($db->connect_error)
 }
 else {
     $i = 0;
-    $theMasterArray = array();
-    $dog_name = mysqli_real_escape_string($db,urldecode($_GET['dog_name']));
+    $dog_name = "wendy";//mysqli_real_escape_string($db,urldecode($_GET['dog_name']));
     $userID = $input['userID'];
     $dog_data = $db->query(
     "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
@@ -28,10 +27,10 @@ else {
     WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND d.VolunteerID = '$userID'"
     );
     while ($result = $dog_data->fetch_assoc()){
-        $theMasterArray[$i] = $result;
+        $MasterArray[$i] = $result;
         $i++;
     }
-    echo json_encode($theMasterArray);
+    echo json_encode($MasterArray);
         $db->close();
 }
 }
