@@ -140,6 +140,7 @@ function redirectToSearch(){
 function loadMotherInfo(){
     const urlParams = new URLSearchParams(window.location.search);
     const dogID = urlParams.get('dogID');
+    var dogNameDiv = document.getElementById("dogNameDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID) //Add the file name
     .then(response => response.json())
@@ -147,6 +148,7 @@ function loadMotherInfo(){
         var obj = JSON.parse(JSON.stringify(data));
         obj.forEach(function(element) {
             console.log(element.Name);
+            dogNameDiv.value = element.Name;
         });
     });
     
