@@ -38,7 +38,7 @@ function loginUser(){
     var password = "steve";
     var data = {};
     data.user_name = username;
-    data.hashed_password = sha1(password);
+    data.hashed_password = SHA1(password);
    
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
