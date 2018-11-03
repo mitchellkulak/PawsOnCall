@@ -2,7 +2,6 @@
 
 include 'authenticate.php';
 $input = json_decode(authenticate('AdqpQ9RNNGoz80oEgQQb'));
-echo $input;
 if ($input['error'] == 'auth error') {
     echo('Error: cannot authenicate');
 }
