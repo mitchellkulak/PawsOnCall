@@ -1,5 +1,8 @@
 <?php
 include 'authenticate.php';
+if (authenticate('wxtK1rMqQLRQ1bhvLRib') = 'auth error') {
+    echo('Error: cannot authenicate');
+}
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 ini_set('display_errors', 1);
@@ -15,9 +18,6 @@ authenticate('wxtK1rMqQLRQ1bhvLRib');
 if ($db->connect_error)
 {
     die("Can't connect");
-}
-else if (authenticate('wxtK1rMqQLRQ1bhvLRib') = 'auth error') {
-    echo('Error: cannot authenicate');
 }
 else {
     $i = 0;
