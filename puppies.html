@@ -42,7 +42,7 @@
 <!-- Searchbar and button-->
 <div class="field">
 		<div class="control">
-			<input class="input searchbar" type="text" placeholder="Search">
+			<input class="input searchbar" id="searchBar" type="text" placeholder="Search">
 			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
 		</div>
 	</div>
@@ -97,7 +97,7 @@
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
           <p class="title">Notes</p>
-          <p class="subtitle">With an image</p>
+					<button onclick="addNote()" class= "button is-link">Add Note</button> 
           <p class="subtitle"><table class="table is-striped">
 			<thead>
 			<tr>

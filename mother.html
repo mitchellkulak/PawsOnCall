@@ -91,7 +91,7 @@
 <!-- Searchbar and button-->
 	<div class="field">
 		<div class="control">
-			<input class="input searchbar" type="text" placeholder="Search">
+			<input class="input searchbar" id="searchBar" type="text" placeholder="Search">
 			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
 		</div>
 	</div>
@@ -136,7 +136,10 @@
 	  <!--temp graph tile-->
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
-        <p class="title">Temperature</p>
+				<p class="title">
+					Temperature 
+					<button onclick="addNote()" class= "button is-link">Add Temp</button> 
+				</p>				
 		   	<div id="chart_div" style="width: 100%;"></div>
         </article>
       </div>

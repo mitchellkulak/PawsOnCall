@@ -22,35 +22,39 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body onload="searchForDogs()">
-<!-- navbar-->
-<nav class="navbar" role="navigation" aria-label="main navigation">
 
+<!-- Navbar, logo, logout button -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
 	<div id="navbarDesktop " class="navbar-brand">
 		<img src="images/pawslogo.png" alt="PAWS Logo" >
 		<a class="navbar-item" href="mother.html">Mom</a>
 		<a class="navbar-item" href="puppies.html">Puppies</a>
 		<a class="navbar-item" href="misc.html">Misc</a>
 	</div>
-	
+	<div class="buttons">
+		<a class="button is-primary logout">
+		Log out
+		</a>
+	</div>
 </nav>
-<!-- navbar-->
+<!-- Navbar, logo, logout button -->
 
-	<!-- searchbar-->
-	<div class="field">
-	<div class="control">
-	<input class="input" type="text" placeholder="Search">
-	<button class="button is-link searchbutton" class="searchbutton" onclick="addNote()">Search</button> 
+<!-- Searchbar and button-->
+<div class="field">
+		<div class="control">
+			<input class="input searchbar" id="searchBar" type="text" placeholder="Search">
+			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+		</div>
 	</div>
-	</div>
-	<!--searchbar-->
-		
+<!--sarchbar and button-->
+	
 <section class="section" id="searchResults">
 	<!-- search result tile-->
 	<article class="tile is-child notification is-primary search">
-				<div class="dogName">Leo</div>
-				<div class="breed">Husky</div> 
-				<div class="volunteerName">Jill Smith</div>
-				<button class="selectButton">Select</button>
+		<div class="dogName result">Leo</div>
+		<div class="breed result">Husky</div> 
+		<div class="volunteerName result">Jill Smith</div>
+		<button class="button is-link selectButton">Select</button>	
 	</article>
 	<!-- Dog name tile-->
 </section>		
