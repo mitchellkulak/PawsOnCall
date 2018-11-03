@@ -133,7 +133,7 @@ function redirectToMother(dogId){
 }
 
 function redirectToSearch(){
-    var dogName = document.getElementById("searchbar").value;
+    var dogName = document.getElementById("searchBar").value;
     window.location.href = "searchresult.html?search=" + dogName;
 }
 
