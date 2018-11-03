@@ -14,8 +14,9 @@ if ($db->connect_error)
     die("Can't connect");
 }
 else {
-    $user_name = mysqli_real_escape_string($db,$_POST['user_name']);
-    $hashed_password = mysqli_real_escape_string($db,$_POST['hashed_password']);
+    $ar = json_decode($_POST);
+    $user_name = mysqli_real_escape_string($db,$ar[0]);
+    $hashed_password = mysqli_real_escape_string($db,$ar[1]);
     $users = $db->query("SELECT email, id, password FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
 	if($users->num_rows == 1){ //continues if and only if 1 matching user is returned
 		$userrow = $users->fetch_assoc();//pulls a row from the SQL return value
