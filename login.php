@@ -14,7 +14,7 @@ if ($db->connect_error)
     die("Can't connect");
 }
 else {
-    $ar = json_decode($_POST);
+    $ar = json_decode(file_get_contents('php://input'), true);
     $user_name = mysqli_real_escape_string($db,$ar[0]);
     $hashed_password = mysqli_real_escape_string($db,$ar[1]);
     $users = $db->query("SELECT email, id, password FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
@@ -33,7 +33,8 @@ else {
 		}
 		echo json_encode($userID,$sessionKey); //RETURN USER AND SESSION ID **NEEDS EDITING**
     }else{
-    	echo json_encode(string $error = 'auth error'); //RETURN ERROR VALUE **NEEDS EDITING**
+	$error = 'auth error';
+    	echo json_encode($error); //RETURN ERROR VALUE **NEEDS EDITING**
     }
 }
 $db->close();
