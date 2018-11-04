@@ -71,7 +71,7 @@ function verifySessionCookie(){
 
 function handleSearchKeyPress(e){
     if(e.keyCode === 13){
-        searchForDogs();
+        redirectToSearch();
     }
 
     return false;
