@@ -159,10 +159,11 @@ function redirectToSearch(){
 function loadMotherInfo(){
     verifySessionCookie();
     var dogID = getCookie("dogID");
+    var session = getCookie("session");
     console.log(dogID);
     var dogNameDiv = document.getElementById("dogNameDiv");
 
-    fetch('GetMomDogInfo.php?dogID=' + dogID) //Add the file name
+    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
