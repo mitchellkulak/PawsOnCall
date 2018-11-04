@@ -129,7 +129,9 @@ window.onclick = function(event) {
 }
 
 function redirectToMother(dogId){
-    window.location.href = "mother.html?dogID=" + dogId;
+    document.cookie = "dogID=" + dogId;
+    console.log(document.cookie);
+    //change to using a cookie instead of querystring 
 }
 
 function redirectToSearch(){
