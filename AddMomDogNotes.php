@@ -22,19 +22,21 @@ $db = mysqli_connect("$host","$username","$password","$db_name");
 $ar = json_decode(file_get_contents('php://input'), true);
 $momDog_note = "this is a note";//mysqli_real_escape_string($db,$ar['Note']);
 $dog_id =  2;//mysqli_real_escape_string($db,$ar['DogID']);
-$time = time();//mysqli_real_escape_string($db,$ar['Time']);
+$time = 'current_timestamp';//mysqli_real_escape_string($db,$ar['Time']);
 
 if ($db->connect_error)
 {
     die("Can't connect");
 }
 else {
-    $dog_data = $db->query(
+    if ($db->query(
     "INSERT 
     INTO DogUpdates
-    (Note) 
-    VALUES ($dog_id, $time, '$momDog_note')"
-    );
+    VALUES ($dog_id, $time, '$momDog_note')") === TRUE) {
+        echo "Record updated successfully";
+    } else {
+        echo "Error updating record: " . $db->error;
+    }
     $db->close();
 }
 }
