@@ -27,10 +27,11 @@ else {
     $i = 0;
     $theMasterArray = array();
     $dog_id = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
+    $userID = $input['userID'];
     $dog_data = $db->query(
     "SELECT *
     FROM Dogs 
-    WHERE id = $dog_id"
+    WHERE id = $dog_id and VolunteerID = $userID"
     );
     while ($result = $dog_data->fetch_assoc()){
         $theMasterArray[$i] = $result;
