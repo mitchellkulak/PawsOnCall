@@ -1,5 +1,5 @@
 <?php
-authenticate('XamUpyJniQzJntrCLbFB');
+authenticate('XamUpyJniQzJntrCLbFB'); //REMOVE
 function authenticate($sessionKey){
     $host = "localhost";
     $username = "pawswhelp";
