@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'authenticate.php';
-$input = json_decode(authenticate('XamUpyJniQzJntrCLbFB'), true);
+$input = json_decode(authenticate(urldecode($_GET['session'])), true);
 if ($input['error'] == 'auth error') {
     $error = array('error' => 'auth error');
     echo json_encode($error);
