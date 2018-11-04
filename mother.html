@@ -85,9 +85,6 @@
 </nav>
 <!-- Navbar, logo, logout button -->
 
-
-
-
 <!-- Searchbar and button-->
 	<div class="field">
 		<div class="control">
@@ -97,41 +94,20 @@
 	</div>
 <!--sarchbar and button-->	
 
-<section class="section">
-<div class="tile is-ancestor">
+<!-- Dog name tile & section-->
+<section class="section mother">
+		<div class="tile">
+		<article class="tile is-child notification is-primary dogname">
+				<p class="title" id="dogNameDiv">Ein</p>
+			</article>
+</section>
+<!-- Dog name tile & section-->
+
+<section class="section mother">
+
+	<div class="tile is-ancestor">
   <div class="tile is-vertical is-8">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-		
-				<!-- Dog name tile-->
-        <article class="tile is-child notification is-primary is-12">
-          <p class="title" id="dogNameDiv">Ein</p>
-        </article>
-				<!-- Dog name tile-->
-		
-				<!-- Notes tile -->
-        <article class="tile is-child notification is-warning">
-					<p class="title">Notes 
-						<button onclick="addNote()" class= "button is-link inline">Add Note</button>
-					</p>
-					<p class="subtitle"><table class="table is-striped">
-						<thead>
-						<tr>
-						<th>Date</th>
-						<th width="90%">Notes</th>
-						</tr>
-						</thead>
-						<tbody>
-						<td>10/9/2018</td>
-						<td>Threw up at 7:30pm</td>
-						</tbody>
-						</table>
-					</p>
-				</article>
-				<!-- notes tile -->
-	
-      </div> <!--I don't know what this does but I'm sure it will break thigns if deleted-->
-	  
+    <div class="tile"> 
 	  <!--temp graph tile-->
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
@@ -139,6 +115,7 @@
 					Temp
 					<button onclick="addNote()" class= "button is-link inline">Add Temp</button> 
 				</p>				
+				<div id="chart_div"> 
         </article>
       </div>
 	  <!--temp graph tile-->
@@ -167,7 +144,7 @@
 	<!--date tile-->
   </div>
   
-  <!--medications tile--
+  <!--medications tile-->
   <div class="tile is-parent">
     <article class="tile is-child notification is-success">
       <div class="content">
@@ -199,7 +176,7 @@
     </article>
   </div>
   
-  !--medications tile-->
+  <!--medications tile-->
 </div>
 </section>
 </body>
