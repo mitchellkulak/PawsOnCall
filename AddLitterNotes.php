@@ -20,8 +20,9 @@ $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$litter_note = mysqli_real_escape_string($db,$ar['litterID']);
-
+$litter_note = mysqli_real_escape_string($db,$ar['Note']);
+$litter_id =  mysqli_real_escape_string($db,$ar['LitterID']);
+$time = mysqli_real_escape_string($db,$ar['Time']);
 if ($db->connect_error)
 {
     die("Can't connect");
@@ -33,9 +34,7 @@ else {
     $dog_data = $db->query(
     "INSERT 
     INTO LitterUpdates
-    (Note) 
-    VALUES ($litter_note)
-    WHERE id = $litter_id"
+    VALUES ($litter_id, $time, '$litter_note')"
     );
     while ($result = $dog_data->fetch_assoc()){
         $theMasterArray[$i] = $result;

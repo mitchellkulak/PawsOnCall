@@ -20,7 +20,9 @@ $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$momDog_note = mysqli_real_escape_string($db,$ar['dogID']);
+$momDog_note = mysqli_real_escape_string($db,$ar['Note']);
+$dog_id =  mysqli_real_escape_string($db,$ar['DogID']);
+$time = mysqli_real_escape_string($db,$ar['Time']);
 
 if ($db->connect_error)
 {
@@ -29,7 +31,6 @@ if ($db->connect_error)
 else {
     $i = 0;
     $theMasterArray = array();
-    $dog_id = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $dog_data = $db->query(
     "INSERT 
     INTO LitterUpdates
