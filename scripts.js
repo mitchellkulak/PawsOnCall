@@ -70,7 +70,9 @@ function verifySessionCookie(){
 }
 
 function handleSearchKeyPress(e){
+    console.log("function entered");
     if(e.keyCode === 13){
+        console.log("enter pressed");
         redirectToSearch();
     }
 
