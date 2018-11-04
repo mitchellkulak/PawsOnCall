@@ -92,7 +92,7 @@
 	<div class="field">
 		<div class="control">
 			<input class="input searchbar" id="searchBar" type="text" placeholder="Search">
-			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+			<button class="button is-link searchbutton" onclick="redirectToSearch()" onkeypress="handleKeyPress()">Search</button> 
 		</div>
 	</div>
 <!--sarchbar and button-->	
@@ -103,33 +103,32 @@
     <div class="tile">
       <div class="tile is-parent is-vertical">
 		
-		<!-- Dog name tile-->
+				<!-- Dog name tile-->
         <article class="tile is-child notification is-primary is-12">
           <p class="title" id="dogNameDiv">Ein</p>
         </article>
-		<!-- Dog name tile-->
+				<!-- Dog name tile-->
 		
-		<!-- Notes tile -->
+				<!-- Notes tile -->
         <article class="tile is-child notification is-warning">
-          <p class="title">Feedback</p>
-		  <p class="subtitle">
-		  <button onclick="addNote()" class= "button is-link">Add Note</button>
-<p id="demo"></p>
-</p>
-          <p class="subtitle"><table class="table is-striped">
-			<thead>
-			<tr>
-			<th>Date</th>
-			<th width="90%">Notes</th>
-			</tr>
-			</thead>
-			<tbody>
-			<td>10/9/2018</td>
-			<td>Threw up at 7:30pm</td>
-			</tbody>
-			</table></p>
-        </article>
-		<!-- notes tile -->
+					<p class="title">Notes 
+						<button onclick="addNote()" class= "button is-link inline">Add Note</button>
+					</p>
+					<p class="subtitle"><table class="table is-striped">
+						<thead>
+						<tr>
+						<th>Date</th>
+						<th width="90%">Notes</th>
+						</tr>
+						</thead>
+						<tbody>
+						<td>10/9/2018</td>
+						<td>Threw up at 7:30pm</td>
+						</tbody>
+						</table>
+					</p>
+				</article>
+				<!-- notes tile -->
 	
       </div> <!--I don't know what this does but I'm sure it will break thigns if deleted-->
 	  
@@ -137,10 +136,9 @@
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
 				<p class="title">
-					Temperature 
-					<button onclick="addNote()" class= "button is-link">Add Temp</button> 
+					Temp
+					<button onclick="addNote()" class= "button is-link inline">Add Temp</button> 
 				</p>				
-		   	<div id="chart_div" style="width: 100%;"></div>
         </article>
       </div>
 	  <!--temp graph tile-->
