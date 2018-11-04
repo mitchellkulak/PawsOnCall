@@ -31,10 +31,9 @@ if ($db->connect_error)
 else {
     $dog_data = $db->query(
     "INSERT 
-    INTO LitterUpdates
+    INTO DogUpdates
     (Note) 
-    VALUES ($mom_note)
-    WHERE id = $dog_id"
+    VALUES ($dog_id, $time, '$momDog_note')"
     );
     $db->close();
 }
