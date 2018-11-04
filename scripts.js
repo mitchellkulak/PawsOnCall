@@ -26,6 +26,11 @@ function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
+function logout(){
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+    window.location.href = "login.html";
+}
+
 function loginUser(){
     // Call login.php with username and SHA-1 hashed password in the POST data.
     var url = "login.php"
