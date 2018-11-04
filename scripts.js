@@ -61,7 +61,6 @@ function searchForDogs(){
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    console.log(searchResultSection.innerHTML);
     fetch('DogSearch.php?dog_name=' + dogName) //Add the file name
     .then(response => response.json())
     .then((data) => {
@@ -130,6 +129,7 @@ window.onclick = function(event) {
 
 function redirectToMother(dogId){
     document.cookie = "dogID=" + dogId;
+    window.location.href = "mother.html";
     console.log(document.cookie);
     //change to using a cookie instead of querystring 
 }
@@ -140,8 +140,8 @@ function redirectToSearch(){
 }
 
 function loadMotherInfo(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const dogID = urlParams.get('dogID');
+    var dogID = getCookie("dogID");
+    console.log(dogID);
     var dogNameDiv = document.getElementById("dogNameDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID) //Add the file name
@@ -155,6 +155,22 @@ function loadMotherInfo(){
     });
     
 
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }
 
 /**
