@@ -56,7 +56,7 @@ function loginUser(){
     .then(response => response.json()) // parses response to JSON
     .then((data) => {
         console.log(data);
-        document.cookie = "session=" + data.sessionKey;
+        document.cookie = "session=asdlfjhaeklj" + data.sessionKey;
         console.log(document.cookie);
         window.location.href = "mother.html";
     });
@@ -168,7 +168,7 @@ function redirectToSearch(){
 }
 
 function loadMotherInfo(){
-    verifySessionCookie();
+    // verifySessionCookie(); //Removed to help chris debug
     var dogID = getCookie("dogID");
     var session = getCookie("session");
     console.log(dogID);
