@@ -57,11 +57,18 @@ function loginUser(){
     });
 }
 
+function verifySessionCookie(){
+    var sessionKey = getCookie("session");
+    if (sessionKey == null){
+        window.location.href = "login.html";
+    }
+}
+
 function searchForDogs(){
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    fetch('DogSearch.php?dog_name=' + dogName) //Add the file name
+    fetch('DogSearch.php?dog_name=' + dogName + "&session=" + getCookie(session)) //Add the file name
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
@@ -133,8 +140,6 @@ window.onclick = function(event) {
 function redirectToMother(dogId){
     document.cookie = "dogID=" + dogId;
     window.location.href = "mother.html";
-    console.log(document.cookie);
-    //change to using a cookie instead of querystring 
 }
 
 function redirectToSearch(){
@@ -143,6 +148,7 @@ function redirectToSearch(){
 }
 
 function loadMotherInfo(){
+    verifySessionCookie();
     var dogID = getCookie("dogID");
     console.log(dogID);
     var dogNameDiv = document.getElementById("dogNameDiv");
