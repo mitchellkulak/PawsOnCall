@@ -20,7 +20,7 @@ if ($db->connect_error)
 }
 else {
     $i = 0;
-    $dog_name = "wendy";//mysqli_real_escape_string($db,urldecode($_GET['dog_name']));
+    $dog_name = mysqli_real_escape_string($db,urldecode($_GET['dog_name']));
     $userID = $input['userID'];
     $dog_data = $db->query(
     "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 

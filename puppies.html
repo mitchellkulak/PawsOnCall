@@ -20,6 +20,30 @@
 	
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
+	<script>
+		function editDates() {
+		  document.getElementById("whelpStart").removeAttribute("disabled");
+		  document.getElementById("whelpEnd").removeAttribute("disabled");
+		  document.getElementById("whelpDate").removeAttribute("disabled");
+		  document.getElementById("weanStart").removeAttribute("disabled");
+		  document.getElementById("weanEnd").removeAttribute("disabled");
+		  document.getElementById("deworm").removeAttribute("disabled");
+		  document.getElementById('edit').hidden = true;
+		  document.getElementById('save').hidden = false;
+		  
+		  return false;
+		}
+		
+		function editLitter() {
+		  document.getElementById("father").removeAttribute("disabled");
+		  document.getElementById("stillborns").removeAttribute("disabled");
+		  document.getElementById("deaths").removeAttribute("disabled");
+		  document.getElementById('edit').hidden = true;
+		  document.getElementById('save').hidden = false;
+		  
+		  return false;
+		}
+	</script>
 </head>
 <body>
 
@@ -70,28 +94,85 @@
         </article>
         <article class="tile is-child notification is-warning" style="color: #ffffff">
           <p class="title">Important Dates</p>
-          <p class="subtitle"><table class="table is-striped">
-			<thead>
-			<tr>
-			<th width="90%">Event</th>
-			<th width="50%">Date</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr><td>Start of Whelp</td>
-			<td>10/03/2018</td></tr>
-			<tr><td>End of Whelp</td>
-			<td></td></tr>
-			<tr><td>Birthdate of Litter</td>
-			<td></td></tr>
-			<tr><td>Start of Wean</td>
-			<td></td></tr>
-			<tr><td>End of Wean</td>
-			<td></td></tr>
-			<tr><td>Deworm</td>
-			<td></td></tr>
-			</tbody>
-			</table></p>
+          <p class="title">Important Dates</p>
+			<form class="form-horizontal">
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Whelp Start</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="whelpStart" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Whelp End</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="whelpEnd" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Whelp Date</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="whelpDate" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Wean Start</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="weanStart" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Wean End</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="weanEnd" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Deworm</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="deworm" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="form-group">
+				  <button type="edit" class="btn btn-default" id="edit" onclick="return editDates()">Edit</button>
+				  <button type="submit" class="btn btn-default" id="save" hidden>Save</button>
+				</div>
+			</form>
         </article>
       </div>
       <div class="tile is-parent">
@@ -145,20 +226,49 @@
   </div>
   <div class="tile is-parent">
     <article class="tile is-child notification is-success">
-          <p class="subtitle"><table class="table is-striped">
-			<p class="title">Litter Information</p>
-			<table class="table is-striped">
-			<tbody><tr>
-			<td width="80%">Father</td>
-			<td>(ID or Name)</td></tr>
-			<tr>
-			<td>Stillborns</td>
-			<td>1</td></tr>
-			<tr>
-			<td>Deaths</td>
-			<td>0</td>
-			</tbody>
-			</table></p>
+          <p class="title">Litter Information</p>
+			<form class="form-horizontal">
+			<div class="field is-horizontal">
+			  <div class="field-label is-normal">
+				<label class="label">Father</label>
+			  </div>
+			  <div class="field-body">
+				<div class="field">
+				  <p class="control is-expanded">
+					<input class="input" type="text" id="father" placeholder="Disabled input" disabled>
+				  </p>
+				</div>
+			  </div>
+			</div>
+			<div class="field is-horizontal">
+			  <div class="field-label is-normal">
+				<label class="label">Stillborns</label>
+			  </div>
+			  <div class="field-body">
+				<div class="field">
+				  <p class="control is-expanded">
+					<input class="input" type="text" id="stillborns" placeholder="Disabled input" disabled>
+				  </p>
+				</div>
+			  </div>
+			</div>
+			<div class="field is-horizontal">
+			  <div class="field-label is-normal">
+				<label class="label">Deaths</label>
+			  </div>
+			  <div class="field-body">
+				<div class="field">
+				  <p class="control is-expanded">
+					<input class="input" type="text" id="deaths" placeholder="Disabled input" disabled>
+				  </p>
+				</div>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <button type="edit" class="btn btn-default" id="edit" onclick="return editLitter()">Edit</button>
+			  <button type="submit" class="btn btn-default" id="save" hidden>Save</button>
+			</div>
+			</form>
         </div>
       </div>
     </article>
