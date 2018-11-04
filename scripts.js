@@ -79,6 +79,10 @@ function searchForDogs(){
         var obj = JSON.parse(JSON.stringify(data));
         obj.forEach(function(element) {
 
+            if(element.error == "auth error"){
+                logout();
+            }
+            
             var outerArticle = document.createElement("article");
             outerArticle.classList.add("tile");
             outerArticle.classList.add("is-child");
