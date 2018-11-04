@@ -20,9 +20,9 @@ $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$momDog_note = mysqli_real_escape_string($db,$ar['Note']);
-$dog_id =  mysqli_real_escape_string($db,$ar['DogID']);
-$time = mysqli_real_escape_string($db,$ar['Time']);
+$momDog_note = "this is a note";//mysqli_real_escape_string($db,$ar['Note']);
+$dog_id =  2;//mysqli_real_escape_string($db,$ar['DogID']);
+$time = time();//mysqli_real_escape_string($db,$ar['Time']);
 
 if ($db->connect_error)
 {
