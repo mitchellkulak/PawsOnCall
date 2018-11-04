@@ -69,6 +69,14 @@ function verifySessionCookie(){
     }
 }
 
+function handleSearchKeyPress(e){
+    if(e.keyCode === 13){
+        searchForDogs();
+    }
+
+    return false;
+}
+
 function searchForDogs(){
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
