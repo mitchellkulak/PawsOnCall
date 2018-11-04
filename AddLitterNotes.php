@@ -28,7 +28,6 @@ if ($db->connect_error)
     die("Can't connect");
 }
 else {
-    $litter_id = mysqli_real_escape_string($db,urldecode($_GET['litterID']));
     $dog_data = $db->query(
     "INSERT 
     INTO LitterUpdates
