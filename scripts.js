@@ -27,7 +27,7 @@ function myFunction() {
 }
 
 function logout(){
-    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/login;"
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;"
     window.location.href = "login.html";
 }
 
