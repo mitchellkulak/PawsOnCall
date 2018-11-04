@@ -20,28 +20,20 @@ $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$litter_note = mysqli_real_escape_string($db,$ar['Note']);
-$litter_id =  mysqli_real_escape_string($db,$ar['LitterID']);
-$time = mysqli_real_escape_string($db,$ar['Time']);
+$litter_note = "this is another note";//mysqli_real_escape_string($db,$ar['Note']);
+$litter_id =  1;//mysqli_real_escape_string($db,$ar['LitterID']);
+$time = time();//mysqli_real_escape_string($db,$ar['Time']);
 if ($db->connect_error)
 {
     die("Can't connect");
 }
 else {
-    $litter_id = mysqli_real_escape_string($db,urldecode($_GET['litterID']));
-    $i = 0;
-    $theMasterArray = array();
     $dog_data = $db->query(
     "INSERT 
     INTO LitterUpdates
     VALUES ($litter_id, $time, '$litter_note')"
     );
-    while ($result = $dog_data->fetch_assoc()){
-        $theMasterArray[$i] = $result;
-        $i++;
-    }
-    echo json_encode($theMasterArray);
-        $db->close();
+    $db->close();
 }
 }
 ?>

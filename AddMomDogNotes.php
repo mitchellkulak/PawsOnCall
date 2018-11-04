@@ -20,30 +20,22 @@ $theMasterArray = array();
 $db = mysqli_connect("$host","$username","$password","$db_name");
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$momDog_note = mysqli_real_escape_string($db,$ar['Note']);
-$dog_id =  mysqli_real_escape_string($db,$ar['DogID']);
-$time = mysqli_real_escape_string($db,$ar['Time']);
+$momDog_note = "this is a note";//mysqli_real_escape_string($db,$ar['Note']);
+$dog_id =  2;//mysqli_real_escape_string($db,$ar['DogID']);
+$time = time();//mysqli_real_escape_string($db,$ar['Time']);
 
 if ($db->connect_error)
 {
     die("Can't connect");
 }
 else {
-    $i = 0;
-    $theMasterArray = array();
     $dog_data = $db->query(
     "INSERT 
-    INTO LitterUpdates
+    INTO DogUpdates
     (Note) 
-    VALUES ($mom_note)
-    WHERE id = $dog_id"
+    VALUES ($dog_id, $time, '$momDog_note')"
     );
-    while ($result = $dog_data->fetch_assoc()){
-        $theMasterArray[$i] = $result;
-        $i++;
-    }
-    echo json_encode($theMasterArray);
-        $db->close();
+    $db->close();
 }
 }
 ?>
