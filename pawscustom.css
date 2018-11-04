@@ -96,13 +96,15 @@ article {
 }
 
 input.input.searchbar{
-		width: 90% !important;
-		height: auto !important;
+	width: 85% !important;
+	height: auto !important;
 }
 
 button.button.is-link.searchbutton{
-	width: 8%;
-	float: right;
+	position:absolute !important;
+	top: 10.5px !important;
+	right: 1% !important;
+	z-index: +5 !important;
 }
 
 button.button.is-link.logout{
@@ -130,7 +132,7 @@ input.input.create{
 div.buttons{
 	position:absolute !important;
 	top: 25px !important;
-	right: 2% !important;
+	right: 1% !important;
 	z-index: +5 !important;
 }
 
@@ -143,3 +145,16 @@ div.buttons{
 	width: 15%;
 }
 
+.policy{
+	text-align: center !important;
+}
+
+label.label{
+	width: 64px;
+	text-align: left;
+}
+
+.inline{
+	float:right;
+	max-width: 93px;
+}
