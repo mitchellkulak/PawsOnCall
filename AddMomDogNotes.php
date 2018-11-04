@@ -29,8 +29,6 @@ if ($db->connect_error)
     die("Can't connect");
 }
 else {
-    $i = 0;
-    $theMasterArray = array();
     $dog_data = $db->query(
     "INSERT 
     INTO LitterUpdates
@@ -38,12 +36,7 @@ else {
     VALUES ($mom_note)
     WHERE id = $dog_id"
     );
-    while ($result = $dog_data->fetch_assoc()){
-        $theMasterArray[$i] = $result;
-        $i++;
-    }
-    echo json_encode($theMasterArray);
-        $db->close();
+    $db->close();
 }
 }
 ?>

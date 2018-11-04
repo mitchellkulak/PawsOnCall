@@ -29,19 +29,12 @@ if ($db->connect_error)
 }
 else {
     $litter_id = mysqli_real_escape_string($db,urldecode($_GET['litterID']));
-    $i = 0;
-    $theMasterArray = array();
     $dog_data = $db->query(
     "INSERT 
     INTO LitterUpdates
     VALUES ($litter_id, $time, '$litter_note')"
     );
-    while ($result = $dog_data->fetch_assoc()){
-        $theMasterArray[$i] = $result;
-        $i++;
-    }
-    echo json_encode($theMasterArray);
-        $db->close();
+    $db->close();
 }
 }
 ?>
