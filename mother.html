@@ -85,9 +85,6 @@
 </nav>
 <!-- Navbar, logo, logout button -->
 
-
-
-
 <!-- Searchbar and button-->
 	<div class="field">
 		<div class="control">
@@ -97,41 +94,20 @@
 	</div>
 <!--sarchbar and button-->	
 
-<section class="section">
-<div class="tile is-ancestor">
+<!-- Dog name tile & section-->
+<section class="section mother">
+		<div class="tile">
+		<article class="tile is-child notification is-primary dogname">
+				<p class="title" id="dogNameDiv">Ein</p>
+			</article>
+</section>
+<!-- Dog name tile & section-->
+
+<section class="section mother">
+
+	<div class="tile is-ancestor">
   <div class="tile is-vertical is-8">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-		
-				<!-- Dog name tile-->
-        <article class="tile is-child notification is-primary is-12">
-          <p class="title" id="dogNameDiv">Ein</p>
-        </article>
-				<!-- Dog name tile-->
-		
-				<!-- Notes tile -->
-        <article class="tile is-child notification is-warning">
-					<p class="title">Notes 
-						<button onclick="addNote()" class= "button is-link inline">Add Note</button>
-					</p>
-					<p class="subtitle"><table class="table is-striped">
-						<thead>
-						<tr>
-						<th>Date</th>
-						<th width="90%">Notes</th>
-						</tr>
-						</thead>
-						<tbody>
-						<td>10/9/2018</td>
-						<td>Threw up at 7:30pm</td>
-						</tbody>
-						</table>
-					</p>
-				</article>
-				<!-- notes tile -->
-	
-      </div> <!--I don't know what this does but I'm sure it will break thigns if deleted-->
-	  
+    <div class="tile"> 
 	  <!--temp graph tile-->
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
@@ -139,6 +115,7 @@
 					Temp
 					<button onclick="addNote()" class= "button is-link inline">Add Temp</button> 
 				</p>				
+				<div id="chart_div"> 
         </article>
       </div>
 	  <!--temp graph tile-->
@@ -171,32 +148,34 @@
   <div class="tile is-parent">
     <article class="tile is-child notification is-success">
       <div class="content">
-        <p class="title">Medical History</p>
+        <p class="title">Add Medication</p>
         <p class="subtitle">
-		<div class="dropdown">
-<button onclick="myFunction()" class="dropbtn">Medication</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a onclick="addMed('Probiotic Powder')">Probiotic Powder</a>
-    <a onclick="addMed('Benebac')">Benebac</a>
-    <a onclick="addMed('Tylan Powder')">Tylan Powder</a>
-	<a onclick="addMed('Cephlexin')">Cephlexin</a>
-    <a onclick="addMed('Amoxicillin')">Amoxicillin</a>
-    <a onclick="addMed('Valium')">Valium</a>
-	<a onclick="addMed('Clavamox')">Clavamox</a>
-    <a onclick="addMed('Oral Calcium')">Oral Calcium</a>
-    <a onclick="addMed('Albon')">Albon</a>
-	<a onclick="addMed('Pyrantel')">Pyrantel</a>
-	<a onclick="addMed('Panacure')">Panacure</a>
-	<a onclick="addMed('Metronid')">Metronid</a>
-	<a onclick="addMed('Other')">Other</a>
-  </div>
-</div>
-<p id="test"></p>
-		</p>
-        <div class="content">
-			<p> medical history table</p>
-        </div>
-      </div>
+					<div class="dropdown">
+						<button onclick="myFunction()" class="button is-link" onclick="addMedication()"> Add Medication</button>
+						<div id="myDropdown" class="dropdown-content">
+							<a onclick="addMed('Probiotic Powder')">Probiotic Powder</a>
+							<a onclick="addMed('Benebac')">Benebac</a>
+							<a onclick="addMed('Tylan Powder')">Tylan Powder</a>
+							<a onclick="addMed('Cephlexin')">Cephlexin</a>
+							<a onclick="addMed('Amoxicillin')">Amoxicillin</a>
+							<a onclick="addMed('Valium')">Valium</a>
+							<a onclick="addMed('Clavamox')">Clavamox</a>
+							<a onclick="addMed('Oral Calcium')">Oral Calcium</a>
+							<a onclick="addMed('Albon')">Albon</a>
+							<a onclick="addMed('Pyrantel')">Pyrantel</a>
+							<a onclick="addMed('Panacure')">Panacure</a>
+							<a onclick="addMed('Metronid')">Metronid</a>
+							<a onclick="addMed('Other')">Other</a>
+						</div>
+					</div>
+					<button onclick="addNote()" class= "button is-link inline" onclick="addNote()">Add Note</button> 
+				</p>
+
+			<div class="content">
+				<p> medical history table</p>
+			</div>
+			</div>
+
     </article>
   </div>
   
