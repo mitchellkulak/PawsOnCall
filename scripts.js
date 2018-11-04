@@ -64,7 +64,7 @@ function loginUser(){
 
 function verifySessionCookie(){
     var sessionKey = getCookie("session");
-    if (sessionKey == null){
+    if (sessionKey == "" || sessionKey == null){
         window.location.href = "login.html";
     }
 }
