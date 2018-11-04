@@ -55,10 +55,10 @@ function loginUser(){
     })
     .then(response => response.json()) // parses response to JSON
     .then((data) => {
-        console.log("START");
         console.log(data);
         document.cookie = "session=" + data.sessionKey;
         console.log(document.cookie);
+        window.location.href = "mother.html";
     });
 }
 
@@ -73,7 +73,7 @@ function searchForDogs(){
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    fetch('DogSearch.php?dog_name=' + dogName + "&session=" + getCookie(session)) //Add the file name
+    fetch('DogSearch.php?dog_name=' + dogName + "&session=" + getCookie("session")) //Add the file name
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
@@ -82,7 +82,7 @@ function searchForDogs(){
             if(element.error == "auth error"){
                 logout();
             }
-            
+
             var outerArticle = document.createElement("article");
             outerArticle.classList.add("tile");
             outerArticle.classList.add("is-child");
