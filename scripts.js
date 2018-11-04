@@ -76,15 +76,15 @@ function searchForDogs(){
             outerArticle.classList.add("search");
 
             var dogNameDiv = document.createElement("div");
-            dogNameDiv.classList.add("dogName");
+            dogNameDiv.classList.add("dogName result");
             dogNameDiv.innerHTML = element.DogName;
 
             var breedDiv = document.createElement("div");
-            breedDiv.classList.add("breed");
+            breedDiv.classList.add("breed result");
             breedDiv.innerHTML = element.Breed;
 
             var volunteerDiv = document.createElement("div");
-            volunteerDiv.classList.add("volunteerName");
+            volunteerDiv.classList.add("volunteerName result");
             volunteerDiv.innerHTML = element.VolunteerName;
 
             var idDiv = document.createElement("div");
