@@ -76,7 +76,7 @@ article {
 
 .show {display: block;}
 
-p.title, p.subtitle{
+p.title, p.subtitle, label.label{
 	color: white !important;
 }
 
@@ -111,6 +111,8 @@ button.button.is-link.logout{
 	vertical-align: baseline !important;
 }
 
+
+
 article.tile.is-child.notification.is-primary.search{
 	height:40px !important;
 	padding: 10px 15px 10px 15px !important;
@@ -141,6 +143,3 @@ div.buttons{
 	width: 15%;
 }
 
-.search{
-
-}
