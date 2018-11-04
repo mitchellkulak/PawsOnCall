@@ -1,6 +1,6 @@
 <?php
 include 'authenticate.php';
-$input = json_decode(authenticate('XamUpyJniQzJntrCLbFB'), true);
+$input = json_decode(authenticate(urldecode($_GET['session'])), true);
 if ($input['error'] == 'auth error') {
     $error = array('error' => 'auth error');
     echo json_encode($error);
