@@ -85,7 +85,6 @@ function searchForDogs(){
 
             var outerArticle = document.createElement("article");
             outerArticle.classList.add("tile");
-            outerArticle.classList.add("is-child");
             outerArticle.classList.add("notification");
             outerArticle.classList.add("is-primary");
             outerArticle.classList.add("search");
@@ -105,12 +104,14 @@ function searchForDogs(){
             volunteerDiv.classList.add("result");
             volunteerDiv.innerHTML = element.VolunteerName;
 
-            var idDiv = document.createElement("div");
-            idDiv.classList.add("dogID");
-            idDiv.innerHTML = element.DogId;
+            // var idDiv = document.createElement("div");
+            // idDiv.classList.add("dogID");
+            // idDiv.innerHTML = element.DogId;
 
             var selectButton = document.createElement("button");
             selectButton.classList.add("selectButton");
+            selectButton.classList.add("is-link");
+            selectButton.classList.add("button");
             selectButton.innerHTML = "Select";
             selectButton.onclick = function() { redirectToMother(element.DogId); };
             //Need to add onclick with access to dogID
@@ -118,7 +119,7 @@ function searchForDogs(){
             outerArticle.appendChild(dogNameDiv);
             outerArticle.appendChild(breedDiv);
             outerArticle.appendChild(volunteerDiv);
-            outerArticle.appendChild(idDiv);
+            // outerArticle.appendChild(idDiv);
             outerArticle.appendChild(selectButton);
 
             searchResultSection.appendChild(outerArticle);
