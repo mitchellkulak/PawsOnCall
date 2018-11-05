@@ -158,3 +158,12 @@ label.label{
 	float:right;
 	max-width: 93px;
 }
+
+.dogname{
+	padding: 1em !important;
+	text-align: center;
+}
+
+.mother{
+	padding: 12px;
+}
