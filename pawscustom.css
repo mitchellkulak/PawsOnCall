@@ -115,9 +115,9 @@ button.button.is-link.logout{
 
 
 
-article.tile.is-child.notification.is-primary.search{
+article.tile.notification.is-primary.search{
 	height:40px !important;
-	padding: 10px 15px 10px 15px !important;
+	padding: 10px 25px !important;
 }
 
 input.input.create{
