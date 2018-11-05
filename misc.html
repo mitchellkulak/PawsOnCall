@@ -19,6 +19,20 @@
 	<!-- favicon stuff-->
 	
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script>
+		function editHost() {
+		  document.getElementById("hostName").removeAttribute("disabled");
+		  document.getElementById("hostStreet").removeAttribute("disabled");
+		  document.getElementById("hostCity").removeAttribute("disabled");
+		  document.getElementById("hostState").removeAttribute("disabled");
+		  document.getElementById("hostZIP").removeAttribute("disabled");
+		  document.getElementById("hostPhone").removeAttribute("disabled");
+		  document.getElementById('edit').hidden = true;
+		  document.getElementById('save').hidden = false;
+		  
+		  return false;
+		}
+	</script>
 </head>
 <body>
 
@@ -49,24 +63,116 @@
 
 <section class="section">
 <div class="tile is-ancestor">
-  <div class="tile is-vertical is-8">
+  <div class="tile is-vertical">
     <div class="tile">
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-primary is-12">
+        <article class="tile is-child notification is-primary">
           <p class="title">Ein</p>
-		  <p class="subtitle">ID: 15454</p>
-        </article>
-        <article class="tile is-child notification is-warning">
-          <p class="title">Breed</p>
-          <p class="subtitle">Golden Poogle</p>
+		  <div class="field is-horizontal">
+			  <div class="field-label is-normal">
+				<label class="label">ID</label>
+			  </div>
+			  <div class="field-body">
+				<div class="field">
+				  <p class="control is-expanded">
+					<input class="input" type="text" id="dogID" placeholder="Disabled input" disabled>
+				  </p>
+				</div>
+			  </div>
+		  </div>
+		  <div class="field is-horizontal">
+			  <div class="field-label is-normal">
+				<label class="label">Breed</label>
+			  </div>
+			  <div class="field-body">
+				<div class="field">
+				  <p class="control is-expanded">
+					<input class="input" type="text" id="dogBreed" placeholder="Disabled input" disabled>
+				  </p>
+				</div>
+			  </div>
+		  </div>
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child notification is-info">
           <p class="title">Host Family</p>
-          <p class="subtitle">Jerry
-		  <br>1 Adams St, Allendale, MI 15874</br>
-		  616-444-5555</p>
+		  <div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Name</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="hostName" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Street</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="hostStreet" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">City</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="hostCity" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">State</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="hostState" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">ZIP</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="hostZIP" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="field is-horizontal">
+				  <div class="field-label is-normal">
+					<label class="label">Phone</label>
+				  </div>
+				  <div class="field-body">
+					<div class="field">
+					  <p class="control is-expanded">
+						<input class="input" type="text" id="hostPhone" placeholder="Disabled input" disabled>
+					  </p>
+					</div>
+				  </div>
+				</div>
+				<div class="form-group">
+				  <button type="edit" class="btn btn-default" id="edit" onclick="return editHost()">Edit</button>
+				  <button type="submit" class="btn btn-default" id="save" hidden>Save</button>
+				</div>
         </article>
       </div>
     </div>
