@@ -33,9 +33,12 @@ else {
     "INSERT 
     INTO DogUpdates
     VALUES ($dog_id, $time, '$momDog_note')") === TRUE) {
-        //echo json_encode("Record updated successfully");
+        $error = array('result' => 'Record updated successfully');
+        echo json_encode($error);
+
     } else {
-        //echo json_encode("Error updating record: " . $db->error);
+        $error = array('result' => 'Record NOT updated successfully');
+        echo json_encode($error);
     }
     $db->close();
 }
