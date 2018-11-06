@@ -63,7 +63,7 @@ function loadMotherInfo() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
+            console.log(obj.dogInfo[0].Name);
             // obj.forEach(function (element) {
             //     console.log(element.Name);
             //     dogNameDiv.textContent = element.Name;
