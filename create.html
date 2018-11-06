@@ -48,74 +48,163 @@
 	</div>
 <!--sarchbar and button-->
 
+<!--mothers name, breed and id-->
 <div class="center">	
   <div class="field is-horizontal">
-    <div class="field-label is-normal">
-      <label class="label">Mother</label>
-    </div>
     <div class="field-body">
       <div class="field">
         <p class="control is-expanded">
-          <input class="input" type="text" placeholder="Name">
+          <input class="input create" type="text" placeholder="Mother Name" id="motherName">
         </p>
       </div>
       <div class="field">
         <p class="control is-expanded">
-          <input class="input" type="text" placeholder="ID Number">
+          <input class="input create" type="text" placeholder="Mother ID Number" id="motherIdNum">
+        </p>
+      </div>
+    </div>
+  </div>
+
+<div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Mother's Breed" id=motherBreed>
+      </p>
+    </div>
+  </div>
+</div>
+<!--mothers name, breed and id-->
+
+<!--fathers name, breed and id-->
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <p class="control is-expanded">
+          <input class="input create" type="text" placeholder="Father Name" id="fatherName">
+        </p>
+      </div>
+      <div class="field">
+        <p class="control is-expanded">
+          <input class="input create" type="text" placeholder="Father ID Number" id="fatherIdNum">
         </p>
       </div>
     </div>
   </div>
 
   <div class="field is-horizontal">
-    <div class="field-label is-normal">
-    </div>
     <div class="field-body">
       <div class="field">
         <p class="control is-expanded">
-          <input class="input" type="text" placeholder="Breed">
+          <input class="input create" type="text" placeholder="Father's Breed" id="fatherBreed">
         </p>
       </div>
     </div>
   </div>
+<!--fathers name, breed and id-->
 
-  <div class="field is-horizontal">
-    <div class="field-label is-normal">
-      <label class="label">Host</label>
+<!--Expected due date-->
+<div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Expected Due Date" id="expectedDueDate">
+      </p>
     </div>
+  </div>
+</div>
+<!--Expected due date-->
+
+<!--welp start and end date-->
+<div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Welp start in YYYY-MM-DD HH:MM:SS format" id="welpStart">
+      </p>
+    </div>
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Welp end in YYYY-MM-DD HH:MM:SS format" id="welpEnd">
+      </p>
+    </div>
+  </div>
+</div>
+<!--welp start and end date-->
+
+<!--welp start and end date-->
+<div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Stillborn Puppies" id="stillborn">
+      </p>
+    </div>
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Puppy death Include the date" id="puppyDeaths">
+      </p>
+    </div>
+  </div>
+</div>
+<!--welp start and end date-->
+
+<!--deworm date-->
+<div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Start of wean" id="weanDate">
+      </p>
+    </div>
+  </div>
+</div>
+<!--deworm date-->
+
+<!--deworm date-->
+<div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input create" type="text" placeholder="Mother & puppies deworm date in YYYY-MM-DD " id="dewormDate">
+      </p>
+    </div>
+  </div>
+</div>
+<!--deworm date-->
+
+<!--host information-->
+  <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
         <p class="control">
-          <input class="input" type="text" placeholder="Name">
+          <input class="input create" type="text" placeholder="Host Name" id="hostName">
         </p>
       </div>
       <div class="field">
         <p class="control">
-          <input class="input" type="text" placeholder="Street">
+          <input class="input create" type="text" placeholder="Street" id="street">
         </p>
       </div>
     </div>
   </div>
 
   <div class="field is-horizontal">
-    <div class="field-label is-normal">
-    </div>
     <div class="field-body">
       <div class="field">
         <p class="control is-expanded">
-          <input class="input" type="text" placeholder="State">
+          <input class="input create" type="text" placeholder="State" id="state">
         </p>
       </div>
       <div class="field">
         <p class="control is-expanded">
-          <input class="input" type="text" placeholder="ZIP">
+          <input class="input create" type="text" placeholder="ZIP" id="zip">
         </p>
       </div>
     </div>
   </div>
 
   <div class="field is-horizontal">
-    <div class="field-label"></div>
     <div class="field-body">
       <div class="field is-expanded">
         <div class="field has-addons">
@@ -125,26 +214,24 @@
             </a>
           </p>
           <p class="control is-expanded">
-            <input class="input" type="tel" placeholder="Your phone number">
+            <input class="input create" type="tel" placeholder="Your phone number" id="phoneNum">
           </p>
         </div>
         <p class="help">Do not enter the first zero</p>
       </div>
     </div>
   </div>
+<!--host information-->
 
   <div class="field is-horizontal">
-    <div class="field-label">
-      <label class="label">Gender</label>
-    </div>
     <div class="field-body">
       <div class="field is-narrow">
-        <div class="control" style="background-color: #ffffff">
+        <div class="control create">
           <label class="radio">
             <input type="radio" name="member">
             Male
           </label>
-          <label class="radio">
+          <label class="radio create">
             <input type="radio" name="member">
             Female
           </label>
@@ -154,14 +241,12 @@
   </div>
 
   <div class="field is-horizontal">
-    <div class="field-label">
-    </div>
     <div class="field-body">
-      <div class="control" style="background-color: #ffffff">
-      <button class="button is-link">Submit</button>
+      <div class="control create">
+      <button class="button is-link" id="submitButton">Submit</button>
     </div>
-    <div class="control" style="background-color: #ffffff">
-      <button class="button is-text">Cancel</button>
+    <div class="control create">
+      <button class="button is-text" id="cancelButton">Cancel</button>
     </div>
     </div>
   </div>

@@ -115,9 +115,9 @@ button.button.is-link.logout{
 
 
 
-article.tile.is-child.notification.is-primary.search{
+article.tile.notification.is-primary.search{
 	height:40px !important;
-	padding: 10px 15px 10px 15px !important;
+	padding: 10px 25px !important;
 }
 
 input.input.create{
@@ -126,7 +126,8 @@ input.input.create{
 }
 
 .center{	
-    width: 90%;
+	margin: auto;
+    width: 80%;
 }
 
 div.buttons{
@@ -166,4 +167,12 @@ label.label{
 
 .mother{
 	padding: 12px;
+}
+
+input.create{
+	border: 1px solid black;
+}
+
+div.control.create{
+	background: #ffffff;
 }
