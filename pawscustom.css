@@ -126,7 +126,8 @@ input.input.create{
 }
 
 .center{	
-    width: 90%;
+	margin: auto;
+    width: 80%;
 }
 
 div.buttons{
@@ -166,4 +167,12 @@ label.label{
 
 .mother{
 	padding: 12px;
+}
+
+input.create{
+	border: 1px solid black;
+}
+
+div.control.create{
+	background: #ffffff;
 }
