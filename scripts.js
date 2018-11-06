@@ -23,8 +23,9 @@ function addNote() {
             })
                 .then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    var obj = JSON.parse(JSON.stringify(responseContent));
-                    console.log(obj.result);
+                    console.log(responseContent);
+                    console.log(responseContent.result);
+                    console.log("end");
                 });
         }
     }
