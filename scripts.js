@@ -8,7 +8,7 @@ function addNote() {
             var url = "AddMomDogNotes.php?session=" + getCookie("session");
             var data = {};
             data.Note = note;
-            data.DogId = getCookie("dogID");
+            data.DogID = getCookie("dogID");
             console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
