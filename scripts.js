@@ -6,6 +6,8 @@ function addNote() {
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
             var url = "AddMomDogNotes.php?session=" + getCookie("session");
+            console.log(note);
+            console.log(getCookie("dogID"));
             var data = {};
             data.Note = note;
             data.DogId = getCookie("dogID");
