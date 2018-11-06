@@ -24,21 +24,44 @@ if ($db->connect_error)
     die("Can't connect");
 }
 else {
-    $i = 0;
-    $theMasterArray = array();
+    $dogInfo = array();
+    $dogTemps = array();
+    $dogUpdates = array();
     $dog_id = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $userID = $input['userID'];
-    $dog_data = $db->query(
+    $dogRequest = $db->query(
     "SELECT *
     FROM Dogs 
     WHERE id = $dog_id and VolunteerID = $userID"
     );
-    while ($result = $dog_data->fetch_assoc()){
-        $theMasterArray[$i] = $result;
+    $i = 0;
+    while ($result = $dogRequest->fetch_assoc()){
+        $dogInfo[$i] = $result;
         $i++;
     }
+    $tempRequest = $db->query(
+    "SELECT *
+    FROM Temperature
+    WHERE dogID = $dog_id"
+    );
+    $i = 0;
+    while ($result = $tempRequest->fetch_assoc()){
+        $dogTemps[$i] = $result;
+        $i++;
+    }
+    $updateRequest = $db->query(
+    "SELECT *
+    FROM DogUpdates
+    WHERE dogID = $dog_id"
+    );
+    $i = 0;
+    while ($result = $updateRequest->fetch_assoc()){
+        $dogUpdates[$i] = $result;
+        $i++;
+    }
+    $theMasterArray = array('dogInfo' => $dogInfo, 'dogTemps' => $dogTemps, 'dogUpdates' => $dogUpdates);
     echo json_encode($theMasterArray);
-        $db->close();
+    $db->close();
 }
 }
 ?>
