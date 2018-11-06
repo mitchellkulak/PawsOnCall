@@ -37,7 +37,7 @@ else {
         echo json_encode($success);
 
     } else {
-        $error = array('result' => 'Record NOT updated successfully' . mysqli_error($db));
+        $error = array('result' => mysqli_error($db));
         echo json_encode($error);
     }
     $db->close();
