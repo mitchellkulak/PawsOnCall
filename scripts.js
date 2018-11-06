@@ -24,8 +24,8 @@ function addNote() {
                 .then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
-                    console.log(responseContent.result);
-                    console.log("end");
+
+
                 });
         }
     }
@@ -204,10 +204,11 @@ function loadMotherInfo() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            obj.forEach(function (element) {
-                console.log(element.Name);
-                dogNameDiv.textContent = element.Name;
-            });
+            console.log(obj);
+            // obj.forEach(function (element) {
+            //     console.log(element.Name);
+            //     dogNameDiv.textContent = element.Name;
+            // });
         });
 
 
