@@ -38,13 +38,6 @@ else {
     } else {
         echo "Error updating record: " . $db->error;
     }
-    /*$dog_data = $db->query(
-    "INSERT 
-    INTO LitterUpdates
-    VALUES ($litter_id, $time, '$litter_note')"
-    );
-    echo $dog_data;
-    */
     $db->close();
 }
 }
