@@ -5,9 +5,33 @@ function addNote() {
         console.log(dogID);
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
+            var url = "AddMomDogNotes.php?session=" + getCookie("session");
+            var data = {};
+            data.Note = note;
+            data.DogID = getCookie("dogID");
+            console.log(JSON.stringify(data));
+            fetch(url, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, cors, *same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, *same-origin, omit
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    // "Content-Type": "application/x-www-form-urlencoded",
+                },
+                redirect: "follow", // manual, *follow, error
+                referrer: "no-referrer", // no-referrer, *client
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+                .then(response => response.json()) // parses response to JSON
+                .then((responseContent) => {
+                    console.log(responseContent);
+
+
+                });
         }
     }
-    else{
+    else {
         logout();
     }
 }
@@ -37,7 +61,7 @@ function logout() {
 
 function loginUser() {
     // Call login.php with username and SHA-1 hashed password in the POST data.
-    var url = "login.php"
+    var url = "login.php";
     var username = "no@nomail.com";
     var password = "steve";
     var data = {};
@@ -182,10 +206,11 @@ function loadMotherInfo() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            obj.forEach(function (element) {
-                console.log(element.Name);
-                dogNameDiv.textContent = element.Name;
-            });
+            console.log(obj);
+            // obj.forEach(function (element) {
+            //     console.log(element.Name);
+            //     dogNameDiv.textContent = element.Name;
+            // });
         });
 
 
