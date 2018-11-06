@@ -5,7 +5,7 @@ function addNote() {
         console.log(dogID);
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
-            var url = "AddMomDogNotes.php";
+            var url = "AddMomDogNotes.php?session=" + getCookie("session");
             var data = {};
             data.Note = note;
             fetch(url, {
