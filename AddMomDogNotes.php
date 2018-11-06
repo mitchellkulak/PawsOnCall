@@ -22,7 +22,6 @@ $db = mysqli_connect("$host","$username","$password","$db_name");
 $ar = json_decode(file_get_contents('php://input'), true);
 $momDog_note = mysqli_real_escape_string($db,$ar['Note']);
 $dog_id =  mysqli_real_escape_string($db,$ar['DogID']);
-$time = mysqli_real_escape_string($db,$ar['Time']);
 
 if ($db->connect_error)
 {
@@ -32,9 +31,9 @@ else {
     if ($db->query(
     "INSERT 
     INTO DogUpdates
-    VALUES ($dog_id, $time, '$momDog_note')") === TRUE) {
-        $error = array('result' => 'Record updated successfully');
-        echo json_encode($error);
+    VALUES ($dog_id, '$momDog_note')") === TRUE) {
+        $success = array('result' => 'Record updated successfully');
+        echo json_encode($success);
 
     } else {
         $error = array('result' => 'Record NOT updated successfully');
