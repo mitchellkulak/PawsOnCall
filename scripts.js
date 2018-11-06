@@ -61,12 +61,15 @@ function logout() {
 
 function loginUser() {
     // Call login.php with username and SHA-1 hashed password in the POST data.
+    var emailInput = document.getElementById("emailInput").value;
+    var passwordInput = document.getElementById("passwordInput").value;
     var url = "login.php";
     var username = "no@nomail.com";
     var password = "steve";
     var data = {};
-    data.user_name = username;
-    data.hashed_password = SHA1(password);
+    data.user_name = emailInput;
+    data.hashed_password = SHA1(passwordInput);
+    console.log(data);
 
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
