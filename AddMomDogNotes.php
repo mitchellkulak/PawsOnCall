@@ -22,7 +22,8 @@ $db = mysqli_connect("$host","$username","$password","$db_name");
 $ar = json_decode(file_get_contents('php://input'), true);
 $momDog_note = mysqli_real_escape_string($db,$ar['Note']);
 $dog_id =  mysqli_real_escape_string($db,$ar['DogID']);
-
+var_dump($momDog_note);
+var_dump($dog_id);
 if ($db->connect_error)
 {
     die("Can't connect");
@@ -36,7 +37,7 @@ else {
         echo json_encode($success);
 
     } else {
-        $error = array('result' => 'Record NOT updated successfully');
+        $error = array('result' => 'Record NOT updated successfully' . mysqli_error($db));
         echo json_encode($error);
     }
     $db->close();
