@@ -23,7 +23,7 @@ function addNote() {
             })
                 .then(response => response.json()) // parses response to JSON
                 .then((data) => {
-                    console.log("worked?");
+                    console.log(data.result);
                 });
         }
     }

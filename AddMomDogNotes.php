@@ -1,9 +1,9 @@
 <?php
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 include 'authenticate.php';
 $input = json_decode(authenticate(urldecode($_GET['session'])), true);
@@ -33,9 +33,12 @@ else {
     "INSERT 
     INTO DogUpdates
     VALUES ($dog_id, $time, '$momDog_note')") === TRUE) {
-        //echo json_encode("Record updated successfully");
+        $error = array('result' => 'Record updated successfully');
+        echo json_encode($error);
+
     } else {
-        //echo json_encode("Error updating record: " . $db->error);
+        $error = array('result' => 'Record NOT updated successfully');
+        echo json_encode($error);
     }
     $db->close();
 }
