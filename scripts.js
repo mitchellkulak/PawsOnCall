@@ -58,6 +58,7 @@ function loadMotherInfo() {
     var session = getCookie("session");
     console.log(dogID);
     var dogNameDiv = document.getElementById("dogNameDiv");
+    var noteTable = document.getElementById("noteTable");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
@@ -65,10 +66,16 @@ function loadMotherInfo() {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
             dogNameDiv.textContent = obj.dogInfo[0].Name;
-            // obj.forEach(function (element) {
-            //     console.log(element.Name);
-            //     dogNameDiv.textContent = element.Name;
-            // });
+            
+            obj.dogUpdates.forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var newCell = document.createElement("td");
+                newCell.innerHTML = element.Note;
+                newRow.appendChild(newCell);
+                noteTable.appendChild(newRow);
+                console.log(element.Note);
+                
+            });
         });
 }
 
