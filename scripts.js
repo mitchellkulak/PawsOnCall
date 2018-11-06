@@ -23,7 +23,7 @@ function addNote() {
                 referrer: "no-referrer", // no-referrer, *client
                 body: JSON.stringify(data), // body data type must match "Content-Type" header
             })
-                // .then(response => response.json()) // parses response to JSON
+                //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
 
@@ -61,14 +61,12 @@ function logout() {
 
 function loginUser() {
     // Call login.php with username and SHA-1 hashed password in the POST data.
-    var enteredEmail = document.getElementById("emailInput").value;
-    var enteredPassword = document.getElementById("passwordInput").value;
     var url = "login.php";
     var username = "no@nomail.com";
     var password = "steve";
     var data = {};
-    data.user_name = enteredEmail;
-    data.hashed_password = SHA1(enteredPassword);
+    data.user_name = username;
+    data.hashed_password = SHA1(password);
 
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
