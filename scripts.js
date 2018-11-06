@@ -22,8 +22,8 @@ function addNote() {
                 body: JSON.stringify(data), // body data type must match "Content-Type" header
             })
                 .then(response => response.json()) // parses response to JSON
-                .then((data) => {
-                    console.log(data.result);
+                .then((responseContent) => {
+                    console.log(responseContent.result);
                 });
         }
     }
