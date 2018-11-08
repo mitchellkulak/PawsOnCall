@@ -81,6 +81,7 @@ function loadMotherInfo() {
 
 function loginUser() {
     // Call login.php with username and SHA-1 hashed password in the POST data.
+    console.log("LOGIN EVENT FIRED.");
     var emailInput = document.getElementById("emailInput");
     var passwordInput = document.getElementById("passwordInput");
     var url = "login.php";
