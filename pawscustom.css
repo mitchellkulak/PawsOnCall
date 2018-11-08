@@ -176,3 +176,7 @@ input.create{
 div.control.create{
 	background: #ffffff;
 }
+
+#edit{
+	margin-right: 3px;
+}
