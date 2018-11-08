@@ -167,7 +167,11 @@ label.label{
 }
 
 input.create{
-	border: 1px solid black;
+	border: 1.5px solid black;
+}
+
+input.create:hover{
+	border: 1.5px solid #3273dc;
 }
 
 div.control.create{
@@ -176,4 +180,13 @@ div.control.create{
 
 #edit{
 	margin-right: 3px;
+}
+
+article.create{
+	margin: auto;
+	padding: 10px !important;
+}
+
+.centeralign{
+	text-align: center;
 }
