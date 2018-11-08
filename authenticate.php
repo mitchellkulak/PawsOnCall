@@ -1,7 +1,7 @@
 <?php
 authenticate('XamUpyJniQzJntrCLbFB'); //REMOVE
 function authenticate($sessionKey){
-    include 'authenticate.php';
+    include 'dbconnect.php';
     if ($db->connect_error)
     {
         die("Can't connect");
