@@ -1,5 +1,5 @@
 <?php
-include 'authenticate.php';
+include '../authenticate.php';
 $session = "XamUpyJniQzJntrCLbFB";//$_GET['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
 
@@ -7,9 +7,9 @@ $auth = json_decode(authenticate(urldecode($session)), true);
 if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $error = array('error' => 'auth error');
     echo json_encode($error);
-    echo "<script>window.location.replace('login.php');</script>";
+    echo "<script>window.location.replace('../login.php');</script>";
 }else{
-  include 'dbconnect.php';
+  include '../dbconnect.php';
   if ($db->connect_error){
       die("Can't connect");
   }
