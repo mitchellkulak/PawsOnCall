@@ -1,3 +1,118 @@
+function addMed(x) {
+    var txt;
+    txt = x;
+    document.getElementById("test").innerHTML = txt;
+}
+
+function addMedi(x) {
+    var txt;
+    txt = x;
+    document.getElementById("test1").innerHTML = txt;
+}
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function logout() {
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;"
+    window.location.href = "login.html";
+}
+
+function verifySessionCookie() {
+    var sessionKey = getCookie("session");
+    if (sessionKey == "" || sessionKey == null) {
+        window.location.href = "login.html";
+    }
+}
+
+function handleSearchKeyPress(e) {
+    console.log("function entered");
+    if (e.keyCode === 13) {
+        console.log("enter pressed");
+        redirectToSearch();
+    }
+
+    return false;
+}
+
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+function loadMotherInfo() {
+    // verifySessionCookie(); //Removed to help chris debug
+    var dogID = getCookie("dogID");
+    var session = getCookie("session");
+    console.log(dogID);
+    var dogNameDiv = document.getElementById("dogNameDiv");
+    var noteTable = document.getElementById("noteTable");
+
+    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            console.log(obj);
+            dogNameDiv.textContent = obj.dogInfo[0].Name;
+            
+            obj.dogUpdates.forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var newCell = document.createElement("td");
+                newCell.innerHTML = element.Note;
+                newRow.appendChild(newCell);
+                noteTable.appendChild(newRow);
+                console.log(element.Note);
+                
+            });
+        });
+}
+
+function loginUser() {
+    // Call login.php with username and SHA-1 hashed password in the POST data.
+    var emailInput = document.getElementById("emailInput");
+    var passwordInput = document.getElementById("passwordInput");
+    var url = "login.php";
+    var username = "no@nomail.com";
+    var password = "steve";
+    var data = {};
+    data.user_name = emailInput.value;
+    data.hashed_password = SHA1(passwordInput.value);
+    console.log(data);
+
+    fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+        .then(response => response.json()) // parses response to JSON
+        .then((data) => {
+            console.log(data);
+            document.cookie = "session=" + data.sessionKey;
+            console.log(document.cookie);
+            window.location.href = "mother.html";
+        });
+}
+
 function addNote() {
     var d = Date.now();
     var dogID = getCookie("dogID");
@@ -36,76 +151,16 @@ function addNote() {
     }
 }
 
-function addMed(x) {
-    var txt;
-    txt = x;
-    document.getElementById("test").innerHTML = txt;
+function redirectToMother(dogId) {
+    document.cookie = "dogID=" + dogId;
+    window.location.href = "mother.html";
 }
 
-function addMedi(x) {
-    var txt;
-    txt = x;
-    document.getElementById("test1").innerHTML = txt;
+function redirectToSearch() {
+    var dogName = document.getElementById("searchBar").value;
+    window.location.href = "searchresult.html?search=" + dogName;
 }
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-function logout() {
-    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;"
-    window.location.href = "login.html";
-}
-
-function loginUser() {
-    // Call login.php with username and SHA-1 hashed password in the POST data.
-    var url = "login.php";
-    var username = "no@nomail.com";
-    var password = "steve";
-    var data = {};
-    data.user_name = username;
-    data.hashed_password = SHA1(password);
-
-    fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-    })
-        .then(response => response.json()) // parses response to JSON
-        .then((data) => {
-            console.log(data);
-            document.cookie = "session=" + data.sessionKey;
-            console.log(document.cookie);
-            window.location.href = "mother.html";
-        });
-}
-
-function verifySessionCookie() {
-    var sessionKey = getCookie("session");
-    if (sessionKey == "" || sessionKey == null) {
-        window.location.href = "login.html";
-    }
-}
-
-function handleSearchKeyPress(e) {
-    console.log("function entered");
-    if (e.keyCode === 13) {
-        console.log("enter pressed");
-        redirectToSearch();
-    }
-
-    return false;
-}
 
 function searchForDogs() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -167,52 +222,6 @@ function searchForDogs() {
         });
 
     console.log("searched");
-
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function (event) {
-    if (!event.target.matches('.dropbtn')) {
-
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
-function redirectToMother(dogId) {
-    document.cookie = "dogID=" + dogId;
-    window.location.href = "mother.html";
-}
-
-function redirectToSearch() {
-    var dogName = document.getElementById("searchBar").value;
-    window.location.href = "searchresult.html?search=" + dogName;
-}
-
-function loadMotherInfo() {
-    // verifySessionCookie(); //Removed to help chris debug
-    var dogID = getCookie("dogID");
-    var session = getCookie("session");
-    console.log(dogID);
-    var dogNameDiv = document.getElementById("dogNameDiv");
-
-    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
-        .then(response => response.json())
-        .then((data) => {
-            var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
-            // obj.forEach(function (element) {
-            //     console.log(element.Name);
-            //     dogNameDiv.textContent = element.Name;
-            // });
-        });
-
 
 }
 
