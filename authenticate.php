@@ -1,11 +1,8 @@
 <?php
 authenticate('XamUpyJniQzJntrCLbFB'); //REMOVE
+include 'dbconnect.php';
 function authenticate($sessionKey){
-    $host = "localhost";
-    $username = "pawswhelp";
-    $password = "Ireallylikepuppies1!";
-    $db_name = "pawswhelpdb";
-    $db = mysqli_connect("$host","$username","$password","$db_name");
+
     if ($db->connect_error)
     {
         die("Can't connect");
