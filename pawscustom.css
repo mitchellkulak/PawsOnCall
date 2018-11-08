@@ -1,7 +1,4 @@
 /*custom css page for paws website*/
-/*.navbar {
-	background-color: #c553d6 ;
-}*/
 
 a.navbar-item:hover{
 	color: white !important;
@@ -96,7 +93,7 @@ article {
 }
 
 input.input.searchbar{
-	width: 85% !important;
+	width: calc(100% - 80px) !important;
 	height: auto !important;
 }
 
@@ -104,7 +101,7 @@ button.button.is-link.searchbutton{
 	position:absolute !important;
 	top: 10.5px !important;
 	right: 1% !important;
-	z-index: +5 !important;
+	margin-left: 2px;
 }
 
 button.button.is-link.logout{
@@ -170,9 +167,26 @@ label.label{
 }
 
 input.create{
-	border: 1px solid black;
+	border: 1.5px solid black;
+}
+
+input.create:hover{
+	border: 1.5px solid #3273dc;
 }
 
 div.control.create{
 	background: #ffffff;
+}
+
+#edit{
+	margin-right: 3px;
+}
+
+article.create{
+	margin: auto;
+	padding: 10px !important;
+}
+
+.centeralign{
+	text-align: center;
 }

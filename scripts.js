@@ -147,9 +147,6 @@ function addNote() {
                 });
         }
     }
-    else {
-        logout();
-    }
 }
 
 function redirectToMother(dogId) {
