@@ -1,7 +1,4 @@
 /*custom css page for paws website*/
-/*.navbar {
-	background-color: #c553d6 ;
-}*/
 
 a.navbar-item:hover{
 	color: white !important;
@@ -96,7 +93,7 @@ article {
 }
 
 input.input.searchbar{
-	width: 85% !important;
+	width: calc(100% - 80px) !important;
 	height: auto !important;
 }
 
@@ -104,7 +101,7 @@ button.button.is-link.searchbutton{
 	position:absolute !important;
 	top: 10.5px !important;
 	right: 1% !important;
-	z-index: +5 !important;
+	margin-left: 2px;
 }
 
 button.button.is-link.logout{
