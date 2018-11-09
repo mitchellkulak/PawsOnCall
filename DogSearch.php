@@ -27,7 +27,7 @@ else {
     $dog_data = $db->query(
     "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
     FROM Volunteer AS v, Dogs AS d 
-    WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND d.VolunteerID = '$userID' v.ID = d.VolunteerID"
+    WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND d.VolunteerID = '$userID' AND v.ID = d.VolunteerID AND d.LitterID = null"
     );
     while ($result = $dog_data->fetch_assoc()){
         $MasterArray[$i] = $result;
