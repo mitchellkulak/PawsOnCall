@@ -190,3 +190,7 @@ article.create{
 .centeralign{
 	text-align: center;
 }
+
+.message{
+	display: none;
+}
