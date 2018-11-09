@@ -24,6 +24,8 @@ else {
     $i = 0;
     $dog_name = mysqli_real_escape_string($db,urldecode($_GET['search']));
     $userID = $input['userID'];
+    var_dump($dog_name);
+    var_dump($userID);
     $dog_data = $db->query(
     "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
     FROM Volunteer AS v, Dogs AS d 
