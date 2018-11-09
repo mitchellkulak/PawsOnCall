@@ -55,7 +55,7 @@ window.onclick = function (event) {
 function loadMotherInfo() {
     var searchMessage = document.getElementById("searchMessage");
     var motherContent = document.getElementById("wrapper");
-    if(document.getCookie("dogID") == "" || document.getCookie("dogID") == null){
+    if(getCookie("dogID") == "" || getCookie("dogID") == null){
         searchMessage.style.display = "block";
         motherContent.style.display = "none";
     }
