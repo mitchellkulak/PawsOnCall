@@ -174,7 +174,7 @@ function searchForDogs() {
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    fetch('DogSearch.php?dog_name=' + dogName + "&session=" + getCookie("session")) //Add the file name
+    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session")) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
