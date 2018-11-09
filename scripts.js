@@ -56,12 +56,12 @@ function loadMotherInfo() {
     var searchMessage = document.getElementById("searchMessage");
     var motherContent = document.getElementById("wrapper");
     if(document.getCookie("dogID") == "" || document.getCookie("dogID") == null){
-        searchMessage.style.display = "none";
-        motherContent.style.display = "block";
-    }
-    else{
         searchMessage.style.display = "block";
         motherContent.style.display = "none";
+    }
+    else{
+        searchMessage.style.display = "none";
+        motherContent.style.display = "block";
     }
     // verifySessionCookie(); //Removed to help chris debug
     var dogID = getCookie("dogID");
