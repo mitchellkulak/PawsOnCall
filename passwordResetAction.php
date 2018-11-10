@@ -26,12 +26,10 @@
 <script>
 	function Rewritepassword(data)
 	{
-   		alert(data);
-   		document.getElementById("password").value = sha1(data);
+   		document.getElementById("password").value = SHA1(data);
 	}
         function Rewriteverpassword(data)
         {
-                alert(data);
-                document.getElementById("verpassword").value = sha1(data);
+                document.getElementById("verpassword").value = SHA1(data);
         }
 </script>
