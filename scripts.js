@@ -107,6 +107,7 @@ window.onclick = function (event) {
 }
 
 function loadMotherInfo() {
+    loadGoogle();
     var searchMessage = document.getElementById("searchMessage");
     var motherContent = document.getElementById("wrapper");
     if (getCookie("dogID") == "" || getCookie("dogID") == null) {
