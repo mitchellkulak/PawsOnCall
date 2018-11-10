@@ -35,7 +35,7 @@ function drawChart() {
     };
 
     var dataChart = new google.visualization.LineChart(document.getElementById('chart_div'));
-    dataChart.draw(data, options);
+    dataChart.draw(window.dataChart, options);
 }
 
 function resizeChart() {
