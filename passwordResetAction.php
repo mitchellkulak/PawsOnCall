@@ -15,7 +15,7 @@
      $db->close();  
   }
 ?>
-<script>include 'scripts.js';</script>
+<script type="text/javascript" src="scripts.js"></script>
 <html>
 	<form action="passwordResetAction.php" method="post">
 		Enter Password:<input onchange="Rewritepassword(this);" type="password" name="password" id="password">
