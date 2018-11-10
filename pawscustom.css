@@ -37,7 +37,7 @@ article {
 .dropbtn {
     background-color: #3498DB;
     color: white;
-    padding: 16px;
+    padding: 7px !important;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -193,4 +193,24 @@ article.create{
 
 .message{
 	display: none;
+}
+
+input.input.admin{
+	width:100% !important;
+}
+
+article.admin{
+	width:80% !important;
+	padding:25px !important;
+	margin: auto;
+	margin-top: 10px;
+}
+
+label.admin{
+	width: auto;
+}
+
+input.button.admin{
+	margin-top:2px;
+	position: 5px;
 }
