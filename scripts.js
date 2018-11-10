@@ -77,7 +77,7 @@ function loadMotherInfo() {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
             dogNameDiv.textContent = obj.dogInfo[0].Name;
-            dogBreedDiv.textContent = obj.doginfo[0].Breed;
+            dogBreedDiv.textContent = obj.dogInfo[0].Breed;
             
             obj.dogUpdates.forEach(function (element) {
                 var newRow = document.createElement("tr");
