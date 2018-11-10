@@ -15,6 +15,7 @@ if ($input['error'] == 'auth error') {
 }
 else{
 
+
 $theMasterArray = array();
 
 if ($db->connect_error)
@@ -24,12 +25,11 @@ if ($db->connect_error)
 else {
     $i = 0;
     $theMasterArray = array();
-    $userID = $input['userID'];
-    $litterID = mysqli_real_escape_string($db,urldecode($_GET['litterID']));
+    $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $dogData = $db->query(
     "SELECT *
-    FROM Litter 
-    WHERE id = $litterID AND VolunteerID = $userID"
+    FROM Temperature 
+    WHERE $dogID = motherID"
     );
     while ($result = $dogData->fetch_assoc()){
         $theMasterArray[$i] = $result;
