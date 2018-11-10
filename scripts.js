@@ -1,3 +1,5 @@
+console.log("outside of any function!!!!!!!!");
+
 function addMed(x) {
     var txt;
     txt = x;
