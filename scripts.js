@@ -7,9 +7,9 @@ function loadGoogle() {
 
 function drawChart() {
     window.dataChart = new google.visualization.DataTable();
-    dataChart.addColumn('number', 'X');
-    dataChart.addColumn('number', 'Temperature');
-    dataChart.addRows([
+    window.dataChart.addColumn('number', 'X');
+    window.dataChart.addColumn('number', 'Temperature');
+    window.dataChart.addRows([
         [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
         [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
         [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
