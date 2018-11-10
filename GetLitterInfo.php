@@ -26,12 +26,11 @@ else {
     $i = 0;
     $theMasterArray = array();
     $userID = $input['userID'];
-    $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
-    $litterID = mysqli_real_escape_string($db,urldecode($_GET['litterID']))
+    $litterID = mysqli_real_escape_string($db,urldecode($_GET['litterID']));
     $dogData = $db->query(
     "SELECT *
     FROM Litter 
-    WHERE id = 1 AND VolunteerID = $userID"
+    WHERE id = $litterID AND VolunteerID = $userID"
     );
     while ($result = $dogData->fetch_assoc()){
         $theMasterArray[$i] = $result;
