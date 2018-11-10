@@ -6,7 +6,7 @@ function loadGoogle() {
 }
 
 function drawBackgroundColor() {
-    data = new google.visualization.DataTable();
+    var data = new google.visualization.DataTable();
     data.addColumn('number', 'X');
     data.addColumn('number', 'Temperature');
     data.addRows([
