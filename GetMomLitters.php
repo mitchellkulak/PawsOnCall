@@ -25,13 +25,13 @@ if ($db->connect_error)
 else {
     $i = 0;
     $theMasterArray = array();
-    $dog_id = mysqli_real_escape_string($db,urldecode($_GET['dog_id']));
-    $dog_data = $db->query(
+    $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
+    $dogData = $db->query(
     "SELECT *
     FROM Litter 
-    WHERE $dog_id = motherID"
+    WHERE $dogID = motherID"
     );
-    while ($result = $dog_data->fetch_assoc()){
+    while ($result = $dogData->fetch_assoc()){
         $theMasterArray[$i] = $result;
         $i++;
     }
