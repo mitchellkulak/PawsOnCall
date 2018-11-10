@@ -2,7 +2,7 @@
 function loadGoogle() {
     console.log("google loaded!!!!!!!!!!!!");
     google.charts.load('current', { packages: ['corechart', 'line'] });
-   // google.charts.setOnLoadCallback(drawBackgroundColor);
+    google.charts.setOnLoadCallback(drawBackgroundColor);
 }
 
 function drawBackgroundColor() {
