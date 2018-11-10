@@ -5,8 +5,8 @@ function loadGoogle() {
     google.charts.setOnLoadCallback(drawBackgroundColor);
 }
 
+var data = new google.visualization.DataTable();
 function drawBackgroundColor() {
-    data = new google.visualization.DataTable();
     data.addColumn('number', 'X');
     data.addColumn('number', 'Temperature');
 
