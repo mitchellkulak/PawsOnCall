@@ -23,7 +23,6 @@ if ($db->connect_error)
 }
 else {
     $dogInfo = array();
-    $dogTemps = array();
     $dogUpdates = array();
     $dog_id = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $userID = $input['userID'];
@@ -37,16 +36,6 @@ else {
         $dogInfo[$i] = $result;
         $i++;
     }
-    $tempRequest = $db->query(
-    "SELECT *
-    FROM Temperature
-    WHERE dogID = $dog_id"
-    );
-    $i = 0;
-    while ($result = $tempRequest->fetch_assoc()){
-        $dogTemps[$i] = $result;
-        $i++;
-    }
     $updateRequest = $db->query(
     "SELECT *
     FROM DogUpdates
@@ -57,7 +46,7 @@ else {
         $dogUpdates[$i] = $result;
         $i++;
     }
-    $theMasterArray = array('dogInfo' => $dogInfo, 'dogTemps' => $dogTemps, 'dogUpdates' => $dogUpdates);
+    $theMasterArray = array('dogInfo' => $dogInfo, 'dogUpdates' => $dogUpdates);
     echo json_encode($theMasterArray);
     $db->close();
 }
