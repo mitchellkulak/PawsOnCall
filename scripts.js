@@ -12,8 +12,11 @@ function drawChart() {
     fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
     .then(response => response.json())
     .then((data) => {
+        var tempArray = [];
         var obj = JSON.parse(JSON.stringify(data));
-        console.log(obj);
+        obj.forEach(function (element) {
+            console.log(element);
+        });
     });
 
 
