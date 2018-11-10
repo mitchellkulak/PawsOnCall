@@ -69,6 +69,7 @@ function loadMotherInfo() {
     console.log(dogID);
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
+    var dogBreedDiv = document.getElementById("breedDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
@@ -76,6 +77,7 @@ function loadMotherInfo() {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
             dogNameDiv.textContent = obj.dogInfo[0].Name;
+            dogBreedDiv.textContent = obj.doginfo[0].Breed;
             
             obj.dogUpdates.forEach(function (element) {
                 var newRow = document.createElement("tr");
@@ -168,7 +170,6 @@ function redirectToSearch() {
     var dogName = document.getElementById("searchBar").value;
     window.location.href = "searchresult.html?search=" + dogName;
 }
-
 
 function searchForDogs() {
     const urlParams = new URLSearchParams(window.location.search);
