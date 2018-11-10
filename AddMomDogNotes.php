@@ -16,10 +16,10 @@ if ($input['error'] == 'auth error') {
 else {
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$momDog_note = mysqli_real_escape_string($db,$ar['Note']);
-$dog_id = mysqli_real_escape_string($db,$ar['DogID']);
-var_dump($momDog_note);
-var_dump($dog_id);
+$momDogNote = mysqli_real_escape_string($db,$ar['Note']);
+$dogID = mysqli_real_escape_string($db,$ar['DogID']);
+var_dump($momDogNote);
+var_dump($dogID);
 if ($db->connect_error)
 {
     die("Can't connect");
@@ -28,7 +28,7 @@ else {
     if ($db->query(
     "INSERT 
     INTO DogUpdates
-    VALUES ($dog_id, null, '$momDog_note')") === TRUE) {
+    VALUES ($dogID, null, '$momDogNote')") === TRUE) {
         $success = array('result' => 'Record updated successfully');
         echo json_encode($success);
     } else {
