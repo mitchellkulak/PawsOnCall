@@ -29,7 +29,7 @@ else {
     $dogData = $db->query(
     "SELECT *
     FROM Temperature 
-    WHERE $dogID = motherID"
+    WHERE $dogID = DogID"
     );
     while ($result = $dogData->fetch_assoc()){
         $theMasterArray[$i] = $result;
