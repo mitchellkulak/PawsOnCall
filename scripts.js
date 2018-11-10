@@ -47,6 +47,7 @@ function resizeChart() {
     else {
         window.resize = resizeChart;
     }
+}
 
     function addMed(x) {
         var txt;
