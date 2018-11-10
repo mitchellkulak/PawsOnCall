@@ -1,6 +1,5 @@
 // Line Chart Initialization, intentionally not in any function
 function loadGoogle() {
-    console.log("google loaded!!!!!!!!!!!!");
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawChart);
 }
@@ -9,6 +8,15 @@ function drawChart() {
     data = new google.visualization.DataTable();
     data.addColumn('number', 'X');
     data.addColumn('number', 'Temperature');
+
+    fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+    .then(response => response.json())
+    .then((data) => {
+        var obj = JSON.parse(JSON.stringify(data));
+        console.log(obj);
+    });
+
+
     data.addRows([
         [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
         [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
@@ -80,9 +88,7 @@ function verifySessionCookie() {
 }
 
 function handleSearchKeyPress(e) {
-    console.log("function entered");
     if (e.keyCode === 13) {
-        console.log("enter pressed");
         redirectToSearch();
     }
 
@@ -120,7 +126,6 @@ function loadMotherInfo() {
     // verifySessionCookie(); //Removed to help chris debug
     var dogID = getCookie("dogID");
     var session = getCookie("session");
-    console.log(dogID);
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
     var dogBreedDiv = document.getElementById("breedDiv");
@@ -139,14 +144,12 @@ function loadMotherInfo() {
                 newCell.innerHTML = element.Note;
                 newRow.appendChild(newCell);
                 noteTable.appendChild(newRow);
-                console.log(element.Note);
             });
         });
 }
 
 function loginUser() {
     // Call login.php with username and SHA-1 hashed password in the POST data.
-    console.log("LOGIN EVENT FIRED.");
     var emailInput = document.getElementById("emailInput");
     var passwordInput = document.getElementById("passwordInput");
     var url = "login.php";
@@ -155,7 +158,6 @@ function loginUser() {
     var data = {};
     data.user_name = emailInput.value;
     data.hashed_password = SHA1(passwordInput.value);
-    console.log(data);
 
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -183,7 +185,6 @@ function addNote() {
     var d = Date.now();
     var dogID = getCookie("dogID");
     if (dogID != "") {
-        console.log(dogID);
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
             var url = "AddMomDogNotes.php?session=" + getCookie("session");
@@ -279,7 +280,6 @@ function searchForDogs() {
 
                 searchResultSection.appendChild(outerArticle);
 
-                console.log("yeah");
             });
         });
 
