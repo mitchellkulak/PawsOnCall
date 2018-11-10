@@ -2,14 +2,14 @@
 function loadGoogle() {
     console.log("google loaded!!!!!!!!!!!!");
     google.charts.load('current', { packages: ['corechart', 'line'] });
-   // google.charts.setOnLoadCallback(drawBackgroundColor);
+    google.charts.setOnLoadCallback(drawChart);
 }
 
-function drawBackgroundColor() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('number', 'X');
-    data.addColumn('number', 'Temperature');
-    data.addRows([
+function drawChart() {
+    window.dataChart = new google.visualization.DataTable();
+    dataChart.addColumn('number', 'X');
+    dataChart.addColumn('number', 'Temperature');
+    dataChart.addRows([
         [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
         [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
         [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
@@ -34,8 +34,8 @@ function drawBackgroundColor() {
         backgroundColor: '#f1f8e9'
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
+    var dataChart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    dataChart.draw(data, options);
 }
 
 function resizeChart() {
@@ -140,7 +140,6 @@ function loadMotherInfo() {
                 newRow.appendChild(newCell);
                 noteTable.appendChild(newRow);
                 console.log(element.Note);
-                drawBackgroundColor();
             });
         });
 }
