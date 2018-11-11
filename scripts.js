@@ -25,7 +25,7 @@ function drawChart() {
     */
 
     data1.addRows(prepareDataForChart());
-    console.log(prepareDataForChart());
+    console.log(JSON.stringify(prepareDataForChart()));
 
     var options = {
         hAxis: {
