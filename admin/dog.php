@@ -48,7 +48,6 @@ $db->close();
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 	<!-- favicon stuff-->
-	
 </head>
 
 <body>
@@ -69,7 +68,7 @@ $db->close();
   </nav>
   <!-- Navbar, logo, logout button -->
 
-	<!-- search result tile-->
+	<!-- central tile-->
 	<article class="tile notification is-primary is-vertical admin">
     <form action="dog.php">
       <select name='loadID'class="dropbtn" >
