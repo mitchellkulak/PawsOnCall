@@ -44,27 +44,25 @@ function drawChart() {
 }
 
 function prepareDataForChart(){    
-
+    var bigArray = [];
     fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
         console.log(obj);
         obj.forEach(function (element) {
-            console.log(element.date.day);
-            console.log(element.date.month);
-            console.log(element.date.year);
+            var day = element.date.day;
+            var month = element.date.month;
+            var year = element.date.year;
+            var date = new Date(year,month,day);
+            console.log(date);
+            var temp = element.Temp;
+            console.log(temp);
+            var smallArray =[date, temp]
+            bigArray.push(smallArray);
         });
     });
 
-    var numberOfLoops = 8;
-    var bigArray = [];
-    for(i=0; i<numberOfLoops; i++){
-        var date = new Date(2008,8,i);
-        var temp = 88 + i;
-        var smallArray = [date,temp];
-        bigArray.push(smallArray);
-    }
     return bigArray;
 }
 
