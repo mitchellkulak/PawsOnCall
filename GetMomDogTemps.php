@@ -35,7 +35,7 @@ else {
         if(strtotime($result["Time"]) = time()-5184000){
 		$theMasterArray[$i] = $result;
 		$theMasterArray[$i]["Time"] = strtotime($theMasterArray[$i]["Time"]);
-		i++;
+		$i++;
 	}
     }
     echo json_encode($theMasterArray);
