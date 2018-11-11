@@ -5,7 +5,7 @@ function loadGoogle() {
 }
 
 function drawChart() {
-    data = new google.visualization.DataTable();
+    var data = new google.visualization.DataTable();
     data.addColumn('number', 'X');
     data.addColumn('number', 'Temperature');
     var tempArray = [];
