@@ -6,7 +6,7 @@ function loadGoogle() {
 }
 
 function drawChart() {
-    var data = new google.visualization.DataTable();
+    var data = google.visualization.arrayToDataTable(prepareDataForChart());
     data.addColumn('date', 'Date');
     data.addColumn('number', 'Temperature');
 /*
@@ -23,9 +23,6 @@ function drawChart() {
         [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
-   
-   data.addRows(google.visualization.arrayToDataTable(prepareDataForChart()));
-    console.log(JSON.stringify( prepareDataForChart()));
 
     var options = {
         hAxis: {
