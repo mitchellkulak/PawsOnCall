@@ -31,7 +31,6 @@ function drawChart() {
 
     var options = {
         hAxis: {
-            format: 'M/d/yy',
             title: 'Time'
         },
         vAxis: {
