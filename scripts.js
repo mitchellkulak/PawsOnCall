@@ -9,6 +9,8 @@ function drawChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('date', 'Date');
     data.addColumn('number', 'Temperature');
+    var tempArray = [];
+
 /*
         [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
         [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
@@ -23,9 +25,7 @@ function drawChart() {
         [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
-   
-   data.addRows(google.visualization.arrayToDataTable(prepareDataForChart()));
-    console.log(JSON.stringify( prepareDataForChart()));
+    data.addRows(prepareDataForChart());
 
     var options = {
         hAxis: {
@@ -49,17 +49,18 @@ function prepareDataForChart(){
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
+        console.log(obj);
         obj.forEach(function (element) {
             var day = element.date.day;
             var month = element.date.month;
             var year = element.date.year;
-            console.log(day + month + year);
+            var date = new Date(year,month,day);
             var temp = element.Temp;
-            var smallArray =[new Date(year,month,day), temp];
+            var smallArray =[date, temp]
             bigArray.push(smallArray);
         });
     });
-    console.log(bigArray.toString());
+    console.log(bigArray);
     return bigArray;
 }
 
@@ -192,6 +193,8 @@ function loginUser() {
         .then(response => response.json()) // parses response to JSON
         .then((data) => {
             console.log(data);
+            document.cookie = "session=" + data.sessionKey;
+            document.cookie = "admin=" + data.admin;
             console.log(document.cookie);
             window.location.href = "mother.html";
         });
@@ -474,7 +477,7 @@ function SHA1(msg) {
 
 function adminShowHide(){
     if(getCookie("admin")){
-        document.getElementById("adminLink").style.display= "inline";
+        document.getElementById("adminLink").style.display= "flex";
     }
 
 }
