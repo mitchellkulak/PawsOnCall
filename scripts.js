@@ -65,8 +65,8 @@ function prepareDataForChart() {
                 var month = parseInt(element.date.month);
                 var year = parseInt(element.date.year);
                 var temp = element.Temp;
-                smallArray[0] = new Date(year, month, day);
-                smallArray[1] = parseInt(temp);
+                smallArray[1] = new Date(year, month, day);
+                smallArray[0] = parseInt(temp);
                 bigArray[i] = smallArray;
                 i++;
             });
