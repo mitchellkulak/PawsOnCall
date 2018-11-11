@@ -25,11 +25,18 @@ function drawChart() {
         [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
+<<<<<<< HEAD
     data.addRows(prepareDataForChart());
+=======
+   
+   data.addRows(prepareDataForChart());
+   console.log(prepareDataForChart());
+
+    
+>>>>>>> b3a57e97c9ed54485da0bb2f2c1adc5ab6314643
 
     var options = {
         hAxis: {
-            format: 'M/d/yy',
             title: 'Time'
         },
         vAxis: {
@@ -51,12 +58,21 @@ function prepareDataForChart(){
         var obj = JSON.parse(JSON.stringify(data));
         console.log(obj);
         obj.forEach(function (element) {
+<<<<<<< HEAD
             var day = element.date.day;
             var month = element.date.month;
             var year = element.date.year;
             var date = new Date(year,month,day);
             var temp = element.Temp;
             var smallArray =[date, temp]
+=======
+            var day = parseInt(element.date.day);
+            var month = parseInt(element.date.month);
+            var year = parseInt(element.date.year);
+            console.log(day + month + year);
+            var temp = element.Temp;
+            var smallArray =[new Date(year,month,day), parseInt(temp)];
+>>>>>>> b3a57e97c9ed54485da0bb2f2c1adc5ab6314643
             bigArray.push(smallArray);
         });
     });
