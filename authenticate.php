@@ -7,6 +7,7 @@ function authenticate($sessionKey){
         die("Can't connect");
     }
     else {
+	$sessionKey = mysqli_real_escape_string($db,$sessionKey);
         $session = $db->query("SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
         $sessionrow = $session->fetch_assoc();
         if($session->num_rows == 1 && strtotime($sessionrow["Time"]) > time() - 3600 && $sessionrow["SessionKey"] != null){ //checks if session key valid and session last use <1hr ago
