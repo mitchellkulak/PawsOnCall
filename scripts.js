@@ -60,13 +60,9 @@ function prepareDataForChart() {
                 var temp = element.Temp;
                 smallArray.push(new Date(year, month, day));
                 smallArray.push(parseInt(temp));
-                console.log("Small Array:");
-                console.log(smallArray);
                 bigArray.push(smallArray);
             });
         });
-    console.log("Big Array:");
-    console.log(bigArray);
     return bigArray;
 }
 
