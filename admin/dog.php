@@ -56,7 +56,7 @@ $db->close();
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div id="navbarDesktop " class="navbar-brand">
       <a href="searchresult.html">
-        <img src="images/pawslogo.png" alt="PAWS Logo" >
+        <img src="../images/pawslogo.png" alt="PAWS Logo" >
       </a>
       <a class="navbar-item" href="mother.html">Mom</a>
       <a class="navbar-item" href="puppies.html">Puppies</a>
