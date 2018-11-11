@@ -25,7 +25,7 @@ function drawChart() {
         [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
-    data.addRows(prepareTempDataForChart());
+    data.addRows(prepareDataForChart());
 
     var options = {
         hAxis: {
@@ -43,16 +43,15 @@ function drawChart() {
     dataChart.draw(data, options);
 }
 
-function prepareTempDataForChart(){    
+function prepareDataForChart(){    
 
     fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
-        console.log(obj);
-        // obj.forEach(function (element) {
-        //     console.log(element);
-        // });
+        obj.forEach(function (element) {
+            console.log(element);
+        });
     });
 
     var numberOfLoops = 8;
