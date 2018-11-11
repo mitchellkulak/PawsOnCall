@@ -51,12 +51,13 @@ function prepareDataForChart(){
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
         obj.forEach(function (element) {
+            var smallArray = [];
             var day = parseInt(element.date.day);
             var month = parseInt(element.date.month);
             var year = parseInt(element.date.year);
-            console.log(day + month + year);
             var temp = element.Temp;
-            var smallArray =[new Date(year,month,day), parseInt(temp)];
+             smallArray.push(new Date(year,month,day));
+             smallArray.push(parseInt(temp));
             bigArray.push(smallArray);
         });
     });
