@@ -7,7 +7,7 @@ function loadGoogle() {
 
 function drawChart() {
     var data = new google.visualization.DataTable();
-    data.addColumn('date', 'Date');
+    data.addColumn('number', 'Date');
     data.addColumn('number', 'Temperature');
 /*
         [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
