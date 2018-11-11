@@ -55,14 +55,12 @@ function prepareDataForChart(){
             var month = element.date.month;
             var year = element.date.year;
             var date = new Date(year,month,day);
-            console.log(date);
             var temp = element.Temp;
-            console.log(temp);
             var smallArray =[date, temp]
             bigArray.push(smallArray);
         });
     });
-
+    console.log(bigArray);
     return bigArray;
 }
 
