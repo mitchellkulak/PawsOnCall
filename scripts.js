@@ -2,23 +2,14 @@
 function loadGoogle() {
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawChart);
+    window.addEventListener("resize",drawChart,false);
 }
 
 function drawChart() {
-    data = new google.visualization.DataTable();
-    data.addColumn('number', 'X');
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Date');
     data.addColumn('number', 'Temperature');
     var tempArray = [];
-
-    fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
-    .then(response => response.json())
-    .then((data) => {
-        var obj = JSON.parse(JSON.stringify(data));
-        obj.forEach(function (element) {
-            tempArray.push(element.Temp);
-            console.log(element);
-        });
-    });
 
 /*
         [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
@@ -34,23 +25,43 @@ function drawChart() {
         [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
-
-    data.addRows([
-        ["Nov 1", tempArray[0]],["Nov 2", tempArray[1]],["Nov 3", tempArray[2]], ["Nov 4", tempArray[3]]
-    ]);
+    data.addRows(prepareDataForChart());
 
     var options = {
         hAxis: {
+            format: 'M/d/yy',
             title: 'Time'
         },
         vAxis: {
             title: 'Temperature'
         },
-        backgroundColor: '#f1f8e9'
+        backgroundColor: '#f1f8e9',
+        legend : { position:"none"}
     };
 
     var dataChart = new google.visualization.LineChart(document.getElementById('chart_div'));
     dataChart.draw(data, options);
+}
+
+function prepareDataForChart(){    
+    var bigArray = [];
+    fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+    .then(response => response.json())
+    .then((data) => {
+        var obj = JSON.parse(JSON.stringify(data));
+        console.log(obj);
+        obj.forEach(function (element) {
+            var day = element.date.day;
+            var month = element.date.month;
+            var year = element.date.year;
+            var date = new Date(year,month,day);
+            var temp = element.Temp;
+            var smallArray =[date, temp]
+            bigArray.push(smallArray);
+        });
+    });
+    console.log(bigArray);
+    return bigArray;
 }
 
 function resizeChart() {
