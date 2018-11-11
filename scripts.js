@@ -9,8 +9,6 @@ function drawChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('date', 'Date');
     data.addColumn('number', 'Temperature');
-    var tempArray = [];
-
 /*
         [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
         [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
@@ -54,6 +52,7 @@ function prepareDataForChart(){
             var day = element.date.day;
             var month = element.date.month;
             var year = element.date.year;
+            console.log(day + month + year);
             var date = new Date(year,month,day);
             var temp = element.Temp;
             var smallArray =[date, temp];
