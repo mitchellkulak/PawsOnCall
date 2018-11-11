@@ -2,7 +2,6 @@
 function loadGoogle() {
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawChart);
-    google.setOnLoadCallback(drawData);
     window.addEventListener("resize",drawChart,false);
 }
 
@@ -59,6 +58,7 @@ function prepareDataForChart(){
             bigArray.push(smallArray);
         });
     });
+    console.log(bigArray.toString());
     return bigArray;
 }
 
