@@ -23,11 +23,9 @@ function drawChart() {
         [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
-   var dataToPop = prepareDataForChart();
-   data.addRows(dataToPop);
+   
+   data.addRows(prepareDataForChart());
    console.log(prepareDataForChart());
-
-    
 
     var options = {
         hAxis: {
@@ -57,7 +55,7 @@ function prepareDataForChart(){
             var year = parseInt(element.date.year);
             var temp = element.Temp;
              smallArray.push(new Date(year,month,day));
-             smallArray.push(0.3);
+             smallArray.push(parseInt(temp));
             bigArray.push(smallArray);
         });
     });
