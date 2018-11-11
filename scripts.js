@@ -462,3 +462,8 @@ function SHA1(msg) {
 
     return temp.toLowerCase();
 }
+
+function adminShowHide(){
+    varAdminLink = document.getElementById("adminLink");
+    if()
+}
