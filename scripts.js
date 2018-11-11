@@ -7,7 +7,7 @@ function loadGoogle() {
 
 function drawChart() {
     var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Date');
+    data.addColumn('date', 'Date');
     data.addColumn('number', 'Temperature');
 /*
         [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
@@ -57,8 +57,7 @@ function prepareDataForChart(){
             var year = element.date.year;
             console.log(day + month + year);
             var temp = element.Temp;
-           // var smallArray =[new Date(year,month,day), parseInt(temp)];
-            var smallArray =[day.toString(), parseInt(temp)];
+            var smallArray =["Date(year,month,day)", parseInt(temp)];
             bigArray.push(smallArray);
         });
     });
