@@ -53,9 +53,8 @@ function prepareDataForChart(){
             var month = element.date.month;
             var year = element.date.year;
             console.log(day + month + year);
-            var date = new Date(year,month,day);
             var temp = element.Temp;
-            var smallArray =[date, temp];
+            var smallArray =[new Date(year,month,day), temp];
             bigArray.push(smallArray);
         });
     });
