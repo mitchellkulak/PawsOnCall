@@ -24,6 +24,7 @@ function drawChart() {
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
     data.addRows(prepareDataForChart());
+    console.log(prepareDataForChart());
 
     var options = {
         hAxis: {
@@ -47,7 +48,6 @@ function prepareDataForChart(){
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
-        console.log(obj);
         obj.forEach(function (element) {
             var day = element.date.day;
             var month = element.date.month;
@@ -58,7 +58,6 @@ function prepareDataForChart(){
             bigArray.push(smallArray);
         });
     });
-    console.log(bigArray);
     return bigArray;
 }
 
