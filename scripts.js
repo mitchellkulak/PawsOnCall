@@ -193,7 +193,6 @@ function loginUser() {
         .then(response => response.json()) // parses response to JSON
         .then((data) => {
             console.log(data);
-            document.cookie = "session=" + data.sessionKey;
             console.log(document.cookie);
             window.location.href = "mother.html";
         });
@@ -475,6 +474,8 @@ function SHA1(msg) {
 }
 
 function adminShowHide(){
-    varAdminLink = document.getElementById("adminLink");
-    if()
+    if(getCookie("admin")){
+        document.getElementById("adminLink").style.display= "inline";
+    }
+
 }

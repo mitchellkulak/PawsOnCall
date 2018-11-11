@@ -218,3 +218,7 @@ input.button.admin{
 a.button.is-link{
 	margin: 5px 0px;
 }
+
+#adminLink{
+	display:hidden;
+}
