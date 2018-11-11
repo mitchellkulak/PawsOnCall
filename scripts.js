@@ -25,11 +25,14 @@ function drawChart() {
     */
     justSomeData = prepareDataForChart();
     justSomeData.forEach(function (element) {
+        console.log("Start");
+        console.log(justSomeData);
         console.log(element);
+        console.log("End");
 
     });
     data1.addRows(prepareDataForChart());
-    console.log(JSON.stringify(prepareDataForChart()));
+    console.log(prepareDataForChart());
 
     var options = {
         hAxis: {
