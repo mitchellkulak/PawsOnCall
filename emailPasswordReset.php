@@ -15,6 +15,7 @@
     		$sessionKey = generateRandomString();
     		$keyMatch = $db->query("SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
     	  }while($keyMatch->num_rows > 0); //creates new session key repeatedly, until a unique key is created
+	  $timer = time()+3600;
     	  $db->query("UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = $userID"); //sets session key in database, time is updated automatically
           $msg = "Please visit <a href='http://".$domain."/PawsOnCall/passwordResetAction.php?session=".$sessionKey."'>here</a> to reset your password. This link is good for 1 hour.";
           echo $msg;
