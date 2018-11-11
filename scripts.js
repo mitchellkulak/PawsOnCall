@@ -23,17 +23,17 @@ function drawChart() {
             [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
             [66, 70], [67, 72], [68, 75], [69, 80]]
     */
-    // var newData = prepareDataForChart();
-    // console.log("Length of new Data = " + newData.length);
-    // var numRows = newData.length;
-    // for (var i = 1; i < numRows; i++) {
-    //     console.log(newData[i]);
-    //     data1.addRow(newData[i]);
-    // }
+    var newData = prepareDataForChart();
+    console.log("Length of new Data = " + newData.length);
+    var numRows = newData.length;
+    for (var i = 1; i < numRows; i++) {
+        console.log(newData[i]);
+        data1.addRow(newData[i]);
+    }
 
 // THIS IS A PROBLEM WITH NON-NUMERIC KEYS. INSTEAD OF PUSHING TO ARRAY, USE INDEXING [0]
 
-     data1.addRows(prepareDataForChart());
+    // data1.addRows(prepareDataForChart());
 
     var options = {
         hAxis: {
