@@ -50,10 +50,10 @@ function prepareDataForChart(){
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
         console.log(obj);
-        obj.date.forEach(function (element) {
-            console.log(element.day);
-            console.log(element.month);
-            console.log(element.year);
+        obj.forEach(function (element) {
+            console.log(element.date.day);
+            console.log(element.date.month);
+            console.log(element.date.year);
         });
     });
 
