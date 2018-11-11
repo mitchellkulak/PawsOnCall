@@ -29,35 +29,91 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
 $db->close();
 ?>
 <html>
-  <form action="litter.php">
-    <select name='loadID'>
-      <option value="0">New Litter</option>
-      <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$litterID){echo " selected";} echo ">".$sublitter["StartWhelp"]." ".$sublitter["Name"]."</option>";}?>
-    </select><br>
-    <input type="submit" value="Load">
-  </form>
-  <form action="litterAction.php" method="post">
-    <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $litterID?>">
-    Volunteer:
-    <select name="volunteerID">
-      <option value="0">select</option>
-      <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $volunteerID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
-    </select><br>
-    Mother:
-    <select name="motherID">
-      <option value="0">select</option>
-      <?php while($subuser = $motherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
-    </select><br>
-    Father:
-    <select name="fatherID">
-      <option value="0">select</option>
-      <?php while($subuser = $fatherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
-    </select><br>
-    Start Whelp: <input type="datetime-local" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
-    End Whelp: <input type="datetime-local" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
-    Start Wean: <input type="datetime-local" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
-    End Wean: <input type="datetime-local" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
-    <input type="submit" value="Save">
-  </form>
-  <a href="admin.html">Return to admin page</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PAWS Motherhood Database</title>
+  <link rel="stylesheet" href="bulma.css">
+	<link rel="stylesheet" href="pawscustom.css">
+	
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+	<script src="scripts.js"></script>
+	
+	<!-- favicon stuff-->
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<!-- favicon stuff-->
+</head>
+
+<body> 
+
+  <!-- Navbar, logo, logout button -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div id="navbarDesktop " class="navbar-brand">
+      <img src="images/pawslogo.png" alt="PAWS Logo" >
+      <a class="navbar-item" href="mother.html">Mom</a>
+      <a class="navbar-item" href="puppies.html">Puppies</a>
+      <a class="navbar-item" href="misc.html">Misc</a>
+    </div>
+    <div class="buttons">
+      <a class="button is-primary logout" onclick="logout()">
+      Log out
+      </a>
+    </div>
+  </nav>
+  <!-- Navbar, logo, logout button -->
+
+  <!--central tile-->
+  <article class="tile notification is-primary is-vertical admin">
+    <form action="litter.php">
+      <select class="dropbtn admin" name='loadID'>
+        <option  value="0">New Litter</option>
+        <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$litterID){echo " selected";} echo ">".$sublitter["StartWhelp"]." ".$sublitter["Name"]."</option>";}?>
+      </select>
+      <input type="submit" class="button is-link admin" value="Load">
+    </form>
+
+    <form action="litterAction.php" method="post">
+      <input type="text" class="dropbtn" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $litterID?>">
+      <label class="label admin">Volunteer:</label>
+      <select name="volunteerID" class="dropbtn admin">
+        <option value="0">select</option>
+        <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $volunteerID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
+      </select>
+
+      <label class="label admin"> Mother:</label>
+      <select name="motherID" class="dropbtn admin">
+        <option class="dropbtn admin" value="0">select</option>
+        <?php while($subuser = $motherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
+      </select><br>
+
+      <label class="label admin">Father:</label>
+      <select name="fatherID" class="dropbtn admin">
+        <option class="dropbtn admin" value="0">select</option>
+        <?php while($subuser = $fatherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
+      </select><br>
+      
+      <label class="label admin">Start Whelp: </label>
+      <input class="input admin" type="datetime-local" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
+
+      <label class="label admin">End Whelp:</label>
+      <input class="input admin" type="datetime-local" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
+
+      <label class="label admin">Start Wean: </label>
+      <input class="input admin" type="datetime-local" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
+
+      <label class="label admin">End Wean: </label>
+      <input class="input admin" type="datetime-local" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
+      
+      <input type="submit" value="Save">
+    </form>
+
+    <a href="admin.html">Return to admin page</a>
+  </article>
+</body>
 <html>
