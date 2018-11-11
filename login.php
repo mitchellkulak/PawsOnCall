@@ -17,10 +17,11 @@ else {
     $ar = json_decode(file_get_contents('php://input'), true);
     $user_name = mysqli_real_escape_string($db,$ar['user_name']);
     $hashed_password = mysqli_real_escape_string($db,$ar['hashed_password']);
-    $users = $db->query("SELECT email, id, password FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
+    $users = $db->query("SELECT email, id, password, admin FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
 	if($users->num_rows == 1){ //continues if and only if 1 matching user is returned
 		$userrow = $users->fetch_assoc();//pulls a row from the SQL return value
 		$userID = $userrow["id"];//select the ID element from the SQL row
+		$admin = $userrow["admin"];
 		$session = $db->query("SELECT userID, SessionKey, Time FROM SessionKeys WHERE userID = '$userID'"); //finds the users session key
 		$sessionrow = $session->fetch_assoc();
 		$sessionKey = $sessionrow["SessionKey"];
@@ -31,7 +32,7 @@ else {
 			}while($keyMatch->num_rows > 0); //creates new session key repeatedly, until a unique key is created
 			$db->query("UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = '$userID'"); //sets session key in database, time is updated automatically
 		}
-		$arr = array('userID' => $userID,'sessionKey' => $sessionKey, 'error' => 'none'); 
+		$arr = array('userID' => $userID,'sessionKey' => $sessionKey,'admin' => $admin, 'error' => 'none'); 
 		echo json_encode($arr); //RETURN USER AND SESSION ID **NEEDS EDITING**
     }else{
 	$error = array('error' => 'auth error');
