@@ -30,8 +30,8 @@ $db->close();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PAWS Motherhood Database</title>
-  <link rel="stylesheet" href="bulma.css">
-	<link rel="stylesheet" href="pawscustom.css">
+  <link rel="stylesheet" href="../bulma.css">
+	<link rel="stylesheet" href="../pawscustom.css">
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
