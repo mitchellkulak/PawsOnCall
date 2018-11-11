@@ -5,7 +5,7 @@ function loadGoogle() {
     window.addEventListener("resize", drawChart, false);
 }
 
-function drawChart() {
+async function drawChart() {
     var data1 = new google.visualization.DataTable();
     data1.addColumn('date', 'Date');
     data1.addColumn('number', 'Temperature');
