@@ -43,13 +43,13 @@ function drawChart() {
 }
 
 function prepareDataForChart() {
-    var bigArray = [];
+    var bigArray = new Array();
     fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             obj.forEach(function (element) {
-                var smallArray = [];
+                var smallArray = new Array();
                 var day = parseInt(element.date.day);
                 var month = parseInt(element.date.month);
                 var year = parseInt(element.date.year);
