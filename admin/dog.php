@@ -69,40 +69,68 @@ $db->close();
   </nav>
   <!-- Navbar, logo, logout button -->
 
+	<!-- search result tile-->
+	<article class="tile notification is-primary is-vertical admin">
+    <form action="dog.php">
+      <select name='loadID'class="dropbtn" >
+        <option value="0">New Dog</option>
+        <?php while($subdog = $dogs->fetch_assoc()){echo "<option value=".$subdog["ID"].">".$subdog["Name"]."</option>";}?>
+      </select>
+      <input type="submit" class="button is-link admin " value="Load">
+    </form>
 
-    <div class="tile">
-  <form action="dog.php">
-    <select name='loadID'>
-      <option value="0">New Dog</option>
-      <?php while($subdog = $dogs->fetch_assoc()){echo "<option value=".$subdog["ID"].">".$subdog["Name"]."</option>";}?>
-    </select><br>
-    <input type="submit" value="Load">
-  </form>
-  <form action="dogAction.php" method="post">
-    <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $dogID?>">
-    Name: <input type="text" name="name" value="<?php echo $dogrow['Name']?>"><br>
-    Volunteer:
-    <select name="volunteerID">
-      <option value="0">select</option>
-      <?php while($subuser = $users->fetch_assoc()){
-        echo "<option value=".$subuser["ID"];
-        if($subuser["ID"]==$dogrow["VolunteerID"]){
-          echo " selected";}
-        echo ">".$subuser["Name"]."</option>";
-      }?>
-    </select><br>
-    Sex: <input type="text" name="sex" value="<?php echo $dogrow['Sex']?>"><br>
-    Birthdate: <input type="datetime-local" name="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
-    Adoption Date: <input type="datetime-local" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
-    Deathdate: <input type="datetime-local" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
-    Breed: <input type="text" name="breed" value="<?php echo $dogrow['Breed']?>"><br>
-    Litter:<select name="litterID">
-      <option value=null>None</option>
-      <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
-    </select><br>
-    <input type="submit" value="Save">
-  </form>
-  <a href="admin.html">Return to admin page</a>
-    </div><!--close tile div-->
+
+    <form action="dogAction.php" method="post">
+      <!--pick dog from listed dogs-->
+      <input type="text" class="dropdown-content" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $dogID?>">
+      
+      <!--enter dog name-->
+      <label class="label admin">Name: </label>
+      <input type="text" class="input admin" name="name" value="<?php echo $dogrow['Name']?>"><br>
+
+      <!--volunteer dropdown-->
+      <label class="label admin">Volunteer:</label>
+      <select class="dropbtn" name="volunteerID">
+        <option value="0">select</option>
+        <?php while($subuser = $users->fetch_assoc()){
+          echo "<option value=".$subuser["ID"];
+          if($subuser["ID"]==$dogrow["VolunteerID"]){
+            echo " selected";}
+          echo ">".$subuser["Name"]."</option>";
+        }?>
+      </select><br>
+      
+      <!--sex input-->
+      <label class="label admin">Sex:</label> 
+      <input type="text" class="input admin" name="sex" value="<?php echo $dogrow['Sex']?>"><br>
+      
+      <!--birthday-->
+      <label class="label admin"> Birthdate:</label>
+      <input type="datetime-local" class="input admin" name="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
+      
+      <!--adoption date-->
+      <label class="label admin">Adoption Date:</label>
+      <input type="datetime-local" class="input admin" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
+      
+      <!--death date-->
+      <label class="label admin">Deathdate:</label>
+      <input type="datetime-local" class="input admin" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
+      
+      <!--breed-->
+      <label class="label admin">Breed:</label>
+      <input type="text" class="input admin" name="breed" value="<?php echo $dogrow['Breed']?>"><br>
+      
+      <!--litter-->
+      <label class="label admin">Litter:</label>
+      <select class="dropbtn" name="litterID">
+        <option value=null>None</option>
+        <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
+      </select>
+      <input class="button is-link admin " type="submit" value="Save">
+    </form>
+
+    <a href="admin.html">Return to admin page</a>
+
+  </article>
 </body>
 <html>

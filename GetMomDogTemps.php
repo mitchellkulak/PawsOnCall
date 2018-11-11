@@ -32,8 +32,11 @@ else {
     WHERE $dogID = DogID"
     );
     while ($result = $dogData->fetch_assoc()){
-        $theMasterArray[$i] = $result;
-        $i++;
+        if(strtotime($result["Time"]) = time()-5184000){
+		$theMasterArray[$i] = $result;
+		$theMasterArray[$i]["Time"] = strtotime($theMasterArray[$i]["Time"]);
+		i++;
+	}
     }
     echo json_encode($theMasterArray);
         $db->close();
