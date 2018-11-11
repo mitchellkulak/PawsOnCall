@@ -51,9 +51,9 @@ function prepareDataForChart(){
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
         obj.forEach(function (element) {
-            var day = element.date.day;
-            var month = element.date.month;
-            var year = element.date.year;
+            var day = parseInt(element.date.day);
+            var month = parseInt(element.date.month);
+            var year = parseInt(element.date.year);
             console.log(day + month + year);
             var temp = element.Temp;
             var smallArray =[new Date(year,month,day), parseInt(temp)];
