@@ -56,7 +56,7 @@ function prepareDataForChart(){
             var year = element.date.year;
             var date = new Date(year,month,day);
             var temp = element.Temp;
-            var smallArray =[date, temp]
+            var smallArray =[date, temp];
             bigArray.push(smallArray);
         });
     });
