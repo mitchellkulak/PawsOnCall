@@ -23,7 +23,11 @@ function drawChart() {
             [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
             [66, 70], [67, 72], [68, 75], [69, 80]]
     */
+    justSomeData = prepareDataForChart();
+    justSomeData.forEach(function (element) {
+        console.log(element);
 
+    });
     data1.addRows(prepareDataForChart());
     console.log(JSON.stringify(prepareDataForChart()));
 
