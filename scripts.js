@@ -24,6 +24,7 @@ function drawChart() {
             [66, 70], [67, 72], [68, 75], [69, 80]]
     */
     var newData = prepareDataForChart();
+    console.log(newData);
     console.log("Length of new Data = " + newData.length);
     var numRows = newData.length;
     for (var i = 1; i < numRows; i++) {
