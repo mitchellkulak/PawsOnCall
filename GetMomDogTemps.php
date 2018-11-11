@@ -18,6 +18,7 @@ else{
 
 $theMasterArray = array();
 
+
 if ($db->connect_error)
 {
     die("Can't connect");
@@ -26,7 +27,6 @@ else {
     $year = 0;
     $month = 0;
     $day = 0;
-    $delimiter = ' '
     $i = 0;
     $theMasterArray = array();
     $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
@@ -36,14 +36,15 @@ else {
     WHERE $dogID = DogID"
     );
     while ($result = $dogData->fetch_assoc()){
-        if(strtotime($result["Time"]) = time()-5184000){
+        if(strtotime($result["Time"]) == time()-5184000){
         $theMasterArray[$i] = $result;
         $ar1 = explode (' ', $result["Time"]);
         $ar2 = explode ('-', $ar1[0]);
         $year = $ar2[0];
         $month = $ar2[1];
         $day = $ar2[2];
-        array_push($theMasterArray[$i], 'year' => $year, 'month' = $month, 'day' = $day);
+        $theDateArray = array('year' => $year,'month' => $month, 'day' => $day);
+        array_push($theMasterArray[$i], $theDateArray);
 		$i++;
 	}
     }
