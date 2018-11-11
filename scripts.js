@@ -23,15 +23,8 @@ function drawChart() {
             [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
             [66, 70], [67, 72], [68, 75], [69, 80]]
     */
-    justSomeData = prepareDataForChart();
-    justSomeData.forEach(function (element) {
-        console.log("Start");
-        console.log(justSomeData);
-        console.log(element);
-        console.log("End");
-
-    });
     data1.addRows(prepareDataForChart());
+    console.log("Full Data from function call:");
     console.log(prepareDataForChart());
 
     var options = {
@@ -63,10 +56,13 @@ function prepareDataForChart() {
                 var temp = element.Temp;
                 smallArray.push(new Date(year, month, day));
                 smallArray.push(parseInt(temp));
+                console.log("Small Array:");
+                console.log(smallArray);
                 bigArray.push(smallArray);
             });
         });
-    console.log(bigArray.toString());
+    console.log("Big Array:");
+    console.log(bigArray);
     return bigArray;
 }
 
