@@ -23,9 +23,11 @@ function drawChart() {
             [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
             [66, 70], [67, 72], [68, 75], [69, 80]]
     */
-    data1.addRows(prepareDataForChart());
-    console.log("Full Data from function call:");
-    console.log(prepareDataForChart());
+   var newData = prepareDataForChart();
+   var numRows = newData.length;
+   for (var i = 1; i < numRows; i++)
+            data1.addRow(newData[i]);  
+   // data1.addRows(prepareDataForChart());
 
     var options = {
         hAxis: {
