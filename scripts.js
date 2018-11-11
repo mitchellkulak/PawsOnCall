@@ -49,6 +49,7 @@ function prepareDataForChart(){
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
+        console.log(obj);
         obj.date.forEach(function (element) {
             console.log(element.day);
             console.log(element.month);
