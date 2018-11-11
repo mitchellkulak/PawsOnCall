@@ -9,8 +9,6 @@ function drawChart() {
     var data = new google.visualization.DataTable();
     data.addColumn('date', 'Date');
     data.addColumn('number', 'Temperature');
-    var tempArray = [];
-
 /*
         [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
         [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
@@ -25,7 +23,9 @@ function drawChart() {
         [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
         [66, 70], [67, 72], [68, 75], [69, 80]]
 */
-    data.addRows(prepareDataForChart());
+   
+   data.addRows(google.visualization.arrayToDataTable(prepareDataForChart()));
+    console.log(JSON.stringify( prepareDataForChart()));
 
     var options = {
         hAxis: {
@@ -49,18 +49,17 @@ function prepareDataForChart(){
     .then(response => response.json())
     .then((data) => {
         var obj = JSON.parse(JSON.stringify(data));
-        console.log(obj);
         obj.forEach(function (element) {
             var day = element.date.day;
             var month = element.date.month;
             var year = element.date.year;
-            var date = new Date(year,month,day);
+            console.log(day + month + year);
             var temp = element.Temp;
-            var smallArray =[date, temp]
+            var smallArray =[new Date(year,month,day), temp];
             bigArray.push(smallArray);
         });
     });
-    console.log(bigArray);
+    console.log(bigArray.toString());
     return bigArray;
 }
 
