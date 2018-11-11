@@ -2,6 +2,7 @@
 function loadGoogle() {
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawChart);
+    window.addEventListener("resize",drawChart,false);
 }
 
 function drawChart() {
