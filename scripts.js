@@ -486,7 +486,7 @@ function SHA1(msg) {
 
 function adminShowHide() {
     if (getCookie("admin")) {
-        document.getElementById("adminLink").style.display = "inline";
+        document.getElementById("adminLink").style.display = "flex";
     }
 
 }
