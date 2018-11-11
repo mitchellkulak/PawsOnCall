@@ -30,6 +30,9 @@ function drawChart() {
     //     console.log(newData[i]);
     //     data1.addRow(newData[i]);
     // }
+
+// THIS IS A PROBLEM WITH NON-NUMERIC KEYS. INSTEAD OF PUSHING TO ARRAY, USE INDEXING [0]
+
      data1.addRows(prepareDataForChart());
 
     var options = {
@@ -49,6 +52,7 @@ function drawChart() {
 
 function prepareDataForChart() {
     var bigArray = new Array();
+   var i = 0;
     fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
@@ -59,9 +63,10 @@ function prepareDataForChart() {
                 var month = parseInt(element.date.month);
                 var year = parseInt(element.date.year);
                 var temp = element.Temp;
-                smallArray.push(new Date(year, month, day));
-                smallArray.push(parseInt(temp));
-                bigArray.push(smallArray);
+                smallArray[0] = new Date(year, month, day);
+                smallArray[1] = parseInt(temp);
+                bigArray[i] = smallArray;
+                i++;
             });
         });
     return bigArray;
