@@ -25,6 +25,7 @@ function drawChart() {
 */
    
    data.addRows(prepareDataForChart());
+   console.log(data);
     
 
     var options = {
