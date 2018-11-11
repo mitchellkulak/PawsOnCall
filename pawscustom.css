@@ -214,3 +214,11 @@ input.button.admin{
 	margin-top:2px;
 	position: 5px;
 }
+
+a.button.is-link{
+	margin: 5px 0px;
+}
+
+#adminLink{
+	display:hidden;
+}

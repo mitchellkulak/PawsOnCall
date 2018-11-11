@@ -189,7 +189,6 @@ function loginUser() {
         .then(response => response.json()) // parses response to JSON
         .then((data) => {
             console.log(data);
-            document.cookie = "session=" + data.sessionKey;
             console.log(document.cookie);
             window.location.href = "mother.html";
         });
@@ -468,4 +467,11 @@ function SHA1(msg) {
     var temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
 
     return temp.toLowerCase();
+}
+
+function adminShowHide(){
+    if(getCookie("admin")){
+        document.getElementById("adminLink").style.display= "inline";
+    }
+
 }
