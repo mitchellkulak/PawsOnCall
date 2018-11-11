@@ -24,7 +24,7 @@ function drawChart() {
             [66, 70], [67, 72], [68, 75], [69, 80]]
     */
     var newData = new Array();
-    newData = prepareDataForChart();
+    newData = await prepareDataForChart();
     console.log(newData);
     console.log("Length of new Data = " + newData.length);
     var numRows = newData.length;
@@ -52,10 +52,10 @@ function drawChart() {
     dataChart.draw(data1, options);
 }
 
-function prepareDataForChart() {
+async function prepareDataForChart() {
     var bigArray = new Array();
    var i = 0;
-    fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
