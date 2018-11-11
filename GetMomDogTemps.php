@@ -36,7 +36,7 @@ else {
     WHERE $dogID = DogID"
     );
     while ($result = $dogData->fetch_assoc()){
-        if(strtotime($result["Time"]) = time()-5184000){
+        if(strtotime($result["Time"]) == time()-5184000){
         $theMasterArray[$i] = $result;
         $ar1 = explode (' ', $result["Time"]);
         $ar2 = explode ('-', $ar1[0]);
