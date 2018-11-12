@@ -33,12 +33,9 @@ async function drawChart() {
         data1.addRow(newData[i]);
     }
 
-// THIS IS A PROBLEM WITH NON-NUMERIC KEYS. INSTEAD OF PUSHING TO ARRAY, USE INDEXING [0]
-
-    // data1.addRows(prepareDataForChart());
-
     var options = {
         hAxis: {
+            format: 'MM/DD/YY',
             title: 'Time'
         },
         vAxis: {
