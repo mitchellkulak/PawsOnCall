@@ -59,7 +59,7 @@ async function prepareDataForChart() {
             obj.forEach(function (element) {
                 var smallArray = new Array();
                 var day = parseInt(element.date.day);
-                var month = parseInt(element.date.month);
+                var month = parseInt(element.date.month) - 1;
                 var year = parseInt(element.date.year);
                 var temp = element.Temp;
                 smallArray[0] = new Date(year, month, day);
