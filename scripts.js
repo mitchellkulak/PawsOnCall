@@ -5,6 +5,31 @@ function loadGoogle() {
     window.addEventListener("resize", drawChart, false);
 }
 
+function getWhelpDates() {
+    var startWhelp;
+    var endWhelp;
+    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            obj.forEach(function (element) {
+                startWhelp = element.StartWhelp;
+                endWhelp = element.EndWhelp
+                console.log(startWhelp);
+                console.log(endWhelp);
+                /*var smallArray = new Array();
+                var day = parseInt(element.date.day);
+                var month = parseInt(element.date.month);
+                var year = parseInt(element.date.year);
+                var temp = element.Temp;
+                smallArray[0] = new Date(year, month, day);
+                smallArray[1] = parseInt(temp);
+                bigArray[i] = smallArray;*/
+            });
+        });
+    return bigArray;
+}
+
 function drawChart() {
     var data1 = new google.visualization.DataTable();
     data1.addColumn('date', 'Date');
@@ -33,7 +58,7 @@ function drawChart() {
         data1.addRow(newData[i]);
     }
 
-// THIS IS A PROBLEM WITH NON-NUMERIC KEYS. INSTEAD OF PUSHING TO ARRAY, USE INDEXING [0]
+    // THIS IS A PROBLEM WITH NON-NUMERIC KEYS. INSTEAD OF PUSHING TO ARRAY, USE INDEXING [0]
 
     // data1.addRows(prepareDataForChart());
 
@@ -54,7 +79,7 @@ function drawChart() {
 
 function prepareDataForChart() {
     var bigArray = new Array();
-   var i = 0;
+    var i = 0;
     fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
