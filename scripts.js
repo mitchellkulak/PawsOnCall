@@ -28,7 +28,7 @@ async function drawChart() {
     console.log(newData);
     console.log("Length of new Data = " + newData.length);
     var numRows = newData.length;
-    for (var i = 1; i < numRows; i++) {
+    for (var i = 0; i < numRows; i++) {
         console.log(newData[i]);
         data1.addRow(newData[i]);
     }
