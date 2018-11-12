@@ -28,7 +28,7 @@ async function drawChart() {
     console.log(newData);
     console.log("Length of new Data = " + newData.length);
     var numRows = newData.length;
-    for (var i = 1; i < numRows; i++) {
+    for (var i = 0; i < numRows; i++) {
         console.log(newData[i]);
         data1.addRow(newData[i]);
     }
@@ -154,7 +154,7 @@ function loadMotherInfo() {
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
     noteTable.classList.add("table");
-    noteTable.classList.add("is-striped");
+    noteTable.classList.add("table");
     var dogBreedDiv = document.getElementById("breedDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
@@ -517,7 +517,7 @@ function SHA1(msg) {
 }
 
 function adminShowHide() {
-    if (getCookie("admin")) {
+    if (getCookie("admin") == 1) {
         document.getElementById("adminLink").style.display = "flex";
     }
 
