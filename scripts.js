@@ -8,6 +8,10 @@ function loadGoogle() {
 function getWhelpDates() {
     var startWhelp;
     var endWhelp;
+    var thisTableBody = document.getElementById("whelp");
+    var newRow = document.createElement("tr");
+    var startCell = document.createElement("td");
+    var endCell = document.createElement("td");
     fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
@@ -18,14 +22,9 @@ function getWhelpDates() {
                 endWhelp = element.EndWhelp
                 console.log(startWhelp);
                 console.log(endWhelp);
-                /*var smallArray = new Array();
-                var day = parseInt(element.date.day);
-                var month = parseInt(element.date.month);
-                var year = parseInt(element.date.year);
-                var temp = element.Temp;
-                smallArray[0] = new Date(year, month, day);
-                smallArray[1] = parseInt(temp);
-                bigArray[i] = smallArray;*/
+                newRow.appendChild(startCell);
+                newRow.appendChild(endCell);
+                thisTableBody.appendChild(newRow);
             });
         });
 }
