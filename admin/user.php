@@ -69,6 +69,8 @@ $db->close();
 <!-- Navbar, logo, logout button -->
 
 <article class="tile notification is-primary is-vertical admin">
+  
+  <!--select user-->
   <form action="user.php">
     <select class="dropbtn admin" name='loadID'>
       <option value="0">New User</option>
@@ -78,28 +80,38 @@ $db->close();
   </form>
 
   <form action="userAction.php" method="post">
+    
+    <!--Name section-->
     <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $userID?>">
     <label class="label admin">Name:</label>
     <input class="input admin"type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
 
+    <!--email-->
     <label class="label admin">Email: </label>
     <input class="input admin"type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
 
+    <!--phone-->
     <label class="label admin">Phone: </label>
     <input class="input admin"type="tel" name="phone" value="<?php echo $userrow['Phone']?>"><br>
 
+
+    <!--address-->
     <label class="label admin">Address: </label>
     <input class="input admin"type="text" name="address" value="<?php echo $userrow['Address']?>"><br>
 
+    <!--city-->
     <label class="label admin">City:</label>
     <input class="input admin"type="text" name="city" value="<?php echo $userrow['City']?>"><br>
 
+    <!--state-->
     <label class="label admin">State: </label>
     <input class="input admin"type="text" name="state" maxlength="2" value="<?php echo $userrow['State']?>"><br>
 
+    <!--zip-->
     <label class="label admin">ZIP: </label>
     <input class="input admin"type="text" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
     
+    <!--admin buttons-->
     <label class="label admin">Admin:</label>
     <input type="radio" name="admin" value="1" <?php if($userrow["Admin"] == 1){echo "checked";}?>>Yes<br>
     <input type="radio" name="admin" value="0" <?php if($userrow["Admin"] == 0 || $userID == 0){echo "checked";}?>> No<br>
