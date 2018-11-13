@@ -72,10 +72,21 @@ $db->close();
   
   <!--select user-->
   <form action="user.php">
+    <input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
     <select class="dropbtn admin" name='loadID'>
       <option value="0">New User</option>
-      <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"].">".$subuser["Name"]."</option>";}?>
+      <!--results go here-->
     </select>
+
+<!-- Searchbar and button exmaple--
+<div class="field">
+		<div class="control">
+			<input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
+			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+		</div>
+	</div>
+!--sarchbar and button-->
+
     <input class="button is-link admin" type="submit" value="Load">
   </form>
 
