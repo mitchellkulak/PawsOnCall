@@ -22,6 +22,8 @@ function getWhelpDates() {
                 endWhelp = element.EndWhelp
                 console.log(startWhelp);
                 console.log(endWhelp);
+                startCell.innerHTML = startWhelp;
+                endCell.innerHTML = endWhelp;
                 newRow.appendChild(startCell);
                 newRow.appendChild(endCell);
                 thisTableBody.appendChild(newRow);
