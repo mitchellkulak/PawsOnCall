@@ -1,3 +1,6 @@
+<?php
+	$_SESSION["session"] = $_GET["session"];
+?>
 <!DOCTYPE html>
 <html>
 <head>
