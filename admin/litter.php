@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../authenticate.php';
 $session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);

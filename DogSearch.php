@@ -27,11 +27,11 @@ else {
     if($input['admin']){
 	$SQL = "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
     	FROM Volunteer AS v, Dogs AS d 
-    	WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND v.ID = d.VolunteerID AND LitterID = NULL";
+    	WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND v.ID = d.VolunteerID";
     }else{
 	$SQL = "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
     	FROM Volunteer AS v, Dogs AS d 
-    	WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND d.VolunteerID = $userID AND v.ID = d.VolunteerID AND LitterID = NULL";
+    	WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND d.VolunteerID = $userID AND v.ID = d.VolunteerID";
     }
     $dog_data = $db->query($SQL);
     while ($result = $dog_data->fetch_assoc()){
