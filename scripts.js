@@ -9,15 +9,16 @@ function getWhelpDates() {
     var startWhelp;
     var endWhelp;
     var thisTableBody = document.getElementById("whelp");
-    var newRow = document.createElement("tr");
-    var startCell = document.createElement("td");
-    var endCell = document.createElement("td");
+
     fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
             obj.forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var startCell = document.createElement("td");
+                var endCell = document.createElement("td");
                 startWhelp = element.StartWhelp;
                 endWhelp = element.EndWhelp
                 console.log(startWhelp);
@@ -77,7 +78,7 @@ async function drawChart() {
 
 async function prepareDataForChart() {
     var bigArray = new Array();
-   var i = 0;
+    var i = 0;
     var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
