@@ -1,6 +1,6 @@
 <?php
 include '../authenticate.php';
-$session = "XamUpyJniQzJntrCLbFB";//$_GET['session'];
+$session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
 
 
@@ -106,7 +106,7 @@ $db->close();
     <input class="button is-link admin" type="submit" value="Save">
   </form>
 
-  <a href="admin.html">Return to admin page</a>
+  <a href="index.php">Return to admin page</a>
 </article>
 </body>
 <html>
