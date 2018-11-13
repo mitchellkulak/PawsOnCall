@@ -113,7 +113,7 @@ function addMed(medication) {
     var d = Date.now();
     var dogID = getCookie("dogID");
     if (dogID != "") {
-        var note = prompt("Please add medication information", "Date: " + timeConverter(d) + "Gave " + medication);
+        var note = prompt("Please add medication information", "Date: " + timeConverter(d) + " Gave " + medication + ".");
         if (note != null) {
             var url = "AddMomDogNotes.php?session=" + getCookie("session");
             var data = {};
