@@ -12,6 +12,7 @@ function getWhelpDates() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
+            console.log(obj);
             obj.forEach(function (element) {
                 startWhelp = element.StartWhelp;
                 endWhelp = element.EndWhelp
@@ -27,7 +28,6 @@ function getWhelpDates() {
                 bigArray[i] = smallArray;*/
             });
         });
-    return bigArray;
 }
 
 async function drawChart() {
