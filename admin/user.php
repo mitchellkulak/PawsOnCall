@@ -48,7 +48,7 @@ $db->close();
 	<!-- favicon stuff-->
 </head>
 
-<body> 
+<body  onload="adminShowHide()">
 
 <!-- Navbar, logo, logout button -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -59,7 +59,7 @@ $db->close();
 		<a class="navbar-item" href="mother.html">Mom</a>
 		<a class="navbar-item" href="puppies.html">Puppies</a>
 		<a class="navbar-item" href="misc.html">Misc</a>
-		<a class="navbar-item" id="adminLink" href="/admin">Admin</a>
+		<a class="navbar-item" id="adminLink" href="./admin">Admin</a>
 	</div>
 	<div class="buttons">
 		<a class="button is-primary logout" onclick="logout()">
@@ -70,37 +70,68 @@ $db->close();
 <!-- Navbar, logo, logout button -->
 
 <article class="tile notification is-primary is-vertical admin">
+  <!-- Searchbar and button-->
+  <div class="field">
+      <div class="control">
+        <input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
+        <button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+      </div>
+    </div>
+  <!--sarchbar and button-->  
+
+  <!--select user-->
   <form action="user.php">
+    <input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
     <select class="dropbtn admin" name='loadID'>
       <option value="0">New User</option>
-      <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"].">".$subuser["Name"]."</option>";}?>
+      <!--results go here-->
     </select>
+
+<!-- Searchbar and button exmaple--
+<div class="field">
+		<div class="control">
+			<input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
+			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+		</div>
+	</div>
+!--sarchbar and button-->
+
     <input class="button is-link admin" type="submit" value="Load">
   </form>
 
   <form action="userAction.php" method="post">
+    
+    <!--Name section-->
     <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $userID?>">
     <label class="label admin">Name:</label>
     <input class="input admin"type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
 
+    <!--email-->
     <label class="label admin">Email: </label>
     <input class="input admin"type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
 
+    <!--phone-->
     <label class="label admin">Phone: </label>
     <input class="input admin"type="tel" name="phone" value="<?php echo $userrow['Phone']?>"><br>
 
+
+    <!--address-->
     <label class="label admin">Address: </label>
     <input class="input admin"type="text" name="address" value="<?php echo $userrow['Address']?>"><br>
 
+    <!--city-->
     <label class="label admin">City:</label>
     <input class="input admin"type="text" name="city" value="<?php echo $userrow['City']?>"><br>
 
+    <!--state-->
     <label class="label admin">State: </label>
     <input class="input admin"type="text" name="state" maxlength="2" value="<?php echo $userrow['State']?>"><br>
 
+    <!--zip-->
     <label class="label admin">ZIP: </label>
     <input class="input admin"type="text" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
     
+    <!--admin buttons-->
     <label class="label admin">Admin:</label>
     <input type="radio" name="admin" value="1" <?php if($userrow["Admin"] == 1){echo "checked";}?>>Yes<br>
     <input type="radio" name="admin" value="0" <?php if($userrow["Admin"] == 0 || $userID == 0){echo "checked";}?>> No<br>

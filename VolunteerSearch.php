@@ -23,12 +23,12 @@ if ($db->connect_error)
 else {
     $i = 0;
     $volunteer_name = mysqli_real_escape_string($db,urldecode($_GET['search']));
-    $_data = $db->query(
-    "SELECT v.Name AS VolunteerName
-    FROM Volunteer AS v
-    WHERE v.ID = d.VolunteerID"
+    $volunteerName_data = $db->query(
+    "SELECT ID, Name
+    FROM Volunteer 
+    WHERE name LIKE '%$volunteer_Name%'"
     );
-    while ($result = $dog_data->fetch_assoc()){
+    while ($result = $volunteerName_data->fetch_assoc()){
         $MasterArray[$i] = $result;
         $i++;
     }
