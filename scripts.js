@@ -4,7 +4,7 @@ function loadGoogle() {
     window.addEventListener("resize", drawChart, false);
 }
 
-function addMomDogTemps() {
+function addMomDogTemp() {
     var d = Date.now();
     var dogID = getCookie("dogID");
     if (dogID != "") {
