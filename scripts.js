@@ -140,7 +140,8 @@ function loadLitterInfo(){
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
-            litterNameDiv.innerHTML = obj[0][1].MotherName;
+           // litterNameDiv.innerHTML = obj[0][1].MotherName;
+           console.log(obj[0][1]);
             
         });
 
