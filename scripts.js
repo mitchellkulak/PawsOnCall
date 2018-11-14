@@ -9,7 +9,7 @@ function addMomDogTemps() {
     var dogID = getCookie("dogID");
     if (dogID != "") {
         var temp = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
-        if (note != null) {
+        if (temp != null) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.Temp = temp;
