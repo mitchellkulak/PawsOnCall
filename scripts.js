@@ -8,11 +8,12 @@ function addMomDogTemp() {
     var d = Date.now();
     var dogID = getCookie("dogID");
     if (dogID != "") {
-        var temp = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
+        var temp = prompt("Please add a temp");
         if (temp != null) {
-            var url = "AddMomDogTemps.php?session=" + getCookie("session");
+            var url = "AddMomDogTemps.php?session=" + getCookie("session") + ;
             var data = {};
             data.Temp = temp;
+            console.log(temp);
             data.DogID = getCookie("dogID");
             console.log(JSON.stringify(data));
             fetch(url, {
