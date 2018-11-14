@@ -56,9 +56,9 @@ $db->close();
 		<a href="searchresult.html">
 			<img src="images/pawslogo.png" alt="PAWS Logo" >
 		</a>
-		<a class="navbar-item" href="mother.html">Mom</a>
-		<a class="navbar-item" href="puppies.html">Puppies</a>
-		<a class="navbar-item" href="misc.html">Misc</a>
+		<a class="navbar-item" href="../mother.html">Mom</a>
+		<a class="navbar-item" href="../puppies.html">Puppies</a>
+		<a class="navbar-item" href="../misc.html">Misc</a>
 		<a class="navbar-item" id="adminLink" href="./admin">Admin</a>
 	</div>
 	<div class="buttons">
