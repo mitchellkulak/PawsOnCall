@@ -132,12 +132,14 @@ function resizeChart() {
 function loadLitterInfo(){
     var session = getCookie("session");
     var dogID = getCookie("dogID");
+    var litterNameDiv = document.getElementById("litterNameDiv");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
+            litterNameDiv.innerHTML = obj[0][1].MotherName;
             
         });
 
