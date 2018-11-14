@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$_SESSION["session"] = $_GET["session"];
+	if(isset($_GET["session"])){$_SESSION["session"] = $_GET["session"]};
 ?>
 <!DOCTYPE html>
 <html>
