@@ -100,21 +100,12 @@ function loadLitterInfo(){
     var session = getCookie("session");
     var dogID = getCookie("dogID");
 
-
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
             
-
-            // obj.dogUpdates.forEach(function (element) {
-            //     var newRow = document.createElement("tr");
-            //     var newCell = document.createElement("td");
-            //     newCell.innerHTML = element.Note;
-            //     newRow.appendChild(newCell);
-            //     noteTable.appendChild(newRow);
-            // });
         });
 
 
