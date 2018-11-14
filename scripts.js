@@ -144,7 +144,10 @@ function myFunction() {
 }
 
 function logout() {
-    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;"
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    document.cookie = "litterID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    fetch("logoff.php");
     window.location.href = "login.html";
 }
 
