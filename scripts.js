@@ -345,6 +345,10 @@ function redirectToMother(dogId) {
     window.location.href = "mother.html";
 }
 
+function redirectToAdmin(){
+    window.location.href = "./admin/index.php?session=" + getCookie("session");
+}
+
 function redirectToSearch() {
     var dogName = document.getElementById("searchBar").value;
     window.location.href = "searchresult.html?search=" + dogName;
