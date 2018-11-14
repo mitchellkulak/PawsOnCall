@@ -13,6 +13,7 @@ function addMomDogTemp() {
             var url = "AddMomDogTemps.php?session=" + getCookie("session") + ;
             var data = {};
             data.Temp = temp;
+            console.log(temp);
             data.DogID = getCookie("dogID");
             console.log(JSON.stringify(data));
             fetch(url, {
