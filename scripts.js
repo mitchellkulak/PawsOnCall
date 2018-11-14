@@ -10,7 +10,7 @@ function addMomDogTemp() {
     if (dogID != "") {
         var temp = prompt("Please add a temp");
         if (temp != null) {
-            var url = "AddMomDogTemps.php?session=" + getCookie("session") + ;
+            var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.Temp = temp;
             console.log(temp);
