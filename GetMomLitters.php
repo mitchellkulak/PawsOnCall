@@ -16,7 +16,6 @@ if ($input['error'] == 'auth error') {
 else{
 
 
-$theMasterArray = array();
 
 if ($db->connect_error)
 {
@@ -24,18 +23,44 @@ if ($db->connect_error)
 }
 else {
     $i = 0;
-    $theMasterArray = array();
+    $littersArray = array();
     $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $dogData = $db->query(
-    "SELECT *
-    FROM Litter 
-    WHERE $dogID = motherID ORDER BY ID DESC"
+    "SELECT l.*, d.Name as MotherName
+    FROM Litter as l, Dogs as d 
+    WHERE $dogID = l.MotherID AND $dogID = d.ID AND l.MotherID = d.ID ORDER BY ID DESC"
     );
     while ($result = $dogData->fetch_assoc()){
-        $theMasterArray[$i] = $result;
-        $i++;
+        $littersArray[$i] = $result;
+		$in = 0;
+    		$puppiesArray = array();
+    		$litterID = $littersArray[$i]["ID"];
+    		$litterData = $db->query(
+    		"SELECT *
+    		FROM Dogs 
+    		WHERE LitterID = $litterID"
+    		);
+    		while ($litterResult = $litterData->fetch_assoc()){
+        		$puppiesArray[$in] = $litterResult;
+       	 		$in++;
+    		}
+		$inr = 0;
+    		$updatesArray = array();
+    		$updateData = $db->query(
+    		"SELECT *
+    		FROM LitterUpdates 
+    		WHERE LitterID = $litterID"
+    		);
+    		while ($updateResult = $updateData->fetch_assoc()){
+        		$updatesArray[$inr] = $updateResult;
+       	 		$inr++;
+    		}
+
+	array_push($littersArray[$i],$puppiesArray,$updatesArray);
+        $i++;	
     }
-    echo json_encode($theMasterArray);
+
+    echo json_encode($littersArray);
         $db->close();
 }
 }
