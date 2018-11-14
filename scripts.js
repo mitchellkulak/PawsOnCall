@@ -1,4 +1,3 @@
-// Line Chart Initialization, intentionally not in any function
 function loadGoogle() {
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawChart);
@@ -8,24 +7,26 @@ function loadGoogle() {
 function getWhelpDates() {
     var startWhelp;
     var endWhelp;
+    var thisTableBody = document.getElementById("whelp");
+
     fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
             obj.forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var startCell = document.createElement("td");
+                var endCell = document.createElement("td");
                 startWhelp = element.StartWhelp;
                 endWhelp = element.EndWhelp
                 console.log(startWhelp);
                 console.log(endWhelp);
-                /*var smallArray = new Array();
-                var day = parseInt(element.date.day);
-                var month = parseInt(element.date.month);
-                var year = parseInt(element.date.year);
-                var temp = element.Temp;
-                smallArray[0] = new Date(year, month, day);
-                smallArray[1] = parseInt(temp);
-                bigArray[i] = smallArray;*/
+                startCell.innerHTML = startWhelp;
+                endCell.innerHTML = endWhelp;
+                newRow.appendChild(startCell);
+                newRow.appendChild(endCell);
+                thisTableBody.appendChild(newRow);
             });
         });
 }
@@ -34,20 +35,6 @@ async function drawChart() {
     var data1 = new google.visualization.DataTable();
     data1.addColumn('date', 'Date');
     data1.addColumn('number', 'Temperature');
-    /*
-            [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
-            [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
-            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-            [66, 70], [67, 72], [68, 75], [69, 80]]
-    */
     var newData = new Array();
     newData = await prepareDataForChart();
     console.log(newData);
@@ -76,7 +63,7 @@ async function drawChart() {
 
 async function prepareDataForChart() {
     var bigArray = new Array();
-   var i = 0;
+    var i = 0;
     var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
@@ -176,7 +163,10 @@ function myFunction() {
 }
 
 function logout() {
-    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;"
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    document.cookie = "litterID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    fetch("logoff.php");
     window.location.href = "login.html";
 }
 
@@ -587,7 +577,6 @@ function SHA1(msg) {
         H4 = (H4 + E) & 0x0ffffffff;
     }
     var temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
-
     return temp.toLowerCase();
 }
 
@@ -595,5 +584,4 @@ function adminShowHide() {
     if (getCookie("admin") == 1) {
         document.getElementById("adminLink").style.display = "flex";
     }
-
 }

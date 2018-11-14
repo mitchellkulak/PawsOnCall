@@ -22,24 +22,18 @@ if ($db->connect_error)
 }
 else {
     $i = 0;
-    $dog_name = mysqli_real_escape_string($db,urldecode($_GET['search']));
-    $userID = $input['userID'];
-    if($input['admin']){
-	$SQL = "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
-    	FROM Volunteer AS v, Dogs AS d 
-    	WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND v.ID = d.VolunteerID";
-    }else{
-	$SQL = "SELECT d.id AS DogId, d.Name AS DogName, v.Name AS VolunteerName, d.Breed 
-    	FROM Volunteer AS v, Dogs AS d 
-    	WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND d.VolunteerID = $userID AND v.ID = d.VolunteerID";
-    }
-    $dog_data = $db->query($SQL);
+    $volunteer_name = mysqli_real_escape_string($db,urldecode($_GET['search']));
+    $_data = $db->query(
+    "SELECT v.Name AS VolunteerName
+    FROM Volunteer AS v
+    WHERE v.ID = d.VolunteerID"
+    );
     while ($result = $dog_data->fetch_assoc()){
         $MasterArray[$i] = $result;
         $i++;
     }
     echo json_encode($MasterArray);
+        $db->close();
 }
 }
-$db->close();
 ?>
