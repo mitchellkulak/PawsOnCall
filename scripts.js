@@ -1,28 +1,40 @@
-// Line Chart Initialization, intentionally not in any function
 function loadGoogle() {
     google.charts.load('current', { packages: ['corechart', 'line'] });
     google.charts.setOnLoadCallback(drawChart);
     window.addEventListener("resize", drawChart, false);
 }
 
+function getWhelpDates() {
+    var startWhelp;
+    var endWhelp;
+    var thisTableBody = document.getElementById("whelp");
+
+    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            console.log(obj);
+            obj.forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var startCell = document.createElement("td");
+                var endCell = document.createElement("td");
+                startWhelp = element.StartWhelp;
+                endWhelp = element.EndWhelp
+                console.log(startWhelp);
+                console.log(endWhelp);
+                startCell.innerHTML = startWhelp;
+                endCell.innerHTML = endWhelp;
+                newRow.appendChild(startCell);
+                newRow.appendChild(endCell);
+                thisTableBody.appendChild(newRow);
+            });
+        });
+}
+
 async function drawChart() {
     var data1 = new google.visualization.DataTable();
     data1.addColumn('date', 'Date');
     data1.addColumn('number', 'Temperature');
-    /*
-            [[0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
-            [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
-            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-            [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-            [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-            [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-            [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-            [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-            [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-            [66, 70], [67, 72], [68, 75], [69, 80]]
-    */
     var newData = new Array();
     newData = await prepareDataForChart();
     console.log(newData);
@@ -51,7 +63,7 @@ async function drawChart() {
 
 async function prepareDataForChart() {
     var bigArray = new Array();
-   var i = 0;
+    var i = 0;
     var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
         .then(response => response.json())
         .then((data) => {
@@ -84,10 +96,41 @@ function resizeChart() {
     }
 }
 
-function addMed(x) {
-    var txt;
-    txt = x;
-    document.getElementById("test").innerHTML = txt;
+function addMed(medication) {
+    var d = Date.now();
+    var dogID = getCookie("dogID");
+    if (dogID != "") {
+        var note = prompt("Please add medication information", "Date: " + timeConverter(d) + " Gave " + medication + ".");
+        if (note != null) {
+            var url = "AddMomDogNotes.php?session=" + getCookie("session");
+            var data = {};
+            data.Note = note;
+            data.DogID = getCookie("dogID");
+            console.log(JSON.stringify(data));
+            fetch(url, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, cors, *same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, *same-origin, omit
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    // "Content-Type": "application/x-www-form-urlencoded",
+                },
+                redirect: "follow", // manual, *follow, error
+                referrer: "no-referrer", // no-referrer, *client
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+                //.then(response => response.json()) // parses response to JSON
+                .then((responseContent) => {
+                    console.log(responseContent);
+
+
+                });
+        }
+    }
+    // var txt;
+    // txt = x;
+    // document.getElementById("test").innerHTML = txt;
 }
 
 function addMedi(x) {
@@ -512,7 +555,6 @@ function SHA1(msg) {
         H4 = (H4 + E) & 0x0ffffffff;
     }
     var temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
-
     return temp.toLowerCase();
 }
 
@@ -520,5 +562,4 @@ function adminShowHide() {
     if (getCookie("admin") == 1) {
         document.getElementById("adminLink").style.display = "flex";
     }
-
 }

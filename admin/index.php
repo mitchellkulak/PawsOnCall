@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	$_SESSION["session"] = $_GET["session"];
+?>
 <!DOCTYPE html>
 <html>
 <head>

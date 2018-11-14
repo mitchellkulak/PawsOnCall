@@ -1,13 +1,14 @@
 <?php
+session_start();
 include '../authenticate.php';
-$session = "XamUpyJniQzJntrCLbFB";//$_GET['session'];
+$session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
 
 
 if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $error = array('error' => 'auth error');
     echo json_encode($error);
-    echo "<script>window.location.replace('../login.php');</script>";
+    echo "<script>window.location.replace('../login.html');</script>";
 }else{
   include '../dbconnect.php';
   if ($db->connect_error){
@@ -115,7 +116,7 @@ $db->close();
       <input type="submit" value="Save">
     </form>
 
-    <a href="admin.html">Return to admin page</a>
+    <a href="index.php">Return to admin page</a>
   </article>
 </body>
 <html>
