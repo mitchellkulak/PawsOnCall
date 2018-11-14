@@ -16,10 +16,8 @@ if ($input['error'] == 'auth error') {
 else {
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$momDogNote = mysqli_real_escape_string($db,$ar['temp']);
-$dogID = mysqli_real_escape_string($db,$ar['DogID']);
-var_dump($momDogNote);
-var_dump($dogID);
+$momDogTemp = mysqli_real_escape_string($db,$ar['temp']);
+$dogID = mysqli_real_escape_string($db,$ar['dogID']);
 if ($db->connect_error)
 {
     die("Can't connect");
@@ -28,7 +26,7 @@ else {
     if ($db->query(
     "INSERT 
     INTO Temperature
-    VALUES ($dogID, null, '$momDogNote')") === TRUE) {
+    VALUES ($dogID, null, $momDogTemp)") === TRUE) {
         $success = array('result' => 'Record updated successfully');
         echo json_encode($success);
     } else {
