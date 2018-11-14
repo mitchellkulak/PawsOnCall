@@ -29,7 +29,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
 $db->close();
 ?>
 <html>
-<head>
+<body  onload="adminShowHide()">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PAWS Motherhood Database</title>

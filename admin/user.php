@@ -47,7 +47,7 @@ $db->close();
 	<!-- favicon stuff-->
 </head>
 
-<body> 
+<body  onload="adminShowHide()">
 
 <!-- Navbar, logo, logout button -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
