@@ -59,7 +59,7 @@ $db->close();
 		<a class="navbar-item" href="mother.html">Mom</a>
 		<a class="navbar-item" href="puppies.html">Puppies</a>
 		<a class="navbar-item" href="misc.html">Misc</a>
-		<a class="navbar-item" id="adminLink" href="/admin">Admin</a>
+		<a class="navbar-item" id="adminLink" href="./admin">Admin</a>
 	</div>
 	<div class="buttons">
 		<a class="button is-primary logout" onclick="logout()">
@@ -70,7 +70,15 @@ $db->close();
 <!-- Navbar, logo, logout button -->
 
 <article class="tile notification is-primary is-vertical admin">
-  
+  <!-- Searchbar and button-->
+  <div class="field">
+      <div class="control">
+        <input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
+        <button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+      </div>
+    </div>
+  <!--sarchbar and button-->  
+
   <!--select user-->
   <form action="user.php">
     <input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">

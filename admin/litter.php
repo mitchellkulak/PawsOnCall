@@ -51,25 +51,26 @@ $db->close();
 	<!-- favicon stuff-->
 </head>
 
-<body> 
+<body onload="adminShowHide()"> 
 
-  <!-- Navbar, logo, logout button -->
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div id="navbarDesktop " class="navbar-brand">
-      <a href="searchresult.html">
-        <img src="../images/pawslogo.png" alt="PAWS Logo" >
-      </a>
-      <a class="navbar-item" href="mother.html">Mom</a>
-      <a class="navbar-item" href="puppies.html">Puppies</a>
-      <a class="navbar-item" href="misc.html">Misc</a>
-    </div>
-    <div class="buttons">
-      <a class="button is-primary logout" onclick="logout()">
-      Log out
-      </a>
-    </div>
-  </nav>
-  <!-- Navbar, logo, logout button -->
+<!-- Navbar, logo, logout button -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+	<div id="navbarDesktop " class="navbar-brand">
+		<a href="searchresult.html">
+			<img src="images/pawslogo.png" alt="PAWS Logo" >
+		</a>
+		<a class="navbar-item" href="mother.html">Mom</a>
+		<a class="navbar-item" href="puppies.html">Puppies</a>
+		<a class="navbar-item" href="misc.html">Misc</a>
+		<a class="navbar-item" id="adminLink" href="./admin">Admin</a>
+	</div>
+	<div class="buttons">
+		<a class="button is-primary logout" onclick="logout()">
+		Log out
+		</a>
+	</div>
+</nav>
+<!-- Navbar, logo, logout button -->
 
   <!--central tile-->
   <article class="tile notification is-primary is-vertical admin">
