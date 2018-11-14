@@ -18,6 +18,7 @@ else{
 
 $theMasterArray = array();
 
+
 if ($db->connect_error)
 {
     die("Can't connect");
@@ -25,18 +26,17 @@ if ($db->connect_error)
 else {
     $i = 0;
     $theMasterArray = array();
-    $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
-    $dogData = $db->query(
-    "SELECT *
-    FROM Litter 
-    WHERE $dogID = motherID ORDER BY ID DESC"
+    $dogID = mysqli_real_escape_string($db,urldecode($_GET['']));
+    $SQL = "SELECT *
+    FROM Temperature 
+    WHERE $dogID = DogID"
     );
-    while ($result = $dogData->fetch_assoc()){
-        $theMasterArray[$i] = $result;
-        $i++;
+    if($db->query($SQL)){
+	    echo json_encode(array('error'=>mysqli_error{$db)));
+    }else{
+	    echo json_encode(array('error'=>'none'));
     }
-    echo json_encode($theMasterArray);
-        $db->close();
 }
 }
+$db->close();
 ?>
