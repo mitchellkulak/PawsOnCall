@@ -26,6 +26,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
+<body  onload="adminShowHide()"></body>
 <!-- Navbar, logo, logout button -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div id="navbarDesktop " class="navbar-brand">
@@ -43,10 +44,11 @@
 		</a>
 	</div>
 </nav>
-<!-- Navbar, logo, logout button -->
+<!-- Links to admin pages -->
 <article class="tile notification is-primary is-vertical admin">
   <a class="button is-link " href="user.php">User</a>
   <a class="button is-link " href="dog.php">Dog</a>
   <a class="button is-link "href="litter.php">Litter</a>
 </article>
+</body>
 </html>
