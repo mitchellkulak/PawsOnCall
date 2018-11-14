@@ -29,7 +29,7 @@ else {
     $dogData = $db->query(
     "SELECT *
     FROM Litter 
-    WHERE $dogID = motherID"
+    WHERE $dogID = motherID ORDER BY ID DESC"
     );
     while ($result = $dogData->fetch_assoc()){
         $theMasterArray[$i] = $result;
