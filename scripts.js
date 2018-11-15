@@ -149,8 +149,19 @@ function loadLitterInfo(){
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
             console.log(obj);
+
+            // For each litter
+            obj.forEach(function (element){
+                var newDdlLitter = document.createElement("a");
+                newDdlLitter.onclick = function () { loadLitterInfoByID(element.ID); };
+                newDdlLitter.innerHTML = "Whelp started " + obj[0].StartWhelp;
+
+            });
             
+
+            // For each note in first litter
             obj[0][1].forEach(function (element) {
+                
                 console.log(element);
                 var newRow = document.createElement("tr");
                 var newCell = document.createElement("td");
