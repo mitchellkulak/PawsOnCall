@@ -8,11 +8,12 @@ function addMomDogTemp() {
     var d = Date.now();
     var dogID = getCookie("dogID");
     if (dogID != "") {
-        var temp = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
+        var temp = prompt("Please add a temp");
         if (temp != null) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.Temp = temp;
+            console.log(temp);
             data.DogID = getCookie("dogID");
             console.log(JSON.stringify(data));
             fetch(url, {
@@ -132,22 +133,17 @@ function resizeChart() {
 function loadLitterInfo(){
     var session = getCookie("session");
     var dogID = getCookie("dogID");
-
+    var litterNameDiv = document.getElementById("litterNameDiv");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
-            
+           // litterNameDiv.innerHTML = obj[0][1].MotherName;
+           console.log(obj[0].MotherName);
 
-            // obj.dogUpdates.forEach(function (element) {
-            //     var newRow = document.createElement("tr");
-            //     var newCell = document.createElement("td");
-            //     newCell.innerHTML = element.Note;
-            //     newRow.appendChild(newCell);
-            //     noteTable.appendChild(newRow);
-            // });
+            
         });
 
 
