@@ -149,8 +149,14 @@ function loadLitterInfo(){
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
 
+            
             obj[0][1].forEach(function (element) {
                 console.log(element);
+                var newRow = document.createElement("tr");
+                var newCell = document.createElement("td");
+                newCell.innerHTML = element.Note;
+                newRow.appendChild(newCell);
+                puppyNoteTable.appendChild(newRow);
 
             });
             
