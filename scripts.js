@@ -134,15 +134,17 @@ function loadLitterInfo(){
     var session = getCookie("session");
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
+    var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
-           // litterNameDiv.innerHTML = obj[0][1].MotherName;
-           console.log(obj[0].MotherName);
-           console.log(obj[1][0][0].Name);
+            litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
+            whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
+          // obj[0].MotherName 
+          // obj[1][0][0].Name // [Gets first puppy name]
 
             
         });
