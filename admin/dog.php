@@ -60,7 +60,7 @@ $db->close();
 		<a class="navbar-item" href="../mother.html">Mom</a>
 		<a class="navbar-item" href="../puppies.html">Puppies</a>
 		<a class="navbar-item" href="../misc.html">Misc</a>
-		<a class="navbar-item" id="adminLink" href="../admin">Admin</a>
+		<a class="navbar-item" id="adminLink" href="../admin" style="display:flex">Admin</a>
 	</div>
 	<div class="buttons">
 		<a class="button is-primary logout" onclick="logout()">
