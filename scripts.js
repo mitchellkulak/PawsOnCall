@@ -135,6 +135,7 @@ function loadLitterInfo(){
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
     var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
+    var puppyNoteTable = document.getElementById("puppyNoteTable");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
@@ -143,9 +144,22 @@ function loadLitterInfo(){
             console.log(obj);
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
+
+            obj[0][1].forEach(function (element) {
+                console.log(element);
+
+            });
+            
+            // obj.dogUpdates.forEach(function (element) {
+            //     var newRow = document.createElement("tr");
+            //     var newCell = document.createElement("td");
+            //     newCell.innerHTML = element.Note;
+            //     newRow.appendChild(newCell);
+            //     noteTable.appendChild(newRow);
+            // });
           // obj[0].MotherName 
           // obj[1][0][0].Name // [Gets first puppy name]
-
+            // To Do next: create notes table based on response
             
         });
 
