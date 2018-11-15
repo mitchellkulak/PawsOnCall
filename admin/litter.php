@@ -20,6 +20,9 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       $litterID = mysqli_real_escape_string($db,$_GET['loadID']);
       $litter = $db->query("SELECT * FROM Litter WHERE id = $litterID");
       $litterrow = $litter->fetch_assoc();
+      $fatherID = $litterrow["FatherID"];
+      $motherID = $litterrow["MotherID"];
+      $volunteerID = $litterrow["VolunteerID"];
     }
     $litters = $db->query("SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Litter, Dogs WHERE Litter.MotherID = Dogs.ID ORDER BY Dogs.Name");
     $motherdogs = $db->query("SELECT ID, Name FROM Dogs WHERE Sex = 'F'");
@@ -62,7 +65,7 @@ $db->close();
 		<a class="navbar-item" id="adminLink" href="../admin" style="display:flex">Admin</a>
 	</div>
 	<div class="buttons">
-		<a class="button is-primary logout" onclick="logout()">
+		<a class="button is-primary logout" onclick="logout();">
 		Log out
 		</a>
 	</div>

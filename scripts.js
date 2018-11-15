@@ -139,17 +139,37 @@ function loadLitterInfo(){
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
     var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
+    var puppyNoteTable = document.getElementById("puppyNoteTable");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
+            document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
+            console.log(obj);
+            
+            obj[0][1].forEach(function (element) {
+                console.log(element);
+                var newRow = document.createElement("tr");
+                var newCell = document.createElement("td");
+                newCell.innerHTML = element.Note;
+                newRow.appendChild(newCell);
+                puppyNoteTable.appendChild(newRow);
+
+            });
+            
+            // obj.dogUpdates.forEach(function (element) {
+            //     var newRow = document.createElement("tr");
+            //     var newCell = document.createElement("td");
+            //     newCell.innerHTML = element.Note;
+            //     newRow.appendChild(newCell);
+            //     noteTable.appendChild(newRow);
+            // });
           // obj[0].MotherName 
           // obj[1][0][0].Name // [Gets first puppy name]
-
+            // To Do next: create notes table based on response
             
         });
 
@@ -201,7 +221,7 @@ function myFunction() {
 function logout() {
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    document.cookie = "litterID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     fetch("logoff.php");
     window.location.href = "login.html";
 }
@@ -254,8 +274,6 @@ function loadMotherInfo() {
     var session = getCookie("session");
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
-    noteTable.classList.add("table");
-    noteTable.classList.add("table");
     var dogBreedDiv = document.getElementById("breedDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
