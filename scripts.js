@@ -12,9 +12,9 @@ function addMomDogTemp() {
         if (temp != null) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
-            data.Temp = temp;
+            data.temp = temp;
             console.log(temp);
-            data.DogID = getCookie("dogID");
+            data.dogID = getCookie("dogID");
             console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -134,14 +134,17 @@ function loadLitterInfo(){
     var session = getCookie("session");
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
+    var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
-           // litterNameDiv.innerHTML = obj[0][1].MotherName;
-           console.log(obj[0].MotherName);
+            litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
+            whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
+          // obj[0].MotherName 
+          // obj[1][0][0].Name // [Gets first puppy name]
 
             
         });
