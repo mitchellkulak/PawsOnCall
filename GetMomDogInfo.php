@@ -29,7 +29,7 @@ else {
     $dogRequest = $db->query(
     "SELECT *
     FROM Dogs 
-    WHERE id = $dog_id and VolunteerID = $userID"
+    WHERE id = $dog_id"
     );
     $i = 0;
     while ($result = $dogRequest->fetch_assoc()){
