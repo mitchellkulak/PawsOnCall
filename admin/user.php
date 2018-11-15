@@ -60,7 +60,7 @@ $db->close();
 		<a class="navbar-item" href="../admin" style="display:flex">Admin</a>
 	</div>
 	<div class="buttons">
-		<a class="button is-primary logout" onclick="logout()">
+		<a class="button is-primary logout" onclick="logout();">
 		Log out
 		</a>
 	</div>
@@ -73,7 +73,7 @@ $db->close();
   <form action="user.php">
     <select class="dropbtn admin" name='loadID'>
       <option value="0">New User</option>
-      <!--results go here-->
+      <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"]==$userID){echo " selected";} echo ">".$subuser["Name"]."</option>";}?>
     </select>
 
     <input class="button is-link admin" type="submit" value="Load">
