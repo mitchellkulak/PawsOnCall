@@ -142,7 +142,7 @@ function loadLitterInfo(){
             console.log(obj);
            // litterNameDiv.innerHTML = obj[0][1].MotherName;
            console.log(obj[0].MotherName);
-           console.log(obj[1][0].Name);
+           console.log(obj[1].Name);
 
             
         });
