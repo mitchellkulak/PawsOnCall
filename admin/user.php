@@ -35,7 +35,7 @@ $db->close();
 	<link rel="stylesheet" href="../pawscustom.css">
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-	<script src="scripts.js"></script>
+	<script src="../scripts.js"></script>
 	
 	<!-- favicon stuff-->
 	<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
@@ -54,12 +54,12 @@ $db->close();
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div id="navbarDesktop " class="navbar-brand">
 		<a href="searchresult.html">
-			<img src="images/pawslogo.png" alt="PAWS Logo" >
+			<img src="../images/pawslogo.png" alt="PAWS Logo" >
 		</a>
 		<a class="navbar-item" href="../mother.html">Mom</a>
 		<a class="navbar-item" href="../puppies.html">Puppies</a>
 		<a class="navbar-item" href="../misc.html">Misc</a>
-		<a class="navbar-item" id="adminLink" href="./admin">Admin</a>
+		<a class="navbar-item" href="./admin">Admin</a>
 	</div>
 	<div class="buttons">
 		<a class="button is-primary logout" onclick="logout()">
@@ -70,31 +70,13 @@ $db->close();
 <!-- Navbar, logo, logout button -->
 
 <article class="tile notification is-primary is-vertical admin">
-  <!-- Searchbar and button-->
-  <div class="field">
-      <div class="control">
-        <input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
-        <button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
-      </div>
-    </div>
-  <!--sarchbar and button-->  
 
   <!--select user-->
   <form action="user.php">
-    <input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
     <select class="dropbtn admin" name='loadID'>
       <option value="0">New User</option>
       <!--results go here-->
     </select>
-
-<!-- Searchbar and button exmaple--
-<div class="field">
-		<div class="control">
-			<input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
-			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
-		</div>
-	</div>
-!--sarchbar and button-->
 
     <input class="button is-link admin" type="submit" value="Load">
   </form>
