@@ -12,9 +12,9 @@ function addMomDogTemp() {
         if (temp != null) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
-            data.Temp = temp;
+            data.temp = temp;
             console.log(temp);
-            data.DogID = getCookie("dogID");
+            data.dogID = getCookie("dogID");
             console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
