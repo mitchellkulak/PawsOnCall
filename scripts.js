@@ -140,6 +140,7 @@ function loadLitterInfo(){
     var litterNameDiv = document.getElementById("litterNameDiv");
     var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
     var puppyNoteTable = document.getElementById("puppyNoteTable");
+    var myDropdown = document.getElementById("myDropdown");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
@@ -155,6 +156,7 @@ function loadLitterInfo(){
                 var newDdlLitter = document.createElement("a");
                 newDdlLitter.onclick = function () { loadLitterInfoByID(element.ID); };
                 newDdlLitter.innerHTML = "Whelp started " + obj[0].StartWhelp;
+                myDropdown.appendChild(newDdlLitter);
 
             });
             
