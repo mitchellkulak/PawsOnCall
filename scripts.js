@@ -10,7 +10,7 @@ function addMomDogTemp() {
     if (dogID != "") {
         var temp = prompt("Please add a temp");
         var tempInt = parseInt(temp);
-        if (tempInt != null && temp == tempInt && tempInt >= 90 && tempInt <= 120) {
+        if (tempInt != null && temp == tempInt && tempInt >= 90 && tempInt <= 110) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.temp = temp;
@@ -34,6 +34,9 @@ function addMomDogTemp() {
                 .then((responseContent) => {
                     console.log(responseContent);
                 });
+        }
+        else {
+            alert("please enter a number between 90 and 110");
         }
     }
 
