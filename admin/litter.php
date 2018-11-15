@@ -30,7 +30,6 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
 $db->close();
 ?>
 <html>
-<body  onload="adminShowHide()">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PAWS Motherhood Database</title>
@@ -50,8 +49,6 @@ $db->close();
 	<meta name="theme-color" content="#ffffff">
 	<!-- favicon stuff-->
 </head>
-
-<body onload="adminShowHide()"> 
 
 <!-- Navbar, logo, logout button -->
 <nav class="navbar" role="navigation" aria-label="main navigation">

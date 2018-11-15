@@ -51,8 +51,6 @@ $db->close();
 	<!-- favicon stuff-->
 </head>
 
-<body  onload="adminShowHide()">
-
 <!-- Navbar, logo, logout button -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div id="navbarDesktop " class="navbar-brand">
