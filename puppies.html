@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PAWS Motherhood Database</title>
-	
-    <link rel="stylesheet" href="bulma.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PAWS Motherhood Database</title>
+
+	<link rel="stylesheet" href="bulma.css">
 	<link rel="stylesheet" href="pawscustom.css">
 
 	<!-- favicon stuff-->
@@ -17,77 +18,78 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 	<!-- favicon stuff-->
-	
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
 	<!--forms script-->
 	<script>
 		function editDates() {
-		  document.getElementById("whelpStart").removeAttribute("disabled");
-		  document.getElementById("whelpEnd").removeAttribute("disabled");
-		  document.getElementById("whelpDate").removeAttribute("disabled");
-		  document.getElementById("weanStart").removeAttribute("disabled");
-		  document.getElementById("weanEnd").removeAttribute("disabled");
-		  document.getElementById("deworm").removeAttribute("disabled");
-		  document.getElementById('edit').hidden = true;
-		  document.getElementById('save').hidden = false;
-		  
-		  return false;
+			document.getElementById("whelpStart").removeAttribute("disabled");
+			document.getElementById("whelpEnd").removeAttribute("disabled");
+			document.getElementById("whelpDate").removeAttribute("disabled");
+			document.getElementById("weanStart").removeAttribute("disabled");
+			document.getElementById("weanEnd").removeAttribute("disabled");
+			document.getElementById("deworm").removeAttribute("disabled");
+			document.getElementById('edit').hidden = true;
+			document.getElementById('save').hidden = false;
+
+			return false;
 		}
-		
+
 		function editLitter() {
-		  document.getElementById("father").removeAttribute("disabled");
-		  document.getElementById("stillborns").removeAttribute("disabled");
-		  document.getElementById("deaths").removeAttribute("disabled");
-		  document.getElementById('edit').hidden = true;
-		  document.getElementById('save').hidden = false;
-		  
-		  return false;
+			document.getElementById("father").removeAttribute("disabled");
+			document.getElementById("stillborns").removeAttribute("disabled");
+			document.getElementById("deaths").removeAttribute("disabled");
+			document.getElementById('edit').hidden = true;
+			document.getElementById('save').hidden = false;
+
+			return false;
 		}
 	</script>
 	<!--forms script-->
 </head>
-<body  onload="adminShowHide(); loadLitterInfo();">
-<!-- Navbar, logo, logout button -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-	<div id="navbarDesktop " class="navbar-brand">
-		<a href="searchresult.html">
-			<img src="images/pawslogo.png" alt="PAWS Logo" >
-		</a>
-		<a class="navbar-item" href="mother.html">Mom</a>
-		<a class="navbar-item" href="puppies.html">Puppies</a>
-		<a class="navbar-item" href="misc.html">Misc</a>
-		<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
-	</div>
-	<div class="buttons">
-		<a class="button is-primary logout" onclick="logout()">
-		Log out
-		</a>
-	</div>
-</nav>
-<!-- Navbar, logo, logout button -->
 
-<!-- Searchbar and button-->
-<div class="field">
+<body onload="adminShowHide(); loadLitterInfo();">
+	<!-- Navbar, logo, logout button -->
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div id="navbarDesktop " class="navbar-brand">
+			<a href="searchresult.html">
+				<img src="images/pawslogo.png" alt="PAWS Logo">
+			</a>
+			<a class="navbar-item" href="mother.html">Mom</a>
+			<a class="navbar-item" href="puppies.html">Puppies</a>
+			<a class="navbar-item" href="misc.html">Misc</a>
+			<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
+		</div>
+		<div class="buttons">
+			<a class="button is-primary logout" onclick="logout()">
+				Log out
+			</a>
+		</div>
+	</nav>
+	<!-- Navbar, logo, logout button -->
+
+	<!-- Searchbar and button-->
+	<div class="field">
 		<div class="control">
 			<input class="input searchbar" id="searchBar" type="text" onkeypress="handleSearchKeyPress(event)" placeholder="Search">
-			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button> 
+			<button class="button is-link searchbutton" onclick="redirectToSearch()">Search</button>
 		</div>
 	</div>
-<!--sarchbar and button-->		
+	<!--sarchbar and button-->
 
-<section class="section">
-<div class="tile is-ancestor">
-  <div class="tile is-vertical is-8">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-				
-				<!--mother name & litter select-->
-				<article class="tile is-child notification is-primary is-12">
-          <p class="title" id="litterNameDiv"></p>
-					<p class="subtitle" id="whelpStartDateDiv"></p>
+	<section class="section">
+		<div class="tile is-ancestor 1">
+			<div class="tile is-vertical is-8 2">
+				<div class="tile 3">
+					<div class="tile is-parent is-vertical 4">
+
+						<!--mother name & litter select-->
+						<article class="tile is-child notification is-primary is-12">
+							<p class="title" id="litterNameDiv">dog</p>
+							<p class="subtitle" id="whelpStartDateDiv"></p>
 							<div class="dropdown">
-							<button onclick="myFunction()" class="dropbtn" id="litterNameDiv">Select a different litter</button>
+								<button onclick="myFunction()" class="dropbtn" id="litterNameDiv">Select a different litter</button>
 								<div id="myDropdown" class="dropdown-content">
 									<a onclick="addMed('Litter 1')">1</a>
 									<a onclick="addMed('Litter 2')">2</a>
@@ -95,93 +97,56 @@
 									<a onclick="addMed('Litter 4')">4</a>
 								</div>
 							</div>
-						</p>
-        </article>
-				<!--mother name & litter select-->
+							</p>
+						</article>
 
-				<!--important dates tile-->
-				<article class="tile is-child notification is-warning">
-          <p class="title">Important Dates</p>
-					<form class="form-horizontal">
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Whelp Start</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-									<input class="input" type="text" id="whelpStart" placeholder="Disabled input" disabled>
-									</p>
+						<!--litter information-->
+						<article class="tile is-child notification is-success">
+							<p class="title">Litter Information</p>
+							<form class="form-horizontal">
+								<div class="field is-horizontal">
+									<div class="field-label is-normal">
+										<label class="label">Father</label>
+									</div>
+									<div class="field-body">
+										<div class="field">
+											<p class="control is-expanded">
+												<input class="input" type="text" id="father" placeholder="Disabled input" disabled>
+											</p>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Whelp End</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-									<input class="input" type="text" id="whelpEnd" placeholder="Disabled input" disabled>
-									</p>
+								<div class="field is-horizontal">
+									<div class="field-label is-normal">
+										<label class="label">Stillborns</label>
+									</div>
+									<div class="field-body">
+										<div class="field">
+											<p class="control is-expanded">
+												<input class="input" type="text" id="stillborns" placeholder="Disabled input" disabled>
+											</p>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Whelp Date</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-									<input class="input" type="text" id="whelpDate" placeholder="Disabled input" disabled>
-									</p>
+								<div class="field is-horizontal">
+									<div class="field-label is-normal">
+										<label class="label">Deaths</label>
+									</div>
+									<div class="field-body">
+										<div class="field">
+											<p class="control is-expanded">
+												<input class="input" type="text" id="deaths" placeholder="Disabled input" disabled>
+											</p>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Wean Start</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-									<input class="input" type="text" id="weanStart" placeholder="Disabled input" disabled>
-									</p>
+								<div class="form-group">
+									<button type="edit" class="button button is-link" id="edit" onclick="return editLitter()">Edit</button>
+									<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
 								</div>
-							</div>
-						</div>
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Wean End</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-									<input class="input" type="text" id="weanEnd" placeholder="Disabled input" disabled>
-									</p>
-							</div>
-							</div>
-						</div>
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Deworm</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-									<input class="input" type="text" id="deworm" placeholder="Disabled input" disabled>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<button type="edit" class="button button is-link" id="edit" onclick="return editDates()">Edit</button>
-							<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
-						</div>
-					</form>
-				</article>
-				<!--important dates tile-->
+							</form>
+					</div> <!--end div 3-->
+					<!--litter information-->
 
 			</div>
 			
@@ -195,13 +160,10 @@
 						<table class="table is-striped">
 							<thead>
 							<tr>
-								<th>Date</th>
 								<th width="90%">Notes</th>
 							</tr>
 							</thead>
-							<tbody>
-								<td>10/9/2018</td>
-								<td>Blue pup threw up</td>
+							<tbody id="puppyNoteTable">
 							</tbody>
 						</table>
 					</p>
@@ -216,83 +178,128 @@
 					<button type="submit" class="button is-link inline" id="save" hidden>Save</button>
 					<button type="edit" class="button is-link inline" id="edit" onclick="return editHost()">Edit</button>
 				</p>
-        <div class="content">
-          <table class="table is-striped">
-			<thead>
-			<tr>
-			<th>Name</th>
-			<th>Color</th>
-			<th>Sex</th>
-			</tr>
-			</thead>
-			<tbody><tr>
-			<td>Puppy #1</td>
-			<td>White</td>
-			<td>Male</td></tr>
-			<tr>
-			<td>Puppy #2</td>
-			<td>Light Blue</td>
-			<td>Female</td></tr>
-			<tr>
-			<td>Puppy #3</td>
-			<td>Red</td>
-			<td>Female</td></tr>
-			</tbody>
-			</table></p>
-        </div>
-      </article>
-    </div>
-  </div>
-  <div class="tile is-parent">
-    <article class="tile is-child notification is-success">
-          <p class="title">Litter Information</p>
+				<div class="content">
+					<table class="table is-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Color</th>
+								<th>Sex</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Puppy #1</td>
+								<td>White</td>
+								<td>Male</td>
+							</tr>
+							<tr>
+								<td>Puppy #2</td>
+								<td>Light Blue</td>
+								<td>Female</td>
+							</tr>
+							<tr>
+								<td>Puppy #3</td>
+								<td>Red</td>
+								<td>Female</td>
+							</tr>
+						</tbody>
+					</table>
+					</p>
+				</div>
+			</article>
+
+		</div><!--end 1-->
+		<!--litter-->
+
+		<!--important dates tile-->
+		<article class="tile is-child notification is-warning">
+			<p class="title">Important Dates</p>
 			<form class="form-horizontal">
-			<div class="field is-horizontal">
-			  <div class="field-label is-normal">
-				<label class="label">Father</label>
-			  </div>
-			  <div class="field-body">
-				<div class="field">
-				  <p class="control is-expanded">
-					<input class="input" type="text" id="father" placeholder="Disabled input" disabled>
-				  </p>
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">Whelp Start</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control is-expanded">
+								<input class="input" type="text" id="whelpStart" placeholder="Disabled input" disabled>
+							</p>
+						</div>
+					</div>
 				</div>
-			  </div>
-			</div>
-			<div class="field is-horizontal">
-			  <div class="field-label is-normal">
-				<label class="label">Stillborns</label>
-			  </div>
-			  <div class="field-body">
-				<div class="field">
-				  <p class="control is-expanded">
-					<input class="input" type="text" id="stillborns" placeholder="Disabled input" disabled>
-				  </p>
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">Whelp End</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control is-expanded">
+								<input class="input" type="text" id="whelpEnd" placeholder="Disabled input" disabled>
+							</p>
+						</div>
+					</div>
 				</div>
-			  </div>
-			</div>
-			<div class="field is-horizontal">
-			  <div class="field-label is-normal">
-				<label class="label">Deaths</label>
-			  </div>
-			  <div class="field-body">
-				<div class="field">
-				  <p class="control is-expanded">
-					<input class="input" type="text" id="deaths" placeholder="Disabled input" disabled>
-				  </p>
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">Whelp Date</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control is-expanded">
+								<input class="input" type="text" id="whelpDate" placeholder="Disabled input" disabled>
+							</p>
+						</div>
+					</div>
 				</div>
-			  </div>
-			</div>
-			<div class="form-group">
-			  <button type="edit" class="button button is-link" id="edit" onclick="return editLitter()">Edit</button>
-			  <button type="submit" class="btn btn-default" id="save" hidden>Save</button>
-			</div>
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">Wean Start</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control is-expanded">
+								<input class="input" type="text" id="weanStart" placeholder="Disabled input" disabled>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">Wean End</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control is-expanded">
+								<input class="input" type="text" id="weanEnd" placeholder="Disabled input" disabled>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label">Deworm</label>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control is-expanded">
+								<input class="input" type="text" id="deworm" placeholder="Disabled input" disabled>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="edit" class="button button is-link" id="edit" onclick="return editDates()">Edit</button>
+					<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
+				</div>
 			</form>
-        </div>
-      </div>
-    </article>
-  </div>
-</div>
-</section>
+		</article>
+		<!--important dates tile-->
+		</div>
+		</article>
+		</div>
+		</div>
+	</section>
 </body>
+
 </html>
