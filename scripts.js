@@ -9,7 +9,7 @@ function addMomDogTemp() {
     var dogID = getCookie("dogID");
     if (dogID != "") {
         var temp = prompt("Please add a temp");
-        if (temp != null & Number.isInteger(temp) == true & temp >= 90 & temp <= 120) {
+        if (temp != null && Number.isInteger(temp) == true && temp >= 90 && temp <= 120) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.temp = temp;
