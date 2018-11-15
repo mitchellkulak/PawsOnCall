@@ -26,7 +26,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
-<body  onload="adminShowHide()"></body>
 <!-- Navbar, logo, logout button -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div id="navbarDesktop " class="navbar-brand">
@@ -37,7 +36,7 @@
 		<a class="navbar-item" href="../puppies.html">Puppies</a>
 		<a class="navbar-item" href="../misc.html">Misc</a>
 
-		<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
+		<a class="navbar-item" id="adminLink" onclick="../admin" style="display:flex">Admin</a>
 
 	</div>
 	<div class="buttons">
