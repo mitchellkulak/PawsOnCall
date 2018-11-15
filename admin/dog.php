@@ -63,7 +63,7 @@ $db->close();
 		<a class="navbar-item" id="adminLink" href="../admin" style="display:flex">Admin</a>
 	</div>
 	<div class="buttons">
-		<a class="button is-primary logout" onclick="logout()">
+		<a class="button is-primary logout" onclick="logout();">
 		Log out
 		</a>
 	</div>
@@ -73,9 +73,9 @@ $db->close();
 	<!-- central tile-->
 	<article class="tile notification is-primary is-vertical admin">
     <form action="dog.php">
-      <select name='loadID'class="dropbtn" >
+      <select name="loadID" class="dropbtn" >
         <option value="0">New Dog</option>
-        <?php while($subdog = $dogs->fetch_assoc()){echo "<option value=".$subdog["ID"].">".$subdog["Name"]."</option>";}?>
+        <?php while($subdog = $dogs->fetch_assoc()){echo "<option value=".$subdog["ID"];if($subdog["ID"]==$dogID){echo " selected";} echo ">".$subdog["Name"]."</option>";}?>
       </select>
       <input type="submit" class="button is-link admin " value="Load">
     </form>
