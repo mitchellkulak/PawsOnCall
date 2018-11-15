@@ -145,10 +145,10 @@ function loadLitterInfo(){
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
+            document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
-
+            console.log(obj);
             
             obj[0][1].forEach(function (element) {
                 console.log(element);
@@ -221,7 +221,7 @@ function myFunction() {
 function logout() {
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    document.cookie = "litterID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     fetch("logoff.php");
     window.location.href = "login.html";
 }
