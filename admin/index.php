@@ -36,7 +36,9 @@
 		<a class="navbar-item" href="../mother.html">Mom</a>
 		<a class="navbar-item" href="../puppies.html">Puppies</a>
 		<a class="navbar-item" href="../misc.html">Misc</a>
-		<a class="navbar-item" id="adminLink" href="./admin">Admin</a>
+
+		<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
+
 	</div>
 	<div class="buttons">
 		<a class="button is-primary logout" onclick="logout()">
@@ -44,11 +46,13 @@
 		</a>
 	</div>
 </nav>
+<!-- Navbar, logo, logout button -->
+
 <!-- Links to admin pages -->
 <article class="tile notification is-primary is-vertical admin">
-  <a class="button is-link " href="user.php">User</a>
-  <a class="button is-link " href="dog.php">Dog</a>
-  <a class="button is-link "href="litter.php">Litter</a>
+  <a class="button is-link admin" href="user.php">User</a><br>
+  <a class="button is-link admin" href="dog.php">Dog</a><br>
+  <a class="button is-link admin"href="litter.php">Litter</a><br>
 </article>
 </body>
 </html>
