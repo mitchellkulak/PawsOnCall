@@ -116,6 +116,7 @@ $db->close();
       
       <input type="submit" value="Save">
     </form>
+    <form><input type="submit" value="Delete"></form>
 
     <a href="index.php">Return to admin page</a>
   </article>

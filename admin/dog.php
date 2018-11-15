@@ -129,6 +129,7 @@ $db->close();
       </select>
       <input class="button is-link admin " type="submit" value="Save">
     </form>
+    <form><input type="submit" value="Delete"></form>
 
     <a href="index.php">Return to admin page</a>
 
