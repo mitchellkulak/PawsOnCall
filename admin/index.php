@@ -37,7 +37,7 @@
 		<a class="navbar-item" href="../puppies.html">Puppies</a>
 		<a class="navbar-item" href="../misc.html">Misc</a>
 
-		<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
+		<a class="navbar-item" id="adminLink" onclick="../admin">Admin</a>
 
 	</div>
 	<div class="buttons">
