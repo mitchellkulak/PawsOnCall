@@ -148,7 +148,7 @@ function loadLitterInfo(){
             document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
-
+            console.log(obj);
             
             obj[0][1].forEach(function (element) {
                 console.log(element);
