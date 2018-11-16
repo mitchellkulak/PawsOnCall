@@ -141,6 +141,8 @@ function loadLitterInfo(){
     var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
     var puppyNoteTable = document.getElementById("puppyNoteTable");
     var myDropdown = document.getElementById("myDropdown");
+    
+    var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
@@ -171,6 +173,17 @@ function loadLitterInfo(){
                 newRow.appendChild(newCell);
                 puppyNoteTable.appendChild(newRow);
 
+            });
+            element[0][0].forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var newIDCell = document.createElement("td");
+                var newSexCell = document.createElement("td");
+                newIDCell.innerHTML = element.Name;
+                newSexCell.innerHTML = element.Sex;
+                newRow.appendChild(newIDCell);
+                newRow.appendChild(newSexCell);
+                litterInfoTableBody.appendChild(newRow);
+                
             });
             
             // obj.dogUpdates.forEach(function (element) {
