@@ -231,6 +231,7 @@ function loadLitterInfoByID(id){
                         newRow.appendChild(newCell);
                         puppyNoteTable.appendChild(newRow);
                     });
+                    litterInfoTableBody.innerHTML = "";
                     // Litter info population for the selected litter
                     element[0].forEach(function (element) {
                         var newRow = document.createElement("tr");
