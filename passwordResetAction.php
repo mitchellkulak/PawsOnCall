@@ -18,7 +18,7 @@
      }elseif($password!=""){
 	$SQL = "UPDATE Volunteer SET Password = '$password' WHERE ID = $userID";
 	if($db->query($SQL)){
-		$message = "Password Updated Successfully";
+		$message = "Password Updated Successfully, click on the Paws logo to log in";
 	}else{
 		$message = mysqli_error($db);
 	}
@@ -29,15 +29,6 @@
   }
 ?>
 <script type="text/javascript" src="scripts.js"></script>
-<!DOCTYPE HTML>
-<html>
-	<?php echo $message;?>
-	<form action="passwordResetAction.php?session=<?php echo $session;?>" method="post">
-		Enter Password:<input type="password" name="password" id="password" required /><br>
-		Reenter Password:<input type="password" name="verpassword" id="verpassword" required /><br>
-		<input onclick="RewritePassword();" type="submit" value="Reset">
-	</form>
-</html>
 <!DOCTYPE html>
 <html>
 
@@ -74,7 +65,7 @@
                     <p class="subtitle has-text-grey">Please enter your new password</p>
                     <div class="box">
                         <figure class="avatar">
-                            <img src="images\android-chrome-192x192.png">
+                            <a href="login.html"><img src="images\android-chrome-192x192.png"></a>
                         </figure>
                         	<?php echo $message;?>
                           <form action="passwordResetAction.php?session=<?php echo $session;?>" method="post">
