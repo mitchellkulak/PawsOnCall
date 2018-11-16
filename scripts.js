@@ -155,7 +155,7 @@ function loadLitterInfo(){
             obj.forEach(function (element){
                 var newDdlLitter = document.createElement("a");
                 newDdlLitter.onclick = function () { loadLitterInfoByID(element.ID); };
-                newDdlLitter.innerHTML = "Whelp started " + obj[0].StartWhelp;
+                newDdlLitter.innerHTML = "Whelp started " + element.StartWhelp;
                 myDropdown.appendChild(newDdlLitter);
 
             });
@@ -198,6 +198,8 @@ function loadLitterInfoByID(id){
     var puppyNoteTable = document.getElementById("puppyNoteTable");
     var myDropdown = document.getElementById("myDropdown");
 
+    var litterInfoTableBody = document.getElementById("litterInfoTableBody");
+
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
@@ -206,6 +208,7 @@ function loadLitterInfoByID(id){
             obj.forEach(function (element){
                 if(element.ID == id){
                     puppyNoteTable.innerHTML = "";
+                    // Note population for the selected litter
                     element[1].forEach(function (element) {
                         console.log(element);
                         var newRow = document.createElement("tr");
@@ -213,6 +216,18 @@ function loadLitterInfoByID(id){
                         newCell.innerHTML = element.Note;
                         newRow.appendChild(newCell);
                         puppyNoteTable.appendChild(newRow);
+                    });
+                    // Litter info population for the selected litter
+                    element[0].forEach(function (element) {
+                        var newRow = document.createElement("tr");
+                        var newIDCell = document.createElement("td");
+                        var newSexCell = document.createElement("td");
+                        newIDCell.innerHTML = element.Name;
+                        newSexCell.innerHTML = element.Sex;
+                        newRow.appendChild(newIDCell);
+                        newRow.appendChild(newSexCell);
+                        litterInfoTableBody.appendChild(newRow);
+                        
                     });
                 }
                 // var newDdlLitter = document.createElement("a");
