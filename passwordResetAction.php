@@ -69,9 +69,9 @@
                         </figure>
                         	<?php echo $message;?>
                           <form action="passwordResetAction.php?session=<?php echo $session;?>" method="post">
-                            Enter Password:<input type="password" name="password" id="password" required /><br>
-                            Reenter Password:<input type="password" name="verpassword" id="verpassword" required /><br>
-                            <input onclick="RewritePassword();" type="submit" value="Reset">
+                            Enter Password:<input class="input is-large" type="password" name="password" id="password" required /><br>
+                            Reenter Password:<input class="input is-large" type="password" name="verpassword" id="verpassword" required /><br>
+                            <input class="button is-block is-info is-large is-fullwidth" onclick="RewritePassword();" type="submit" value="Reset">
                           </form>
                     </div>
                 </div>
