@@ -189,6 +189,42 @@ function loadLitterInfo(){
 
 }
 
+function loadLitterInfoByID(id){
+
+    var session = getCookie("session");
+    var dogID = getCookie("dogID");
+    var litterNameDiv = document.getElementById("litterNameDiv");
+    var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
+    var puppyNoteTable = document.getElementById("puppyNoteTable");
+    var myDropdown = document.getElementById("myDropdown");
+
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
+        .then(response => response.json())
+        .then((data) => {
+            
+            // For each litter
+            obj.forEach(function (element){
+                if(element.ID == id){
+                    element[1].forEach(function (element) {
+                        var newRow = document.createElement("tr");
+                        var newCell = document.createElement("td");
+                        newCell.innerHTML = element;
+                        newRow.appendChild(newCell);
+                        puppyNoteTable.innerHTML = "";
+                        puppyNoteTable.appendChild(newRow);
+                    });
+                }
+                // var newDdlLitter = document.createElement("a");
+                // newDdlLitter.onclick = function () { loadLitterInfoByID(element.ID); };
+                // newDdlLitter.innerHTML = "Whelp started " + obj[0].StartWhelp;
+                // myDropdown.appendChild(newDdlLitter);
+
+            });
+            
+        });
+    
+}
+
 function addMed(medication) {
     var d = Date.now();
     var dogID = getCookie("dogID");
