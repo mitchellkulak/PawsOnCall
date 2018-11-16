@@ -208,7 +208,7 @@ function loadLitterInfoByID(id){
                     element[1].forEach(function (element) {
                         var newRow = document.createElement("tr");
                         var newCell = document.createElement("td");
-                        newCell.innerHTML = element;
+                        newCell.innerHTML = element.Note;
                         newRow.appendChild(newCell);
                         puppyNoteTable.innerHTML = "";
                         puppyNoteTable.appendChild(newRow);
