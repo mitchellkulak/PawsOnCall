@@ -117,6 +117,7 @@ $db->close();
     <input type="radio" name="admin" value="0" <?php if($userrow["Admin"] == 0 || $userID == 0){echo "checked";}?>> No<br>
     <input class="button is-link admin" type="submit" value="Save">
   </form>
+  <form><input class="button is-link admin " type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this user?');"></form>
 
   <a href="index.php">Return to admin page</a>
 </article>
