@@ -96,8 +96,8 @@
                         </figure>
                         <?php echo $message;?>
                         <form action="emailPasswordReset.php">
-                          Email <input type="email" name="email">
-                          <input type="submit" value="Submit">
+                          Email <input class="input is-large" type="email" name="email">
+                          <input class="button is-block is-info is-large is-fullwidth" type="submit" value="Submit">
                         </form>
                     </div>
                 </div>
