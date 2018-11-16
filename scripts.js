@@ -174,7 +174,7 @@ function loadLitterInfo(){
                 puppyNoteTable.appendChild(newRow);
 
             });
-            element[0][0].forEach(function (element) {
+            obj[0][0].forEach(function (element) {
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");
