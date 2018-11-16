@@ -233,3 +233,7 @@ article.litter{
 .dogname{
 	padding: 15px 10px !important;
 }
+
+#puppynotetable{
+	width:100%;
+}

@@ -129,6 +129,7 @@ $db->close();
       </select>
       <input class="button is-link admin " type="submit" value="Save">
     </form>
+  <form><input class="button is-link admin " type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this dog?');"></form>
 
     <a href="index.php">Return to admin page</a>
 
