@@ -201,7 +201,7 @@ function loadLitterInfoByID(id){
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
         .then((data) => {
-            
+            var obj = JSON.parse(JSON.stringify(data));
             // For each litter
             obj.forEach(function (element){
                 if(element.ID == id){
