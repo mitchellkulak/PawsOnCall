@@ -205,13 +205,13 @@ function loadLitterInfoByID(id){
             // For each litter
             obj.forEach(function (element){
                 if(element.ID == id){
+                    puppyNoteTable.innerHTML = "";
                     element[1].forEach(function (element) {
                         console.log(element);
                         var newRow = document.createElement("tr");
                         var newCell = document.createElement("td");
                         newCell.innerHTML = element.Note;
                         newRow.appendChild(newCell);
-                        puppyNoteTable.innerHTML = "";
                         puppyNoteTable.appendChild(newRow);
                     });
                 }
