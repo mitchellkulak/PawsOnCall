@@ -162,10 +162,10 @@ function loadLitterInfo() {
                 newDdlLitter.onclick = function () { loadLitterInfoByID(element.ID); };
                 newDdlLitter.innerHTML = "Whelp started " + element.StartWhelp;
                 myDropdown.appendChild(newDdlLitter);
-                weanStart.innerHTML = element.StartWean;
-                weanEnd.innerHTML = element.EndWean;
-                whelpStart.innerHTML = element.StartWhelp;
-                whelpEnd.innerHTML = element.EndWhelp;
+                weanStart.value = element.StartWean;
+                weanEnd.value = element.EndWean;
+                whelpStart.value = element.StartWhelp;
+                whelpEnd.value = element.EndWhelp;
                 console.log(element);
             });
 
@@ -231,10 +231,10 @@ function loadLitterInfoByID(id) {
             obj.forEach(function (element) {
                 if (element.ID == id) {
                     console.log(element);
-                    weanStart.innerHTML = element.StartWean;
-                    weanEnd.innerHTML = element.EndWean;
-                    whelpStart.innerHTML = element.StartWhelp;
-                    whelpEnd.innerHTML = element.EndWhelp;
+                    weanStart.value = element.StartWean;
+                    weanEnd.value = element.EndWean;
+                    whelpStart.value = element.StartWhelp;
+                    whelpEnd.value = element.EndWhelp;
                     puppyNoteTable.innerHTML = "";
                     // Note population for the selected litter
                     element[1].forEach(function (element) {
