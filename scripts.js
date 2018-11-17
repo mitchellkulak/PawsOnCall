@@ -238,7 +238,6 @@ function loadLitterInfoByID(id) {
                     puppyNoteTable.innerHTML = "";
                     // Note population for the selected litter
                     element[1].forEach(function (element) {
-                        console.log(element);
                         var newRow = document.createElement("tr");
                         var newCell = document.createElement("td");
                         newCell.innerHTML = element.Note;
