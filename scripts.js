@@ -168,7 +168,6 @@ function loadLitterInfo() {
                 weanEnd.value = element.EndWean;
                 whelpStart.value = element.StartWhelp;
                 whelpEnd.value = element.EndWhelp;
-                console.log(element);
             });
 
             // For each note in first litter
@@ -180,11 +179,15 @@ function loadLitterInfo() {
                 puppyNoteTable.appendChild(newRow);
             });
             litterInfoTableBody.innerHTML = "";
+
             // For each puppy
             obj[0][0].forEach(function (element) {
                 if(element.Stillborn == 1){
                     stillborn++;
                 }
+                var deathDate = new Date(element.Deathdate);
+                console.log(deathDate);
+
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");
