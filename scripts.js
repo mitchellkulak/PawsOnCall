@@ -136,7 +136,7 @@ function resizeChart() {
 
 function loadLitterInfo() {
     var deadpuppies = 0;
-    var stillborns = 0;
+    var stillborn = 0;
     var session = getCookie("session");
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
