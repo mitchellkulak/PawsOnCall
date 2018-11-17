@@ -9,8 +9,8 @@ function addMomDogTemp() {
     var dogID = getCookie("dogID");
     if (dogID != "") {
         var temp = prompt("Please add a temp");
-        var tempInt = parseInt(temp);
-        if (tempInt != null && temp == tempInt && tempInt >= 90 && tempInt <= 110) {
+        var tempFloat = parseFloat(temp);
+        if (tempFloat != null && temp == tempFloat && tempFloat >= 90 && tempFloat <= 110) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.temp = temp;
@@ -75,8 +75,6 @@ async function drawChart() {
     data1.addColumn('number', 'Temperature');
     var newData = new Array();
     newData = await prepareDataForChart();
-    console.log(newData);
-    console.log("Length of new Data = " + newData.length);
     var numRows = newData.length;
     for (var i = 0; i < numRows; i++) {
         console.log(newData[i]);
@@ -113,7 +111,7 @@ async function prepareDataForChart() {
                 var year = parseInt(element.date.year);
                 var temp = element.Temp;
                 smallArray[0] = new Date(year, month, day);
-                smallArray[1] = parseInt(temp);
+                smallArray[1] = parseFloat(temp);
                 bigArray[i] = smallArray;
                 i++;
             });
@@ -170,9 +168,7 @@ function loadLitterInfo() {
                 weanEnd.value = element.EndWean;
                 whelpStart.value = element.StartWhelp;
                 whelpEnd.value = element.EndWhelp;
-                console.log(element);
             });
-
 
             // For each note in first litter
             obj[0][1].forEach(function (element) {
@@ -181,14 +177,19 @@ function loadLitterInfo() {
                 newCell.innerHTML = element.Note;
                 newRow.appendChild(newCell);
                 puppyNoteTable.appendChild(newRow);
-
             });
             litterInfoTableBody.innerHTML = "";
+
             // For each puppy
             obj[0][0].forEach(function (element) {
                 if(element.Stillborn == 1){
                     stillborn++;
                 }
+                var deathDate = new Date(element.Deathdate);
+                console.log("Death Date:")
+                console.log(deathDate);
+                console.log(element.Deathdate);
+
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");
