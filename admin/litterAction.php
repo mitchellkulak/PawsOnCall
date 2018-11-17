@@ -10,12 +10,12 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     echo "<script>window.location.replace('../login.php');</script>";
 }else{
   include '../dbconnect.php';
+  $litterID = mysqli_real_escape_string($db,$_POST["loadID"]);
   if ($db->connect_error){
       die("Can't connect");
   }
-  else {
+  elseif($_POST("Save")) {
 
-    $litterID = mysqli_real_escape_string($db,$_POST["loadID"]);
     $volunteerID = mysqli_real_escape_string($db,$_POST["volunteerID"]);
     $motherID = mysqli_real_escape_string($db,$_POST["motherID"]);
     $fatherID = mysqli_real_escape_string($db,$_POST["fatherID"]);
@@ -39,12 +39,23 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }
     $db->query($SQL);
     $error = mysqli_error($db);
-    if($error = ""){
-      echo "Record Updated/Added Successfully";
+    if($db->query($SQL)){
+      echo "Record Added/Updated";
     }else{
-      echo $error;
-    }
+      echo mysqli_error($db);
+    } 
 
+  }elseif($_POST("Delete")){
+    if($dogID != 0){
+      die("Cannot Delete");
+    }else{
+      $SQL = "DELETE FROM Litter WHERE ID = $litterID";
+    }
+    if($db->query($SQL)){
+      echo "Record Deleted";
+    }else{
+      echo mysqli_error($db);
+    }    
   }
 }
 $db->close();

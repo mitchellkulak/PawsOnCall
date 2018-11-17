@@ -134,13 +134,19 @@ function resizeChart() {
     }
 }
 
-function loadLitterInfo(){
+function loadLitterInfo() {
     var session = getCookie("session");
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
     var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
     var puppyNoteTable = document.getElementById("puppyNoteTable");
     var myDropdown = document.getElementById("myDropdown");
+    var whelpStart = document.getElementById("whelpStart");
+    var whelpEnd = document.getElementById("whelpEnd");
+    var weanStart = document.getElementById("weanStart");
+    var weanEnd = document.getElementById("weanEnd");
+
+    var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
@@ -149,22 +155,23 @@ function loadLitterInfo(){
             document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
-            console.log(obj);
 
             // For each litter
-            obj.forEach(function (element){
+            obj.forEach(function (element) {
                 var newDdlLitter = document.createElement("a");
                 newDdlLitter.onclick = function () { loadLitterInfoByID(element.ID); };
-                newDdlLitter.innerHTML = "Whelp started " + obj[0].StartWhelp;
+                newDdlLitter.innerHTML = "Whelp started " + element.StartWhelp;
                 myDropdown.appendChild(newDdlLitter);
-
+                weanStart.innerHTML = element.StartWean;
+                weanEnd.innerHTML = element.EndWean;
+                whelpStart.innerHTML = element.StartWhelp;
+                whelpEnd.innerHTML = element.EndWhelp;
+                console.log(element);
             });
-            
+
 
             // For each note in first litter
             obj[0][1].forEach(function (element) {
-                
-                console.log(element);
                 var newRow = document.createElement("tr");
                 var newCell = document.createElement("td");
                 newCell.innerHTML = element.Note;
@@ -172,7 +179,19 @@ function loadLitterInfo(){
                 puppyNoteTable.appendChild(newRow);
 
             });
-            
+            litterInfoTableBody.innerHTML = "";
+            obj[0][0].forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var newIDCell = document.createElement("td");
+                var newSexCell = document.createElement("td");
+                newIDCell.innerHTML = element.Name;
+                newSexCell.innerHTML = element.Sex;
+                newRow.appendChild(newIDCell);
+                newRow.appendChild(newSexCell);
+                litterInfoTableBody.appendChild(newRow);
+
+            });
+
             // obj.dogUpdates.forEach(function (element) {
             //     var newRow = document.createElement("tr");
             //     var newCell = document.createElement("td");
@@ -180,12 +199,68 @@ function loadLitterInfo(){
             //     newRow.appendChild(newCell);
             //     noteTable.appendChild(newRow);
             // });
-          // obj[0].MotherName 
-          // obj[1][0][0].Name // [Gets first puppy name]
+            // obj[0].MotherName 
+            // obj[1][0][0].Name // [Gets first puppy name]
             // To Do next: create notes table based on response
-            
+
         });
 
+
+}
+
+function loadLitterInfoByID(id) {
+    document.cookie = "litter=" + id;
+    var session = getCookie("session");
+    var dogID = getCookie("dogID");
+    var litterNameDiv = document.getElementById("litterNameDiv");
+    var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
+    var puppyNoteTable = document.getElementById("puppyNoteTable");
+    var myDropdown = document.getElementById("myDropdown");
+    var whelpStart = document.getElementById("whelpStart");
+    var whelpEnd = document.getElementById("whelpEnd");
+    var weanStart = document.getElementById("weanStart");
+    var weanEnd = document.getElementById("weanEnd");
+
+    var litterInfoTableBody = document.getElementById("litterInfoTableBody");
+
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            // For each litter
+            obj.forEach(function (element) {
+                if (element.ID == id) {
+                    console.log(element);
+                    weanStart.innerHTML = element.StartWean;
+                    weanEnd.innerHTML = element.EndWean;
+                    whelpStart.innerHTML = element.StartWhelp;
+                    whelpEnd.innerHTML = element.EndWhelp;
+                    puppyNoteTable.innerHTML = "";
+                    // Note population for the selected litter
+                    element[1].forEach(function (element) {
+                        console.log(element);
+                        var newRow = document.createElement("tr");
+                        var newCell = document.createElement("td");
+                        newCell.innerHTML = element.Note;
+                        newRow.appendChild(newCell);
+                        puppyNoteTable.appendChild(newRow);
+                    });
+                    litterInfoTableBody.innerHTML = "";
+                    // Litter info population for the selected litter
+                    element[0].forEach(function (element) {
+                        var newRow = document.createElement("tr");
+                        var newIDCell = document.createElement("td");
+                        var newSexCell = document.createElement("td");
+                        newIDCell.innerHTML = element.Name;
+                        newSexCell.innerHTML = element.Sex;
+                        newRow.appendChild(newIDCell);
+                        newRow.appendChild(newSexCell);
+                        litterInfoTableBody.appendChild(newRow);
+                    });
+                }
+            });
+
+        });
 
 }
 
@@ -374,15 +449,17 @@ function addDogNote() {
         }
     }
 }
+
 function addLitterNote() {
     var d = Date.now();
-    if (dogID != "") {
+    var litterID = getCookie("litter");
+    if (litterID != "") {
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
             var url = "AddLitterNotes.php?session=" + getCookie("session");
             var data = {};
             data.Note = note;
-            data.DogID = getCookie("litterID");
+            data.LitterID = getCookie("litter");
             console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -400,8 +477,6 @@ function addLitterNote() {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
-
-
                 });
         }
     }
@@ -412,7 +487,7 @@ function redirectToMother(dogId) {
     window.location.href = "mother.html";
 }
 
-function redirectToAdmin(){
+function redirectToAdmin() {
     window.location.href = "./admin/index.php?session=" + getCookie("session");
 }
 
