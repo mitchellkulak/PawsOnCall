@@ -449,15 +449,17 @@ function addDogNote() {
         }
     }
 }
+
 function addLitterNote() {
     var d = Date.now();
-    if (dogID != "") {
+    var litterID = getCookie("litter");
+    if (litterID != "") {
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
             var url = "AddLitterNotes.php?session=" + getCookie("session");
             var data = {};
             data.Note = note;
-            data.DogID = getCookie("litterID");
+            data.LitterID = getCookie("litter");
             console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -475,8 +477,6 @@ function addLitterNote() {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
-
-
                 });
         }
     }
