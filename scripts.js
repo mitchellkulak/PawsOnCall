@@ -437,7 +437,9 @@ function loginUser() {
             document.cookie = "session=" + data.sessionKey;
             document.cookie = "admin=" + data.admin;
             console.log(document.cookie);
-            window.location.href = "mother.html";
+            if(data.sessionKey != "" && data.sessionKey != null){
+                window.location.href = "mother.html";
+            }
         });
 }
 
