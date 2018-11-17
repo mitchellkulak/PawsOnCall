@@ -12,6 +12,8 @@ a.navbar-item.right{
 
 a.navbar-item{
 	color: #ffffff !important;
+	padding-left: 6px;
+	padding-right:6px;
 }
 
 #navbarDesktop.navbar-brand{
@@ -237,3 +239,4 @@ article.litter{
 #puppyNoteTable{
 	width:100%;
 }
+
