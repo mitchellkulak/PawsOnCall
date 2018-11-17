@@ -6,7 +6,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'authenticate.php';
-include 'dbconnect.php';
 
 $input = json_decode(authenticate(urldecode($_GET['session'])), true);
 if ($input['error'] == 'auth error') {
@@ -14,36 +13,26 @@ if ($input['error'] == 'auth error') {
     echo json_encode($error);
 }
 else {
-$name;
-$street;
-$city;
-$state;
-$zip;
-$phone;
-$volInfo = array();
-$ar = json_decode(file_get_contents('php://input'), true);
-$litterNote = mysqli_real_escape_string($db,$ar['Note']);
-$volunteerID = mysqli_real_escape_string($db,$ar['ID']);
-//$time = 'current_timestamp';//mysqli_real_escape_string($db,$ar['Time']);
-if ($db->connect_error)
-{
-    die("Can't connect");
-}
-else {
-    if ($db->query(
-    "SELECT * 
-    FROM Volunteer
-    where ID = $volunteerID") === TRUE) {
-        echo "Record grabbed successfully";
-    } else {
-        echo "Error grabbing record: " . $db->error;
+    $volunteerID = $_GET["volunteerID"];
+    include 'dbconnect.php';
+    if ($db->connect_error)
+    {
+        die("Can't connect");
     }
-    $i = 0;
-    while ($result = $db->fetch_assoc()){
-        $volInfo[$i] = $result;
-        $i++;
+    else {
+        $volInfo = array();
+        $i=0;
+        $SQL = "SELECT Name, Email, Phone, Address, City, State, ZIP FROM Volunteer Where ID = $volunteerID";
+        if ($volunteers = $db->query($SQL)) {
+            while ($result = $volunteers->fetch_assoc()){
+                $volInfo[$i] = $result;
+                $i++;
+            }
+        } else {
+            $volInfo = array('error' => 'failed to fetch');
+        }
+        echo json_encode($volInfo);
     }
     $db->close();
-}
 }
 ?>
