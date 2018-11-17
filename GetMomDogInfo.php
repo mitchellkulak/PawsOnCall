@@ -39,7 +39,7 @@ else {
     $updateRequest = $db->query(
     "SELECT *
     FROM DogUpdates
-    WHERE dogID = $dog_id"
+    WHERE dogID = $dog_id ORDER BY Time DESC"
     );
     $i = 0;
     while ($result = $updateRequest->fetch_assoc()){
