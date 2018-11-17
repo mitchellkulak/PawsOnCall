@@ -9,8 +9,8 @@ function addMomDogTemp() {
     var dogID = getCookie("dogID");
     if (dogID != "") {
         var temp = prompt("Please add a temp");
-        var tempInt = parseInt(temp);
-        if (tempInt != null && temp == tempInt && tempInt >= 90 && tempInt <= 110) {
+        var tempFloat = parseFloat(temp);
+        if (tempFloat != null && temp == tempFloat && tempFloat >= 90 && tempFloat <= 110) {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.temp = temp;
@@ -173,7 +173,6 @@ function loadLitterInfo() {
                 console.log(element);
             });
 
-
             // For each note in first litter
             obj[0][1].forEach(function (element) {
                 var newRow = document.createElement("tr");
@@ -181,7 +180,6 @@ function loadLitterInfo() {
                 newCell.innerHTML = element.Note;
                 newRow.appendChild(newCell);
                 puppyNoteTable.appendChild(newRow);
-
             });
             litterInfoTableBody.innerHTML = "";
             // For each puppy
