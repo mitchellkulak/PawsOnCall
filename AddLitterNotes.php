@@ -16,9 +16,9 @@ if ($input['error'] == 'auth error') {
 else {
 
 $ar = json_decode(file_get_contents('php://input'), true);
-$litterNote = "this is another note";//mysqli_real_escape_string($db,$ar['Note']);
-$litterID =  1;//mysqli_real_escape_string($db,$ar['LitterID']);
-$time = 'current_timestamp';//mysqli_real_escape_string($db,$ar['Time']);
+$litterNote = mysqli_real_escape_string($db,$ar['Note']);
+$litterID = mysqli_real_escape_string($db,$ar['LitterID']);
+//$time = 'current_timestamp';//mysqli_real_escape_string($db,$ar['Time']);
 echo $litterNote;
 echo $litterID;
 echo $time;
@@ -30,7 +30,7 @@ else {
     if ($db->query(
     "INSERT 
     INTO LitterUpdates
-    VALUES ($litterID, $time, '$litterNote')") === TRUE) {
+    VALUES ($litterID, current_timestamp, '$litterNote')") === TRUE) {
         echo "Record updated successfully";
     } else {
         echo "Error updating record: " . $db->error;
