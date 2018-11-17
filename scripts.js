@@ -135,6 +135,8 @@ function resizeChart() {
 }
 
 function loadLitterInfo() {
+    var deadpuppies = 0;
+    var stillborn = 0;
     var session = getCookie("session");
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
@@ -145,6 +147,8 @@ function loadLitterInfo() {
     var whelpEnd = document.getElementById("whelpEnd");
     var weanStart = document.getElementById("weanStart");
     var weanEnd = document.getElementById("weanEnd");
+    var stillbornsDiv = document.getElementById("stillborns");
+    var deathsDiv = document.getElementById("deaths");
 
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
@@ -180,7 +184,11 @@ function loadLitterInfo() {
 
             });
             litterInfoTableBody.innerHTML = "";
+            // For each puppy
             obj[0][0].forEach(function (element) {
+                if(element.Stillborn == 1){
+                    stillborn++;
+                }
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");
@@ -189,8 +197,8 @@ function loadLitterInfo() {
                 newRow.appendChild(newIDCell);
                 newRow.appendChild(newSexCell);
                 litterInfoTableBody.appendChild(newRow);
-
             });
+            stillbornsDiv.value = stillborn;
 
             // obj.dogUpdates.forEach(function (element) {
             //     var newRow = document.createElement("tr");
@@ -220,7 +228,10 @@ function loadLitterInfoByID(id) {
     var whelpEnd = document.getElementById("whelpEnd");
     var weanStart = document.getElementById("weanStart");
     var weanEnd = document.getElementById("weanEnd");
-
+    var stillborn = 0;
+    var deadpuppies = 0;
+    var stillbornsDiv = document.getElementById("stillborns");
+    var deathsDiv = document.getElementById("deaths");
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
@@ -245,8 +256,11 @@ function loadLitterInfoByID(id) {
                         puppyNoteTable.appendChild(newRow);
                     });
                     litterInfoTableBody.innerHTML = "";
-                    // Litter info population for the selected litter
+                    // For each puppy
                     element[0].forEach(function (element) {
+                        if(element.Stillborn == 1){
+                            stillborn++;
+                        }
                         var newRow = document.createElement("tr");
                         var newIDCell = document.createElement("td");
                         var newSexCell = document.createElement("td");
@@ -256,6 +270,8 @@ function loadLitterInfoByID(id) {
                         newRow.appendChild(newSexCell);
                         litterInfoTableBody.appendChild(newRow);
                     });
+                    stillbornsDiv.value = stillborn;
+
                 }
             });
 
@@ -480,6 +496,42 @@ function addLitterNote() {
                 });
         }
     }
+}
+
+function getVolunteerInfo() {
+    var name = "Bob";
+    var street = "1234 Main St.";
+    var city = "Jenison";
+    var state = "Michigan";
+    var zip = "49428";
+    var phone = "616-123-4567";
+    var url = "GetVolunteerInfo.php?session=" + getCookie("session");
+    var data = {};
+    data.Name = name;
+    data.Street = street;
+    data.City = city;
+    data.State = state;
+    data.Zip = zip;
+    data.Phone = phone;
+    data.LitterID = getCookie("dogID");
+    console.log(JSON.stringify(data));
+    fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+        //.then(response => response.json()) // parses response to JSON
+        .then((responseContent) => {
+            console.log(responseContent);
+        });
 }
 
 function redirectToMother(dogId) {
