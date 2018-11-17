@@ -14,7 +14,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
   if ($db->connect_error){
       die("Can't connect");
   }
-  elseif($_POST("Save")) {
+  elseif(isset($_POST["Save"])) {
     $name = mysqli_real_escape_string($db,$_POST["name"]);
     $sex = mysqli_real_escape_string($db,$_POST["sex"]);
     $volunteerID = mysqli_real_escape_string($db,$_POST["volunteerID"]);
@@ -23,6 +23,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $deathdate = mysqli_real_escape_string($db,$_POST["deathdate"]);
     $breed = mysqli_real_escape_string($db,$_POST["breed"]);
     $litterID = mysqli_real_escape_string($db,$_POST["litterID"]);
+    $stillborn = mysqli_real_escape_string($db,$_POST["stillborn"]);
 
     if($dogID != 0){
       $SQL = "UPDATE Dogs SET
@@ -33,10 +34,11 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
         Adoptiondate = '$adoptiondate',
         Deathdate = '$deathdate',
         Breed = '$breed',
-        LitterID = $litterID
+        LitterID = $litterID,
+        Stillborn = $stillborn
       WHERE id = $dogID";
     }else{
-      $SQL = "INSERT INTO Dogs Values(null,'$name','$volunteerID','$sex','$birthdate','$adoptiondate','$deathdate','$breed',$litterID)";
+      $SQL = "INSERT INTO Dogs Values(null,'$name','$volunteerID','$sex','$birthdate','$adoptiondate','$deathdate','$breed',$litterID,$stillborn)";
     }
     if($db->query($SQL)){
       echo "Record Updated/Added Successfully";
@@ -44,7 +46,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       echo mysqli_error($db);
     }
 
-  }elseif($_POST("Delete")){
+  }elseif(isset($_POST["Delete"])){
     if($dogID != 0){
       die("Cannot Delete");
     }else{

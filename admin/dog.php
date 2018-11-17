@@ -106,16 +106,16 @@ $db->close();
       <input type="text" class="input admin" name="sex" value="<?php echo $dogrow['Sex']?>"><br>
       
       <!--birthday-->
-      <label class="label admin"> Birthdate:</label>
-      <input type="datetime-local" class="input admin" name="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
+      <label class="label admin"> Birthdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
       
       <!--adoption date-->
-      <label class="label admin">Adoption Date:</label>
-      <input type="datetime-local" class="input admin" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
+      <label class="label admin">Adoption Date: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
       
       <!--death date-->
-      <label class="label admin">Deathdate:</label>
-      <input type="datetime-local" class="input admin" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
+      <label class="label admin">Deathdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
       
       <!--breed-->
       <label class="label admin">Breed:</label>
@@ -127,8 +127,11 @@ $db->close();
         <option value=null>None</option>
         <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
+      <label class="label stillborn">Stillborn:</label>
+      <input type="radio" name="stillborn" value="1" <?php if($dogrow["Stillborn"] == 1){echo "checked";}?>>Yes<br>
+      <input type="radio" name="stillborn" value="0" <?php if($dogrow["Stillborn"] == 0 || $dogID == 0){echo "checked";}?>> No<br>
       <input class="button is-link admin " type="submit" value="Save" name="Save">
-      <input class="button is-link admin " type="submit" name="Delete" value="Delete" onclick="confirm('Are you sure you want to delete this dog?');">
+      <input class="button is-link admin " type="submit" name="Delete" value="Delete" onclick="return confirm('Are you sure you want to delete this dog?');">
     </form>
     <a href="index.php">Return to admin page</a>
 

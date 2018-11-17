@@ -14,7 +14,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
   if ($db->connect_error){
       die("Can't connect");
   }
-  elseif($_POST("Save")) {
+  elseif(isset($_POST["Save"])) {
 
     $name = mysqli_real_escape_string($db,$_POST["name"]);
     $email = mysqli_real_escape_string($db,$_POST["email"]);
@@ -47,7 +47,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       echo mysqli_error($db);
     }   
 
-  }elseif($_POST("Delete")){
+  }elseif(isset($_POST["Delete"])){
     if($dogID != 0){
       die("Cannot Delete");
     }else{

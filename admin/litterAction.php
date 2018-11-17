@@ -13,8 +13,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
   $litterID = mysqli_real_escape_string($db,$_POST["loadID"]);
   if ($db->connect_error){
       die("Can't connect");
-  }
-  elseif($_POST("Save")) {
+  }elseif(isset($_POST["Save"])) {
 
     $volunteerID = mysqli_real_escape_string($db,$_POST["volunteerID"]);
     $motherID = mysqli_real_escape_string($db,$_POST["motherID"]);
@@ -45,7 +44,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       echo mysqli_error($db);
     } 
 
-  }elseif($_POST("Delete")){
+  }elseif(isset($_POST["Delete"])){
     if($dogID != 0){
       die("Cannot Delete");
     }else{
