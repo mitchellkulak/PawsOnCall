@@ -102,20 +102,20 @@ $db->close();
         <?php while($subuser = $fatherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
       </select><br>
       
-      <label class="label admin">Start Whelp: </label>
-      <input class="input admin" type="datetime-local" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
+      <label class="label admin">Start Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
 
-      <label class="label admin">End Whelp:</label>
-      <input class="input admin" type="datetime-local" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
+      <label class="label admin">End Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
 
-      <label class="label admin">Start Wean: </label>
-      <input class="input admin" type="datetime-local" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
+      <label class="label admin">Start Wean: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
 
-      <label class="label admin">End Wean: </label>
-      <input class="input admin" type="datetime-local" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
+      <label class="label admin">End Wean: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
       
-      <input type="submit" value="Save">
-      <input class="button is-link admin " type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this litter?');">
+      <input type="submit" name="Save" value="Save">
+      <input class="button is-link admin" name="Delete" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this litter?');">
     </form>
     <a href="index.php">Return to admin page</a>
   </article>
