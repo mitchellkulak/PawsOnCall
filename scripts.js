@@ -75,8 +75,6 @@ async function drawChart() {
     data1.addColumn('number', 'Temperature');
     var newData = new Array();
     newData = await prepareDataForChart();
-    console.log(newData);
-    console.log("Length of new Data = " + newData.length);
     var numRows = newData.length;
     for (var i = 0; i < numRows; i++) {
         console.log(newData[i]);
@@ -113,7 +111,7 @@ async function prepareDataForChart() {
                 var year = parseInt(element.date.year);
                 var temp = element.Temp;
                 smallArray[0] = new Date(year, month, day);
-                smallArray[1] = parseInt(temp);
+                smallArray[1] = parseFloat(temp);
                 bigArray[i] = smallArray;
                 i++;
             });
