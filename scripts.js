@@ -501,22 +501,22 @@ function addLitterNote() {
 
 function getVolunteerInfo() {
     var dogID = getCookie("dogID");
-    var url = "GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID;
-    fetch(url, {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-    })
-        //.then(response => response.json()) // parses response to JSON
-        .then((responseContent) => {
-            console.log(responseContent);
+    
+    fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            console.log(obj);
+            //dogNameDiv.textContent = obj.dogInfo[0].Name;
+            //dogBreedDiv.textContent = obj.dogInfo[0].Breed;
+
+            obj.dogUpdates.forEach(function (element) {
+                var newRow = document.createElement("tr");
+                var newCell = document.createElement("td");
+                newCell.innerHTML = element.Note;
+                newRow.appendChild(newCell);
+                noteTable.appendChild(newRow);
+            });
         });
 }
 
