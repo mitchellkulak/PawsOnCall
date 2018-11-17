@@ -155,7 +155,6 @@ function loadLitterInfo() {
             document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
-            console.log(obj);
 
             // For each litter
             obj.forEach(function (element) {
@@ -167,13 +166,12 @@ function loadLitterInfo() {
                 weanEnd.innerHTML = element.weanEnd;
                 whelpStart.innerHTML = element.whelpStart;
                 whelpEnd.innerHTML = element.whelpEnd;
+                console.log(element);
             });
 
 
             // For each note in first litter
             obj[0][1].forEach(function (element) {
-
-                console.log(element);
                 var newRow = document.createElement("tr");
                 var newCell = document.createElement("td");
                 newCell.innerHTML = element.Note;
@@ -232,6 +230,7 @@ function loadLitterInfoByID(id) {
             // For each litter
             obj.forEach(function (element) {
                 if (element.ID == id) {
+                    console.log(element);
                     weanStart.innerHTML = element.weanStart;
                     weanEnd.innerHTML = element.weanEnd;
                     whelpStart.innerHTML = element.whelpStart;
