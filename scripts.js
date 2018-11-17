@@ -512,7 +512,7 @@ function addLitterNote() {
 
 function getVolunteerInfo() {
     var dogID = getCookie("dogID");
-    
+    var VolunteerID;
     fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
         .then(response => response.json())
         .then((data) => {
@@ -521,13 +521,10 @@ function getVolunteerInfo() {
             //dogNameDiv.textContent = obj.dogInfo[0].Name;
             //dogBreedDiv.textContent = obj.dogInfo[0].Breed;
 
-            obj.dogUpdates.forEach(function (element) {
-                var newRow = document.createElement("tr");
-                var newCell = document.createElement("td");
-                newCell.innerHTML = element.Note;
-                newRow.appendChild(newCell);
-                noteTable.appendChild(newRow);
-            });
+            //obj.forEach(function (element) {
+                VolunteerID = obj.VolunteerID;
+                console.log(VolunteerID);
+            //});
         });
 }
 
