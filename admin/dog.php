@@ -127,8 +127,11 @@ $db->close();
         <option value=null>None</option>
         <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
+      <label class="label stillborn">Stillborn:</label>
+      <input type="radio" name="stillborn" value="1" <?php if($dogrow["Stillborn"] == 1){echo "checked";}?>>Yes<br>
+      <input type="radio" name="stillborn" value="0" <?php if($dogrow["Stillborn"] == 0 || $dogID == 0){echo "checked";}?>> No<br>
       <input class="button is-link admin " type="submit" value="Save" name="Save">
-      <input class="button is-link admin " type="submit" name="Delete" value="Delete" onclick="confirm('Are you sure you want to delete this dog?');">
+      <input class="button is-link admin " type="submit" name="Delete" value="Delete" onclick="return confirm('Are you sure you want to delete this dog?');">
     </form>
     <a href="index.php">Return to admin page</a>
 

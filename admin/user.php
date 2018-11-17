@@ -115,8 +115,8 @@ $db->close();
     <label class="label admin">Admin:</label>
     <input type="radio" name="admin" value="1" <?php if($userrow["Admin"] == 1){echo "checked";}?>>Yes<br>
     <input type="radio" name="admin" value="0" <?php if($userrow["Admin"] == 0 || $userID == 0){echo "checked";}?>> No<br>
-    <input class="button is-link admin" type="submit" value="Save">
-    <input class="button is-link admin " type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this user?');">
+    <input class="button is-link admin" type="submit" name="Save" value="Save">
+    <input class="button is-link admin " type="submit" name="Delete" value="Delete" onclick="return confirm('Are you sure you want to delete this user?');">
   </form>
 
   <a href="index.php">Return to admin page</a>
