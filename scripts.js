@@ -204,7 +204,7 @@ function loadLitterInfo(){
 }
 
 function loadLitterInfoByID(id){
-
+    document.cookie = "litter=" + id;
     var session = getCookie("session");
     var dogID = getCookie("dogID");
     var litterNameDiv = document.getElementById("litterNameDiv");
@@ -242,7 +242,6 @@ function loadLitterInfoByID(id){
                         newRow.appendChild(newIDCell);
                         newRow.appendChild(newSexCell);
                         litterInfoTableBody.appendChild(newRow);
-                        
                     });
                 }
                 // var newDdlLitter = document.createElement("a");
