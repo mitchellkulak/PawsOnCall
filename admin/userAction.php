@@ -10,12 +10,12 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     echo "<script>window.location.replace('../login.php');</script>";
 }else{
   include '../dbconnect.php';
+  $userID = mysqli_real_escape_string($db,$_POST["loadID"]);
   if ($db->connect_error){
       die("Can't connect");
   }
-  else {
+  elseif($_POST("Save")) {
 
-    $userID = mysqli_real_escape_string($db,$_POST["loadID"]);
     $name = mysqli_real_escape_string($db,$_POST["name"]);
     $email = mysqli_real_escape_string($db,$_POST["email"]);
     $phone = mysqli_real_escape_string($db,$_POST["phone"]);
@@ -41,12 +41,23 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }
     $db->query($SQL);
     $error = mysqli_error($db);
-    if($error = ""){
-      echo "Record Updated/Added Successfully";
+    if($db->query($SQL)){
+      echo "Record Added/Updated";
     }else{
-      echo $error;
-    }
+      echo mysqli_error($db);
+    }   
 
+  }elseif($_POST("Delete")){
+    if($dogID != 0){
+      die("Cannot Delete");
+    }else{
+      $SQL = "DELETE FROM Volunteer WHERE ID = $userID";
+    }
+    if($db->query($SQL)){
+      echo "Record Deleted";
+    }else{
+      echo mysqli_error($db);
+    }    
   }
 }
 $db->close();

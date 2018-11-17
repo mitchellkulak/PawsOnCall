@@ -115,9 +115,8 @@ $db->close();
       <input class="input admin" type="datetime-local" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
       
       <input type="submit" value="Save">
+      <input class="button is-link admin " type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this litter?');">
     </form>
-  <form><input class="button is-link admin " type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this litter?');"></form>
-
     <a href="index.php">Return to admin page</a>
   </article>
 </body>
