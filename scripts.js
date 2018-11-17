@@ -186,6 +186,9 @@ function loadLitterInfo() {
                     stillborn++;
                 }
                 var deathDate = new Date(element.Deathdate);
+                if(deathDate<Date.now()){
+                    deadpuppies++;
+                }
                 console.log("Death Date:")
                 console.log(deathDate);
                 console.log(element.Deathdate);
@@ -200,6 +203,7 @@ function loadLitterInfo() {
                 litterInfoTableBody.appendChild(newRow);
             });
             stillbornsDiv.value = stillborn;
+            deathsDiv.value = deadpuppies;
 
             // obj.dogUpdates.forEach(function (element) {
             //     var newRow = document.createElement("tr");
@@ -262,6 +266,10 @@ function loadLitterInfoByID(id) {
                         if(element.Stillborn == 1){
                             stillborn++;
                         }
+                        var deathDate = new Date(element.Deathdate);
+                        if(deathDate<Date.now()){
+                            deadpuppies++;
+                        }
                         var newRow = document.createElement("tr");
                         var newIDCell = document.createElement("td");
                         var newSexCell = document.createElement("td");
@@ -272,6 +280,7 @@ function loadLitterInfoByID(id) {
                         litterInfoTableBody.appendChild(newRow);
                     });
                     stillbornsDiv.value = stillborn;
+                    deathsDiv.value = deadpuppies;
 
                 }
             });
