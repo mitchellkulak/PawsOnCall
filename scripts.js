@@ -452,6 +452,7 @@ function addDogNote() {
 function addLitterNote() {
     var d = Date.now();
     var litterID = getCookie("litter");
+    console.log(litterID);
     if (litterID != "") {
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
