@@ -127,10 +127,9 @@ $db->close();
         <option value=null>None</option>
         <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
-      <input class="button is-link admin " type="submit" value="Save">
+      <input class="button is-link admin " type="submit" value="Save" name="Save">
+      <input class="button is-link admin " type="submit" name="Delete" value="Delete" onclick="confirm('Are you sure you want to delete this dog?');">
     </form>
-  <form><input class="button is-link admin " type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this dog?');"></form>
-
     <a href="index.php">Return to admin page</a>
 
   </article>
