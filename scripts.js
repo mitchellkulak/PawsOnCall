@@ -182,7 +182,7 @@ function loadLitterInfo() {
 
             // For each puppy
             obj[0][0].forEach(function (element) {
-                if(element.Stillborn == 1){
+                if (element.Stillborn == 1) {
                     stillborn++;
                 }
                 var deathDate = new Date(element.Deathdate);
@@ -263,7 +263,7 @@ function loadLitterInfoByID(id) {
                     litterInfoTableBody.innerHTML = "";
                     // For each puppy
                     element[0].forEach(function (element) {
-                        if(element.Stillborn == 1){
+                        if (element.Stillborn == 1) {
                             stillborn++;
                         }
                         var deathDate = new Date(element.Deathdate);
@@ -509,24 +509,10 @@ function addLitterNote() {
 }
 
 function getVolunteerInfo() {
-    var name = "Bob";
-    var street = "1234 Main St.";
-    var city = "Jenison";
-    var state = "Michigan";
-    var zip = "49428";
-    var phone = "616-123-4567";
-    var url = "GetVolunteerInfo.php?session=" + getCookie("session");
-    var data = {};
-    data.Name = name;
-    data.Street = street;
-    data.City = city;
-    data.State = state;
-    data.Zip = zip;
-    data.Phone = phone;
-    data.LitterID = getCookie("dogID");
-    console.log(JSON.stringify(data));
+    var dogID = getCookie("dogID");
+    var url = "GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID;
     fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
@@ -536,7 +522,6 @@ function getVolunteerInfo() {
         },
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
         //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
