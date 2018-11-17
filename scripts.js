@@ -186,7 +186,9 @@ function loadLitterInfo() {
                     stillborn++;
                 }
                 var deathDate = new Date(element.Deathdate);
+                console.log("Death Date:")
                 console.log(deathDate);
+                console.log(element.Deathdate);
 
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
