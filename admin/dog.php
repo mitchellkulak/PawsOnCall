@@ -107,15 +107,15 @@ $db->close();
       
       <!--birthday-->
       <label class="label admin"> Birthdate:</label>
-      <input type="datetime-local" class="input admin" name="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
+      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
       
       <!--adoption date-->
       <label class="label admin">Adoption Date:</label>
-      <input type="datetime-local" class="input admin" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
+      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
       
       <!--death date-->
       <label class="label admin">Deathdate:</label>
-      <input type="datetime-local" class="input admin" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
+      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
       
       <!--breed-->
       <label class="label admin">Breed:</label>

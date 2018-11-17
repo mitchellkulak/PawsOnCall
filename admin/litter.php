@@ -103,16 +103,16 @@ $db->close();
       </select><br>
       
       <label class="label admin">Start Whelp: </label>
-      <input class="input admin" type="datetime-local" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
 
       <label class="label admin">End Whelp:</label>
-      <input class="input admin" type="datetime-local" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
 
       <label class="label admin">Start Wean: </label>
-      <input class="input admin" type="datetime-local" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
 
       <label class="label admin">End Wean: </label>
-      <input class="input admin" type="datetime-local" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
       
       <input type="submit" name="Save" value="Save">
       <input class="button is-link admin" name="Delete" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this litter?');">
