@@ -517,7 +517,8 @@ function getVolunteerInfo() {
     var txtStreet = document.getElementById("hostStreet");
     var txtCity = document.getElementById("hostCity");
     var txtState = document.getElementById("hostState");
-    var txtZip = document.getElementById("hostZip");
+    var txtZIP = document.getElementById("hostZIP");
+    var txtPhone = document.getElementById("hostPhone");
     fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
         .then(response => response.json())
         .then((data) => {
@@ -540,7 +541,8 @@ function getVolunteerInfo() {
                     txtStreet.innerHTML = obj1[0].Address;
                     txtCity.innerHTML = obj1[0].City;
                     txtState.innerHTML = obj1[0].State;
-                    txtZip.innerHTML = obj1[0].ZIP;
+                    txtZIP.innerHTML = obj1[0].ZIP;
+                    txtPhone.innerHTML = obj[0].Phone;
 
                     console.log(obj1[0].Name);
                 });
