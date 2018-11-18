@@ -148,6 +148,8 @@ function loadLitterInfo() {
     var stillbornsDiv = document.getElementById("stillborns");
     var deathsDiv = document.getElementById("deaths");
 
+    var txtFather = document.getElementById("father");
+
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
@@ -157,6 +159,7 @@ function loadLitterInfo() {
             document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
+            txtFather.value = obj[0].FatherName;
 
             // For each litter
             obj.forEach(function (element) {
@@ -189,10 +192,6 @@ function loadLitterInfo() {
                 if (deathDate < Date.now()) {
                     deadpuppies++;
                 }
-                console.log("Death Date:")
-                console.log(deathDate);
-                console.log(element.Deathdate);
-
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");

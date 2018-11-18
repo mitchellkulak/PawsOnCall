@@ -21,32 +21,6 @@
 
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
-	<!--forms script-->
-	<script>
-		function editDates() {
-			document.getElementById("whelpStart").removeAttribute("disabled");
-			document.getElementById("whelpEnd").removeAttribute("disabled");
-			document.getElementById("whelpDate").removeAttribute("disabled");
-			document.getElementById("weanStart").removeAttribute("disabled");
-			document.getElementById("weanEnd").removeAttribute("disabled");
-			document.getElementById("deworm").removeAttribute("disabled");
-			document.getElementById('edit').hidden = true;
-			document.getElementById('save').hidden = false;
-
-			return false;
-		}
-
-		function editLitter() {
-			document.getElementById("father").removeAttribute("disabled");
-			document.getElementById("stillborns").removeAttribute("disabled");
-			document.getElementById("deaths").removeAttribute("disabled");
-			document.getElementById('edit').hidden = true;
-			document.getElementById('save').hidden = false;
-
-			return false;
-		}
-	</script>
-	<!--forms script-->
 </head>
 
 <body onload="adminShowHide(); loadLitterInfo();">
@@ -172,10 +146,10 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<button type="edit" class="button button is-link" id="edit" onclick="return editLitter()">Edit</button>
 									<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
-								</div>
+								</div> -->
 							</form>
 					</div>
 					<!--end blue tile-->
