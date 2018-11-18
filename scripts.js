@@ -524,6 +524,7 @@ function getVolunteerInfo() {
             //obj.forEach(function (element) {
                 VolunteerID = obj.VolunteerID;
                 console.log(VolunteerID);
+                console.log(obj.dogInfo[0].VolunteerID);
             //});
         });
 }
