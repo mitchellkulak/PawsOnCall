@@ -542,7 +542,7 @@ function getVolunteerInfo() {
                     txtCity.innerHTML = obj1[0].City;
                     txtState.innerHTML = obj1[0].State;
                     txtZIP.innerHTML = obj1[0].ZIP;
-                    txtPhone.innerHTML = obj[0].Phone;
+                    txtPhone.innerHTML = obj1[0].Phone;
 
                     console.log(obj1[0].Name);
                 });
