@@ -35,7 +35,7 @@
 		}
 	</script>
 </head>
-<body  onload="adminShowHide()">
+<body  onload="adminShowHide(); getVolunteerInfo();">
 
 <!-- Navbar, logo, logout button -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -71,31 +71,10 @@
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child notification is-primary">
-          <p class="title">Ein</p>
-		  <div class="field is-horizontal">
-			  <div class="field-label is-normal">
-				<label class="label">ID</label>
-			  </div>
-			  <div class="field-body">
-				<div class="field">
-				  <p class="control is-expanded">
-					<input class="input" type="text" id="dogID" placeholder="Disabled input" disabled>
-				  </p>
-				</div>
-			  </div>
-		  </div>
-		  <div class="field is-horizontal">
-			  <div class="field-label is-normal">
-				<label class="label">Breed</label>
-			  </div>
-			  <div class="field-body">
-				<div class="field">
-				  <p class="control is-expanded">
-					<input class="input" type="text" id="dogBreed" placeholder="Disabled input" disabled>
-				  </p>
-				</div>
-			  </div>
-		  </div>
+				<p id="dogName" class="title">Dog Name</p>
+				<p id="dogBreed" class="subtitle">Dog Breed</p>
+			</div>
+		</div>
         </article>
       </div>
       <div class="tile is-parent">

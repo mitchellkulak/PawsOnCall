@@ -39,18 +39,18 @@
                         <form onsubmit="loginUser()">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-large" type="email" id="emailInput" placeholder="Your Email" autofocus="">
+                                    <input class="input is-large" onkeypress="handleLoginKeyPress(event)" type="email" id="emailInput" placeholder="Your Email" autofocus="">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <div class="control">
-                                    <input class="input is-large" type="password" id="passwordInput" placeholder="Your Password">
+                                    <input class="input is-large" onkeypress="handleLoginKeyPress(event)" type="password" id="passwordInput" placeholder="Your Password">
                                 </div>
                             </div>
                             <div class="field">
                             </div>
-                            <button type="button" class="button is-block is-info is-large is-fullwidth" onclick="loginUser()">Login</button>
+                            <button type="submit" class="button is-block is-info is-large is-fullwidth" onclick="loginUser()">Login</button>
                         </form>
                     </div>
                     <p class="has-text-grey">

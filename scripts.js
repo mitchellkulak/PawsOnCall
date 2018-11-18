@@ -182,11 +182,11 @@ function loadLitterInfo() {
 
             // For each puppy
             obj[0][0].forEach(function (element) {
-                if(element.Stillborn == 1){
+                if (element.Stillborn == 1) {
                     stillborn++;
                 }
                 var deathDate = new Date(element.Deathdate);
-                if(deathDate<Date.now()){
+                if (deathDate < Date.now()) {
                     deadpuppies++;
                 }
                 console.log("Death Date:")
@@ -263,11 +263,11 @@ function loadLitterInfoByID(id) {
                     litterInfoTableBody.innerHTML = "";
                     // For each puppy
                     element[0].forEach(function (element) {
-                        if(element.Stillborn == 1){
+                        if (element.Stillborn == 1) {
                             stillborn++;
                         }
                         var deathDate = new Date(element.Deathdate);
-                        if(deathDate<Date.now()){
+                        if (deathDate < Date.now()) {
                             deadpuppies++;
                         }
                         var newRow = document.createElement("tr");
@@ -349,6 +349,14 @@ function verifySessionCookie() {
 function handleSearchKeyPress(e) {
     if (e.keyCode === 13) {
         redirectToSearch();
+    }
+
+    return false;
+}
+
+function handleLoginKeyPress(e) {
+    if (e.keyCode === 13) {
+        loginUser();
     }
 
     return false;
@@ -437,7 +445,9 @@ function loginUser() {
             document.cookie = "session=" + data.sessionKey;
             document.cookie = "admin=" + data.admin;
             console.log(document.cookie);
-            window.location.href = "mother.html";
+            if (data.sessionKey != "" && data.sessionKey != null) {
+                window.location.href = "mother.html";
+            }
         });
 }
 
@@ -509,39 +519,46 @@ function addLitterNote() {
 }
 
 function getVolunteerInfo() {
-    var name = "Bob";
-    var street = "1234 Main St.";
-    var city = "Jenison";
-    var state = "Michigan";
-    var zip = "49428";
-    var phone = "616-123-4567";
-    var url = "GetVolunteerInfo.php?session=" + getCookie("session");
-    var data = {};
-    data.Name = name;
-    data.Street = street;
-    data.City = city;
-    data.State = state;
-    data.Zip = zip;
-    data.Phone = phone;
-    data.LitterID = getCookie("dogID");
-    console.log(JSON.stringify(data));
-    fetch(url, {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, cors, *same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-            // "Content-Type": "application/x-www-form-urlencoded",
-        },
-        redirect: "follow", // manual, *follow, error
-        referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-    })
-        //.then(response => response.json()) // parses response to JSON
-        .then((responseContent) => {
-            console.log(responseContent);
-        });
+    var dogID = getCookie("dogID");
+    var VolunteerID;
+    var txtName = document.getElementById("hostName");
+    var txtStreet = document.getElementById("hostStreet");
+    var txtCity = document.getElementById("hostCity");
+    var txtState = document.getElementById("hostState");
+    var txtZIP = document.getElementById("hostZIP");
+    var txtPhone = document.getElementById("hostPhone");
+    var dogName = document.getElementById("dogName");
+    var dogBreed = document.getElementById("dogBreed");
+    fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            console.log(obj);
+            dogName.innerHTML = obj.dogInfo[0].Name;
+            dogBreed.innerHTML = obj.dogInfo[0].Breed;
+            VolunteerID = obj.dogInfo[0].VolunteerID;
+            console.log(VolunteerID);
+        })
+
+        .then((v) => {
+            fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID) //Add the file name
+                .then(response => response.json())
+                .then((data) => {
+                    var obj1 = JSON.parse(JSON.stringify(data));
+                    console.log(obj1);
+
+                    txtName.value = obj1[0].Name;
+                    txtStreet.value = obj1[0].Address;
+                    txtCity.value = obj1[0].City;
+                    txtState.value = obj1[0].State;
+                    txtZIP.value = obj1[0].ZIP;
+                    txtPhone.value = obj1[0].Phone;
+
+                    console.log(obj1[0].Name);
+                });
+
+        }
+        );
 }
 
 function redirectToMother(dogId) {
