@@ -186,7 +186,7 @@ function loadLitterInfo() {
                     stillborn++;
                 }
                 var deathDate = new Date(element.Deathdate);
-                if(deathDate<Date.now()){
+                if (deathDate < Date.now()) {
                     deadpuppies++;
                 }
                 console.log("Death Date:")
@@ -267,7 +267,7 @@ function loadLitterInfoByID(id) {
                             stillborn++;
                         }
                         var deathDate = new Date(element.Deathdate);
-                        if(deathDate<Date.now()){
+                        if (deathDate < Date.now()) {
                             deadpuppies++;
                         }
                         var newRow = document.createElement("tr");
@@ -437,7 +437,7 @@ function loginUser() {
             document.cookie = "session=" + data.sessionKey;
             document.cookie = "admin=" + data.admin;
             console.log(document.cookie);
-            if(data.sessionKey != "" && data.sessionKey != null){
+            if (data.sessionKey != "" && data.sessionKey != null) {
                 window.location.href = "mother.html";
             }
         });
@@ -520,12 +520,37 @@ function getVolunteerInfo() {
             console.log(obj);
             //dogNameDiv.textContent = obj.dogInfo[0].Name;
             //dogBreedDiv.textContent = obj.dogInfo[0].Breed;
+            VolunteerID = obj.dogInfo[0].VolunteerID;
+            console.log(VolunteerID);
+        });
+    var name;
+    var street;
+    var city;
+    var state;
+    var zip;
+    var txtName = document.getElementById("hostName");
+    var txtStreet = document.getElementById("hostStreet");
+    var txtCity = document.getElementById("hostCity");
+    var txtState = document.getElementById("hostState");
+    var txtZip = document.getElementById("hostZip");
+    fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID) //Add the file name
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            console.log(obj);
 
-            //obj.forEach(function (element) {
-                VolunteerID = obj.VolunteerID;
-                console.log(VolunteerID);
-                console.log(obj.dogInfo[0].VolunteerID);
-            //});
+            name = obj.volInfo[0].Name;
+            street = obj.volInfo[0].Street;
+            city = obj.volInfo[0].City;
+            state = obj.volInfo[0].State;
+            zip = obj.volInfo[0].Zip;
+
+            txtName.innerHTML = name;
+            txtStreet.innerHTML = street;
+            txtCity.innerHTML = city;
+            txtState.innerHTML = state;
+            txtZip.innerHTML = zip;
+
         });
 }
 
