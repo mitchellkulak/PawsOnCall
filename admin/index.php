@@ -52,6 +52,7 @@
   <a class="button is-link admin" href="user.php">User</a><br>
   <a class="button is-link admin" href="dog.php">Dog</a><br>
   <a class="button is-link admin"href="litter.php">Litter</a><br>
+  <a class="button is-link admin"href="dbDownload.php">Database Download</a><br>
 </article>
 </body>
 </html>
