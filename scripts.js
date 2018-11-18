@@ -519,13 +519,15 @@ function getVolunteerInfo() {
     var txtState = document.getElementById("hostState");
     var txtZIP = document.getElementById("hostZIP");
     var txtPhone = document.getElementById("hostPhone");
+    var dogName = document.getElementById("dogName");
+    var dogBreed = document.getElementById("dogBreed");
     fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
-            //dogNameDiv.textContent = obj.dogInfo[0].Name;
-            //dogBreedDiv.textContent = obj.dogInfo[0].Breed;
+            dogName.innerHTML = obj.dogInfo[0].Name;
+            dogBreed.innerHTML = obj.dogInfo[0].Breed;
             VolunteerID = obj.dogInfo[0].VolunteerID;
             console.log(VolunteerID);
         })
