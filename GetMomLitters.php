@@ -26,9 +26,9 @@ else {
     $littersArray = array();
     $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $dogData = $db->query(
-    "SELECT l.*, d.Name as MotherName
-    FROM Litter as l, Dogs as d 
-    WHERE $dogID = l.MotherID AND $dogID = d.ID AND l.MotherID = d.ID ORDER BY ID DESC"
+    "SELECT l.*, d.Name as MotherName, f.Name as FatherName
+    FROM Litter as l, Dogs as d, Dogs as f 
+    WHERE $dogID = l.MotherID AND $dogID = d.ID AND l.MotherID = d.ID AND f.ID = l.FatherID ORDER BY l.ID DESC"
     );
     while ($result = $dogData->fetch_assoc()){
         $littersArray[$i] = $result;
@@ -49,7 +49,7 @@ else {
     		$updateData = $db->query(
     		"SELECT *
     		FROM LitterUpdates 
-    		WHERE LitterID = $litterID"
+    		WHERE LitterID = $litterID ORDER BY Time DESC"
     		);
     		while ($updateResult = $updateData->fetch_assoc()){
         		$updatesArray[$inr] = $updateResult;
