@@ -537,12 +537,12 @@ function getVolunteerInfo() {
                     var obj1 = JSON.parse(JSON.stringify(data));
                     console.log(obj1);
 
-                    txtName.innerHTML = obj1[0].Name;
-                    txtStreet.innerHTML = obj1[0].Address;
-                    txtCity.innerHTML = obj1[0].City;
-                    txtState.innerHTML = obj1[0].State;
-                    txtZIP.innerHTML = obj1[0].ZIP;
-                    txtPhone.innerHTML = obj1[0].Phone;
+                    txtName.value = obj1[0].Name;
+                    txtStreet.value = obj1[0].Address;
+                    txtCity.value = obj1[0].City;
+                    txtState.value = obj1[0].State;
+                    txtZIP.value = obj1[0].ZIP;
+                    txtPhone.value = obj1[0].Phone;
 
                     console.log(obj1[0].Name);
                 });
