@@ -20,20 +20,6 @@
 	<!-- favicon stuff-->
 	
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-	<script>
-		function editHost() {
-		  document.getElementById("hostName").removeAttribute("disabled");
-		  document.getElementById("hostStreet").removeAttribute("disabled");
-		  document.getElementById("hostCity").removeAttribute("disabled");
-		  document.getElementById("hostState").removeAttribute("disabled");
-		  document.getElementById("hostZIP").removeAttribute("disabled");
-		  document.getElementById("hostPhone").removeAttribute("disabled");
-		  document.getElementById('edit').hidden = true;
-		  document.getElementById('save').hidden = false;
-		  
-		  return false;
-		}
-	</script>
 </head>
 <body  onload="adminShowHide(); getVolunteerInfo();">
 
