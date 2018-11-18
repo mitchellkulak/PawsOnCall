@@ -525,6 +525,7 @@ function getVolunteerInfo() {
         })
 
         .then((v) => {
+            console.log(v);
             var txtName = document.getElementById("hostName");
             var txtStreet = document.getElementById("hostStreet");
             var txtCity = document.getElementById("hostCity");
@@ -542,7 +543,9 @@ function getVolunteerInfo() {
             txtState.innerHTML = obj.volInfo[0].State;
             txtZip.innerHTML = obj.volInfo[0].Zip;
 
+            console.log(v);
         });
+
         } 
         );
 }
