@@ -189,10 +189,6 @@ function loadLitterInfo() {
                 if (deathDate < Date.now()) {
                     deadpuppies++;
                 }
-                console.log("Death Date:")
-                console.log(deathDate);
-                console.log(element.Deathdate);
-
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");
