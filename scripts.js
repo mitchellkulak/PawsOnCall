@@ -533,16 +533,16 @@ function getVolunteerInfo() {
             fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID) //Add the file name
                 .then(response => response.json())
                 .then((data) => {
-                    var obj = JSON.parse(JSON.stringify(data));
-                    console.log(obj);
+                    var obj1 = JSON.parse(JSON.stringify(data));
+                    console.log(obj1);
 
-                    txtName.innerHTML = obj.Name;
-                    txtStreet.innerHTML = obj.Address;
-                    txtCity.innerHTML = obj.City;
-                    txtState.innerHTML = obj.State;
-                    txtZip.innerHTML = obj.Zip;
+                    txtName.innerHTML = obj1[0].Name;
+                    txtStreet.innerHTML = obj1[0].Address;
+                    txtCity.innerHTML = obj1[0].City;
+                    txtState.innerHTML = obj1[0].State;
+                    txtZip.innerHTML = obj1[0].Zip;
 
-                    console.log(v);
+                    console.log(obj1[0].Name);
                 });
 
         }
