@@ -19,7 +19,7 @@ else {
     {
         die("Can't connect");
     }
-    else {
+    else{
         $volInfo = array();
         $i=0;
         $SQL = "SELECT Name, Email, Phone, Address, City, State, ZIP FROM Volunteer Where ID = $volunteerID";

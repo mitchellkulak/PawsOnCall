@@ -57,7 +57,7 @@ function getWhelpDates() {
                 var startCell = document.createElement("td");
                 var endCell = document.createElement("td");
                 startWhelp = element.StartWhelp;
-                endWhelp = element.EndWhelp
+                endWhelp = element.EndWhelp;
                 console.log(startWhelp);
                 console.log(endWhelp);
                 startCell.innerHTML = startWhelp;
@@ -336,7 +336,7 @@ function logout() {
     document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     fetch("logoff.php");
-    window.location.href = "login.html";
+    window.location.href = "/PawsOnCall/login.html";
 }
 
 function verifySessionCookie() {
