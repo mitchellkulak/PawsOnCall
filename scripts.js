@@ -522,36 +522,29 @@ function getVolunteerInfo() {
             //dogBreedDiv.textContent = obj.dogInfo[0].Breed;
             VolunteerID = obj.dogInfo[0].VolunteerID;
             console.log(VolunteerID);
-        });
-    var name;
-    var street;
-    var city;
-    var state;
-    var zip;
-    var txtName = document.getElementById("hostName");
-    var txtStreet = document.getElementById("hostStreet");
-    var txtCity = document.getElementById("hostCity");
-    var txtState = document.getElementById("hostState");
-    var txtZip = document.getElementById("hostZip");
+        })
+
+        .then((v) => {
+            var txtName = document.getElementById("hostName");
+            var txtStreet = document.getElementById("hostStreet");
+            var txtCity = document.getElementById("hostCity");
+            var txtState = document.getElementById("hostState");
+            var txtZip = document.getElementById("hostZip");
     fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
 
-            name = obj.volInfo[0].Name;
-            street = obj.volInfo[0].Street;
-            city = obj.volInfo[0].City;
-            state = obj.volInfo[0].State;
-            zip = obj.volInfo[0].Zip;
-
-            txtName.innerHTML = name;
-            txtStreet.innerHTML = street;
-            txtCity.innerHTML = city;
-            txtState.innerHTML = state;
-            txtZip.innerHTML = zip;
+            txtName.innerHTML = obj.volInfo[0].Name;
+            txtStreet.innerHTML = obj.volInfo[0].Street;
+            txtCity.innerHTML = obj.volInfo[0].City;
+            txtState.innerHTML = obj.volInfo[0].State;
+            txtZip.innerHTML = obj.volInfo[0].Zip;
 
         });
+        } 
+        );
 }
 
 function redirectToMother(dogId) {
