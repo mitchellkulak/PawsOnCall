@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 	include '../authenticate.php';
 	session_start();
 	$session = $_SESSION['session'];
@@ -14,12 +16,12 @@
 		if ($db->connect_error){
 		    die("Can't connect");
 		}else{
-			$dogsFile = fopen("/tmp/dogs.csv","w") or die("Unable to open file!");
-			$volunteerFile = fopen("/tmp/volunteers.csv","w") or die("Unable to open file!");
-			$litterFile = fopen("/tmp/litters.csv","w") or die("Unable to open file!");
-			$dogUpdatesFile = fopen("/tmp/dogUpdates.csv","w") or die("Unable to open file!");
-			$litterUpdatesFile = fopen("/tmp/litterUpdates.csv","w") or die("Unable to open file!");
-			$temperatureFile = fopen("/tmp/temperatures.csv","w") or die("Unable to open file!");
+			$dogsFile = fopen($_SERVER['DOCUMENT_ROOT']."dogs.csv","w") or die("Unable to open file!");
+			$volunteerFile = fopen($_SERVER['DOCUMENT_ROOT']."volunteers.csv","w") or die("Unable to open file!");
+			$litterFile = fopen($_SERVER['DOCUMENT_ROOT']."litters.csv","w") or die("Unable to open file!");
+			$dogUpdatesFile = fopen($_SERVER['DOCUMENT_ROOT']."dogUpdates.csv","w") or die("Unable to open file!");
+			$litterUpdatesFile = fopen($_SERVER['DOCUMENT_ROOT']."litterUpdates.csv","w") or die("Unable to open file!");
+			$temperatureFile = fopen($_SERVER['DOCUMENT_ROOT']."temperatures.csv","w") or die("Unable to open file!");
 
 			//Download Dogs Table and write to CSV
 			$SQL = "SELECT * FROM Dogs";
@@ -70,9 +72,9 @@
 				echo mysqli_error($db);
 			}
 			//Write files to a Zip
-			$files = array("/tmp/dogs.csv","/tmp/volunteers.csv","/tmp/litters.csv","/tmp/dogUpdates.csv","/tmp/litterUpdates.csv","/tmp/temperatures.csv");
+			$files = array("dogs.csv",$_SERVER['DOCUMENT_ROOT']."volunteers.csv",$_SERVER['DOCUMENT_ROOT']."litters.csv",$_SERVER['DOCUMENT_ROOT']."dogUpdates.csv",$_SERVER['DOCUMENT_ROOT']."litterUpdates.csv",$_SERVER['DOCUMENT_ROOT']."temperatures.csv");
 			$zip = new ZipArchive();
-			$zipname = "whelpingJournal_backup_".date("Y_m_d").".zip";
+			$zipname = $_SERVER['DOCUMENT_ROOT']."whelpingJournal_backup_".date("Y_m_d").".zip";
 			$zip->open($zipname, ZipArchive::CREATE); //example_zip zip file created 
   
 			foreach($files as $key =>$file){
@@ -85,11 +87,11 @@
 			fclose($dogUpdatesFile);
 			fclose($litterUpdatesFile);
 			fclose($temperatureFile);
-			echo "<strong>Download Zip File</strong>";
-				header('Content-Type: application/zip');
-				header('Content-disposition: attachment; filename='.$zipname);
-				header('Content-Length: ' . filesize($zipname));
-				readfile($zipname);
+			ob_clean();
+			echo	header('Content-Type: application/zip');
+			echo 	header('Content-disposition: attachment; filename='.$zipname);
+			echo	header('Content-Length: ' . filesize($zipname));
+			echo	readfile($zipname);
 		}
 	}
 ?>
