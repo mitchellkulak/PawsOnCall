@@ -513,6 +513,11 @@ function addLitterNote() {
 function getVolunteerInfo() {
     var dogID = getCookie("dogID");
     var VolunteerID;
+    var txtName = document.getElementById("hostName");
+    var txtStreet = document.getElementById("hostStreet");
+    var txtCity = document.getElementById("hostCity");
+    var txtState = document.getElementById("hostState");
+    var txtZip = document.getElementById("hostZip");
     fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
         .then(response => response.json())
         .then((data) => {
@@ -525,25 +530,22 @@ function getVolunteerInfo() {
         })
 
         .then((v) => {
-            var txtName = document.getElementById("hostName");
-            var txtStreet = document.getElementById("hostStreet");
-            var txtCity = document.getElementById("hostCity");
-            var txtState = document.getElementById("hostState");
-            var txtZip = document.getElementById("hostZip");
-    fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID) //Add the file name
-        .then(response => response.json())
-        .then((data) => {
-            var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
+            fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID) //Add the file name
+                .then(response => response.json())
+                .then((data) => {
+                    var obj1 = JSON.parse(JSON.stringify(data));
+                    console.log(obj1);
 
-            txtName.innerHTML = obj.volInfo[0].Name;
-            txtStreet.innerHTML = obj.volInfo[0].Street;
-            txtCity.innerHTML = obj.volInfo[0].City;
-            txtState.innerHTML = obj.volInfo[0].State;
-            txtZip.innerHTML = obj.volInfo[0].Zip;
+                    txtName.innerHTML = obj1[0].Name;
+                    txtStreet.innerHTML = obj1[0].Address;
+                    txtCity.innerHTML = obj1[0].City;
+                    txtState.innerHTML = obj1[0].State;
+                    txtZip.innerHTML = obj1[0].Zip;
 
-        });
-        } 
+                    console.log(obj1[0].Name);
+                });
+
+        }
         );
 }
 
