@@ -540,7 +540,7 @@ function getVolunteerInfo() {
                     txtStreet.innerHTML = obj1[0].Address;
                     txtCity.innerHTML = obj1[0].City;
                     txtState.innerHTML = obj1[0].State;
-                    txtZip.innerHTML = obj1[0].Zip;
+                    txtZip.innerHTML = obj1[0].ZIP;
 
                     console.log(obj1[0].Name);
                 });
