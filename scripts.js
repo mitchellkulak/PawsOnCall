@@ -354,6 +354,14 @@ function handleSearchKeyPress(e) {
     return false;
 }
 
+function handleLoginKeyPress(e) {
+    if (e.keyCode === 13) {
+        loginUser();
+    }
+
+    return false;
+}
+
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (event) {
