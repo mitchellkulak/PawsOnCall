@@ -249,6 +249,7 @@ function loadLitterInfoByID(id) {
     document.cookie = "litter=" + id;
     var session = getCookie("session");
     var dogID = getCookie("dogID");
+    var txtFather = document.getElementById("father");
     var litterNameDiv = document.getElementById("litterNameDiv");
     var whelpStartDateDiv = document.getElementById("whelpStartDateDiv");
     var puppyNoteTable = document.getElementById("puppyNoteTable");
