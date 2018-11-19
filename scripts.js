@@ -281,8 +281,8 @@ function loadLitterInfoByID(id) {
                     weanEnd.value = element.EndWean;
                     whelpStart.value = element.StartWhelp;
                     whelpEnd.value = element.EndWhelp;
-                    dewormStart.value = element.DewormStart;
-                    dewormEnd.value = element.DewormEnd;
+                    dewormStart.value = element.StartDeworm;
+                    dewormEnd.value = element.EndDeworm;
                     puppyNoteTable.innerHTML = "";
                     // Note population for the selected litter
                     element[1].forEach(function (element) {
