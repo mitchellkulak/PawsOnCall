@@ -162,6 +162,7 @@ function loadLitterInfo() {
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
             txtFather.value = obj[0].FatherName;
+            loadLitterWeightTable(obj[0].ID);
 
             // For each litter
             obj.forEach(function (element) {
@@ -245,6 +246,20 @@ function addPuppy(){
         }
 }
 
+function loadLitterWeightTable(id){
+    var litterWeightTable = document.getElementById("litterWeightTable");
+    var litterWeightHeaders1 = document.getElementById("litterWeightHeaders1");
+    var litterWeightHeaders2 = document.getElementById("litterWeightHeaders2");
+    
+    fetch('GetLitterWeights.php?litterID=' + id + "&session=" + getCookie("session")) //Add the file name
+        .then(response => response.json())
+        .then((data) => {
+            var obj = JSON.parse(JSON.stringify(data));
+            console.log(obj);
+        });
+
+}
+
 function loadLitterInfoByID(id) {
     document.cookie = "litter=" + id;
     var session = getCookie("session");
@@ -265,6 +280,8 @@ function loadLitterInfoByID(id) {
     var stillbornsDiv = document.getElementById("stillborns");
     var deathsDiv = document.getElementById("deaths");
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
+
+    loadLitterWeightTable(id);
 
     fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
         .then(response => response.json())
