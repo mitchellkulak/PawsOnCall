@@ -23,7 +23,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $endWhelp = mysqli_real_escape_string($db,$_POST["endWhelp"]);
     $startWean = mysqli_real_escape_string($db,$_POST["startWean"]);
     $endWean = mysqli_real_escape_string($db,$_POST["endWean"]);
-    $startDeworm = mysqli_real_escape_string($db,$_POST["endDeworm"]);
+    $startDeworm = mysqli_real_escape_string($db,$_POST["startDeworm"]);
     $endDeworm = mysqli_real_escape_string($db,$_POST["endDeworm"]);
 
     if($litterID != 0){
@@ -36,7 +36,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
         StartWean = '$startWean',
         EndWean = '$endWean',
         StartDeworm = '$startDeworm',
-        EndDeword = '$endDeworm'
+        EndDeworm = '$endDeworm'
       WHERE ID = $litterID";
     }else{
       $SQL = "INSERT INTO Litter Values(null,'$volunteerID','$motherID','$fatherID','$startWhelp','$endWhelp','$startWean','$endWean','$startDeworm','$endDeworm')";
