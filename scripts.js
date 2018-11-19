@@ -173,8 +173,8 @@ function loadLitterInfo() {
                 weanEnd.value = element.EndWean;
                 whelpStart.value = element.StartWhelp;
                 whelpEnd.value = element.EndWhelp;
-                dewormStart.value = element.dewormStart;
-                dewormEnd.value = element.dewormEnd;
+                dewormStart.value = element.StartDeworm;
+                dewormEnd.value = element.StartDeworm;
             });
 
             // For each note in first litter
