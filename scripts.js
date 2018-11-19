@@ -208,17 +208,6 @@ function loadLitterInfo() {
             stillbornsDiv.value = stillborn;
             deathsDiv.value = deadpuppies;
 
-            // obj.dogUpdates.forEach(function (element) {
-            //     var newRow = document.createElement("tr");
-            //     var newCell = document.createElement("td");
-            //     newCell.innerHTML = element.Note;
-            //     newRow.appendChild(newCell);
-            //     noteTable.appendChild(newRow);
-            // });
-            // obj[0].MotherName 
-            // obj[1][0][0].Name // [Gets first puppy name]
-            // To Do next: create notes table based on response
-
         });
 
 
@@ -284,6 +273,9 @@ function loadLitterInfoByID(id) {
             obj.forEach(function (element) {
                 if (element.ID == id) {
                     console.log(element);
+                    litterNameDiv.innerHTML = "Litter of " + element.MotherName;
+                    whelpStartDateDiv.innerHTML = "Whelp started " + element.StartWhelp;
+                    txtFather.value = element.FatherName;
                     weanStart.value = element.StartWean;
                     weanEnd.value = element.EndWean;
                     whelpStart.value = element.StartWhelp;
