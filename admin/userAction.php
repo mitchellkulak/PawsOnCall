@@ -40,7 +40,6 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }else{
       $SQL = "INSERT INTO Volunteer Values(null,'$name','$email','$phone','$address','$city','$state','$zip',null,$admin)";
     }
-    $db->query($SQL);
     $error = mysqli_error($db);
     if($db->query($SQL)){
       echo "Record Added/Updated";

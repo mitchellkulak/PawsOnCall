@@ -18,7 +18,6 @@ else {
 $ar = json_decode(file_get_contents('php://input'), true);
 $litterNote = mysqli_real_escape_string($db,$ar['Note']);
 $litterID = mysqli_real_escape_string($db,$ar['LitterID']);
-//$time = 'current_timestamp';//mysqli_real_escape_string($db,$ar['Time']);
 echo $litterNote;
 echo $litterID;
 echo $time;

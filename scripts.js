@@ -145,6 +145,8 @@ function loadLitterInfo() {
     var whelpEnd = document.getElementById("whelpEnd");
     var weanStart = document.getElementById("weanStart");
     var weanEnd = document.getElementById("weanEnd");
+    var dewormStart = document.getElementById("dewormStart");
+    var dewormEnd = document.getElementById("dewormEnd");
     var stillbornsDiv = document.getElementById("stillborns");
     var deathsDiv = document.getElementById("deaths");
 
@@ -171,6 +173,8 @@ function loadLitterInfo() {
                 weanEnd.value = element.EndWean;
                 whelpStart.value = element.StartWhelp;
                 whelpEnd.value = element.EndWhelp;
+                dewormStart.value = element.dewormStart;
+                dewormEnd.value = element.dewormEnd;
             });
 
             // For each note in first litter
@@ -232,6 +236,8 @@ function loadLitterInfoByID(id) {
     var whelpEnd = document.getElementById("whelpEnd");
     var weanStart = document.getElementById("weanStart");
     var weanEnd = document.getElementById("weanEnd");
+    var dewormStart = document.getElementById("dewormStart");
+    var dewormEnd = document.getElementById("dewormEnd");
     var stillborn = 0;
     var deadpuppies = 0;
     var stillbornsDiv = document.getElementById("stillborns");
@@ -250,6 +256,8 @@ function loadLitterInfoByID(id) {
                     weanEnd.value = element.EndWean;
                     whelpStart.value = element.StartWhelp;
                     whelpEnd.value = element.EndWhelp;
+                    dewormStart.value = element.DewormStart;
+                    dewormEnd.value = element.DewormEnd;
                     puppyNoteTable.innerHTML = "";
                     // Note population for the selected litter
                     element[1].forEach(function (element) {

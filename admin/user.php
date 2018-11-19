@@ -84,32 +84,84 @@ $db->close();
     <!--Name section-->
     <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $userID?>">
     <label class="label admin">Name:</label>
-    <input class="input admin"type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
+    <input class="input admin" type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
 
     <!--email-->
     <label class="label admin">Email: </label>
-    <input class="input admin"type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
+    <input class="input admin" type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
 
     <!--phone-->
-    <label class="label admin">Phone: </label>
-    <input class="input admin"type="tel" name="phone" value="<?php echo $userrow['Phone']?>"><br>
+    <label class="label admin">Phone: <i>Enter as ###-###-####</i></label>
+    <input class="input admin" type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" value="<?php echo $userrow['Phone']?>"><br>
 
 
     <!--address-->
     <label class="label admin">Address: </label>
-    <input class="input admin"type="text" name="address" value="<?php echo $userrow['Address']?>"><br>
+    <input class="input admin" type="text" name="address" value="<?php echo $userrow['Address']?>"><br>
 
     <!--city-->
     <label class="label admin">City:</label>
-    <input class="input admin"type="text" name="city" value="<?php echo $userrow['City']?>"><br>
+    <input class="input admin" type="text" name="city" value="<?php echo $userrow['City']?>"><br>
 
     <!--state-->
     <label class="label admin">State: </label>
-    <input class="input admin"type="text" name="state" maxlength="2" value="<?php echo $userrow['State']?>"><br>
+    <select class="dropbtn admin" name="state" id="state">
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+      <option value="CA">California</option>
+      <option value="CO">Colorado</option>
+      <option value="CT">Connecticut</option>
+      <option value="DE">Delaware</option>
+      <option value="DC">District Of Columbia</option>
+      <option value="FL">Florida</option>
+      <option value="GA">Georgia</option>
+      <option value="HI">Hawaii</option>
+      <option value="ID">Idaho</option>
+      <option value="IL">Illinois</option>
+      <option value="IN">Indiana</option>
+      <option value="IA">Iowa</option>
+      <option value="KS">Kansas</option>
+      <option value="KY">Kentucky</option>
+      <option value="LA">Louisiana</option>
+      <option value="ME">Maine</option>
+      <option value="MD">Maryland</option>
+      <option value="MA">Massachusetts</option>
+      <option value="MI">Michigan</option>
+      <option value="MN">Minnesota</option>
+      <option value="MS">Mississippi</option>
+      <option value="MO">Missouri</option>
+      <option value="MT">Montana</option>
+      <option value="NE">Nebraska</option>
+      <option value="NV">Nevada</option>
+      <option value="NH">New Hampshire</option>
+      <option value="NJ">New Jersey</option>
+      <option value="NM">New Mexico</option>
+      <option value="NY">New York</option>
+      <option value="NC">North Carolina</option>
+      <option value="ND">North Dakota</option>
+      <option value="OH">Ohio</option>
+      <option value="OK">Oklahoma</option>
+      <option value="OR">Oregon</option>
+      <option value="PA">Pennsylvania</option>
+      <option value="RI">Rhode Island</option>
+      <option value="SC">South Carolina</option>
+      <option value="SD">South Dakota</option>
+      <option value="TN">Tennessee</option>
+      <option value="TX">Texas</option>
+      <option value="UT">Utah</option> 
+      <option value="VT">Vermont</option>
+      <option value="VA">Virginia</option>
+      <option value="WA">Washington</option>
+      <option value="WV">West Virginia</option>
+      <option value="WI">Wisconsin</option>
+      <option value="WY">Wyoming</option>
+    </select>	
 
     <!--zip-->
-    <label class="label admin">ZIP: </label>
-    <input class="input admin"type="text" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
+    <label class="label admin">ZIP: <i>Enter as #####</i> </label>
+    <input class="input admin" type="text" pattern="[0-9]{5}" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
     
     <!--admin buttons-->
     <label class="label admin">Admin:</label>
@@ -122,4 +174,5 @@ $db->close();
   <a href="index.php">Return to admin page</a>
 </article>
 </body>
-<html>
+</html>
+<script>document.getElementById("state").value = "<?php echo $userrow['State']?>"</script>
