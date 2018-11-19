@@ -23,6 +23,8 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $endWhelp = mysqli_real_escape_string($db,$_POST["endWhelp"]);
     $startWean = mysqli_real_escape_string($db,$_POST["startWean"]);
     $endWean = mysqli_real_escape_string($db,$_POST["endWean"]);
+    $startDeworm = mysqli_real_escape_string($db,$_POST["endDeworm"]);
+    $endDeworm = mysqli_real_escape_string($db,$_POST["endDeworm"]);
 
     if($litterID != 0){
       $SQL = "UPDATE Litter SET
@@ -32,12 +34,13 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
         StartWhelp = '$startWhelp',
         EndWhelp = '$endWhelp',
         StartWean = '$startWean',
-        EndWean = '$endWean'
+        EndWean = '$endWean',
+        StartDeworm = '$startDeworm',
+        EndDeword = '$endDeworm'
       WHERE ID = $litterID";
     }else{
-      $SQL = "INSERT INTO Litter Values(null,'$volunteerID','$motherID','$fatherID','$startWhelp','$endWhelp','$startWean','$endWean')";
+      $SQL = "INSERT INTO Litter Values(null,'$volunteerID','$motherID','$fatherID','$startWhelp','$endWhelp','$startWean','$endWean','$startDeworm','$endDeworm')";
     }
-    $db->query($SQL);
     $error = mysqli_error($db);
     if($db->query($SQL)){
       echo "Record Added/Updated";

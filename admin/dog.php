@@ -21,9 +21,9 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       $dog = $db->query("SELECT * FROM Dogs WHERE id = $dogID");
       $dogrow = $dog->fetch_assoc();
     }
-    $dogs = $db->query("SELECT ID, Name FROM Dogs");
-    $users = $db->query("SELECT ID, Name FROM Volunteer");
-    $litters = $db->query("SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Dogs,Litter WHERE Litter.MotherID = Dogs.ID");
+    $dogs = $db->query("SELECT ID, Name, Breed FROM Dogs WHERE LitterID IS NULL ORDER BY NAME ASC");
+    $users = $db->query("SELECT ID, Name FROM Volunteer ORDER BY NAME ASC");
+    $litters = $db->query("SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Dogs,Litter WHERE Litter.MotherID = Dogs.ID ORDER BY Dogs.NAME ASC");
   }
 }
 $db->close();
@@ -75,7 +75,7 @@ $db->close();
     <form action="dog.php">
       <select name="loadID" class="dropbtn" >
         <option value="0">New Dog</option>
-        <?php while($subdog = $dogs->fetch_assoc()){echo "<option value=".$subdog["ID"];if($subdog["ID"]==$dogID){echo " selected";} echo ">".$subdog["Name"]."</option>";}?>
+        <?php while($subdog = $dogs->fetch_assoc()){echo "<option value=".$subdog["ID"];if($subdog["ID"]==$dogID){echo " selected";} echo ">".$subdog["Name"]." ".$subdog["Breed"]."</option>";}?>
       </select>
       <input type="submit" class="button is-link admin " value="Load">
     </form>
@@ -103,7 +103,8 @@ $db->close();
       
       <!--sex input-->
       <label class="label admin">Sex:</label> 
-      <input type="text" class="input admin" name="sex" value="<?php echo $dogrow['Sex']?>"><br>
+      <input type="radio" name="sex" value="F" <?php if($dogrow["Sex"] == "F"){echo "checked";}?>>Female<br>
+      <input type="radio" name="sex" value="M" <?php if($dogrow["Sex"] == "M"){echo "checked";}?>>Male<br>
       
       <!--birthday-->
       <label class="label admin"> Birthdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>

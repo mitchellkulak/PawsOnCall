@@ -25,9 +25,9 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       $volunteerID = $litterrow["VolunteerID"];
     }
     $litters = $db->query("SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Litter, Dogs WHERE Litter.MotherID = Dogs.ID ORDER BY Dogs.Name");
-    $motherdogs = $db->query("SELECT ID, Name FROM Dogs WHERE Sex = 'F'");
-    $fatherdogs = $db->query("SELECT ID, Name FROM Dogs WHERE Sex = 'M'");
-    $users = $db->query("SELECT ID, Name FROM Volunteer");
+    $motherdogs = $db->query("SELECT ID, Name, Breed FROM Dogs WHERE Sex = 'F' AND LitterID IS NULL ORDER BY NAME ASC");
+    $fatherdogs = $db->query("SELECT ID, Name, Breed FROM Dogs WHERE Sex = 'M' AND LitterID IS NULL ORDER BY NAME ASC");
+    $users = $db->query("SELECT ID, Name FROM Volunteer ORDER BY NAME ASC");
   }
 }
 $db->close();
@@ -77,7 +77,7 @@ $db->close();
     <form action="litter.php">
       <select class="dropbtn admin" name='loadID'>
         <option  value="0">New Litter</option>
-        <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$litterID){echo " selected";} echo ">".$sublitter["StartWhelp"]." ".$sublitter["Name"]."</option>";}?>
+        <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$litterID){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
       <input type="submit" class="button is-link admin" value="Load">
     </form>
@@ -93,13 +93,13 @@ $db->close();
       <label class="label admin"> Mother:</label>
       <select name="motherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
-        <?php while($subuser = $motherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
+        <?php while($subuser = $motherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
 
       <label class="label admin">Father:</label>
       <select name="fatherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
-        <?php while($subuser = $fatherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
+        <?php while($subuser = $fatherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
       
       <label class="label admin">Start Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
@@ -114,7 +114,13 @@ $db->close();
       <label class="label admin">End Wean: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
       <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
       
-      <input type="submit" name="Save" value="Save">
+      <label class="label admin">Start Deworm: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startDeworm" value="<?php echo $litterrow['StartDeworm']?>"><br>
+      
+      <label class="label admin">End Deworm: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endDeworm" value="<?php echo $litterrow['StartDeworm']?>"><br>
+      
+      <input class="button is-link admin" type="submit" name="Save" value="Save">
       <input class="button is-link admin" name="Delete" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this litter?');">
     </form>
     <a href="index.php">Return to admin page</a>
