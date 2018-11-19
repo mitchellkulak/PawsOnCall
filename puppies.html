@@ -21,6 +21,22 @@
 
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
+	
+	<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
 </head>
 
 <body onload="adminShowHide(); loadLitterInfo();">
@@ -274,10 +290,94 @@
 		</article>
 		</div>
 		</div>
-		<div class="tile is-ancestor 1">
-		  <div class="tile is-parent 2">
-			<div class="tile is-child box 3 has-background-dark">
+		<div class="tile is-ancestor">
+		  <div class="tile is-parent">
+			<div class="tile is-child box has-background-grey-lighter">
 			  <p class="title">Litter Weights</p>
+				<div style="overflow-x:auto;">
+  <table class="table is-bordered is-hoverable">
+    <tr>
+      <th>Puppy</th>
+      <th>Day 1 AM</th>
+	  <th>Day 1 PM</th>
+      <th>Day 2 AM</th>
+	  <th>Day 2 PM</th>
+      <th>Day 3 AM</th>
+	  <th>Day 3 PM</th>
+      <th>Day 4 AM</th>
+	  <th>Day 4 PM</th>
+      <th>Day 5 AM</th>
+	  <th>Day 5 PM</th>
+      <th>Day 6 AM</th>
+	  <th>Day 6 PM</th>
+      <th>Day 7 AM</th>
+	  <th>Day 7 PM</th>
+      <th>Day 8 AM</th>
+	  <th>Day 8 PM</th>
+      <th>Day 9 AM</th>
+    </tr>
+    <tr>
+      <td>Smith</td>
+      <td id="w1a" contenteditable='true'></td>
+      <td id="w1b" contenteditable='true'></td>
+      <td id="w2a" contenteditable='true'></td>
+	  <td id="w2b" contenteditable='true'></td>
+      <td id="w3a" contenteditable='true'></td>
+      <td id="w3b" contenteditable='true'></td>
+	  <td id="w4a" contenteditable='true'></td>
+      <td id="w4b" contenteditable='true'></td>
+      <td id="w5a" contenteditable='true'></td>
+	  <td id="w5b" contenteditable='true'></td>
+      <td id="w6a" contenteditable='true'></td>
+      <td id="w6b" contenteditable='true'></td>
+	  <td id="w7a" contenteditable='true'></td>
+      <td id="w7b" contenteditable='true'></td>
+      <td id="w8a" contenteditable='true'></td>
+	  <td id="w8b" contenteditable='true'></td>
+      <td id="w9a" contenteditable='true'></td>
+    </tr>
+	<tr>
+      <th>Puppy</th>
+	  <th>Day 9 PM</th>
+	  <th>Day 10 AM</th>
+	  <th>Day 10 PM</th>
+      <th>Day 11 AM</th>
+	  <th>Day 11 PM</th>
+      <th>Day 12 AM</th>
+	  <th>Day 12 PM</th>
+      <th>Day 13 AM</th>
+	  <th>Day 13 PM</th>
+      <th>Day 14 AM</th>
+	  <th>Day 14 PM</th>
+      <th>3 weeks</th>
+	  <th>4 weeks</th>
+      <th>5 weeks</th>
+	  <th>6 weeks</th>
+      <th>7 weeks</th>
+	  <th>8 weeks</th>
+    </tr>
+	<tr>
+      <td>Smith</td>
+      <td id="w9b" contenteditable='true'></td>
+      <td id="w10a" contenteditable='true'></td>
+      <td id="w10b" contenteditable='true'></td>
+	  <td id="w11a" contenteditable='true'></td>
+      <td id="w11b" contenteditable='true'></td>
+      <td id="w12a" contenteditable='true'></td>
+	  <td id="w12b" contenteditable='true'></td>
+	  <td id="w13a" contenteditable='true'></td>
+      <td id="w13b" contenteditable='true'></td>
+      <td id="w14a" contenteditable='true'></td>
+	  <td id="w14b" contenteditable='true'></td>
+      <td id="w3w" contenteditable='true'></td>
+      <td id="w4w" contenteditable='true'></td>
+	  <td id="w5w" contenteditable='true'></td>
+      <td id="w6w" contenteditable='true'></td>
+      <td id="w7w" contenteditable='true'></td>
+      <td id="w8w" contenteditable='true'></td>
+    </tr>
+  </table>
+</div>
 			</div>
 		  </div>
 		</div>
