@@ -5,8 +5,6 @@ ini_set('display_errors', 1);
 	session_start();
 	$session = $_SESSION['session'];
 	$auth = json_decode(authenticate(urldecode($session)), true);
-
-
 	if ($auth['error'] == 'auth error' || !$auth['admin']) {
 	    $error = array('error' => 'auth error');
 	    echo json_encode($error);
@@ -22,7 +20,6 @@ ini_set('display_errors', 1);
 			$dogUpdatesFile = fopen($_SERVER['DOCUMENT_ROOT']."dogUpdates.csv","w") or die("Unable to open file!");
 			$litterUpdatesFile = fopen($_SERVER['DOCUMENT_ROOT']."litterUpdates.csv","w") or die("Unable to open file!");
 			$temperatureFile = fopen($_SERVER['DOCUMENT_ROOT']."temperatures.csv","w") or die("Unable to open file!");
-
 			//Download Dogs Table and write to CSV
 			$SQL = "SELECT * FROM Dogs";
 			if($dogs = $db->query($SQL)){

@@ -109,6 +109,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 											
 										</tbody>
 									</table>
+									<button class="button is-link inline">Save</button>
+									<button class="button is-link inline" onclick="addPuppy();">Add Puppy</button>
 									</p>
 								</div>
 							</article>
@@ -253,16 +255,29 @@ tr:nth-child(even){background-color: #f2f2f2}
 						</div>
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
-								<label class="label">Deworm</label>
+								<label class="label">Deworm Start</label>
 							</div>
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="deworm" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="dewormStart" placeholder="Disabled input" disabled>
 									</p>
 								</div>
 							</div>
 						</div>
+						<div class="field is-horizontal">
+							<div class="field-label is-normal">
+								<label class="label">Deworm End</label>
+							</div>
+							<div class="field-body">
+								<div class="field">
+									<p class="control is-expanded">
+										<input class="input" type="text" id="dewormEnd" placeholder="Disabled input" disabled>
+									</p>
+								</div>
+							</div>
+						</div>
+						<button class="button is-link inline">Save</button>
 					</form>
 				</article>
 
@@ -303,23 +318,23 @@ tr:nth-child(even){background-color: #f2f2f2}
     </tr>
     <tr>
       <td>Smith</td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
+      <td id="w1a" contenteditable='true'></td>
+      <td id="w1b" contenteditable='true'></td>
+      <td id="w2a" contenteditable='true'></td>
+	  <td id="w2b" contenteditable='true'></td>
+      <td id="w3a" contenteditable='true'></td>
+      <td id="w3b" contenteditable='true'></td>
+	  <td id="w4a" contenteditable='true'></td>
+      <td id="w4b" contenteditable='true'></td>
+      <td id="w5a" contenteditable='true'></td>
+	  <td id="w5b" contenteditable='true'></td>
+      <td id="w6a" contenteditable='true'></td>
+      <td id="w6b" contenteditable='true'></td>
+	  <td id="w7a" contenteditable='true'></td>
+      <td id="w7b" contenteditable='true'></td>
+      <td id="w8a" contenteditable='true'></td>
+	  <td id="w8b" contenteditable='true'></td>
+      <td id="w9a" contenteditable='true'></td>
     </tr>
 	<tr>
       <th>Puppy</th>
@@ -343,23 +358,25 @@ tr:nth-child(even){background-color: #f2f2f2}
     </tr>
 	<tr>
       <td>Smith</td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-	  <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
-      <td contenteditable='true'></td>
+
+      <td id="w9b" contenteditable='true'></td>
+      <td id="w10a" contenteditable='true'></td>
+      <td id="w10b" contenteditable='true'></td>
+	  <td id="w11a" contenteditable='true'></td>
+      <td id="w11b" contenteditable='true'></td>
+      <td id="w12a" contenteditable='true'></td>
+	  <td id="w12b" contenteditable='true'></td>
+	  <td id="w13a" contenteditable='true'></td>
+      <td id="w13b" contenteditable='true'></td>
+      <td id="w14a" contenteditable='true'></td>
+	  <td id="w14b" contenteditable='true'></td>
+      <td id="w3w" contenteditable='true'></td>
+      <td id="w4w" contenteditable='true'></td>
+	  <td id="w5w" contenteditable='true'></td>
+      <td id="w6w" contenteditable='true'></td>
+      <td id="w7w" contenteditable='true'></td>
+      <td id="w8w" contenteditable='true'></td>
+
     </tr>
   </table>
 </div>
