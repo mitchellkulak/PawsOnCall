@@ -1,5 +1,6 @@
 <?php
 //REQUIRES JSON POST of an array with subarrays of dogID, name, sex, birthdate, stillborn and GET of session
+//DELETES Dog if name is blank
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 ini_set('display_errors', 1);
