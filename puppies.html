@@ -212,7 +212,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="whelpStart" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="whelpStart"  >
 									</p>
 								</div>
 							</div>
@@ -224,7 +224,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="whelpEnd" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="whelpEnd" >
 									</p>
 								</div>
 							</div>
@@ -236,7 +236,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="weanStart" disabled>
+										<input class="input" type="text" id="weanStart" >
 									</p>
 								</div>
 							</div>
@@ -248,7 +248,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="weanEnd" disabled>
+										<input class="input" type="text" id="weanEnd" >
 									</p>
 								</div>
 							</div>
@@ -260,7 +260,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="dewormStart" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="dewormStart">
 									</p>
 								</div>
 							</div>
@@ -272,7 +272,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="dewormEnd" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="dewormEnd" >
 									</p>
 								</div>
 							</div>
@@ -295,8 +295,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<div class="tile is-child box has-background-grey-lighter">
 			  <p class="title">Litter Weights</p>
 				<div style="overflow-x:auto;">
-  <table class="table is-bordered is-hoverable" style="white-space: nowrap;">
-    <tr>
+  <table id="litterWeightTable" class="table is-bordered is-hoverable" style="white-space: nowrap;">
+    <tr id="litterWeightHeaders1">
       <th>Puppy</th>
       <th>Day 1 AM</th>
 	  <th>Day 1 PM</th>
@@ -336,7 +336,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 	  <td id="w8b" contenteditable='true'></td>
       <td id="w9a" contenteditable='true'></td>
     </tr>
-	<tr>
+	<tr id="litterWeightHeaders2">
       <th>Puppy</th>
 	  <th>Day 9 PM</th>
 	  <th>Day 10 AM</th>
