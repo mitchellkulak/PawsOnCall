@@ -149,6 +149,9 @@ function loadLitterInfo() {
     var dewormEnd = document.getElementById("dewormEnd");
     var stillbornsDiv = document.getElementById("stillborns");
     var deathsDiv = document.getElementById("deaths");
+    var volunteerIDHolder = document.getElementById("volunteerIDHolder");
+    var breedHolder = document.getElementById("breedHolder");
+    var litterIDHolder = document.getElementById("litterIDHolder");
 
     var txtFather = document.getElementById("father");
 
@@ -161,6 +164,9 @@ function loadLitterInfo() {
             document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
+            breedHolder.innerHTML = obj[0].MotherBreed;
+            volunteerIDHolder.innerHTML = obj[0].VolunteerID;
+            litterIDHolder.innerHTML = obj[0].ID;
             txtFather.value = obj[0].FatherName;
             loadLitterWeightTable(obj[0].ID);
 
@@ -200,10 +206,23 @@ function loadLitterInfo() {
                 var newRow = document.createElement("tr");
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");
+                var newBirthdateCell = document.createElement("td");
+                var newStillbornCell = document.createElement("td");
+                var newStillbornInput = document.createElement("input");
+                newStillbornInput.type = "checkbox";
                 newIDCell.innerHTML = element.Name;
                 newSexCell.innerHTML = element.Sex;
+                newBirthdateCell.innerHTML = element.Birthdate;
+                if(element.Stillborn == 1){
+                    newStillbornInput.checked = true;
+                }else{
+                    newStillbornInput.checked = false;
+                }
+                newStillbornCell.appendChild(newStillbornInput);
                 newRow.appendChild(newIDCell);
                 newRow.appendChild(newSexCell);
+                newRow.appendChild(newBirthdateCell);
+                newRow.appendChild(newStillbornCell);
                 litterInfoTableBody.appendChild(newRow);
             });
             stillbornsDiv.value = stillborn;
@@ -219,11 +238,11 @@ function addPuppy(){
         data.name = prompt("Enter Puppy's Collar Color");
         if (data.name != null) {
             var url = "AddPuppies.php?session=" + getCookie("session"); 
-            data.volunteerID;
+            data.volunteerID = document.getElementById("volunteerIDHolder").innerHTML;
             data.sex;
             data.birthdate;
-            data.breed;
-            data.litterID;
+            data.breed = document.getElementById("breedHolder").innerHTML;
+            data.litterID = document.getElementById("litterIDHolder").innerHTML;
             data.stillborn;
             console.log(JSON.stringify(data));
             fetch(url, {
@@ -280,6 +299,9 @@ function loadLitterInfoByID(id) {
     var stillbornsDiv = document.getElementById("stillborns");
     var deathsDiv = document.getElementById("deaths");
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
+    var volunteerIDHolder = document.getElementById("volunteerIDHolder");
+    var breedHolder = document.getElementById("breedHolder");
+    var litterIDHolder = document.getElementById("litterIDHolder");
 
     loadLitterWeightTable(id);
 
@@ -292,6 +314,9 @@ function loadLitterInfoByID(id) {
                 if (element.ID == id) {
                     console.log(element);
                     litterNameDiv.innerHTML = "Litter of " + element.MotherName;
+                    breedHolder.innerHTML = element.MotherBreed;
+                    volunteerIDHolder.innerHTML = element.VolunteerID;
+                    litterIDHolder.innerHTML = element.ID;
                     whelpStartDateDiv.innerHTML = "Whelp started " + element.StartWhelp;
                     txtFather.value = element.FatherName;
                     weanStart.value = element.StartWean;
@@ -322,10 +347,23 @@ function loadLitterInfoByID(id) {
                         var newRow = document.createElement("tr");
                         var newIDCell = document.createElement("td");
                         var newSexCell = document.createElement("td");
+                        var newBirthdateCell = document.createElement("td");
+                        var newStillbornCell = document.createElement("td");
+                        var newStillbornInput = document.createElement("input");
+                        newStillbornInput.type = "checkbox";
+                        newBirthdateCell.innerHTML = element.Birthdate;
+                        if(element.Stillborn == 1){
+                            newStillbornInput.checked = true;
+                        }else{
+                            newStillbornInput.checked = false;
+                        }
                         newIDCell.innerHTML = element.Name;
                         newSexCell.innerHTML = element.Sex;
+                        newStillbornCell.appendChild(newStillbornInput);
                         newRow.appendChild(newIDCell);
                         newRow.appendChild(newSexCell);
+                        newRow.appendChild(newBirthdateCell);
+                        newRow.appendChild(newStillbornCell);
                         litterInfoTableBody.appendChild(newRow);
                     });
                     stillbornsDiv.value = stillborn;

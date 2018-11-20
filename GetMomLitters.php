@@ -26,7 +26,7 @@ else {
     $littersArray = array();
     $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $dogData = $db->query(
-    "SELECT l.*, d.Name as MotherName, f.Name as FatherName
+    "SELECT l.*, d.Name as MotherName, f.Name as FatherName, d.Breed as MotherBreed
     FROM Litter as l, Dogs as d, Dogs as f 
     WHERE $dogID = l.MotherID AND $dogID = d.ID AND l.MotherID = d.ID AND f.ID = l.FatherID ORDER BY l.ID DESC"
     );
