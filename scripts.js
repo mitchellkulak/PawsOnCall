@@ -262,7 +262,7 @@ function loadLitterWeightTable(id){
                 newRow1.classList.add(element.DogID);
                 newRow2.classList.add(element.DogID);
 
-                var nameCell = document.createElement("td");
+                var nameCell1 = document.createElement("td");
                 nameCell1.classList.add("puppyName");
                 nameCell1.value = element.Name;
                 newRow1.appendChild(nameCell);
