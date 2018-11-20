@@ -275,6 +275,231 @@ function loadLitterWeightTable(id){
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
+            obj.forEach(function (element) {
+                var newRow1 = document.createElement("tr");
+                var newRow2 = document.createElement("tr");
+                newRow1.classList.add(element.DogID);
+                newRow2.classList.add(element.DogID);
+
+                var nameCell1 = document.createElement("td");
+                nameCell1.classList.add("puppyName");
+                nameCell1.value = element.Name;
+                newRow1.appendChild(nameCell1);
+
+                var nameCell2 = document.createElement("td");
+                nameCell2.classList.add("puppyName");
+                nameCell2.value = element.Name;
+                newRow2.appendChild(nameCell2);
+
+                var w1a = document.createElement("td");
+                w1a.classList.add("w1a");
+                w1a.setAttribute("contenteditable", true);
+                w1a.value = element.d1a;
+                newRow1.appendChild(w1a);
+
+                var w1b = document.createElement("td");
+                w1b.classList.add("w1b");
+                w1b.setAttribute("contenteditable", true);
+                w1b.value = element.d1p;
+                newRow1.appendChild(w1b);
+
+                var w2a = document.createElement("td");
+                w2a.classList.add("w2a");
+                w2a.setAttribute("contenteditable", true);
+                w2a.value = element.d2a;
+                newRow1.appendChild(w2a);
+
+                var w2b = document.createElement("td");
+                w2b.classList.add("w2b");
+                w2b.setAttribute("contenteditable", true);
+                w2b.value = element.d2p;
+                newRow1.appendChild(w2b);
+
+
+                var w3a = document.createElement("td");
+                w3a.classList.add("w3a");
+                w3a.setAttribute("contenteditable", true);
+                w3a.value = element.d3a;
+                newRow1.appendChild(w3a);
+
+                var w3b = document.createElement("td");
+                w3b.classList.add("w3b");
+                w3b.setAttribute("contenteditable", true);
+                w3b.value = element.d3p;
+                newRow1.appendChild(w3b);
+
+                var w4a = document.createElement("td");
+                w4a.classList.add("w4a");
+                w4a.setAttribute("contenteditable", true);
+                w4a.value = element.d4a;
+                newRow1.appendChild(w4a);
+
+                var w4b = document.createElement("td");
+                w4b.classList.add("w4b");
+                w4b.setAttribute("contenteditable", true);
+                w4b.value = element.d4p;
+                newRow1.appendChild(w4b);
+
+                var w5a = document.createElement("td");
+                w5a.classList.add("w5a");
+                w5a.setAttribute("contenteditable", true);
+                w5a.value = element.d5a;
+                newRow1.appendChild(w5a);
+
+                var w5b = document.createElement("td");
+                w5b.classList.add("w5b");
+                w5b.setAttribute("contenteditable", true);
+                w5b.value = element.d5p;
+                newRow1.appendChild(w5b);
+
+                var w6a = document.createElement("td");
+                w6a.classList.add("w6a");
+                w6a.setAttribute("contenteditable", true);
+                w6a.value = element.d6a;
+                newRow1.appendChild(w6a);
+
+                var w6b = document.createElement("td");
+                w6b.classList.add("w6b");
+                w6b.setAttribute("contenteditable", true);
+                w6b.value = element.d6p;
+                newRow1.appendChild(w6b);
+
+                var w7a = document.createElement("td");
+                w7a.classList.add("w7a");
+                w7a.setAttribute("contenteditable", true);
+                w7a.value = element.d7a;
+                newRow1.appendChild(w7a);
+
+                var w7b = document.createElement("td");
+                w7b.classList.add("w7b");
+                w7b.setAttribute("contenteditable", true);
+                w7b.value = element.d7b;
+                newRow1.appendChild(w7b);
+
+                var w8a = document.createElement("td");
+                w8a.classList.add("w8a");
+                w8a.setAttribute("contenteditable", true);
+                w8a.value = element.d8a;
+                newRow1.appendChild(w8a);
+
+                var w8b = document.createElement("td");
+                w8b.classList.add("w8b");
+                w8b.setAttribute("contenteditable", true);
+                w8b.value = element.d8p;
+                newRow1.appendChild(w8b);
+
+                var w9a = document.createElement("td");
+                w9a.classList.add("w9a");
+                w9a.setAttribute("contenteditable", true);
+                w9a.value = element.d9a;
+                newRow1.appendChild(w9a);
+
+                var w9b = document.createElement("td");
+                w9b.classList.add("w9b");
+                w9b.setAttribute("contenteditable", true);
+                w9b.value = element.d9p;
+                newRow2.appendChild(w9b);
+
+                var w10a = document.createElement("td");
+                w10a.classList.add("w10a");
+                w10a.setAttribute("contenteditable", true);
+                w10a.value = element.d10a;
+                newRow2.appendChild(w10a);
+
+                var w10b = document.createElement("td");
+                w10b.classList.add("w10b");
+                w10b.setAttribute("contenteditable", true);
+                w10b.value = element.d10p;
+                newRow2.appendChild(w10b);
+
+                var w11a = document.createElement("td");
+                w11a.classList.add("w11a");
+                w11a.setAttribute("contenteditable", true);
+                w11a.value = element.d11a;
+                newRow2.appendChild(w11a);
+
+                var w11b = document.createElement("td");
+                w11b.classList.add("w11b");
+                w11b.setAttribute("contenteditable", true);
+                w11b.value = element.d11p;
+                newRow2.appendChild(w11b);
+
+                var w12a = document.createElement("td");
+                w12a.classList.add("w12a");
+                w12a.setAttribute("contenteditable", true);
+                w12a.value = element.d12a;
+                newRow2.appendChild(w12a);
+                
+                var w12b = document.createElement("td");
+                w12b.classList.add("w12b");
+                w12b.setAttribute("contenteditable", true);
+                w12b.value = element.d12p;
+                newRow2.appendChild(w12b);
+
+                var w13a = document.createElement("td");
+                w13a.classList.add("w13a");
+                w13a.setAttribute("contenteditable", true);
+                w13a.value = element.d13a;
+                newRow2.appendChild(w13a);
+
+                var w13b = document.createElement("td");
+                w13b.classList.add("w13b");
+                w13b.setAttribute("contenteditable", true);
+                w13b.value = element.d13p;
+                newRow2.appendChild(w13b);
+
+                var w14a = document.createElement("td");
+                w14a.classList.add("w14a");
+                w14a.setAttribute("contenteditable", true);
+                w14a.value = element.d14a;
+                newRow2.appendChild(w14a);
+
+                var w14b = document.createElement("td");
+                w14b.classList.add("w14b");
+                w14b.setAttribute("contenteditable", true);
+                w14b.value = element.d14p;
+                newRow2.appendChild(w14b);
+                
+                var w3w = document.createElement("td");
+                w3w.classList.add("w3w");
+                w3w.setAttribute("contenteditable", true);
+                w3w.value = element.w3;
+                newRow2.appendChild(w3w);
+
+                var w4w = document.createElement("td");
+                w4w.classList.add("w4w");
+                w4w.setAttribute("contenteditable", true);
+                w4w.value = element.w4;
+                newRow2.appendChild(w4w);               
+
+                var w5w = document.createElement("td");
+                w5w.classList.add("w5w");
+                w5w.setAttribute("contenteditable", true);
+                w5w.value = element.w5;
+                newRow2.appendChild(w5w);
+
+                var w6w = document.createElement("td");
+                w6w.classList.add("w6w");
+                w6w.setAttribute("contenteditable", true);
+                w6w.value = element.w6;
+                newRow2.appendChild(w6w);
+
+                var w7w = document.createElement("td");
+                w7w.classList.add("w7w");
+                w7w.setAttribute("contenteditable", true);
+                w7w.value = element.w7;
+                newRow2.appendChild(w7w);
+
+                var w8w = document.createElement("td");
+                w8w.classList.add("w8w");
+                w8w.setAttribute("contenteditable", true);
+                w8w.value = element.w8;
+                newRow2.appendChild(w8w);
+
+                litterWeightHeaders1.insertAdjacentHTML('afterend', newRow1);
+                litterWeightHeaders2.insertAdjacentHTML('afterend', newRow2);
+                
+            })
         });
 
 }
