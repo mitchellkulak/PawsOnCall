@@ -477,8 +477,8 @@ function loadLitterWeightTable(id){
                 w8w.value = element.w8;
                 newRow2.appendChild(w8w);
 
-                litterWeightHeaders1.insertAdjacentHTML('afterend', newRow1);
-                litterWeightHeaders2.insertAdjacentHTML('afterend', newRow2);
+                litterWeightHeaders1.insertAdjacentElement('afterend', newRow1);
+                litterWeightHeaders2.insertAdjacentElement('afterend', newRow2);
                 
             })
         });
