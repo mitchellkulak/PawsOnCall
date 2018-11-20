@@ -257,7 +257,7 @@ function loadLitterWeightTable(id){
             var obj = JSON.parse(JSON.stringify(data));
             console.log(obj);
             obj.forEach(function (element) {
-                console.log(element);
+                console.log(element.d1a);
                 var newRow1 = document.createElement("tr");
                 var newRow2 = document.createElement("tr");
                 newRow1.classList.add(element.DogID);
