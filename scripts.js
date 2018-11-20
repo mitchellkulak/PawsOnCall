@@ -355,7 +355,7 @@ function loadLitterWeightTable(id){
                 var w7b = document.createElement("td");
                 w7b.classList.add("w7b");
                 w7b.setAttribute("contenteditable", true);
-                w7b.innerHTML = element.d7b;
+                w7b.innerHTML = element.d7p;
                 newRow1.appendChild(w7b);
 
                 var w8a = document.createElement("td");
