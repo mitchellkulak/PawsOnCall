@@ -79,6 +79,9 @@ tr:nth-child(even){background-color: #f2f2f2}
 						<article class="tile is-child notification is-primary is-12 dogname">
 							<p class="title" id="litterNameDiv">dog</p>
 							<p class="subtitle" id="whelpStartDateDiv"></p>
+							<p id="volunteerIDHolder" style="visibility: hidden; display: none;"></p>
+							<p id="litterIDHolder" style="visibility: hidden; display: none;"></p>
+							<p id="breedHolder" style="visibility: hidden; display: none;"></p>
 							<div class="dropdown">
 								<button onclick="myFunction()" class="dropbtn" id="litterNameDiv">Select a different litter</button>
 								<div id="myDropdown" class="dropdown-content">
@@ -103,14 +106,16 @@ tr:nth-child(even){background-color: #f2f2f2}
 											<tr>
 												<th>ID Color</th>
 												<th>Sex</th>
+												<th>Birthdate</th>
+												<th>Stillborn</th>
 											</tr>
 										</thead>
 										<tbody id="litterInfoTableBody">
 											
 										</tbody>
 									</table>
-									<button class="button is-link inline">Save</button>
-									<button class="button is-link inline" onclick="addPuppy();">Add Puppy</button>
+									<button class="button is-link is-inline-block">Save</button>
+									<button class="button is-link is-inline-block" onclick="addPuppy();">Add Puppy</button>
 									</p>
 								</div>
 							</article>
@@ -277,7 +282,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 								</div>
 							</div>
 						</div>
-						<button class="button is-link inline">Save</button>
+						<button class="button is-link is-inline-block">Save</button>
 					</form>
 				</article>
 
@@ -295,7 +300,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<div class="tile is-child box has-background-grey-lighter">
 			  <p class="title">Litter Weights</p>
 				<div style="overflow-x:auto;">
-  <table id="litterWeightTable" class="table is-bordered is-hoverable" style="white-space: nowrap;">
+  <table id="litterWeightTable" class="table is-bordered is-hoverable">
     <tr id="litterWeightHeaders1">
       <th>Puppy</th>
       <th>Day 1 AM</th>
