@@ -250,6 +250,12 @@ function loadLitterWeightTable(id){
     var litterWeightTable = document.getElementById("litterWeightTable");
     var litterWeightHeaders1 = document.getElementById("litterWeightHeaders1");
     var litterWeightHeaders2 = document.getElementById("litterWeightHeaders2");
+
+    for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
+        if(litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2"){
+            litterWeightTable.rows[i].remove();
+        }
+    }
     
     fetch('GetLitterWeights.php?litterID=' + id + "&session=" + getCookie("session")) //Add the file name
         .then(response => response.json())
