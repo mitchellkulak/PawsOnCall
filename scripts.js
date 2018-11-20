@@ -273,6 +273,7 @@ function loadLitterWeightTable(id){
     for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
         if(litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2"){
             litterWeightTable.rows[i].remove();
+            i--;
         }
     }
     
