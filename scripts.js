@@ -176,12 +176,12 @@ function loadLitterInfo() {
                 newDdlLitter.onclick = function () { loadLitterInfoByID(element.ID); };
                 newDdlLitter.innerHTML = "Whelp started " + element.StartWhelp;
                 myDropdown.appendChild(newDdlLitter);
-                weanStart.value = element.StartWean;
-                weanEnd.value = element.EndWean;
-                whelpStart.value = element.StartWhelp;
-                whelpEnd.value = element.EndWhelp;
-                dewormStart.value = element.StartDeworm;
-                dewormEnd.value = element.StartDeworm;
+                weanStart.value = validateDate(element.StartWean);
+                weanEnd.value = validateDate(element.EndWean);
+                whelpStart.value = validateDate(element.StartWhelp);
+                whelpEnd.value = validateDate(element.EndWhelp);
+                dewormStart.value = validateDate(element.StartDeworm);
+                dewormEnd.value = validateDate(element.StartDeworm);
             });
 
             // For each note in first litter
@@ -552,12 +552,12 @@ function loadLitterInfoByID(id) {
                     litterIDHolder.innerHTML = element.ID;
                     whelpStartDateDiv.innerHTML = "Whelp started " + element.StartWhelp;
                     txtFather.value = element.FatherName;
-                    weanStart.value = element.StartWean;
-                    weanEnd.value = element.EndWean;
-                    whelpStart.value = element.StartWhelp;
-                    whelpEnd.value = element.EndWhelp;
-                    dewormStart.value = element.StartDeworm;
-                    dewormEnd.value = element.EndDeworm;
+                    weanStart.value = validateDate(element.StartWean);
+                    weanEnd.value = validateDate(element.EndWean);
+                    whelpStart.value = validateDate(element.StartWhelp);
+                    whelpEnd.value = validateDate(element.EndWhelp);
+                    dewormStart.value = validateDate(element.StartDeworm);
+                    dewormEnd.value = validateDate(element.EndDeworm);
                     puppyNoteTable.innerHTML = "";
                     // Note population for the selected litter
                     element[1].forEach(function (element) {
@@ -986,6 +986,20 @@ function timeConverter(UNIX_timestamp) {
     }
     var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min;
     return time;
+}
+function validateDate(date){
+    if(date == '2038-01-01 00:00:00'){
+        return "";
+    }else{
+        return date;
+    }
+}
+function rewriteDate(date){
+    if(date == ''){
+        return "2038-01-01 00:00:00";
+    }else{
+        return date;
+    }
 }
 
 /**
