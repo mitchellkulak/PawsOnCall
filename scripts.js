@@ -239,8 +239,8 @@ function addPuppy(){
         if (data.name != null) {
             var url = "AddPuppies.php?session=" + getCookie("session"); 
             data.volunteerID = document.getElementById("volunteerIDHolder").innerHTML;
-            data.sex;
-            data.birthdate;
+            data.sex = prompt("Enter Puppy's Sex:");
+            data.birthdate = prompt("Enter Puppy's Date Of Birth");
             data.breed = document.getElementById("breedHolder").innerHTML;
             data.litterID = document.getElementById("litterIDHolder").innerHTML;
             data.stillborn;
