@@ -334,11 +334,11 @@ function addPuppy(){
         if (data.name != null) {
             var url = "AddPuppies.php?session=" + getCookie("session"); 
             data.volunteerID = document.getElementById("volunteerIDHolder").innerHTML;
-            data.sex = prompt("Enter Puppy's Sex:");
-            data.birthdate = prompt("Enter Puppy's Date Of Birth");
+            data.sex = prompt("Enter Puppy's Sex ('M' or 'F'):");
+            data.birthdate = prompt("Enter Puppy's Date Of Birth (MM-DD-YYYY):");
             data.breed = document.getElementById("breedHolder").innerHTML;
             data.litterID = document.getElementById("litterIDHolder").innerHTML;
-            data.stillborn = prompt("Stillborn? (1 or 0):");
+            data.stillborn = prompt("Is this puppy stillborn? (Y or N):");
             console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
