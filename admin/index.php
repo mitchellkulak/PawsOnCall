@@ -24,26 +24,84 @@
 	<!-- favicon stuff-->
 	
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any nav burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>
 </head>
 
 <!-- Navbar, logo, logout button -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-	<div id="navbarDesktop " class="navbar-brand">
-		<a href="searchresult.html">
-			<img src="../images/pawslogo.png" alt="PAWS Logo" >
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a href="searchresult.html">
+			<img src="images/pawslogo.png" alt="PAWS Logo" >
 		</a>
-		<a class="navbar-item" href="../mother.html">Mom</a>
-		<a class="navbar-item" href="../puppies.html">Puppies</a>
-		<a class="navbar-item" href="../misc.html">Misc</a>
 
-		<a class="navbar-item" id="adminLink" onclick="../admin" style="display:flex">Admin</a>
+    <div class="navbar-burger burger" data-target="navMenubd-example">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 
-	</div>
-	<div class="buttons">
-		<a class="button is-primary logout" onclick="logout()">
-		Log out
-		</a>
-	</div>
+  <div id="navMenubd-example" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link  is-active">
+          Menu
+        </a>
+        <div class="navbar-dropdown ">
+          <a class="navbar-item " href="mother.html">
+            Mom
+          </a>
+          <a class="navbar-item " href="puppies.html">
+            Puppies
+          </a>
+          <a class="navbar-item " href="misc.html">
+            Misc
+          </a>
+          <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
+            Admin
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-primary" onclick="logout()">
+              <span>Logout</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>
 <!-- Navbar, logo, logout button -->
 
