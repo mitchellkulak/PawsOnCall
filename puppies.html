@@ -115,7 +115,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 											
 										</tbody>
 									</table>
-									<button class="button is-link is-inline-block">Save</button>
+									<button class="button is-link is-inline-block" onclick="savePuppy();">Save</button>
 									<button class="button is-link is-inline-block" onclick="addPuppy();">Add Puppy</button>
 									</p>
 								</div>
@@ -211,7 +211,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 			<div class="tile is-parent">
 				<article class="tile is-child notification is-warning">
 					<p class="title">Important Dates</p>
-					<form class="form-horizontal">
+					<!--<form class="form-horizontal">-->
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
 								<label class="label">Whelp Start</label>
@@ -284,8 +284,9 @@ tr:nth-child(even){background-color: #f2f2f2}
 								</div>
 							</div>
 						</div>
-						<button class="button is-link is-inline-block">Save</button>
+						
 					</form>
+					<button class="button is-link is-inline-block" onclick="addImportantDates();">Save</button>
 				</article>
 
 				<!--important dates tile-->
