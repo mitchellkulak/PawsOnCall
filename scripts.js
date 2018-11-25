@@ -204,6 +204,7 @@ function loadLitterInfo() {
                     deadpuppies++;
                 }
                 var newRow = document.createElement("tr");
+                newRow.id = element.ID;
                 var newIDCell = document.createElement("td");
                 var newSexCell = document.createElement("td");
                 var newBirthdateCell = document.createElement("td");
@@ -224,6 +225,7 @@ function loadLitterInfo() {
                 newRow.appendChild(newBirthdateCell);
                 newRow.appendChild(newStillbornCell);
                 litterInfoTableBody.appendChild(newRow);
+
             });
             stillbornsDiv.value = stillborn;
             deathsDiv.value = deadpuppies;
@@ -233,17 +235,110 @@ function loadLitterInfo() {
 
 }
 
+function addImportantDates() {
+    var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
+    var whelpStart = rewriteDate(document.getElementById("whelpStart").value);
+    var whelpEnd = rewriteDate(document.getElementById("whelpEnd").value);
+    var weanStart = rewriteDate(document.getElementById("weanStart").value);
+    var weanEnd = rewriteDate(document.getElementById("weanEnd").value);
+    var dewormStart = rewriteDate(document.getElementById("dewormStart").value);
+    var dewormEnd = rewriteDate(document.getElementById("dewormEnd").value);
+
+    var dateData = {};
+    dateData['litterID'] = litterID;
+    dateData['startWhelp'] = whelpStart;
+    dateData['endWhelp'] = whelpEnd;
+    dateData['startWean'] = weanStart;
+    dateData['endWean'] = weanEnd;
+    dateData['startDeworm'] = dewormStart;
+    dateData['endDeworm'] = dewormEnd;
+
+    var url = "AddImportantDates.php?session=" + getCookie("session");
+    
+    fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: { 
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(dateData), // body data type must match "Content-Type" header
+    })
+        .then(response => response.json()) // parses response to JSON
+        .then((responseContent) => {
+            console.log(responseContent);
+        });
+        //console.log(responseContent.JSON);
+        //console.log(JSON.stringify(theMasterPupData));
+        console.log(JSON.stringify(dateData));
+}
+
+
+function savePuppy() {
+    var thisTbody = document.getElementById("litterInfoTableBody");
+    var dogID;
+    var collarColor;
+    var sex;
+    var DOB;
+    var stillBorn;
+    var theMasterPupData = [];
+    var url = "UpdatePuppies.php?session=" + getCookie("session");
+    for(var i = 0; i < thisTbody.rows.length; i++) {
+        var pupData = {};
+        collarColor = thisTbody.rows[i].cells[0].innerHTML;
+        sex = thisTbody.rows[i].cells[1].innerHTML;
+        DOB = thisTbody.rows[i].cells[2].innerHTML;
+        dogID = thisTbody.rows[i].id;
+        if (thisTbody.rows[i].cells[3].getElementsByTagName("input")[0].checked) {
+            stillBorn = 1;
+        }
+        else {
+            stillBorn = 0;
+        }
+        pupData['dogID'] = dogID;
+        pupData['name'] = collarColor;
+        pupData['sex'] = sex;
+        pupData['birthdate'] = DOB;
+        pupData['stillborn'] = stillBorn;
+
+        theMasterPupData.push(pupData);
+    }
+    fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: { 
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(theMasterPupData), // body data type must match "Content-Type" header
+    })
+        //.then(response => response.json()) // parses response to JSON
+        .then((responseContent) => {
+            //console.log(responseContent);
+        });
+        //console.log(responseContent.JSON);
+        //console.log(JSON.stringify(theMasterPupData));
+}
+
 function addPuppy(){
         var data = {};
         data.name = prompt("Enter Puppy's Collar Color");
         if (data.name != null) {
             var url = "AddPuppies.php?session=" + getCookie("session"); 
             data.volunteerID = document.getElementById("volunteerIDHolder").innerHTML;
-            data.sex;
-            data.birthdate;
+            data.sex = prompt("Enter Puppy's Sex:");
+            data.birthdate = prompt("Enter Puppy's Date Of Birth");
             data.breed = document.getElementById("breedHolder").innerHTML;
             data.litterID = document.getElementById("litterIDHolder").innerHTML;
-            data.stillborn;
+            data.stillborn = prompt("Stillborn? (1 or 0):");
             console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -578,6 +673,7 @@ function loadLitterInfoByID(id) {
                             deadpuppies++;
                         }
                         var newRow = document.createElement("tr");
+                        newRow.id = element.ID;
                         var newIDCell = document.createElement("td");
                         var newSexCell = document.createElement("td");
                         var newBirthdateCell = document.createElement("td");

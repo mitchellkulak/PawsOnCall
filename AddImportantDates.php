@@ -30,7 +30,7 @@ else {
 		$endDeworm = mysqli_real_escape_string($db,$ar["endDeworm"]);
 		$SQL = "UPDATE Litter SET StartWhelp = '$startWhelp', EndWhelp = '$endWhelp',
 		StartWean = '$startWean', EndWean = '$endWean',
-		StartDeworm = '$startDeworm', EndDeworm = '$endDeworm' WHERE ID = $litterID"
+		StartDeworm = '$startDeworm', EndDeworm = '$endDeworm' WHERE ID = $litterID";
 		if ($db->query($SQL)) {
 			echo json_encode(array("result" => "Record updated successfully"));
 		} else {

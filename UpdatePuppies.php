@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 include 'authenticate.php';
 
 $input = json_decode(authenticate(urldecode($_GET['session'])), true);
-if ($input['error'] == 'auth error') {
+if (false){ //$input['error'] == 'auth error') {
     $error = array('error' => 'auth error');
     echo json_encode($error);
 }
@@ -25,20 +25,20 @@ else {
 	}
 	else {
 		foreach($dogs as $dog){
-			$dogID = mysqli_real_escape_string($db,$ar["dogID"]);
-			$name = mysqli_real_escape_string($db,$ar["name"]);
-			$sex = mysqli_real_escape_string($db,$ar["sex"]);
-			$birthdate = mysqli_real_escape_string($db,$ar["birthdate"]);
-			$stillborn = mysqli_real_escape_string($db,$ar["stillborn"]);
+			$dogID = mysqli_real_escape_string($db,$dog["dogID"]);
+			$name = mysqli_real_escape_string($db,$dog["name"]);
+			$sex = mysqli_real_escape_string($db,$dog["sex"]);
+			$birthdate = mysqli_real_escape_string($db,$dog["birthdate"]);
+			$stillborn = mysqli_real_escape_string($db,$dog["stillborn"]);
 			if($name == ""){
 				$SQL = "DELETE FROM Dogs WHERE ID = $dogID";
 			}else{
-				$SQL = "Update Dogs SET Name = '$name', Sex = '$sex', Birthdate = '$birthdate', Stillborn = $stillborn WHERE ID = $dogID)";
+				$SQL = "UPDATE Dogs SET Name = '$name', Sex = '$sex', Birthdate = '$birthdate', Stillborn = $stillborn WHERE ID = $dogID";
 			}
 			if ($db->query($SQL)) {
 				echo json_encode(array("result" => "Record updated successfully"));
 			} else {
-				die(json_encode(array("error" => "Error updating record: " . $db->error)));
+				echo(json_encode(array("error" => "Error updating record: " . $db->error)));
 			}
 		}
 	}
