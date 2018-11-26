@@ -42,9 +42,9 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       $SQL = "INSERT INTO Dogs Values(null,'$name','$volunteerID','$sex','$birthdate','$adoptiondate','$deathdate','$breed',$litterID,$stillborn)";
     }
     if($db->query($SQL)){
-      echo "Record Updated/Added Successfully";
+      $message = "Record Updated/Added Successfully";
     }else{
-      echo mysqli_error($db);
+      $message = mysqli_error($db);
     }
 
   }elseif(isset($_POST["Delete"])){
@@ -54,12 +54,14 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       $SQL = "DELETE FROM Dogs WHERE ID = $dogID";
     }
     if($db->query($SQL)){
-      echo "Record Deleted";
+      $message = "Record Deleted";
     }else{
-      echo mysqli_error($db);
+      $message = mysqli_error($db);
     }    
   }
 }
 $db->close();
 ?>
+
+<?php echo $message?>
 <a href="index.php">Return to admin page</a>
