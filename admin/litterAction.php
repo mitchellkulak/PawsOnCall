@@ -43,9 +43,9 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }
     $error = mysqli_error($db);
     if($db->query($SQL)){
-      echo "Record Added/Updated";
+      $message = "Record Added/Updated";
     }else{
-      echo mysqli_error($db);
+      $message = mysqli_error($db);
     } 
 
   }elseif(isset($_POST["Delete"])){
@@ -55,12 +55,14 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       $SQL = "DELETE FROM Litter WHERE ID = $litterID";
     }
     if($db->query($SQL)){
-      echo "Record Deleted";
+      $message = "Record Deleted";
     }else{
-      echo mysqli_error($db);
+      $message = mysqli_error($db);
     }    
   }
 }
 $db->close();
 ?>
+
+<?php echo $message;?>
 <a href="index.php">Return to admin page</a>
