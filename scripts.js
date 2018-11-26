@@ -370,7 +370,7 @@ function saveLitterWeightTable() {
     for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
         if (litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2") {
            
-            puppyIDs.indexOf(litterWeightTable.rows[i].className) === -1 ? puppyIDs.push(newItem): console.log("This item already exists");
+            puppyIDs.indexOf(litterWeightTable.rows[i].className) === -1 ? puppyIDs.push(litterWeightTable.rows[i].className): console.log("This item already exists");
            
         }
         }
