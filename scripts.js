@@ -374,9 +374,22 @@ function saveLitterWeightTable() {
                 //iterate through columns
                 //columns would be accessed using the "col" variable assigned in the for loop
                 var innerData = {}; 
-                console.log("start it up!!!");
-                var x = col.className;
-                console.log(x);
+                var weightTime = col.className;
+
+                switch(weightTime) {
+                    case "w1a":
+                        innerData.d1a = col.innerHTMl;
+                        break;
+                    case "w1b":
+                        innerData.d1p = col.innerHTMl;
+                        break;
+                    default:
+                       console.log("not found");
+                }
+
+                console.log("DONE");
+                console.log(innerData);
+               
 
              }
         }
