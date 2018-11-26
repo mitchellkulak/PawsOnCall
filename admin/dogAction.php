@@ -60,6 +60,8 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }    
   }
 }
+
+
 $db->close();
 ?>
 
@@ -174,9 +176,11 @@ document.addEventListener('DOMContentLoaded', function () {
 </nav>
 <!-- Navbar, logo, logout button -->
 <article class="tile notification is-primary is-vertical admin">
+  <?php echo $message;?>
   <a class="button is-link admin" href="index.php">Return to admin page</a><br>
-</article>
 
+</article>
+<?php echo $message;?>
 
 </body>
 </html>
