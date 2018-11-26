@@ -64,5 +64,5 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
 $db->close();
 ?>
 
-<?php echo $message?>
+<?php echo $message;?>
 <a href="index.php">Return to admin page</a>
