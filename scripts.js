@@ -363,6 +363,22 @@ function addPuppy() {
 }
 
 function saveLitterWeightTable() {
+    var data = {};
+    var litterWeightTable = document.getElementById("litterWeightTable");
+    var litterWeightHeaders1 = document.getElementById("litterWeightHeaders1");
+    var litterWeightHeaders2 = document.getElementById("litterWeightHeaders2");
+
+    for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
+        if (litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2") {
+            litterWeightTable.rows[i].forEach(function (element) {
+                var innerData = {}; 
+                var x = element.className;
+                console.log(x);
+
+            });
+        }
+    }
+
 
 }
 
