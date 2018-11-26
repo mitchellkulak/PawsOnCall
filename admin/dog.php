@@ -11,22 +11,22 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     echo "<script>window.location.replace('../login.html');</script>";
 }else{
   include '../dbconnect.php';
-  if ($db->connect_error){
+  if (mysqli_connect_error($db)){
       die("Can't connect");
   }
   else {
     $dogrow = array('Name' => "", 'Volunteer' => "", 'Sex' => "", 'Birthdate' => "", 'Deathdate' => "", 'Adoptiondate' => "", 'Breed' => "",'Litter' => "");
     if($_GET['loadID'] != ""){
       $dogID = mysqli_real_escape_string($db,$_GET['loadID']);
-      $dog = $db->query("SELECT * FROM Dogs WHERE id = $dogID");
-      $dogrow = $dog->fetch_assoc();
+      $dog = mysqli_query($db,"SELECT * FROM Dogs WHERE id = $dogID");
+      $dogrow = mysqli_fetch_assoc($dog);
     }
-    $dogs = $db->query("SELECT ID, Name, Breed FROM Dogs WHERE LitterID IS NULL ORDER BY NAME ASC");
-    $users = $db->query("SELECT ID, Name FROM Volunteer ORDER BY NAME ASC");
-    $litters = $db->query("SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Dogs,Litter WHERE Litter.MotherID = Dogs.ID ORDER BY Dogs.NAME ASC");
+    $dogs = mysqli_query($db,"SELECT ID, Name, Breed FROM Dogs WHERE LitterID IS NULL ORDER BY NAME ASC");
+    $users = mysqli_query($db,"SELECT ID, Name FROM Volunteer ORDER BY NAME ASC");
+    $litters = mysqli_query($db,"SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Dogs,Litter WHERE Litter.MotherID = Dogs.ID ORDER BY Dogs.NAME ASC");
   }
 }
-$db->close();
+mysqli_close($db);
 ?>
 
 <html>
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <form action="dog.php">
       <select name="loadID" class="dropbtn" >
         <option value="0">New Dog</option>
-        <?php while($subdog = $dogs->fetch_assoc()){echo "<option value=".$subdog["ID"];if($subdog["ID"]==$dogID){echo " selected";} echo ">".$subdog["Name"]." ".$subdog["Breed"]."</option>";}?>
+        <?php while($subdog = mysqli_fetch_assoc($dogs)){echo "<option value=".$subdog["ID"];if($subdog["ID"]==$dogID){echo " selected";} echo ">".$subdog["Name"]." ".$subdog["Breed"]."</option>";}?>
       </select>
       <input type="submit" class="button is-link admin " value="Load">
     </form>
@@ -147,13 +147,13 @@ document.addEventListener('DOMContentLoaded', function () {
       
       <!--enter dog name-->
       <label class="label admin">Name: </label>
-      <input type="text" class="input admin" name="name" value="<?php echo $dogrow['Name']?>"><br>
+      <input type="text" required class="input admin" name="name" value="<?php echo $dogrow['Name']?>"><br>
 
       <!--volunteer dropdown-->
       <label class="label admin">Volunteer:</label>
       <select class="dropbtn" name="volunteerID">
         <option value="0">select</option>
-        <?php while($subuser = $users->fetch_assoc()){
+        <?php while($subuser = mysqli_fetch_assoc($users)){
           echo "<option value=".$subuser["ID"];
           if($subuser["ID"]==$dogrow["VolunteerID"]){
             echo " selected";}
@@ -180,13 +180,13 @@ document.addEventListener('DOMContentLoaded', function () {
       
       <!--breed-->
       <label class="label admin">Breed:</label>
-      <input type="text" class="input admin" name="breed" value="<?php echo $dogrow['Breed']?>"><br>
+      <input type="text" required class="input admin" name="breed" value="<?php echo $dogrow['Breed']?>"><br>
       
       <!--litter-->
       <label class="label admin">Litter:</label>
       <select class="dropbtn" name="litterID">
         <option value=null>None</option>
-        <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
+        <?php while($sublitter = mysqli_fetch_assoc($litters)){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
       <label class="label stillborn">Stillborn:</label>
       <input type="radio" name="stillborn" value="1" <?php if($dogrow["Stillborn"] == 1){echo "checked";}?>>Yes<br>

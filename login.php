@@ -9,7 +9,7 @@ $username = "pawswhelp";
 $password = "Ireallylikepuppies1!";
 $db_name = "pawswhelpdb";
 $db = mysqli_connect("$host","$username","$password","$db_name");
-if ($db->connect_error)
+if (mysqli_connect_error($db))
 {
     die("Can't connect");
 }
@@ -17,20 +17,20 @@ else {
     $ar = json_decode(file_get_contents('php://input'), true);
     $user_name = mysqli_real_escape_string($db,$ar['user_name']);
     $hashed_password = mysqli_real_escape_string($db,$ar['hashed_password']);
-    $users = $db->query("SELECT email, id, password, admin FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
-	if($users->num_rows == 1){ //continues if and only if 1 matching user is returned
-		$userrow = $users->fetch_assoc();//pulls a row from the SQL return value
+    $users = mysqli_query($db,"SELECT email, id, password, admin FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
+	if(mysqli_num_rows($users) == 1){ //continues if and only if 1 matching user is returned
+		$userrow = mysqli_fetch_assoc($users);//pulls a row from the SQL return value
 		$userID = $userrow["id"];//select the ID element from the SQL row
 		$admin = $userrow["admin"];
-		$session = $db->query("SELECT userID, SessionKey, Time FROM SessionKeys WHERE userID = '$userID'"); //finds the users session key
-		$sessionrow = $session->fetch_assoc();
+		$session = mysqli_query($db,"SELECT userID, SessionKey, Time FROM SessionKeys WHERE userID = '$userID'"); //finds the users session key
+		$sessionrow = mysqli_fetch_assoc($session);
 		$sessionKey = $sessionrow["SessionKey"];
 		if(strtotime($sessionrow["Time"]) < time() - 3600){ //checks session key age, renews if older than 1hr
 			do{
 				$sessionKey = generateRandomString();
-				$keyMatch = $db->query("SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
-			}while($keyMatch->num_rows > 0); //creates new session key repeatedly, until a unique key is created
-			$db->query("UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = '$userID'"); //sets session key in database, time is updated automatically
+				$keyMatch = mysqli_query($db,"SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
+			}while(mysqli_num_rows($keyMatch) > 0); //creates new session key repeatedly, until a unique key is created
+			mysqli_query($db,"UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = '$userID'"); //sets session key in database, time is updated automatically
 		}
 		$arr = array('userID' => $userID,'sessionKey' => $sessionKey,'admin' => $admin, 'error' => 'none'); 
 		echo json_encode($arr); //RETURN USER AND SESSION ID **NEEDS EDITING**
@@ -39,7 +39,7 @@ else {
     	echo json_encode($error); //RETURN ERROR VALUE **NEEDS EDITING**
     }
 }
-$db->close();
+mysqli_close($db);
 function generateRandomString($length = 20) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);

@@ -17,7 +17,7 @@ else {
 
 $theMasterArray = array();
 
-if ($db->connect_error)
+if (mysqli_connect_error($db))
 {
     die("Can't connect");
 }
@@ -26,29 +26,29 @@ else {
     $dogUpdates = array();
     $dog_id = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
     $userID = $input['userID'];
-    $dogRequest = $db->query(
+    $dogRequest = mysqli_query($db,
     "SELECT *
     FROM Dogs 
     WHERE id = $dog_id"
     );
     $i = 0;
-    while ($result = $dogRequest->fetch_assoc()){
+    while ($result = mysqli_fetch_assoc($dogRequest)){
         $dogInfo[$i] = $result;
         $i++;
     }
-    $updateRequest = $db->query(
+    $updateRequest = mysqli_query($db,
     "SELECT *
     FROM DogUpdates
     WHERE dogID = $dog_id ORDER BY Time DESC"
     );
     $i = 0;
-    while ($result = $updateRequest->fetch_assoc()){
+    while ($result = mysqli_fetch_assoc($updateRequest)){
         $dogUpdates[$i] = $result;
         $i++;
     }
     $theMasterArray = array('dogInfo' => $dogInfo, 'dogUpdates' => $dogUpdates);
     echo json_encode($theMasterArray);
-    $db->close();
+    mysqli_close($db);
 }
 }
 ?>

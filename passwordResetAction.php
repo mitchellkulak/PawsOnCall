@@ -17,7 +17,7 @@
 	$message = "Password Cannot Be Blank";
      }elseif($password!=""){
 	$SQL = "UPDATE Volunteer SET Password = '$password' WHERE ID = $userID";
-	if($db->query($SQL)){
+	if(mysqli_query($db,$SQL)){
 		$message = "Password Updated Successfully, click on the Paws logo to log in";
 	}else{
 		$message = mysqli_error($db);
@@ -25,7 +25,7 @@
      }else{
 	$message = "<br>";
      }
-     $db->close();  
+     mysqli_close($db);  
   }
 ?>
 <script type="text/javascript" src="scripts.js"></script>

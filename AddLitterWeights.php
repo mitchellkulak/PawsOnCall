@@ -13,11 +13,11 @@
 	else {
 		include 'dbconnect.php';
 		$theMasterArray = array();
-		if ($db->connect_error)
+		if (mysqli_connect_error($db))
 		{
 			die("Can't connect");
 		}else{
-			$weights = json_decode(file_get_contents('php://input'), true);
+			$weights = mysqli_real_escape_string($db,json_decode(file_get_contents('php://input'), true));
 				foreach($weights as $weight){
 					$SQL = "UPDATE Weight SET
 						d1a = $weight['d1a'], 
@@ -55,10 +55,10 @@
 						w7 = $weight['w7'], 
 						w8 = $weight['w8']
 					WHERE DogID = $weight['DogID']";
-					if(!$db->query($SQL)){die("Failed");}		
+					if(!mysqli_query($db,$SQL)){die("Failed");}		
 				}
 			}
 		}
-		$db->close();
+		mysqli_close($db);
 	}
 ?>

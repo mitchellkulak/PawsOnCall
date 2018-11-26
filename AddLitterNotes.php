@@ -21,20 +21,20 @@ $litterID = mysqli_real_escape_string($db,$ar['LitterID']);
 echo $litterNote;
 echo $litterID;
 echo $time;
-if ($db->connect_error)
+if (mysqli_connect_error($db))
 {
     die("Can't connect");
 }
 else {
-    if ($db->query(
+    if (mysqli_query($db,
     "INSERT 
     INTO LitterUpdates
     VALUES ($litterID, current_timestamp, '$litterNote')") === TRUE) {
         echo "Record updated successfully";
     } else {
-        echo "Error updating record: " . $db->error;
+        echo "Error updating record: " . mysqli_error($db);
     }
-    $db->close();
+    mysqli_close($db);
 }
 }
 ?>
