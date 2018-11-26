@@ -370,13 +370,15 @@ function saveLitterWeightTable() {
 
     for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
         if (litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2") {
-            litterWeightTable.rows[i].cells.forEach(function (element) {
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                //iterate through columns
+                //columns would be accessed using the "col" variable assigned in the for loop
                 var innerData = {}; 
                 console.log("start it up!!!");
-                var x = element.className;
+                var x = col.className;
                 console.log(x);
 
-            });
+             }
         }
     }
 
