@@ -364,39 +364,17 @@ function addPuppy() {
 
 function saveLitterWeightTable() {
     var data = {};
+    var puppyIDs = [];
     var litterWeightTable = document.getElementById("litterWeightTable");
-    var litterWeightHeaders1 = document.getElementById("litterWeightHeaders1");
-    var litterWeightHeaders2 = document.getElementById("litterWeightHeaders2");
-
+    var innerData = {}; 
     for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
         if (litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2") {
-            for (var j = 0, col; col = row.cells[j]; j++) {
-                //iterate through columns
-                //columns would be accessed using the "col" variable assigned in the for loop
-                var innerData = {}; 
-                var weightTime = col.className;
-
-                switch(weightTime) {
-                    case "w1a":
-                        innerData.d1a = col.innerHTML;
-                        break;
-                    case "w1b":
-                        innerData.d1p = col.innerHTML;
-                        break;
-                    default:
-                       console.log("not found");
-                }
-
-                console.log("DONE");
-                console.log(innerData);
-               
-
-             }
+           puppyIDs.push(litterWeightTable.rows[i].className);
+           
         }
+        }
+        console.log(puppyIDs);
     }
-
-
-}
 
 function loadLitterWeightTable(id) {
     var litterWeightTable = document.getElementById("litterWeightTable");
