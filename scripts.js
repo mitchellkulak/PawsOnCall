@@ -378,10 +378,10 @@ function saveLitterWeightTable() {
 
                 switch(weightTime) {
                     case "w1a":
-                        innerData.d1a = col.innerHTMl;
+                        innerData.d1a = col.innerHTML;
                         break;
                     case "w1b":
-                        innerData.d1p = col.innerHTMl;
+                        innerData.d1p = col.innerHTML;
                         break;
                     default:
                        console.log("not found");
