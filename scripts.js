@@ -369,12 +369,40 @@ function saveLitterWeightTable() {
     var innerData = {}; 
     for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
         if (litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2") {
-           
             puppyIDs.indexOf(litterWeightTable.rows[i].className) === -1 ? puppyIDs.push(litterWeightTable.rows[i].className): console.log("This item already exists");
-           
         }
         }
-        console.log(puppyIDs);
+
+        puppyIDs.forEach(function(element) {
+            for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
+
+                if(row.id = element){
+                for (var j = 0, col; col = row.cells[j]; j++) {
+                    
+                    var weightCellClass = col.className;
+                    innerData.DogID = element;
+                    switch(weightCellClass) {
+                        case "w1a":
+                            innerData.d1a = col.innerHTML;
+                            break;
+                        case "w8w":
+                            innerData.w8 = col.innerHTML;
+                            break;
+                        default:
+                            console.log("Something unexpected happened.");
+                    }
+
+                   
+                }
+                
+            }
+            }
+            data.push(innerData);
+            innerData = {};
+        });
+        console.log(data);
+        
+    
     }
 
 function loadLitterWeightTable(id) {
