@@ -363,7 +363,7 @@ function addPuppy() {
 }
 
 function saveLitterWeightTable() {
-    var data = {};
+    var data = [];
     var puppyIDs = [];
     var litterWeightTable = document.getElementById("litterWeightTable");
     var innerData = {}; 
