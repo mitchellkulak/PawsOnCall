@@ -17,7 +17,7 @@
 		{
 			die("Can't connect");
 		}else{
-			$weights = mysqli_real_escape_string($db,json_decode(file_get_contents('php://input'), true));
+			$weights = json_decode(mysqli_real_escape_string($db,file_get_contents('php://input')), true);
 				foreach($weights as $weight){
 					$d1a = $weight['d1a']; 
 					$d1p = $weight['d1p']; 
