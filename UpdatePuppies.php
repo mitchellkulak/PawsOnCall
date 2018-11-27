@@ -17,7 +17,7 @@ if (false){ //$input['error'] == 'auth error') {
 else {
 	
 	include 'dbconnect.php';
-	$dogs = json_decode(file_get_contents('php://input'), true);
+	$dogs = json_decode(mysqli_real_escape_string($db,file_get_contents('php://input')), true);
 
 	if (mysqli_connect_error($db))
 	{
