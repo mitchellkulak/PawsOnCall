@@ -12,7 +12,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
 }else{
   include '../dbconnect.php';
   $dogID = mysqli_real_escape_string($db,$_POST["loadID"]);
-  if ($db->connect_error){
+  if (mysqli_connect_error($db)){
       die("Can't connect");
   }
   elseif(isset($_POST["Save"])) {
@@ -41,7 +41,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }else{
       $SQL = "INSERT INTO Dogs Values(null,'$name','$volunteerID','$sex','$birthdate','$adoptiondate','$deathdate','$breed',$litterID,$stillborn)";
     }
-    if($db->query($SQL)){
+    if(mysqli_query($db,$SQL)){
       $message = "Record Updated/Added Successfully";
     }else{
       $message = mysqli_error($db);
@@ -53,14 +53,14 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }else{
       $SQL = "DELETE FROM Dogs WHERE ID = $dogID";
     }
-    if($db->query($SQL)){
+    if(mysqli_query($db,$SQL)){
       $message = "Record Deleted";
     }else{
       $message = mysqli_error($db);
     }    
   }
 }
-$db->close();
+mysqli_close($db);
 ?>
 
 <?php echo $message;?>

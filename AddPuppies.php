@@ -18,7 +18,7 @@ else {
 	include 'dbconnect.php';
 	$ar = json_decode(file_get_contents('php://input'), true);
 
-	if ($db->connect_error)
+	if (mysqli_connect_error($db))
 	{
 		die("Can't connect");
 	}
@@ -32,12 +32,12 @@ else {
 		$stillborn = mysqli_real_escape_string($db,$ar["stillborn"]);
 		
 		$SQL = "INSERT INTO Dogs VALUES (null, '$name',$volunteerID,'$sex','$birthdate',null,null,'$breed',$litterID,$stillborn)";
-		if ($db->query($SQL)) {
+		if (mysqli_query($db,$SQL)) {
 			echo json_encode(array("result" => "Record updated successfully"));
 		} else {
-			echo json_encode(array("error" => "Error updating record: " . $db->error));
+			echo json_encode(array("error" => "Error updating record: " . mysqli_error($db)));
 		}
 	}
-	$db->close();
+	mysqli_close($db);
 }
 ?>

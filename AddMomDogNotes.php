@@ -20,12 +20,12 @@ $momDogNote = mysqli_real_escape_string($db,$ar['Note']);
 $dogID = mysqli_real_escape_string($db,$ar['DogID']);
 var_dump($momDogNote);
 var_dump($dogID);
-if ($db->connect_error)
+if (mysqli_connect_error($db))
 {
     die("Can't connect");
 }
 else {
-    if ($db->query(
+    if (mysqli_query($db,
     "INSERT 
     INTO DogUpdates
     VALUES ($dogID, null, '$momDogNote')") === TRUE) {
@@ -35,7 +35,7 @@ else {
         $error = array('result' => 'Record NOT updated successfully');
         echo json_encode($error);
     }
-    $db->close();
+    mysqli_close($db);
 }
 }
 ?>

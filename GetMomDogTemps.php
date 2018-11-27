@@ -19,7 +19,7 @@ else{
 $theMasterArray = array();
 
 
-if ($db->connect_error)
+if (mysqli_connect_error($db))
 {
     die("Can't connect");
 }
@@ -30,12 +30,12 @@ else {
     $i = 0;
     $theMasterArray = array();
     $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
-    $dogData = $db->query(
+    $dogData = mysqli_query($db,
     "SELECT *
     FROM Temperature 
     WHERE $dogID = DogID"
     );
-    while ($result = $dogData->fetch_assoc()){
+    while ($result = mysqli_fetch_assoc($dogData)){
         if(strtotime($result["Time"]) >= time()-5184000){
         $theMasterArray[$i] = $result;
         $ar1 = explode (' ', $result["Time"]);
@@ -49,7 +49,7 @@ else {
 	}
     }
     echo json_encode($theMasterArray);
-        $db->close();
+        mysqli_close($db);
 }
 }
 ?>

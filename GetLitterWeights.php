@@ -13,21 +13,21 @@
 	else {
 		include 'dbconnect.php';
 		$theMasterArray = array();
-		if ($db->connect_error)
+		if (mysqli_connect_error($db))
 		{
 			die("Can't connect");
 		}else{
 			$dogInfo = array();
 			$litterID = mysqli_real_escape_string($db,urldecode($_GET['litterID']));
 			$SQL = "SELECT d.Name, w.* FROM Weight AS w, Dogs AS d WHERE d.LitterID = $litterID AND w.DogID = d.ID ORDER BY w.DogID";
-			$dogRequest = $db->query($SQL);
+			$dogRequest = mysqli_query($db,$SQL);
 			$i = 0;
-			while ($result = $dogRequest->fetch_assoc()){
+			while ($result = mysqli_fetch_assoc($dogRequest)){
 				$dogInfo[$i] = $result;
 				$i++;
 			}
 			echo json_encode($dogInfo);
 		}
-		$db->close();
+		mysqli_close($db);
 	}
 ?>
