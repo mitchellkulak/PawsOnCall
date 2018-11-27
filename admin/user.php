@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <nav class="navbar ">
   <div class="navbar-brand">
     <a href="../searchresult.html">
-			<img src="images/pawslogo.png" alt="PAWS Logo" >
+			<img src="../images/pawslogo.png" alt="PAWS Logo" >
 		</a>
 
     <div class="navbar-burger burger" data-target="navMenubd-example">
@@ -97,13 +97,13 @@ document.addEventListener('DOMContentLoaded', function () {
           Menu
         </a>
         <div class="navbar-dropdown ">
-          <a class="navbar-item " href="mother.html">
+          <a class="navbar-item " href="../mother.html">
             Mom
           </a>
-          <a class="navbar-item " href="puppies.html">
+          <a class="navbar-item " href="../puppies.html">
             Puppies
           </a>
-          <a class="navbar-item " href="misc.html">
+          <a class="navbar-item " href="../misc.html">
             Misc
           </a>
           <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
