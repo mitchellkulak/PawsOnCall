@@ -374,8 +374,9 @@ function saveLitterWeightTable() {
     }
 
     puppyIDs.forEach(function (element) {
+        console.log(element);
         for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
-
+           
             if (row.id = element) {
                 for (var j = 0, col; col = row.cells[j]; j++) {
 
@@ -492,10 +493,12 @@ function saveLitterWeightTable() {
                 }
                 
             }
-            data.push(innerData);
+            
         }
-        
-        
+       
+        data.push(innerData);
+        innerData = {};
+       
     });
     console.log(data);
 
