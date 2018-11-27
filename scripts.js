@@ -492,10 +492,10 @@ function saveLitterWeightTable() {
                 }
                 
             }
-            
+            data.push(innerData);
         }
-        data.push(innerData);
-        innerData = {};
+        
+        
     });
     console.log(data);
 
