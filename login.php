@@ -4,11 +4,7 @@ header("Access-Control-Allow-Origin: *");
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$host = "localhost";
-$username = "pawswhelp";
-$password = "Ireallylikepuppies1!";
-$db_name = "pawswhelpdb";
-$db = mysqli_connect("$host","$username","$password","$db_name");
+include 'dbconnect.php';
 if (mysqli_connect_error($db))
 {
     die("Can't connect");
