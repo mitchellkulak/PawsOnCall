@@ -11,20 +11,20 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     echo "<script>window.location.replace('../login.html');</script>";
 }else{
   include '../dbconnect.php';
-  if ($db->connect_error){
+  if (mysqli_connect_error($db)){
       die("Can't connect");
   }
   else {
     $userrow = array('Name' => "", 'Email' => "", 'Phone' => "", 'Address' => "", 'City' => "", 'State' => "", 'ZIP' => "");
     if($_GET['loadID'] != ""){
       $userID = mysqli_real_escape_string($db,$_GET['loadID']);
-      $user = $db->query("SELECT * FROM Volunteer WHERE id = $userID");
-      $userrow = $user->fetch_assoc();
+      $user = mysqli_query($db,"SELECT * FROM Volunteer WHERE id = $userID");
+      $userrow = mysqli_fetch_assoc($user);
     }
-    $users = $db->query("SELECT ID, Name FROM Volunteer");
+    $users = mysqli_query($db,"SELECT ID, Name FROM Volunteer");
   }
 }
-$db->close();
+mysqli_close($db);
 ?>
 <html>
 <head>
@@ -46,24 +46,85 @@ $db->close();
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 	<!-- favicon stuff-->
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any nav burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>
 </head>
 
 <!-- Navbar, logo, logout button -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-	<div id="navbarDesktop " class="navbar-brand">
-		<a href="searchresult.html">
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a href="../searchresult.html">
 			<img src="../images/pawslogo.png" alt="PAWS Logo" >
 		</a>
-		<a class="navbar-item" href="../mother.html">Mom</a>
-		<a class="navbar-item" href="../puppies.html">Puppies</a>
-		<a class="navbar-item" href="../misc.html">Misc</a>
-		<a class="navbar-item" href="../admin" style="display:flex">Admin</a>
-	</div>
-	<div class="buttons">
-		<a class="button is-primary logout" onclick="logout();">
-		Log out
-		</a>
-	</div>
+
+    <div class="navbar-burger burger" data-target="navMenubd-example">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenubd-example" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link  is-active">
+          Menu
+        </a>
+        <div class="navbar-dropdown ">
+          <a class="navbar-item " href="../mother.html">
+            Mom
+          </a>
+          <a class="navbar-item " href="../puppies.html">
+            Puppies
+          </a>
+          <a class="navbar-item " href="../misc.html">
+            Misc
+          </a>
+          <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
+            Admin
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-primary" onclick="logout()">
+              <span>Logout</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>
 <!-- Navbar, logo, logout button -->
 
@@ -73,7 +134,7 @@ $db->close();
   <form action="user.php">
     <select class="dropbtn admin" name='loadID'>
       <option value="0">New User</option>
-      <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"]==$userID){echo " selected";} echo ">".$subuser["Name"]."</option>";}?>
+      <?php while($subuser = mysqli_fetch_assoc($users)){echo "<option value=".$subuser["ID"];if($subuser["ID"]==$userID){echo " selected";} echo ">".$subuser["Name"]."</option>";}?>
     </select>
 
     <input class="button is-link admin" type="submit" value="Load">
@@ -84,32 +145,84 @@ $db->close();
     <!--Name section-->
     <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $userID?>">
     <label class="label admin">Name:</label>
-    <input class="input admin"type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
+    <input class="input admin" type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
 
     <!--email-->
     <label class="label admin">Email: </label>
-    <input class="input admin"type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
+    <input class="input admin" type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
 
     <!--phone-->
-    <label class="label admin">Phone: </label>
-    <input class="input admin"type="tel" name="phone" value="<?php echo $userrow['Phone']?>"><br>
+    <label class="label admin">Phone: <i>Enter as ###-###-####</i></label>
+    <input class="input admin" type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" value="<?php echo $userrow['Phone']?>"><br>
 
 
     <!--address-->
     <label class="label admin">Address: </label>
-    <input class="input admin"type="text" name="address" value="<?php echo $userrow['Address']?>"><br>
+    <input class="input admin" type="text" name="address" value="<?php echo $userrow['Address']?>"><br>
 
     <!--city-->
     <label class="label admin">City:</label>
-    <input class="input admin"type="text" name="city" value="<?php echo $userrow['City']?>"><br>
+    <input class="input admin" type="text" name="city" value="<?php echo $userrow['City']?>"><br>
 
     <!--state-->
     <label class="label admin">State: </label>
-    <input class="input admin"type="text" name="state" maxlength="2" value="<?php echo $userrow['State']?>"><br>
+    <select class="dropbtn admin" name="state" id="state">
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+      <option value="CA">California</option>
+      <option value="CO">Colorado</option>
+      <option value="CT">Connecticut</option>
+      <option value="DE">Delaware</option>
+      <option value="DC">District Of Columbia</option>
+      <option value="FL">Florida</option>
+      <option value="GA">Georgia</option>
+      <option value="HI">Hawaii</option>
+      <option value="ID">Idaho</option>
+      <option value="IL">Illinois</option>
+      <option value="IN">Indiana</option>
+      <option value="IA">Iowa</option>
+      <option value="KS">Kansas</option>
+      <option value="KY">Kentucky</option>
+      <option value="LA">Louisiana</option>
+      <option value="ME">Maine</option>
+      <option value="MD">Maryland</option>
+      <option value="MA">Massachusetts</option>
+      <option value="MI">Michigan</option>
+      <option value="MN">Minnesota</option>
+      <option value="MS">Mississippi</option>
+      <option value="MO">Missouri</option>
+      <option value="MT">Montana</option>
+      <option value="NE">Nebraska</option>
+      <option value="NV">Nevada</option>
+      <option value="NH">New Hampshire</option>
+      <option value="NJ">New Jersey</option>
+      <option value="NM">New Mexico</option>
+      <option value="NY">New York</option>
+      <option value="NC">North Carolina</option>
+      <option value="ND">North Dakota</option>
+      <option value="OH">Ohio</option>
+      <option value="OK">Oklahoma</option>
+      <option value="OR">Oregon</option>
+      <option value="PA">Pennsylvania</option>
+      <option value="RI">Rhode Island</option>
+      <option value="SC">South Carolina</option>
+      <option value="SD">South Dakota</option>
+      <option value="TN">Tennessee</option>
+      <option value="TX">Texas</option>
+      <option value="UT">Utah</option> 
+      <option value="VT">Vermont</option>
+      <option value="VA">Virginia</option>
+      <option value="WA">Washington</option>
+      <option value="WV">West Virginia</option>
+      <option value="WI">Wisconsin</option>
+      <option value="WY">Wyoming</option>
+    </select>	
 
     <!--zip-->
-    <label class="label admin">ZIP: </label>
-    <input class="input admin"type="text" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
+    <label class="label admin">ZIP: <i>Enter as #####</i> </label>
+    <input class="input admin" type="text" pattern="[0-9]{5}" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
     
     <!--admin buttons-->
     <label class="label admin">Admin:</label>
@@ -122,4 +235,5 @@ $db->close();
   <a href="index.php">Return to admin page</a>
 </article>
 </body>
-<html>
+</html>
+<script>document.getElementById("state").value = "<?php echo $userrow['State']?>"</script>

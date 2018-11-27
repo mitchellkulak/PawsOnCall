@@ -15,16 +15,16 @@ if ($input['error'] == 'auth error') {
 else {
     $volunteerID = $_GET["volunteerID"];
     include 'dbconnect.php';
-    if ($db->connect_error)
+    if (mysqli_connect_error($db))
     {
         die("Can't connect");
     }
-    else {
+    else{
         $volInfo = array();
         $i=0;
         $SQL = "SELECT Name, Email, Phone, Address, City, State, ZIP FROM Volunteer Where ID = $volunteerID";
-        if ($volunteers = $db->query($SQL)) {
-            while ($result = $volunteers->fetch_assoc()){
+        if ($volunteers = mysqli_query($db,$SQL)) {
+            while ($result = mysqli_fetch_assoc($volunteers)){
                 $volInfo[$i] = $result;
                 $i++;
             }
@@ -33,6 +33,6 @@ else {
         }
         echo json_encode($volInfo);
     }
-    $db->close();
+    mysqli_close($db);
 }
 ?>

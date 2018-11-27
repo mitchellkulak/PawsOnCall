@@ -20,39 +20,86 @@
 	<!-- favicon stuff-->
 	
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-	<script>
-		function editHost() {
-		  document.getElementById("hostName").removeAttribute("disabled");
-		  document.getElementById("hostStreet").removeAttribute("disabled");
-		  document.getElementById("hostCity").removeAttribute("disabled");
-		  document.getElementById("hostState").removeAttribute("disabled");
-		  document.getElementById("hostZIP").removeAttribute("disabled");
-		  document.getElementById("hostPhone").removeAttribute("disabled");
-		  document.getElementById('edit').hidden = true;
-		  document.getElementById('save').hidden = false;
-		  
-		  return false;
-		}
-	</script>
+	
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any nav burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>
 </head>
 <body  onload="adminShowHide(); getVolunteerInfo();">
 
 <!-- Navbar, logo, logout button -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-	<div id="navbarDesktop " class="navbar-brand">
-		<a href="searchresult.html">
+<nav class="navbar ">
+  <div class="navbar-brand">
+    <a href="searchresult.html">
 			<img src="images/pawslogo.png" alt="PAWS Logo" >
 		</a>
-		<a class="navbar-item" href="mother.html">Mom</a>
-		<a class="navbar-item" href="puppies.html">Puppies</a>
-		<a class="navbar-item" href="misc.html">Misc</a>
-		<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
-	</div>
-	<div class="buttons">
-		<a class="button is-primary logout" onclick="logout()">
-		Log out
-		</a>
-	</div>
+
+    <div class="navbar-burger burger" data-target="navMenubd-example">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenubd-example" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link  is-active">
+          Menu
+        </a>
+        <div class="navbar-dropdown ">
+          <a class="navbar-item " href="mother.html">
+            Mom
+          </a>
+          <a class="navbar-item " href="puppies.html">
+            Puppies
+          </a>
+          <a class="navbar-item " href="misc.html">
+            Misc
+          </a>
+          <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
+            Admin
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-primary" onclick="logout()">
+              <span>Logout</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </nav>
 <!-- Navbar, logo, logout button -->
 
@@ -65,118 +112,92 @@
 	</div>
 <!--sarchbar and button-->	
 
-<section class="section">
-<div class="tile is-ancestor">
-  <div class="tile is-vertical">
-    <div class="tile">
-      <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-primary">
-          <p class="title">Ein</p>
-		  <div class="field is-horizontal">
-			  <div class="field-label is-normal">
-				<label class="label">ID</label>
-			  </div>
-			  <div class="field-body">
-				<div class="field">
-				  <p class="control is-expanded">
-					<input class="input" type="text" id="dogID" placeholder="Disabled input" disabled>
-				  </p>
-				</div>
-			  </div>
-		  </div>
-		  <div class="field is-horizontal">
-			  <div class="field-label is-normal">
-				<label class="label">Breed</label>
-			  </div>
-			  <div class="field-body">
-				<div class="field">
-				  <p class="control is-expanded">
-					<input class="input" type="text" id="dogBreed" placeholder="Disabled input" disabled>
-				  </p>
-				</div>
-			  </div>
-		  </div>
-        </article>
-      </div>
-      <div class="tile is-parent">
-        <article class="tile is-child notification is-info">
-          <p class="title">Host Family</p>
-		  <div class="field is-horizontal">
-				  <div class="field-label is-normal">
-					<label class="label">Name</label>
-				  </div>
-				  <div class="field-body">
+<section class="section mother">
+		<div class="tile">
+		<article class="tile is-child notification is-primary dogname">
+				<p class="title" id="dogNameDiv">dog name</p>
+				<p class="subtitle" id="breedDiv">breed</p>
+			</article>
+			</div>
+</section>
+
+<section class="section mother">
+<div class="tile">
+    <article class="tile is-child notification is-info">
+        <p class="title">Host Family</p>
+		<div class="field is-horizontal">
+			<div class="field-label is-normal">
+				<label class="label">Name</label>
+			</div>
+				<div class="field-body">
 					<div class="field">
 					  <p class="control is-expanded">
 						<input class="input" type="text" id="hostName" placeholder="Disabled input" disabled>
 					  </p>
 					</div>
-				  </div>
 				</div>
-				<div class="field is-horizontal">
-				  <div class="field-label is-normal">
-					<label class="label">Street</label>
-				  </div>
-				  <div class="field-body">
-					<div class="field">
-					  <p class="control is-expanded">
-						<input class="input" type="text" id="hostStreet" placeholder="Disabled input" disabled>
-					  </p>
-					</div>
-				  </div>
-				</div>
-				<div class="field is-horizontal">
-				  <div class="field-label is-normal">
-					<label class="label">City</label>
-				  </div>
-				  <div class="field-body">
-					<div class="field">
-					  <p class="control is-expanded">
-						<input class="input" type="text" id="hostCity" placeholder="Disabled input" disabled>
-					  </p>
-					</div>
-				  </div>
-				</div>
-				<div class="field is-horizontal">
-				  <div class="field-label is-normal">
-					<label class="label">State</label>
-				  </div>
-				  <div class="field-body">
-					<div class="field">
-					  <p class="control is-expanded">
-						<input class="input" type="text" id="hostState" placeholder="Disabled input" disabled>
-					  </p>
-					</div>
-				  </div>
-				</div>
-				<div class="field is-horizontal">
-				  <div class="field-label is-normal">
-					<label class="label">ZIP</label>
-				  </div>
-				  <div class="field-body">
-					<div class="field">
-					  <p class="control is-expanded">
-						<input class="input" type="text" id="hostZIP" placeholder="Disabled input" disabled>
-					  </p>
-					</div>
-				  </div>
-				</div>
-				<div class="field is-horizontal">
-				  <div class="field-label is-normal">
-					<label class="label">Phone</label>
-				  </div>
-				  <div class="field-body">
-					<div class="field">
-					  <p class="control is-expanded">
-						<input class="input" type="text" id="hostPhone" placeholder="Disabled input" disabled>
-					  </p>
-					</div>
-				  </div>
-				</div>
-        </article>
-      </div>
-    </div>
-	
+		</div>
+		<div class="field is-horizontal">
+		  <div class="field-label is-normal">
+			<label class="label">Street</label>
+		  </div>
+		  <div class="field-body">
+			<div class="field">
+			  <p class="control is-expanded">
+				<input class="input" type="text" id="hostStreet" placeholder="Disabled input" disabled>
+			  </p>
+			</div>
+		  </div>
+		</div>
+		<div class="field is-horizontal">
+		  <div class="field-label is-normal">
+			<label class="label">City</label>
+		  </div>
+		  <div class="field-body">
+			<div class="field">
+			  <p class="control is-expanded">
+				<input class="input" type="text" id="hostCity" placeholder="Disabled input" disabled>
+			  </p>
+			</div>
+		  </div>
+		</div>
+		<div class="field is-horizontal">
+		  <div class="field-label is-normal">
+			<label class="label">State</label>
+		  </div>
+		  <div class="field-body">
+			<div class="field">
+			  <p class="control is-expanded">
+				<input class="input" type="text" id="hostState" placeholder="Disabled input" disabled>
+			  </p>
+			</div>
+		  </div>
+		</div>
+		<div class="field is-horizontal">
+		  <div class="field-label is-normal">
+			<label class="label">ZIP</label>
+		  </div>
+		  <div class="field-body">
+			<div class="field">
+			  <p class="control is-expanded">
+				<input class="input" type="text" id="hostZIP" placeholder="Disabled input" disabled>
+			  </p>
+			</div>
+		  </div>
+		</div>
+		<div class="field is-horizontal">
+		  <div class="field-label is-normal">
+			<label class="label">Phone</label>
+		  </div>
+		  <div class="field-body">
+			<div class="field">
+			  <p class="control is-expanded">
+				<input class="input" type="text" id="hostPhone" placeholder="Disabled input" disabled>
+			  </p>
+			</div>
+		  </div>
+		</div>
+     </article>
 </div>
 </section>
 </body>

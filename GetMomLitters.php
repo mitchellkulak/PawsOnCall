@@ -17,7 +17,7 @@ else{
 
 
 
-if ($db->connect_error)
+if (mysqli_connect_error($db))
 {
     die("Can't connect");
 }
@@ -25,33 +25,33 @@ else {
     $i = 0;
     $littersArray = array();
     $dogID = mysqli_real_escape_string($db,urldecode($_GET['dogID']));
-    $dogData = $db->query(
-    "SELECT l.*, d.Name as MotherName
-    FROM Litter as l, Dogs as d 
-    WHERE $dogID = l.MotherID AND $dogID = d.ID AND l.MotherID = d.ID ORDER BY ID DESC"
+    $dogData = mysqli_query($db,
+    "SELECT l.*, d.Name as MotherName, f.Name as FatherName, d.Breed as MotherBreed
+    FROM Litter as l, Dogs as d, Dogs as f 
+    WHERE $dogID = l.MotherID AND $dogID = d.ID AND l.MotherID = d.ID AND f.ID = l.FatherID ORDER BY l.ID DESC"
     );
-    while ($result = $dogData->fetch_assoc()){
+    while ($result = mysqli_fetch_assoc($dogData)){
         $littersArray[$i] = $result;
 		$in = 0;
     		$puppiesArray = array();
     		$litterID = $littersArray[$i]["ID"];
-    		$litterData = $db->query(
+    		$litterData = mysqli_query($db,
     		"SELECT *
     		FROM Dogs 
     		WHERE LitterID = $litterID"
     		);
-    		while ($litterResult = $litterData->fetch_assoc()){
+    		while ($litterResult = mysqli_fetch_assoc($litterData)){
         		$puppiesArray[$in] = $litterResult;
        	 		$in++;
     		}
 		$inr = 0;
     		$updatesArray = array();
-    		$updateData = $db->query(
+    		$updateData = mysqli_query($db,
     		"SELECT *
     		FROM LitterUpdates 
-    		WHERE LitterID = $litterID"
+    		WHERE LitterID = $litterID ORDER BY Time DESC"
     		);
-    		while ($updateResult = $updateData->fetch_assoc()){
+    		while ($updateResult = mysqli_fetch_assoc($updateData)){
         		$updatesArray[$inr] = $updateResult;
        	 		$inr++;
     		}
@@ -61,7 +61,7 @@ else {
     }
 
     echo json_encode($littersArray);
-        $db->close();
+        mysqli_close($db);
 }
 }
 ?>

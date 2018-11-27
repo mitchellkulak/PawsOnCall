@@ -1,17 +1,18 @@
 <?php
 include '../authenticate.php';
-$session = "XamUpyJniQzJntrCLbFB";//$_GET['session'];
+session_start();
+$session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
 
 
 if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $error = array('error' => 'auth error');
     echo json_encode($error);
-    echo "<script>window.location.replace('../login.php');</script>";
+    echo "<script>window.location.replace('../login.html');</script>";
 }else{
   include '../dbconnect.php';
   $litterID = mysqli_real_escape_string($db,$_POST["loadID"]);
-  if ($db->connect_error){
+  if (mysqli_connect_error($db)){
       die("Can't connect");
   }elseif(isset($_POST["Save"])) {
 
@@ -22,6 +23,8 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $endWhelp = mysqli_real_escape_string($db,$_POST["endWhelp"]);
     $startWean = mysqli_real_escape_string($db,$_POST["startWean"]);
     $endWean = mysqli_real_escape_string($db,$_POST["endWean"]);
+    $startDeworm = mysqli_real_escape_string($db,$_POST["startDeworm"]);
+    $endDeworm = mysqli_real_escape_string($db,$_POST["endDeworm"]);
 
     if($litterID != 0){
       $SQL = "UPDATE Litter SET
@@ -31,17 +34,18 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
         StartWhelp = '$startWhelp',
         EndWhelp = '$endWhelp',
         StartWean = '$startWean',
-        EndWean = '$endWean'
+        EndWean = '$endWean',
+        StartDeworm = '$startDeworm',
+        EndDeworm = '$endDeworm'
       WHERE ID = $litterID";
     }else{
-      $SQL = "INSERT INTO Litter Values(null,'$volunteerID','$motherID','$fatherID','$startWhelp','$endWhelp','$startWean','$endWean')";
+      $SQL = "INSERT INTO Litter Values(null,'$volunteerID','$motherID','$fatherID','$startWhelp','$endWhelp','$startWean','$endWean','$startDeworm','$endDeworm')";
     }
-    $db->query($SQL);
     $error = mysqli_error($db);
-    if($db->query($SQL)){
-      echo "Record Added/Updated";
+    if(mysqli_query($db,$SQL)){
+      $message = "Record Added/Updated";
     }else{
-      echo mysqli_error($db);
+      $message = mysqli_error($db);
     } 
 
   }elseif(isset($_POST["Delete"])){
@@ -50,13 +54,15 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }else{
       $SQL = "DELETE FROM Litter WHERE ID = $litterID";
     }
-    if($db->query($SQL)){
-      echo "Record Deleted";
+    if(mysqli_query($db,$SQL)){
+      $message = "Record Deleted";
     }else{
-      echo mysqli_error($db);
+      $message = mysqli_error($db);
     }    
   }
 }
-$db->close();
+mysqli_close($db);
 ?>
+
+<?php echo $message;?>
 <a href="index.php">Return to admin page</a>
