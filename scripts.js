@@ -515,7 +515,7 @@ function saveLitterWeightTable() {
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
-        .then(response => response.json()) // parses response to JSON
+        // .then(response => response.json()) // parses response to JSON
         .then((dataRes) => {
             console.log(dataRes);
         });
