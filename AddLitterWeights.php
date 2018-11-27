@@ -53,6 +53,7 @@
 					$w6 = $weight['w6']; 
 					$w7 = $weight['w7']; 
 					$w8 = $weight['w8'];
+					$dogID = $weight['DogID'];
 
 					$SQL = "UPDATE Weight SET
 						d1a  = $d1a ,
@@ -89,7 +90,7 @@
 						w6  = $w6 ,
 						w7  = $w7 ,
 						w8  = $w8
-					WHERE DogID = $weight['DogID']";
+					WHERE DogID = $dogID";
 					if(!mysqli_query($db,$SQL)){die("Failed");}		
 				}
 			}
