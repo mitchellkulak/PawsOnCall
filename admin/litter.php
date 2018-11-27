@@ -11,26 +11,26 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     echo "<script>window.location.replace('../login.html');</script>";
 }else{
   include '../dbconnect.php';
-  if ($db->connect_error){
+  if (mysqli_connect_error($db)){
       die("Can't connect");
   }
   else {
     $dogrow = array('VolunteerID' => "", 'MotherID' => "", 'FatherID' => "", 'StartWhelp' => "", 'StartWean' => "", 'EndWean' => "");
     if($_GET['loadID'] != ""){
       $litterID = mysqli_real_escape_string($db,$_GET['loadID']);
-      $litter = $db->query("SELECT * FROM Litter WHERE id = $litterID");
-      $litterrow = $litter->fetch_assoc();
+      $litter = mysqli_query($db,"SELECT * FROM Litter WHERE id = $litterID");
+      $litterrow = mysqli_fetch_assoc($litter);
       $fatherID = $litterrow["FatherID"];
       $motherID = $litterrow["MotherID"];
       $volunteerID = $litterrow["VolunteerID"];
     }
-    $litters = $db->query("SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Litter, Dogs WHERE Litter.MotherID = Dogs.ID ORDER BY Dogs.Name");
-    $motherdogs = $db->query("SELECT ID, Name, Breed FROM Dogs WHERE Sex = 'F' AND LitterID IS NULL ORDER BY NAME ASC");
-    $fatherdogs = $db->query("SELECT ID, Name, Breed FROM Dogs WHERE Sex = 'M' AND LitterID IS NULL ORDER BY NAME ASC");
-    $users = $db->query("SELECT ID, Name FROM Volunteer ORDER BY NAME ASC");
+    $litters = mysqli_query($db,"SELECT Dogs.Name, Litter.ID, Litter.StartWhelp FROM Litter, Dogs WHERE Litter.MotherID = Dogs.ID ORDER BY Dogs.Name");
+    $motherdogs = mysqli_query($db,"SELECT ID, Name, Breed FROM Dogs WHERE Sex = 'F' AND LitterID IS NULL ORDER BY NAME ASC");
+    $fatherdogs = mysqli_query($db,"SELECT ID, Name, Breed FROM Dogs WHERE Sex = 'M' AND LitterID IS NULL ORDER BY NAME ASC");
+    $users = mysqli_query($db,"SELECT ID, Name FROM Volunteer ORDER BY NAME ASC");
   }
 }
-$db->close();
+mysqli_close($db);
 ?>
 <html>
   <meta charset="utf-8">
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- Navbar, logo, logout button -->
 <nav class="navbar ">
   <div class="navbar-brand">
-    <a href="searchresult.html">
+    <a href="../searchresult.html">
 			<img src="images/pawslogo.png" alt="PAWS Logo" >
 		</a>
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <form action="litter.php">
       <select class="dropbtn admin" name='loadID'>
         <option  value="0">New Litter</option>
-        <?php while($sublitter = $litters->fetch_assoc()){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$litterID){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
+        <?php while($sublitter = mysqli_fetch_assoc($litters)){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$litterID){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
       <input type="submit" class="button is-link admin" value="Load">
     </form>
@@ -148,19 +148,19 @@ document.addEventListener('DOMContentLoaded', function () {
       <label class="label admin">Volunteer:</label>
       <select name="volunteerID" class="dropbtn admin">
         <option value="0">select</option>
-        <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $volunteerID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
+        <?php while($subuser = mysqli_fetch_assoc($users)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $volunteerID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
       </select>
 
       <label class="label admin"> Mother:</label>
       <select name="motherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
-        <?php while($subuser = $motherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
+        <?php while($subuser = mysqli_fetch_assoc($motherdogs)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
 
       <label class="label admin">Father:</label>
       <select name="fatherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
-        <?php while($subuser = $fatherdogs->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
+        <?php while($subuser = mysqli_fetch_assoc($fatherdogs)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
       
       <label class="label admin">Start Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>

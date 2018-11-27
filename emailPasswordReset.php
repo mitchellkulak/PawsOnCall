@@ -2,21 +2,21 @@
   $message="";
   if(isset($_GET["email"])){
     include 'dbconnect.php'; //creates DB connection $db and sets $domain
-    if ($db->connect_error){
+    if (mysqli_connect_error($db)){
         die("Can't connect");
     }else{
         $email = mysqli_real_escape_string($db,urldecode($_GET["email"]));
-        $user = $db->query("SELECT * FROM Volunteer WHERE Email = '$email'");
-        if($user->num_rows == 1){
-          $user = $user->fetch_assoc();
+        $user = mysqli_query($db,"SELECT * FROM Volunteer WHERE Email = '$email'");
+        if(mysqli_num_rows($user) == 1){
+          $user = mysqli_fetch_assoc($user);
           $userID = $user["ID"];
-          $session = $db->query("SELECT * FROM SessionKeys WHERE UserID = $userID");
+          $session = mysqli_query($db,"SELECT * FROM SessionKeys WHERE UserID = $userID");
           do{
     		$sessionKey = generateRandomString();
-    		$keyMatch = $db->query("SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
-    	  }while($keyMatch->num_rows > 0); //creates new session key repeatedly, until a unique key is created
+    		$keyMatch = mysqli_query($db,"SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
+    	  }while(mysqli_num_rows($keyMatch) > 0); //creates new session key repeatedly, until a unique key is created
 	  $timer = time()+3600;
-    	  $db->query("UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = $userID"); //sets session key in database, time is updated automatically
+    	  mysqli_query($db,"UPDATE SessionKeys SET SessionKey = '$sessionKey' WHERE userID = $userID"); //sets session key in database, time is updated automatically
           $msg = "Please visit <a href='http://".$domain."/PawsOnCall/passwordResetAction.php?session=".$sessionKey."'>here</a> to reset your password. This link is good for 1 hour.";
           echo $msg;
           $msg = wordwrap($msg,70);
@@ -28,7 +28,7 @@
         }else{
           $message = "Check email Address";
         }
-     $db->close();
+     mysqli_close($db);
     }
   }
   function generateRandomString($length = 20) {

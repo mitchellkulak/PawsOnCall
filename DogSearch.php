@@ -16,7 +16,7 @@ else{
     
 $MasterArray = array();
 
-if ($db->connect_error)
+if (mysqli_connect_error($db))
 {
     die("Can't connect");
 }
@@ -33,13 +33,13 @@ else {
     	FROM Volunteer AS v, Dogs AS d 
     	WHERE d.name LIKE '%$dog_name%' AND d.Sex = 'F' AND d.VolunteerID = $userID AND v.ID = d.VolunteerID";
     }
-    $dog_data = $db->query($SQL);
-    while ($result = $dog_data->fetch_assoc()){
+    $dog_data = mysqli_query($db,$SQL);
+    while ($result = mysqli_fetch_assoc($dog_data)){
         $MasterArray[$i] = $result;
         $i++;
     }
     echo json_encode($MasterArray);
 }
 }
-$db->close();
+mysqli_close($db);
 ?>

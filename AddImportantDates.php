@@ -16,7 +16,7 @@ if ($input['error'] == 'auth error') {
 else {
 	include 'dbconnect.php';
 	$ar = json_decode(file_get_contents('php://input'), true);
-	if ($db->connect_error)
+	if (mysqli_connect_error($db))
 	{
 		die("Can't connect");
 	}
@@ -31,12 +31,12 @@ else {
 		$SQL = "UPDATE Litter SET StartWhelp = '$startWhelp', EndWhelp = '$endWhelp',
 		StartWean = '$startWean', EndWean = '$endWean',
 		StartDeworm = '$startDeworm', EndDeworm = '$endDeworm' WHERE ID = $litterID";
-		if ($db->query($SQL)) {
+		if (mysqli_query($db,$SQL)) {
 			echo json_encode(array("result" => "Record updated successfully"));
 		} else {
-			echo json_encode(array("result" => "Error updating record: " . $db->error));
+			echo json_encode(array("result" => "Error updating record: " . mysqli_error($db)));
 		}
 	}
-	$db->close();
+	mysqli_close($db);
 }
 ?>
