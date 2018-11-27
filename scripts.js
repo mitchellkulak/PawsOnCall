@@ -377,7 +377,7 @@ function saveLitterWeightTable() {
         console.log(element);
         for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
            
-            if (row.id == element) {
+            if (row.className == element) {
                 for (var j = 0, col; col = row.cells[j]; j++) {
 
                     var weightCellClass = col.className;
