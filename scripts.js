@@ -47,7 +47,14 @@ function getWhelpDates() {
     var endWhelp;
     var thisTableBody = document.getElementById("whelp");
 
-    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    })
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -100,7 +107,14 @@ async function drawChart() {
 async function prepareDataForChart() {
     var bigArray = new Array();
     var i = 0;
-    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    })
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -150,7 +164,14 @@ function loadLitterInfo() {
 
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -239,7 +260,14 @@ function loadLitterInfoByID(id) {
     var deathsDiv = document.getElementById("deaths");
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -335,7 +363,14 @@ function logout() {
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    fetch("logoff.php");
+    fetch("logoff.php",{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    });
     window.location.href = "login.html";
 }
 
@@ -389,7 +424,14 @@ function loadMotherInfo() {
     var noteTable = document.getElementById("noteTable");
     var dogBreedDiv = document.getElementById("breedDiv");
 
-    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
+    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session,{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -549,7 +591,14 @@ function searchForDogs() {
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session")) //Add the file name
+    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session"),{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));

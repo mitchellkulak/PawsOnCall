@@ -236,6 +236,10 @@ article.litter{
 	padding: 15px 10px !important;
 }
 
+#loginError{
+	color:red;
+}
+
 #puppyNoteTable{
 	width:100%;
 }
