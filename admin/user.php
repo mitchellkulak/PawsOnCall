@@ -11,20 +11,20 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     echo "<script>window.location.replace('../login.html');</script>";
 }else{
   include '../dbconnect.php';
-  if ($db->connect_error){
+  if (mysqli_connect_error($db)){
       die("Can't connect");
   }
   else {
     $userrow = array('Name' => "", 'Email' => "", 'Phone' => "", 'Address' => "", 'City' => "", 'State' => "", 'ZIP' => "");
     if($_GET['loadID'] != ""){
       $userID = mysqli_real_escape_string($db,$_GET['loadID']);
-      $user = $db->query("SELECT * FROM Volunteer WHERE id = $userID");
-      $userrow = $user->fetch_assoc();
+      $user = mysqli_query($db,"SELECT * FROM Volunteer WHERE id = $userID");
+      $userrow = mysqli_fetch_assoc($user);
     }
-    $users = $db->query("SELECT ID, Name FROM Volunteer");
+    $users = mysqli_query($db,"SELECT ID, Name FROM Volunteer");
   }
 }
-$db->close();
+mysqli_close($db);
 ?>
 <html>
 <head>
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- Navbar, logo, logout button -->
 <nav class="navbar ">
   <div class="navbar-brand">
-    <a href="searchresult.html">
-			<img src="images/pawslogo.png" alt="PAWS Logo" >
+    <a href="../searchresult.html">
+			<img src="../images/pawslogo.png" alt="PAWS Logo" >
 		</a>
 
     <div class="navbar-burger burger" data-target="navMenubd-example">
@@ -97,13 +97,13 @@ document.addEventListener('DOMContentLoaded', function () {
           Menu
         </a>
         <div class="navbar-dropdown ">
-          <a class="navbar-item " href="mother.html">
+          <a class="navbar-item " href="../mother.html">
             Mom
           </a>
-          <a class="navbar-item " href="puppies.html">
+          <a class="navbar-item " href="../puppies.html">
             Puppies
           </a>
-          <a class="navbar-item " href="misc.html">
+          <a class="navbar-item " href="../misc.html">
             Misc
           </a>
           <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <form action="user.php">
     <select class="dropbtn admin" name='loadID'>
       <option value="0">New User</option>
-      <?php while($subuser = $users->fetch_assoc()){echo "<option value=".$subuser["ID"];if($subuser["ID"]==$userID){echo " selected";} echo ">".$subuser["Name"]."</option>";}?>
+      <?php while($subuser = mysqli_fetch_assoc($users)){echo "<option value=".$subuser["ID"];if($subuser["ID"]==$userID){echo " selected";} echo ">".$subuser["Name"]."</option>";}?>
     </select>
 
     <input class="button is-link admin" type="submit" value="Load">

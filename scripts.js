@@ -47,7 +47,14 @@ function getWhelpDates() {
     var endWhelp;
     var thisTableBody = document.getElementById("whelp");
 
-    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    })
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -100,7 +107,14 @@ async function drawChart() {
 async function prepareDataForChart() {
     var bigArray = new Array();
     var i = 0;
-    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"))
+    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    })
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -157,7 +171,14 @@ function loadLitterInfo() {
 
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -363,6 +384,162 @@ function addPuppy() {
 }
 
 function saveLitterWeightTable() {
+    var data = [];
+    var puppyIDs = [];
+    var litterWeightTable = document.getElementById("litterWeightTable");
+    var innerData = {};
+    for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
+        if (litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2") {
+            puppyIDs.indexOf(litterWeightTable.rows[i].className) === -1 ? puppyIDs.push(litterWeightTable.rows[i].className) : console.log("This item already exists");
+        }
+    }
+
+    puppyIDs.forEach(function (element) {
+        console.log(element);
+        for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
+           
+            if (row.className == element) {
+                for (var j = 0, col; col = row.cells[j]; j++) {
+
+                    var weightCellClass = col.className;
+                    innerData.DogID = element;
+                    switch (weightCellClass) {
+                        case "w1a":
+                            innerData.d1a = col.innerHTML;
+                            break;
+                        case "w1b":
+                            innerData.d1p = col.innerHTML;
+                            break;
+                        case "w2a":
+                            innerData.d2a = col.innerHTML;
+                            break;
+                        case "w2b":
+                            innerData.d2p = col.innerHTML;
+                            break;
+                        case "w3a":
+                            innerData.d3a = col.innerHTML;
+                            break;
+                        case "w3b":
+                            innerData.d3p = col.innerHTML;
+                            break;
+                        case "w4a":
+                            innerData.d4a = col.innerHTML;
+                            break;
+                        case "w4b":
+                            innerData.d4p = col.innerHTML;
+                            break;
+                        case "w5a":
+                            innerData.d5a = col.innerHTML;
+                            break;
+                        case "w5b":
+                            innerData.d5p = col.innerHTML;
+                            break;
+                        case "w6a":
+                            innerData.d6a = col.innerHTML;
+                            break;
+                        case "w6b":
+                            innerData.d6p = col.innerHTML;
+                            break;
+                        case "w7a":
+                            innerData.d7a = col.innerHTML;
+                            break;
+                        case "w7b":
+                            innerData.d7p = col.innerHTML;
+                            break;
+                        case "w8a":
+                            innerData.d8a = col.innerHTML;
+                            break;
+                        case "w8b":
+                            innerData.d8p = col.innerHTML;
+                            break;
+                        case "w9a":
+                            innerData.d9a = col.innerHTML;
+                            break;
+                        case "w9b":
+                            innerData.d9p = col.innerHTML;
+                            break;
+                        case "w10a":
+                            innerData.d10a = col.innerHTML;
+                            break;
+                        case "w10b":
+                            innerData.d10p = col.innerHTML;
+                            break;
+                        case "w11a":
+                            innerData.d11a = col.innerHTML;
+                            break;
+                        case "w11b":
+                            innerData.d11p = col.innerHTML;
+                            break;
+                        case "w12a":
+                            innerData.d12a = col.innerHTML;
+                            break;
+                        case "w12b":
+                            innerData.d12p = col.innerHTML;
+                            break;
+                        case "w13a":
+                            innerData.d13a = col.innerHTML;
+                            break;
+                        case "w13b":
+                            innerData.d13p = col.innerHTML;
+                            break;
+                        case "w14a":
+                            innerData.d14a = col.innerHTML;
+                            break;
+                        case "w14b":
+                            innerData.d14p = col.innerHTML;
+                            break;
+                        case "w3w":
+                            innerData.w3 = col.innerHTML;
+                            break;
+                        case "w4w":
+                            innerData.w4 = col.innerHTML;
+                            break;
+                        case "w5w":
+                            innerData.w5 = col.innerHTML;
+                            break;
+                        case "w6w":
+                            innerData.w6 = col.innerHTML;
+                            break;
+                        case "w7w":
+                            innerData.w7 = col.innerHTML;
+                            break;
+                        case "w8w":
+                            innerData.w8 = col.innerHTML;
+                            break;
+                        default:
+                            console.log("Something unexpected happened.");
+                    }
+
+
+                }
+                
+            }
+            
+        }
+       
+        data.push(innerData);
+        innerData = {};
+       
+    });
+    console.log(data);
+
+    fetch("AddLitterWeights.php?session=" + getCookie("session"), {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+        // .then(response => response.json()) // parses response to JSON
+        .then((dataRes) => {
+            console.log(dataRes);
+        });
 
 }
 
@@ -640,7 +817,14 @@ function loadLitterInfoByID(id) {
 
     loadLitterWeightTable(id);
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session) //Add the file name
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -758,8 +942,16 @@ function logout() {
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    fetch("logoff.php");
+    fetch("logoff.php",{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    });
     window.location.href = "/PawsOnCall/login.html";
+
 }
 
 function verifySessionCookie() {
@@ -820,7 +1012,14 @@ function loadMotherInfo() {
     var noteTable = document.getElementById("noteTable");
     var dogBreedDiv = document.getElementById("breedDiv");
 
-    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session) //Add the file name
+    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session,{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -1002,7 +1201,14 @@ function searchForDogs() {
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session")) //Add the file name
+    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session"),{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));

@@ -17,9 +17,9 @@ if (false){ //$input['error'] == 'auth error') {
 else {
 	
 	include 'dbconnect.php';
-	$dogs = json_decode(file_get_contents('php://input'), true);
+	$dogs = json_decode(mysqli_real_escape_string($db,file_get_contents('php://input')), true);
 
-	if ($db->connect_error)
+	if (mysqli_connect_error($db))
 	{
 		die("Can't connect");
 	}
@@ -35,13 +35,13 @@ else {
 			}else{
 				$SQL = "UPDATE Dogs SET Name = '$name', Sex = '$sex', Birthdate = '$birthdate', Stillborn = $stillborn WHERE ID = $dogID";
 			}
-			if ($db->query($SQL)) {
+			if (mysqli_query($db,$SQL)) {
 				echo json_encode(array("result" => "Record updated successfully"));
 			} else {
-				echo(json_encode(array("error" => "Error updating record: " . $db->error)));
+				echo json_encode(array("error" => "Error updating record: " . mysqli_error($db)));
 			}
 		}
 	}
-	$db->close();
+	mysqli_close($db);
 }
 ?>
