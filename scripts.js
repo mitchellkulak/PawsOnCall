@@ -844,6 +844,16 @@ function addLitterNote() {
 }
 
 function getVolunteerInfo() {
+    var searchMessage = document.getElementById("searchMessage");
+    var volunteerContent = document.getElementById("wrapper");
+    if (getCookie("dogID") == "" || getCookie("dogID") == null) {
+        searchMessage.style.display = "block";
+        volunteerContent.style.display = "none";
+    }
+    else {
+        searchMessage.style.display = "none";
+        volunteerContent.style.display = "block";
+    }
     var dogID = getCookie("dogID");
     var VolunteerID;
     var txtName = document.getElementById("hostName");
