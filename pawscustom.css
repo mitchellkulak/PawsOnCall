@@ -17,8 +17,8 @@ a.navbar-item{
 }
 
 #noteTile{
-	max-height: 300px;
-	overflow: scroll;
+	max-height: 150px;
+    overflow: auto;
 }
 
 #navbarDesktop.navbar-brand{
