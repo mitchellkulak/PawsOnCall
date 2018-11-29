@@ -19,7 +19,7 @@
 		}else{
 			$dogInfo = array();
 			$litterID = mysqli_real_escape_string($db,urldecode($_GET['litterID']));
-			$SQL = "SELECT d.Name, w.* FROM Weight AS w, Dogs AS d WHERE d.LitterID = $litterID AND w.DogID = d.ID ORDER BY w.DogID";
+			$SQL = "SELECT d.Name, w.* FROM Weight AS w, Dogs AS d WHERE d.LitterID = $litterID AND w.DogID = d.ID ORDER BY d.Birthdate DESC";
 			$dogRequest = mysqli_query($db,$SQL);
 			$i = 0;
 			while ($result = mysqli_fetch_assoc($dogRequest)){
