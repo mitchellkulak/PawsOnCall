@@ -148,6 +148,16 @@ function resizeChart() {
 }
 
 function loadLitterInfo() {
+    var searchMessage = document.getElementById("searchMessage");
+    var litterContent = document.getElementById("wrapper");
+    if (getCookie("dogID") == "" || getCookie("dogID") == null) {
+        searchMessage.style.display = "block";
+        litterContent.style.display = "none";
+    }
+    else {
+        searchMessage.style.display = "none";
+        litterContent.style.display = "block";
+    }
     var deadpuppies = 0;
     var stillborn = 0;
     var session = getCookie("session");
@@ -539,6 +549,16 @@ function loadLitterWeightTable(id) {
 }
 
 function loadLitterInfoByID(id) {
+    var searchMessage = document.getElementById("searchMessage");
+    var litterContent = document.getElementById("wrapper");
+    if (getCookie("dogID") == "" || getCookie("dogID") == null) {
+        searchMessage.style.display = "block";
+        litterContent.style.display = "none";
+    }
+    else {
+        searchMessage.style.display = "none";
+        litterContent.style.display = "block";
+    }
     document.cookie = "litter=" + id;
     var session = getCookie("session");
     var dogID = getCookie("dogID");
@@ -895,6 +915,16 @@ function addLitterNote() {
 }
 
 function getVolunteerInfo() {
+    var searchMessage = document.getElementById("searchMessage");
+    var volunteerContent = document.getElementById("wrapper");
+    if (getCookie("dogID") == "" || getCookie("dogID") == null) {
+        searchMessage.style.display = "block";
+        volunteerContent.style.display = "none";
+    }
+    else {
+        searchMessage.style.display = "none";
+        volunteerContent.style.display = "block";
+    }
     var dogID = getCookie("dogID");
     var VolunteerID;
     var txtName = document.getElementById("hostName");
