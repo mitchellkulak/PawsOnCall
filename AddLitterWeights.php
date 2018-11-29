@@ -17,7 +17,7 @@
 		{
 			die("Can't connect");
 		}else{
-			$weights = mysqli_real_escape_string($db,json_decode(file_get_contents('php://input'), true));
+			$weights = json_decode(mysqli_real_escape_string($db,file_get_contents('php://input')), true);
 				foreach($weights as $weight){
 					$d1a = $weight['d1a']; 
 					$d1p = $weight['d1p']; 
@@ -55,43 +55,9 @@
 					$w8 = $weight['w8'];
 					$dogID = $weight['DogID'];
 
-					$SQL = "UPDATE Weight SET
-						d1a  = $d1a ,
-						d1p  = $d1p ,
-						d2a  = $d2a ,
-						d2p  = $d2p ,
-						d3a  = $d3a ,
-						d3p  = $d3p ,
-						d4a  = $d4a ,
-						d4p  = $d4p ,
-						d5a  = $d5a ,
-						d5p  = $d5p ,
-						d6a  = $d6a ,
-						d6p  = $d6p ,
-						d7a  = $d7a ,
-						d7p  = $d7p ,
-						d8a  = $d8a ,
-						d8p  = $d8p ,
-						d9a  = $d9a ,
-						d9p  = $d9p ,
-						d10a  = $d10a ,
-						d10p  = $d10p ,
-						d11a  = $d11a ,
-						d11p  = $d11p ,
-						d12a  = $d12a ,
-						d12p  = $d12p ,
-						d13a  = $d13a ,
-						d13p  = $d13p ,
-						d14a  = $d14a ,
-						d14p  = $d14p ,
-						w3  = $w3 ,
-						w4  = $w4 ,
-						w5  = $w5 ,
-						w6  = $w6 ,
-						w7  = $w7 ,
-						w8  = $w8
-					WHERE DogID = $dogID";
-					if(!mysqli_query($db,$SQL)){die("Failed");}		
+					$SQL = "UPDATE Weight SET d1a = $d1a, d1p = $d1p, d2a = $d2a, d2p = $d2p, d3a = $d3a, d3p = $d3p, d4a = $d4a, d4p = $d4p, d5a = $d5a, d5p = $d5p, d6a = $d6a, d6p = $d6p, d7a = $d7a, d7p = $d7p, d8a = $d8a, d8p = $d8p, d9a = $d9a, d9p = $d9p, d10a = $d10a,	d10p = $d10p, d11a = $d11a,	d11p = $d11p, d12a = $d12a,	d12p = $d12p, d13a = $d13a,	d13p = $d13p, d14a = $d14a, d14p = $d14p, w3 = $w3, w4 = $w4, w5 = $w5, w6 = $w6, w7 = $w7, w8 = $w8 WHERE DogID = $dogID";
+					if(!mysqli_query($db,$SQL)){die("Failed");}
+					echo json_encode(mysqli_error($db));
 				}
 			}
 		}

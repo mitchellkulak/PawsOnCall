@@ -236,6 +236,10 @@ article.litter{
 	padding: 15px 10px !important;
 }
 
+#loginError{
+	color:red;
+}
+
 #puppyNoteTable{
 	width:100%;
 }
@@ -253,4 +257,8 @@ background-color: #c553d6; !important;
 .navbar-link:hover{
     color:#fff !important;
     background-color: #a72cba !important;
+}
+
+.navbar-burger{
+color: #fff !important;
 }
