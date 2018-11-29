@@ -397,7 +397,7 @@ function addPuppy() {
             //.then(response => response.json()) // parses response to JSON
             .then((responseContent) => {
                 console.log(responseContent);
-            });
+            }); 
     }
     litterID = document.getElementById("litterIDHolder").innerHTML;
     loadLitterInfoByID(litterID);
