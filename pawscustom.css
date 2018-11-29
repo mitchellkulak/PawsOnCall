@@ -119,8 +119,9 @@ button.button.is-link.logout{
 
 
 article.tile.notification.is-primary.search{
-	height:40px !important;
-	padding: 10px 25px !important;
+	height:65px !important;
+	padding: 10px 20px !important;
+	width: 100% !important;
 }
 
 input.input.create{
@@ -270,3 +271,9 @@ color: #fff !important;
 .is-child.box{
 box-shadow: 5px 5px 5px #808080;
 }
+
+#searchResults.section{
+	padding: 30px 10px !important;
+	height: 120px !important;
+}
+
