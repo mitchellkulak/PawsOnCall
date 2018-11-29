@@ -514,6 +514,7 @@ function loadLitterWeightTable(id) {
                 var nameCell1 = document.createElement("td");
                 nameCell1.classList.add("puppyName");
                 nameCell1.innerHTML = element.Name;
+                var nameCell2 = document.createElement("td");
                 nameCell2.classList.add("puppyName");
                 nameCell2.innerHTML = element.Name;
                 newRow1.appendChild(nameCell1);
