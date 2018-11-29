@@ -16,7 +16,7 @@ a.navbar-item{
 	padding-right:6px;
 }
 
-#noteTable{
+#noteTile{
 	max-height: 300px;
 	overflow: scroll;
 }
