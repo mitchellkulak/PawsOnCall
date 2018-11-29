@@ -16,6 +16,10 @@ a.navbar-item{
 	padding-right:6px;
 }
 
+#noteTable{
+	max-height: 50%;
+}
+
 #navbarDesktop.navbar-brand{
 	width: 100%;
 }
