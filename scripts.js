@@ -488,14 +488,9 @@ function saveLitterWeightTable() {
                         default:
                             console.log("Something unexpected happened.");
                     }
-
-
-                }
-                
+                }  
             }
-            
         }
-       
         data.push(innerData);
         innerData = {};
        
