@@ -693,10 +693,10 @@ function addMed(medication) {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
+                    loadMotherInfo();
                 });
         }
     }
-    loadMotherInfo();
 }
 
 function addMedi(x) {
@@ -872,12 +872,11 @@ function addDogNote() {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
-
+                    loadMotherInfo();
 
                 });
         }
     }
-    loadMotherInfo();
 }
 
 function addLitterNote() {
