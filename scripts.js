@@ -454,7 +454,7 @@ function saveLitterWeightTable() {
             if(innerData[String(litterWeightTable.rows[i].cells[ir].className)] == ""){
                 innerData[String(litterWeightTable.rows[i].cells[ir].className)] = "NULL";
             }
-            innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] = litterWeightTable.rows[i+numPuppies+1].cells[irs].textContent
+            innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] = litterWeightTable.rows[i+numPuppies+1].cells[ir].textContent
             .replace('\n',"")
             .replace(" ","");
             if(innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] == ""){
@@ -526,9 +526,9 @@ function loadLitterWeightTable(id) {
                     cell1.innerHTML = element[String(keys[i])];
                     newRow1.appendChild(cell1);
                     var cell2 = document.createElement("td");
-                    cell2.classList.add(String(keys[i+18]));
+                    cell2.classList.add(String(keys[i+17]));
                     cell2.setAttribute("contenteditable", true);
-                    cell2.innerHTML = element[String(keys[i+18])];
+                    cell2.innerHTML = element[String(keys[i+17])];
                     newRow2.appendChild(cell2);
                 }
                 litterWeightHeaders1.insertAdjacentElement('afterend', newRow1);
