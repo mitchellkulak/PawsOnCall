@@ -18,6 +18,7 @@ a.navbar-item{
 
 #noteTable{
 	max-height: 300px;
+	overflow: scroll;
 }
 
 #navbarDesktop.navbar-brand{
