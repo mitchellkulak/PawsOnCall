@@ -39,6 +39,7 @@ function addMomDogTemp() {
             alert("please enter a number between 90 and 110");
         }
     }
+    loadMotherInfo();
 
 }
 
@@ -47,7 +48,7 @@ function getWhelpDates() {
     var endWhelp;
     var thisTableBody = document.getElementById("whelp");
 
-    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -107,7 +108,7 @@ async function drawChart() {
 async function prepareDataForChart() {
     var bigArray = new Array();
     var i = 0;
-    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -171,7 +172,7 @@ function loadLitterInfo() {
 
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -235,8 +236,11 @@ function loadLitterInfo() {
                 var newStillbornInput = document.createElement("input");
                 newStillbornInput.type = "checkbox";
                 newIDCell.innerHTML = element.Name;
+                newIDCell.setAttribute("contenteditable", true);
                 newSexCell.innerHTML = element.Sex;
+                newSexCell.setAttribute("contenteditable", true);
                 newBirthdateCell.innerHTML = element.Birthdate;
+                newBirthdateCell.setAttribute("contenteditable", true);
                 if (element.Stillborn == 1) {
                     newStillbornInput.checked = true;
                 } else {
@@ -298,6 +302,7 @@ function addImportantDates() {
     //console.log(responseContent.JSON);
     //console.log(JSON.stringify(theMasterPupData));
     console.log(JSON.stringify(dateData));
+    alert("Changes Saved");
 }
 
 
@@ -312,9 +317,9 @@ function savePuppy() {
     var url = "UpdatePuppies.php?session=" + getCookie("session");
     for (var i = 0; i < thisTbody.rows.length; i++) {
         var pupData = {};
-        collarColor = thisTbody.rows[i].cells[0].innerHTML;
-        sex = thisTbody.rows[i].cells[1].innerHTML;
-        DOB = thisTbody.rows[i].cells[2].innerHTML;
+        collarColor = thisTbody.rows[i].cells[0].textContent.replace('\n',"");
+        sex = thisTbody.rows[i].cells[1].textContent.replace('\n',"");
+        DOB = thisTbody.rows[i].cells[2].textContent.replace('\n',"");
         dogID = thisTbody.rows[i].id;
         if (thisTbody.rows[i].cells[3].getElementsByTagName("input")[0].checked) {
             stillBorn = 1;
@@ -349,181 +354,61 @@ function savePuppy() {
         });
     //console.log(responseContent.JSON);
     //console.log(JSON.stringify(theMasterPupData));
+    litterID = document.getElementById("litterIDHolder").innerHTML;
+    loadLitterInfoByID(litterID);
+    alert("Changes Saved");
 }
 
 function addPuppy() {
     var data = {};
-    data.name = prompt("Enter Puppy's Collar Color");
-    if (data.name != null) {
+
+    var collarColor = prompt("Enter Puppy's Collar Color");
+    // collar color validation
+    if (collarColor != null) {
         var url = "AddPuppies.php?session=" + getCookie("session");
         data.volunteerID = document.getElementById("volunteerIDHolder").innerHTML;
-        data.sex = prompt("Enter Puppy's Sex ('M' or 'F'):");
-        data.birthdate = prompt("Enter Puppy's Date Of Birth (MM-DD-YYYY):");
+        data.name = collarColor;
+    } else {
+        alert("please enter either a valid collar color e.g. 'Blue'");
+        return;
+    }
+
+    var sex = prompt("Enter Puppy's Sex ('M' or 'F'):");
+    //sex validation
+    sex = sex.toString().toUpperCase();
+    if (sex != null && (sex == 'M' || sex == 'F')) {
+        data.sex = sex;
+    } else {
+        alert("please enter either 'M' or 'F");
+        return;
+    }
+
+    var birthDate = prompt("Enter Puppy's Date Of Birth (YYYY-MM-DD HH:MM):");
+    //birth date validation
+    birthDate = birthDate.toString();
+    if (birthDate != null && /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}/.test(birthDate)) {
+        birthDate = birthDate + ":00";
+        data.birthdate = birthDate;
+        console.log(birthDate);
+    } else {
+        alert("please enter a valid birthdate: (YYYY-MM-DD HH-MM)");
+        return;
+    }
+
+    var stillBorn = prompt("Is this puppy stillborn? (Enter '1' if Yes or '0' No):");
+    //stillBorn validation
+    stillBorn = parseInt(stillBorn);
+    if (stillBorn != null && (stillBorn == '1' || stillBorn == '0')) {
+        data.stillborn = stillBorn;
         data.breed = document.getElementById("breedHolder").innerHTML;
         data.litterID = document.getElementById("litterIDHolder").innerHTML;
-        data.stillborn = prompt("Is this puppy stillborn? (Y or N):");
-        console.log(JSON.stringify(data));
-        fetch(url, {
-            method: "POST", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, cors, *same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                // "Content-Type": "application/x-www-form-urlencoded",
-            },
-            redirect: "follow", // manual, *follow, error
-            referrer: "no-referrer", // no-referrer, *client
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
-        })
-            //.then(response => response.json()) // parses response to JSON
-            .then((responseContent) => {
-                console.log(responseContent);
-            });
-    }
-}
-
-function saveLitterWeightTable() {
-    var data = [];
-    var puppyIDs = [];
-    var litterWeightTable = document.getElementById("litterWeightTable");
-    var innerData = {};
-    for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
-        if (litterWeightTable.rows[i].id != "litterWeightHeaders1" && litterWeightTable.rows[i].id != "litterWeightHeaders2") {
-            puppyIDs.indexOf(litterWeightTable.rows[i].className) === -1 ? puppyIDs.push(litterWeightTable.rows[i].className) : console.log("This item already exists");
-        }
+    } else {
+        alert("please enter either '1' for Yes or '0' for No");
+        return;
     }
 
-    puppyIDs.forEach(function (element) {
-        console.log(element);
-        for (var i = 0, row; row = litterWeightTable.rows[i]; i++) {
-           
-            if (row.className == element) {
-                for (var j = 0, col; col = row.cells[j]; j++) {
-
-                    var weightCellClass = col.className;
-                    innerData.DogID = element;
-                    switch (weightCellClass) {
-                        case "w1a":
-                            innerData.d1a = col.innerHTML;
-                            break;
-                        case "w1b":
-                            innerData.d1p = col.innerHTML;
-                            break;
-                        case "w2a":
-                            innerData.d2a = col.innerHTML;
-                            break;
-                        case "w2b":
-                            innerData.d2p = col.innerHTML;
-                            break;
-                        case "w3a":
-                            innerData.d3a = col.innerHTML;
-                            break;
-                        case "w3b":
-                            innerData.d3p = col.innerHTML;
-                            break;
-                        case "w4a":
-                            innerData.d4a = col.innerHTML;
-                            break;
-                        case "w4b":
-                            innerData.d4p = col.innerHTML;
-                            break;
-                        case "w5a":
-                            innerData.d5a = col.innerHTML;
-                            break;
-                        case "w5b":
-                            innerData.d5p = col.innerHTML;
-                            break;
-                        case "w6a":
-                            innerData.d6a = col.innerHTML;
-                            break;
-                        case "w6b":
-                            innerData.d6p = col.innerHTML;
-                            break;
-                        case "w7a":
-                            innerData.d7a = col.innerHTML;
-                            break;
-                        case "w7b":
-                            innerData.d7p = col.innerHTML;
-                            break;
-                        case "w8a":
-                            innerData.d8a = col.innerHTML;
-                            break;
-                        case "w8b":
-                            innerData.d8p = col.innerHTML;
-                            break;
-                        case "w9a":
-                            innerData.d9a = col.innerHTML;
-                            break;
-                        case "w9b":
-                            innerData.d9p = col.innerHTML;
-                            break;
-                        case "w10a":
-                            innerData.d10a = col.innerHTML;
-                            break;
-                        case "w10b":
-                            innerData.d10p = col.innerHTML;
-                            break;
-                        case "w11a":
-                            innerData.d11a = col.innerHTML;
-                            break;
-                        case "w11b":
-                            innerData.d11p = col.innerHTML;
-                            break;
-                        case "w12a":
-                            innerData.d12a = col.innerHTML;
-                            break;
-                        case "w12b":
-                            innerData.d12p = col.innerHTML;
-                            break;
-                        case "w13a":
-                            innerData.d13a = col.innerHTML;
-                            break;
-                        case "w13b":
-                            innerData.d13p = col.innerHTML;
-                            break;
-                        case "w14a":
-                            innerData.d14a = col.innerHTML;
-                            break;
-                        case "w14b":
-                            innerData.d14p = col.innerHTML;
-                            break;
-                        case "w3w":
-                            innerData.w3 = col.innerHTML;
-                            break;
-                        case "w4w":
-                            innerData.w4 = col.innerHTML;
-                            break;
-                        case "w5w":
-                            innerData.w5 = col.innerHTML;
-                            break;
-                        case "w6w":
-                            innerData.w6 = col.innerHTML;
-                            break;
-                        case "w7w":
-                            innerData.w7 = col.innerHTML;
-                            break;
-                        case "w8w":
-                            innerData.w8 = col.innerHTML;
-                            break;
-                        default:
-                            console.log("Something unexpected happened.");
-                    }
-
-
-                }
-                
-            }
-            
-        }
-       
-        data.push(innerData);
-        innerData = {};
-       
-    });
-    console.log(data);
-
-    fetch("AddLitterWeights.php?session=" + getCookie("session"), {
+    console.log(JSON.stringify(data));
+    fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -536,11 +421,61 @@ function saveLitterWeightTable() {
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
-        // .then(response => response.json()) // parses response to JSON
-        .then((dataRes) => {
-            console.log(dataRes);
+        //.then(response => response.json()) // parses response to JSON
+        .then((responseContent) => {
+            console.log(responseContent);
         });
 
+    litterID = document.getElementById("litterIDHolder").innerHTML;
+    loadLitterInfoByID(litterID);
+
+}
+
+function saveLitterWeightTable() {
+    var data = [];
+    var litterWeightTable = document.getElementById("litterWeightTable");
+    var numPuppies = (litterWeightTable.rows.length - 2) / 2;
+    for(var i = 1; i <= numPuppies; i++){
+        var innerData = {};
+        innerData.DogID = String(litterWeightTable.rows[i].className);
+        for(var ir = 1; ir < litterWeightTable.rows[i].cells.length; ir++){
+            innerData[String(litterWeightTable.rows[i].cells[ir].className)] = litterWeightTable.rows[i].cells[ir].textContent
+            .replace('\n',"")
+            .replace(" ","");
+            if(innerData[String(litterWeightTable.rows[i].cells[ir].className)] == ""){
+                innerData[String(litterWeightTable.rows[i].cells[ir].className)] = "NULL";
+            }
+            innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] = litterWeightTable.rows[i+numPuppies+1].cells[irs].textContent
+            .replace('\n',"")
+            .replace(" ","");
+            if(innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] == ""){
+                innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] = "NULL";
+            }
+        }
+        data.push(innerData);
+    }
+    //console.log(JSON.stringify(data));
+
+
+    var url = "AddLitterWeights.php?session=" + getCookie("session");
+            fetch(url, {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, cors, *same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, *same-origin, omit
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    // "Content-Type": "application/x-www-form-urlencoded",
+                },
+                redirect: "follow", // manual, *follow, error
+                referrer: "no-referrer", // no-referrer, *client
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            })
+                //.then(response => response.json()) // parses response to JSON
+                .then((responseContent) => {
+                    console.log(responseContent);
+                });
+    alert("Weights Saved");
 }
 
 function loadLitterWeightTable(id) {
@@ -560,235 +495,35 @@ function loadLitterWeightTable(id) {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
             obj.forEach(function (element) {
-                console.log(element.d1a);
                 var newRow1 = document.createElement("tr");
                 var newRow2 = document.createElement("tr");
                 newRow1.classList.add(element.DogID);
                 newRow2.classList.add(element.DogID);
-
+                var keys = Object.keys(element);
+                
                 var nameCell1 = document.createElement("td");
                 nameCell1.classList.add("puppyName");
                 nameCell1.innerHTML = element.Name;
                 newRow1.appendChild(nameCell1);
-
-                var nameCell2 = document.createElement("td");
-                nameCell2.classList.add("puppyName");
-                nameCell2.innerHTML = element.Name;
-                newRow2.appendChild(nameCell2);
-
-                var w1a = document.createElement("td");
-                w1a.classList.add("w1a");
-                w1a.setAttribute("contenteditable", true);
-                w1a.innerHTML = element.d1a;
-                newRow1.appendChild(w1a);
-
-                var w1b = document.createElement("td");
-                w1b.classList.add("w1b");
-                w1b.setAttribute("contenteditable", true);
-                w1b.innerHTML = element.d1p;
-                newRow1.appendChild(w1b);
-
-                var w2a = document.createElement("td");
-                w2a.classList.add("w2a");
-                w2a.setAttribute("contenteditable", true);
-                w2a.innerHTML = element.d2a;
-                newRow1.appendChild(w2a);
-
-                var w2b = document.createElement("td");
-                w2b.classList.add("w2b");
-                w2b.setAttribute("contenteditable", true);
-                w2b.innerHTML = element.d2p;
-                newRow1.appendChild(w2b);
-
-
-                var w3a = document.createElement("td");
-                w3a.classList.add("w3a");
-                w3a.setAttribute("contenteditable", true);
-                w3a.innerHTML = element.d3a;
-                newRow1.appendChild(w3a);
-
-                var w3b = document.createElement("td");
-                w3b.classList.add("w3b");
-                w3b.setAttribute("contenteditable", true);
-                w3b.innerHTML = element.d3p;
-                newRow1.appendChild(w3b);
-
-                var w4a = document.createElement("td");
-                w4a.classList.add("w4a");
-                w4a.setAttribute("contenteditable", true);
-                w4a.innerHTML = element.d4a;
-                newRow1.appendChild(w4a);
-
-                var w4b = document.createElement("td");
-                w4b.classList.add("w4b");
-                w4b.setAttribute("contenteditable", true);
-                w4b.innerHTML = element.d4p;
-                newRow1.appendChild(w4b);
-
-                var w5a = document.createElement("td");
-                w5a.classList.add("w5a");
-                w5a.setAttribute("contenteditable", true);
-                w5a.innerHTML = element.d5a;
-                newRow1.appendChild(w5a);
-
-                var w5b = document.createElement("td");
-                w5b.classList.add("w5b");
-                w5b.setAttribute("contenteditable", true);
-                w5b.innerHTML = element.d5p;
-                newRow1.appendChild(w5b);
-
-                var w6a = document.createElement("td");
-                w6a.classList.add("w6a");
-                w6a.setAttribute("contenteditable", true);
-                w6a.innerHTML = element.d6a;
-                newRow1.appendChild(w6a);
-
-                var w6b = document.createElement("td");
-                w6b.classList.add("w6b");
-                w6b.setAttribute("contenteditable", true);
-                w6b.innerHTML = element.d6p;
-                newRow1.appendChild(w6b);
-
-                var w7a = document.createElement("td");
-                w7a.classList.add("w7a");
-                w7a.setAttribute("contenteditable", true);
-                w7a.innerHTML = element.d7a;
-                newRow1.appendChild(w7a);
-
-                var w7b = document.createElement("td");
-                w7b.classList.add("w7b");
-                w7b.setAttribute("contenteditable", true);
-                w7b.innerHTML = element.d7p;
-                newRow1.appendChild(w7b);
-
-                var w8a = document.createElement("td");
-                w8a.classList.add("w8a");
-                w8a.setAttribute("contenteditable", true);
-                w8a.innerHTML = element.d8a;
-                newRow1.appendChild(w8a);
-
-                var w8b = document.createElement("td");
-                w8b.classList.add("w8b");
-                w8b.setAttribute("contenteditable", true);
-                w8b.innerHTML = element.d8p;
-                newRow1.appendChild(w8b);
-
-                var w9a = document.createElement("td");
-                w9a.classList.add("w9a");
-                w9a.setAttribute("contenteditable", true);
-                w9a.innerHTML = element.d9a;
-                newRow1.appendChild(w9a);
-
-                var w9b = document.createElement("td");
-                w9b.classList.add("w9b");
-                w9b.setAttribute("contenteditable", true);
-                w9b.innerHTML = element.d9p;
-                newRow2.appendChild(w9b);
-
-                var w10a = document.createElement("td");
-                w10a.classList.add("w10a");
-                w10a.setAttribute("contenteditable", true);
-                w10a.innerHTML = element.d10a;
-                newRow2.appendChild(w10a);
-
-                var w10b = document.createElement("td");
-                w10b.classList.add("w10b");
-                w10b.setAttribute("contenteditable", true);
-                w10b.innerHTML = element.d10p;
-                newRow2.appendChild(w10b);
-
-                var w11a = document.createElement("td");
-                w11a.classList.add("w11a");
-                w11a.setAttribute("contenteditable", true);
-                w11a.innerHTML = element.d11a;
-                newRow2.appendChild(w11a);
-
-                var w11b = document.createElement("td");
-                w11b.classList.add("w11b");
-                w11b.setAttribute("contenteditable", true);
-                w11b.innerHTML = element.d11p;
-                newRow2.appendChild(w11b);
-
-                var w12a = document.createElement("td");
-                w12a.classList.add("w12a");
-                w12a.setAttribute("contenteditable", true);
-                w12a.innerHTML = element.d12a;
-                newRow2.appendChild(w12a);
-
-                var w12b = document.createElement("td");
-                w12b.classList.add("w12b");
-                w12b.setAttribute("contenteditable", true);
-                w12b.innerHTML = element.d12p;
-                newRow2.appendChild(w12b);
-
-                var w13a = document.createElement("td");
-                w13a.classList.add("w13a");
-                w13a.setAttribute("contenteditable", true);
-                w13a.innerHTML = element.d13a;
-                newRow2.appendChild(w13a);
-
-                var w13b = document.createElement("td");
-                w13b.classList.add("w13b");
-                w13b.setAttribute("contenteditable", true);
-                w13b.innerHTML = element.d13p;
-                newRow2.appendChild(w13b);
-
-                var w14a = document.createElement("td");
-                w14a.classList.add("w14a");
-                w14a.setAttribute("contenteditable", true);
-                w14a.innerHTML = element.d14a;
-                newRow2.appendChild(w14a);
-
-                var w14b = document.createElement("td");
-                w14b.classList.add("w14b");
-                w14b.setAttribute("contenteditable", true);
-                w14b.innerHTML = element.d14p;
-                newRow2.appendChild(w14b);
-
-                var w3w = document.createElement("td");
-                w3w.classList.add("w3w");
-                w3w.setAttribute("contenteditable", true);
-                w3w.innerHTML = element.w3;
-                newRow2.appendChild(w3w);
-
-                var w4w = document.createElement("td");
-                w4w.classList.add("w4w");
-                w4w.setAttribute("contenteditable", true);
-                w4w.innerHTML = element.w4;
-                newRow2.appendChild(w4w);
-
-                var w5w = document.createElement("td");
-                w5w.classList.add("w5w");
-                w5w.setAttribute("contenteditable", true);
-                w5w.innerHTML = element.w5;
-                newRow2.appendChild(w5w);
-
-                var w6w = document.createElement("td");
-                w6w.classList.add("w6w");
-                w6w.setAttribute("contenteditable", true);
-                w6w.innerHTML = element.w6;
-                newRow2.appendChild(w6w);
-
-                var w7w = document.createElement("td");
-                w7w.classList.add("w7w");
-                w7w.setAttribute("contenteditable", true);
-                w7w.innerHTML = element.w7;
-                newRow2.appendChild(w7w);
-
-                var w8w = document.createElement("td");
-                w8w.classList.add("w8w");
-                w8w.setAttribute("contenteditable", true);
-                w8w.innerHTML = element.w8;
-                newRow2.appendChild(w8w);
-
+                newRow2.appendChild(nameCell1);
+                for(var i = 2; i < 19; i++){
+                    var cell1 = document.createElement("td");
+                    cell1.classList.add(String(keys[i]));
+                    cell1.setAttribute("contenteditable", true);
+                    cell1.innerHTML = element[String(keys[i])];
+                    newRow1.appendChild(cell1);
+                    var cell2 = document.createElement("td");
+                    cell2.classList.add(String(keys[i+18]));
+                    cell2.setAttribute("contenteditable", true);
+                    cell2.innerHTML = element[String(keys[i+18])];
+                    newRow2.appendChild(cell2);
+                }
                 litterWeightHeaders1.insertAdjacentElement('afterend', newRow1);
                 litterWeightHeaders2.insertAdjacentElement('afterend', newRow2);
-
-            })
+            }
+            );
         });
-
 }
 
 function loadLitterInfoByID(id) {
@@ -817,7 +552,7 @@ function loadLitterInfoByID(id) {
 
     loadLitterWeightTable(id);
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -872,6 +607,9 @@ function loadLitterInfoByID(id) {
                         var newStillbornInput = document.createElement("input");
                         newStillbornInput.type = "checkbox";
                         newBirthdateCell.innerHTML = element.Birthdate;
+                        newIDCell.setAttribute("contenteditable", true);
+                        newSexCell.setAttribute("contenteditable", true);
+                        newBirthdateCell.setAttribute("contenteditable", true);
                         if (element.Stillborn == 1) {
                             newStillbornInput.checked = true;
                         } else {
@@ -926,6 +664,7 @@ function addMed(medication) {
                 });
         }
     }
+    loadMotherInfo();
 }
 
 function addMedi(x) {
@@ -942,7 +681,7 @@ function logout() {
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    fetch("logoff.php",{
+    fetch("logoff.php", {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -1012,7 +751,7 @@ function loadMotherInfo() {
     var noteTable = document.getElementById("noteTable");
     var dogBreedDiv = document.getElementById("breedDiv");
 
-    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session,{
+    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -1042,8 +781,6 @@ function loginUser() {
     var emailInput = document.getElementById("emailInput");
     var passwordInput = document.getElementById("passwordInput");
     var url = "login.php";
-    var username = "no@nomail.com";
-    var password = "steve";
     var data = {};
     data.user_name = emailInput.value;
     data.hashed_password = SHA1(passwordInput.value);
@@ -1069,6 +806,9 @@ function loginUser() {
             console.log(document.cookie);
             if (data.sessionKey != "" && data.sessionKey != null) {
                 window.location.href = "mother.html";
+            }else{
+                alert("Incorrect Username or Password");
+                passwordInput.value = "";
             }
         });
 }
@@ -1105,11 +845,12 @@ function addDogNote() {
                 });
         }
     }
+    loadMotherInfo();
 }
 
 function addLitterNote() {
     var d = Date.now();
-    var litterID = getCookie("litter");
+    var litterID = document.getElementById("litterIDHolder").innerHTML;
     console.log(litterID);
     if (litterID != "") {
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
@@ -1138,6 +879,7 @@ function addLitterNote() {
                 });
         }
     }
+    loadLitterInfoByID(litterID);
 }
 
 function getVolunteerInfo() {
@@ -1149,8 +891,8 @@ function getVolunteerInfo() {
     var txtState = document.getElementById("hostState");
     var txtZIP = document.getElementById("hostZIP");
     var txtPhone = document.getElementById("hostPhone");
-    var dogName = document.getElementById("dogName");
-    var dogBreed = document.getElementById("dogBreed");
+    var dogName = document.getElementById("dogNameDiv");
+    var dogBreed = document.getElementById("breedDiv");
     fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
         .then(response => response.json())
         .then((data) => {
@@ -1201,7 +943,7 @@ function searchForDogs() {
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session"),{
+    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session"), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

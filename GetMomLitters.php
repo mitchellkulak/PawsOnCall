@@ -38,7 +38,7 @@ else {
     		$litterData = mysqli_query($db,
     		"SELECT *
     		FROM Dogs 
-    		WHERE LitterID = $litterID"
+    		WHERE LitterID = $litterID ORDER BY Birthdate ASC"
     		);
     		while ($litterResult = mysqli_fetch_assoc($litterData)){
         		$puppiesArray[$in] = $litterResult;
