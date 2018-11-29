@@ -852,8 +852,8 @@ function getVolunteerInfo() {
     var txtState = document.getElementById("hostState");
     var txtZIP = document.getElementById("hostZIP");
     var txtPhone = document.getElementById("hostPhone");
-    var dogName = document.getElementById("dogName");
-    var dogBreed = document.getElementById("dogBreed");
+    var dogName = document.getElementById("dogNameDiv");
+    var dogBreed = document.getElementById("breedDiv");
     fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
         .then(response => response.json())
         .then((data) => {
