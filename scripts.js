@@ -48,7 +48,7 @@ function getWhelpDates() {
     var endWhelp;
     var thisTableBody = document.getElementById("whelp");
 
-    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+    fetch('GetMomLitters.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -108,7 +108,7 @@ async function drawChart() {
 async function prepareDataForChart() {
     var bigArray = new Array();
     var i = 0;
-    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"),{
+    var data = await fetch('GetMomDogTemps.php?dogID=' + getCookie("dogID") + "&session=" + getCookie("session"), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -172,7 +172,7 @@ function loadLitterInfo() {
 
     var litterInfoTableBody = document.getElementById("litterInfoTableBody");
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -265,11 +265,17 @@ function loadLitterInfo() {
 function addImportantDates() {
     var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
     var whelpStart = rewriteDate(document.getElementById("whelpStart").value);
+    if(whelpStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpStart != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
     var whelpEnd = rewriteDate(document.getElementById("whelpEnd").value);
+    if(whelpEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpEnd != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
     var weanStart = rewriteDate(document.getElementById("weanStart").value);
+    if(weanStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanStart != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
     var weanEnd = rewriteDate(document.getElementById("weanEnd").value);
+    if(weanEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanEnd != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
     var dewormStart = rewriteDate(document.getElementById("dewormStart").value);
+    if(dewormStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormStart != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
     var dewormEnd = rewriteDate(document.getElementById("dewormEnd").value);
+    if(dewormEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormEnd != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
 
     var dateData = {};
     dateData['litterID'] = litterID;
@@ -318,8 +324,11 @@ function savePuppy() {
     for (var i = 0; i < thisTbody.rows.length; i++) {
         var pupData = {};
         collarColor = thisTbody.rows[i].cells[0].textContent.replace('\n',"");
+        if(collarColor == ""){alert("Please Enter a Name");return;}
         sex = thisTbody.rows[i].cells[1].textContent.replace('\n',"");
+        if(sex != /^[MF]/ || sex != /^[A-Z]{1}/){alert("Enter M or F for Sex");return;}
         DOB = thisTbody.rows[i].cells[2].textContent.replace('\n',"");
+        if(DOB != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
         dogID = thisTbody.rows[i].id;
         if (thisTbody.rows[i].cells[3].getElementsByTagName("input")[0].checked) {
             stillBorn = 1;
@@ -361,36 +370,74 @@ function savePuppy() {
 
 function addPuppy() {
     var data = {};
-    data.name = prompt("Enter Puppy's Collar Color");
-    if (data.name != null) {
+
+    var collarColor = prompt("Enter Puppy's Collar Color");
+    // collar color validation
+    if (collarColor != null) {
         var url = "AddPuppies.php?session=" + getCookie("session");
         data.volunteerID = document.getElementById("volunteerIDHolder").innerHTML;
-        data.sex = prompt("Enter Puppy's Sex ('M' or 'F'):");
-        data.birthdate = prompt("Enter Puppy's Date Of Birth (MM-DD-YYYY):");
+        data.name = collarColor;
+    } else {
+        alert("please enter either a valid collar color e.g. 'Blue'");
+        return;
+    }
+
+    var sex = prompt("Enter Puppy's Sex ('M' or 'F'):");
+    //sex validation
+    sex = sex.toString().toUpperCase();
+    if (sex != null && (sex == 'M' || sex == 'F')) {
+        data.sex = sex;
+    } else {
+        alert("please enter either 'M' or 'F");
+        return;
+    }
+
+    var birthDate = prompt("Enter Puppy's Date Of Birth (YYYY-MM-DD HH:MM):");
+    //birth date validation
+    birthDate = birthDate.toString();
+    if (birthDate != null && /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}/.test(birthDate)) {
+        birthDate = birthDate + ":00";
+        data.birthdate = birthDate;
+        console.log(birthDate);
+    } else {
+        alert("please enter a valid birthdate: (YYYY-MM-DD HH-MM)");
+        return;
+    }
+
+    var stillBorn = prompt("Is this puppy stillborn? (Enter '1' if Yes or '0' No):");
+    //stillBorn validation
+    stillBorn = parseInt(stillBorn);
+    if (stillBorn != null && (stillBorn == '1' || stillBorn == '0')) {
+        data.stillborn = stillBorn;
         data.breed = document.getElementById("breedHolder").innerHTML;
         data.litterID = document.getElementById("litterIDHolder").innerHTML;
-        data.stillborn = prompt("Is this puppy stillborn? (Y or N):");
-        console.log(JSON.stringify(data));
-        fetch(url, {
-            method: "POST", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, cors, *same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                // "Content-Type": "application/x-www-form-urlencoded",
-            },
-            redirect: "follow", // manual, *follow, error
-            referrer: "no-referrer", // no-referrer, *client
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
-        })
-            //.then(response => response.json()) // parses response to JSON
-            .then((responseContent) => {
-                console.log(responseContent);
-            });
+    } else {
+        alert("please enter either '1' for Yes or '0' for No");
+        return;
     }
+
+    console.log(JSON.stringify(data));
+    fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+        //.then(response => response.json()) // parses response to JSON
+        .then((responseContent) => {
+            console.log(responseContent);
+        });
+
     litterID = document.getElementById("litterIDHolder").innerHTML;
     loadLitterInfoByID(litterID);
+
 }
 
 function saveLitterWeightTable() {
@@ -417,6 +464,7 @@ function saveLitterWeightTable() {
         data.push(innerData);
     }
     //console.log(JSON.stringify(data));
+
 
     var url = "AddLitterWeights.php?session=" + getCookie("session");
             fetch(url, {
@@ -513,7 +561,7 @@ function loadLitterInfoByID(id) {
 
     loadLitterWeightTable(id);
 
-    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session,{
+    fetch('GetMomLitters.php?dogID=' + dogID + "&session=" + session, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -642,7 +690,7 @@ function logout() {
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
     document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    fetch("logoff.php",{
+    fetch("logoff.php", {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -712,7 +760,7 @@ function loadMotherInfo() {
     var noteTable = document.getElementById("noteTable");
     var dogBreedDiv = document.getElementById("breedDiv");
 
-    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session,{
+    fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -914,7 +962,7 @@ function searchForDogs() {
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
-    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session"),{
+    fetch('DogSearch.php?search=' + dogName + "&session=" + getCookie("session"), {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
