@@ -251,7 +251,7 @@ article.litter{
 
 .navbar-item,.navbar-link{
 color:#fff !important;
-background-color: #c553d6; !important;
+background-color: #c553d6 !important;
 }
 
 .navbar-link:hover{
@@ -261,4 +261,8 @@ background-color: #c553d6; !important;
 
 .navbar-burger{
 color: #fff !important;
+}
+
+.is-child.box{
+box-shadow: 5px 5px 5px #808080;
 }
