@@ -207,7 +207,7 @@ function loadLitterInfo() {
             whelpStart.value = validateDate(obj[0].StartWhelp);
             whelpEnd.value = validateDate(obj[0].EndWhelp);
             dewormStart.value = validateDate(obj[0].StartDeworm);
-            dewormEnd.value = validateDate(obj[0].StartDeworm);
+            dewormEnd.value = validateDate(obj[0].EndDeworm);
 
             // For each litter
             obj.forEach(function (element) {
