@@ -246,6 +246,7 @@ function loadLitterInfo() {
                 var newDeadPuppyCell = document.createElement("td");
                 var newStillbornInput = document.createElement("input");
                 var newDeadPuppyInput = document.createElement("input");
+                newDeadPuppyInput.type = "checkbox";
                 newStillbornInput.type = "checkbox";
                 newIDCell.innerHTML = element.Name;
                 newIDCell.setAttribute("contenteditable", true);
