@@ -63,7 +63,6 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
 mysqli_close($db);
 ?>
 
-<?php echo $message;?>
 
 <!DOCTYPE html>
 <html>
@@ -77,13 +76,13 @@ mysqli_close($db);
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="scripts.js"></script>
+	<script src="../scripts.js"></script>
 	
 	
 	<!-- favicon stuff-->
-	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
 	<link rel="manifest" href="/site.webmanifest">
 	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
@@ -126,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <nav class="navbar ">
   <div class="navbar-brand">
     <a href="searchresult.html">
-			<img src="images/pawslogo.png" alt="PAWS Logo" >
+			<img src="../images/pawslogo.png" alt="PAWS Logo" >
 		</a>
 
     <div class="navbar-burger burger" data-target="navMenubd-example">
@@ -143,13 +142,13 @@ document.addEventListener('DOMContentLoaded', function () {
           Menu
         </a>
         <div class="navbar-dropdown ">
-          <a class="navbar-item " href="mother.html">
+          <a class="navbar-item " href="../mother.html">
             Mom
           </a>
-          <a class="navbar-item " href="puppies.html">
+          <a class="navbar-item " href="../puppies.html">
             Puppies
           </a>
-          <a class="navbar-item " href="misc.html">
+          <a class="navbar-item " href="../misc.html">
             Misc
           </a>
           <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
@@ -178,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function () {
   <a class="button is-link admin" href="index.php">Return to admin page</a><br>
 
 </article>
-<?php echo $message;?>
 
 </body>
 </html>
