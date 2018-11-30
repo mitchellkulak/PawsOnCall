@@ -637,7 +637,7 @@ function loadLitterInfoByID(id) {
                         if (element.Stillborn == 1) {
                             stillborn++;
                         }
-                        var newStillbornInput = document.createElement("input");
+                        var newDeadPuppyInput = document.createElement("input");   
                         newDeadPuppyInput.type = "checkbox";
                         var deathDate = new Date(element.Deathdate);
                         if (deathDate < Date.now()) {
@@ -653,8 +653,7 @@ function loadLitterInfoByID(id) {
                         var newBirthdateCell = document.createElement("td");
                         var newStillbornCell = document.createElement("td");
                         var newDeadPuppyCell = document.createElement("td");
-                        
-                        var newDeadPuppyInput = document.createElement("input");
+                        var newStillbornInput = document.createElement("input");
                         newStillbornInput.type = "checkbox";
                         
                         newBirthdateCell.innerHTML = element.Birthdate;
