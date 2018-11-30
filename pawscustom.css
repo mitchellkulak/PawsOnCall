@@ -16,10 +16,10 @@ a.navbar-item{
 	padding-right:6px;
 }
 
-#noteTile{
+/* #noteTile{  //For making the notes table not so damn long (not really working in edge, definitely not working in chrome)
 	max-height: 550px;
     overflow: auto;
-}
+} */
 
 #navbarDesktop.navbar-brand{
 	width: 100%;
