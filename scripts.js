@@ -243,7 +243,10 @@ function loadLitterInfo() {
                 var newSexCell = document.createElement("td");
                 var newBirthdateCell = document.createElement("td");
                 var newStillbornCell = document.createElement("td");
+                var newDeadPuppyCell = document.createElement("td");
                 var newStillbornInput = document.createElement("input");
+                var newDeadPuppyInput = document.createElement("input");
+                newDeadPuppyInput.type = "checkbox";
                 newStillbornInput.type = "checkbox";
                 newIDCell.innerHTML = element.Name;
                 newIDCell.setAttribute("contenteditable", true);
@@ -251,6 +254,20 @@ function loadLitterInfo() {
                 newSexCell.setAttribute("contenteditable", true);
                 newBirthdateCell.innerHTML = element.Birthdate;
                 newBirthdateCell.setAttribute("contenteditable", true);
+                var date = new Date(element.Deathdate);
+                if (date <= Date.now()) {
+                    newDeadPuppyInput.checked = true;
+                } else {
+                    newDeadPuppyInput.checked = false;
+                }
+                newDeadPuppyCell.appendChild(newDeadPuppyInput);
+                //use in savelitterinfo
+                /*if(newDeadPuppyInput.checked == false) {
+                    date = '2038-01-01 00:00:00';
+                }
+                else {
+                    newDeadPuppyInput.checked = true;
+                }*/
                 if (element.Stillborn == 1) {
                     newStillbornInput.checked = true;
                 } else {
@@ -261,6 +278,7 @@ function loadLitterInfo() {
                 newRow.appendChild(newSexCell);
                 newRow.appendChild(newBirthdateCell);
                 newRow.appendChild(newStillbornCell);
+                newRow.appendChild(newDeadPuppyCell);
                 litterInfoTableBody.appendChild(newRow);
 
             });
@@ -693,10 +711,10 @@ function addMed(medication) {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
+                    loadMotherInfo();
                 });
         }
     }
-    loadMotherInfo();
 }
 
 function addMedi(x) {
@@ -872,12 +890,11 @@ function addDogNote() {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
-
+                    loadMotherInfo();
 
                 });
         }
     }
-    loadMotherInfo();
 }
 
 function addLitterNote() {
