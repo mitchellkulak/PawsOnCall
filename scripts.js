@@ -869,6 +869,7 @@ function addDogNote() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
+                    alert("Reloading Mother Info");
                     loadMotherInfo();
 
                 });
