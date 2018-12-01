@@ -44,6 +44,7 @@ function addMomDogTemp() {
 }
 
 function getWhelpDates() {
+    verifySessionCookie();
     var startWhelp;
     var endWhelp;
     var thisTableBody = document.getElementById("whelp");
@@ -148,6 +149,7 @@ function resizeChart() {
 }
 
 function loadLitterInfo() {
+    verifySessionCookie();
     var searchMessage = document.getElementById("searchMessage");
     var litterContent = document.getElementById("wrapper");
     if (getCookie("dogID") == "" || getCookie("dogID") == null) {
@@ -571,6 +573,7 @@ function loadLitterWeightTable(id) {
 }
 
 function loadLitterInfoByID(id) {
+    verifySessionCookie();
     var searchMessage = document.getElementById("searchMessage");
     var litterContent = document.getElementById("wrapper");
     if (getCookie("dogID") == "" || getCookie("dogID") == null) {
@@ -798,6 +801,7 @@ window.onclick = function (event) {
 }
 
 function loadMotherInfo() {
+    verifySessionCookie();
     loadGoogle();
     var searchMessage = document.getElementById("searchMessage");
     var motherContent = document.getElementById("wrapper");
@@ -809,7 +813,6 @@ function loadMotherInfo() {
         searchMessage.style.display = "none";
         motherContent.style.display = "block";
     }
-    // verifySessionCookie(); //Removed to help chris debug
     var dogID = getCookie("dogID");
     var session = getCookie("session");
     var dogNameDiv = document.getElementById("dogNameDiv");
@@ -947,6 +950,7 @@ function addLitterNote() {
 }
 
 function getVolunteerInfo() {
+    verifySessionCookie();
     var searchMessage = document.getElementById("searchMessage");
     var volunteerContent = document.getElementById("wrapper");
     if (getCookie("dogID") == "" || getCookie("dogID") == null) {
@@ -1000,15 +1004,18 @@ function getVolunteerInfo() {
 }
 
 function redirectToMother(dogId) {
+    verifySessionCookie();
     document.cookie = "dogID=" + dogId;
     window.location.href = "mother.html";
 }
 
 function redirectToAdmin() {
+    verifySessionCookie();
     window.location.href = "./admin/index.php?session=" + getCookie("session");
 }
 
 function redirectToSearch() {
+    verifySessionCookie();
     var dogName = document.getElementById("searchBar").value;
     window.location.href = "searchresult.html?search=" + dogName;
 }
