@@ -282,3 +282,17 @@ box-shadow: 5px 5px 5px #808080;
 	height: 120px !important;
 }
 
+
+table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    border: 1px solid #ddd !important;
+}
+
+th, td {
+    text-align: left !important;
+    padding: 8px !important;
+}
+
+tr:nth-child(even){background-color: #f2f2f2 !important}
