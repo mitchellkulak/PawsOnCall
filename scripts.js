@@ -289,17 +289,17 @@ function loadLitterInfo() {
 function addImportantDates() {
     var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
     var whelpStart = rewriteDate(document.getElementById("whelpStart").value);
-    if (whelpStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpStart) || whelpStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var whelpEnd = rewriteDate(document.getElementById("whelpEnd").value);
-    if (whelpEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpEnd) || whelpEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanStart = rewriteDate(document.getElementById("weanStart").value);
-    if (weanStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanStart) || weanStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanEnd = rewriteDate(document.getElementById("weanEnd").value);
-    if (weanEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanEnd) || weanEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormStart = rewriteDate(document.getElementById("dewormStart").value);
-    if (dewormStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormStart) || dewormStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormEnd = rewriteDate(document.getElementById("dewormEnd").value);
-    if (dewormEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormEnd) || dewormEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
 
     var dateData = {};
     dateData['litterID'] = litterID;
