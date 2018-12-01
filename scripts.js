@@ -14,9 +14,7 @@ function addMomDogTemp() {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.temp = temp;
-            console.log(temp);
             data.dogID = getCookie("dogID");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -32,7 +30,6 @@ function addMomDogTemp() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                 });
         }
         else {
@@ -60,15 +57,12 @@ function getWhelpDates() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
             obj.forEach(function (element) {
                 var newRow = document.createElement("tr");
                 var startCell = document.createElement("td");
                 var endCell = document.createElement("td");
                 startWhelp = element.StartWhelp;
                 endWhelp = element.EndWhelp;
-                console.log(startWhelp);
-                console.log(endWhelp);
                 startCell.innerHTML = startWhelp;
                 endCell.innerHTML = endWhelp;
                 newRow.appendChild(startCell);
@@ -86,7 +80,6 @@ async function drawChart() {
     newData = await prepareDataForChart();
     var numRows = newData.length;
     for (var i = 0; i < numRows; i++) {
-        console.log(newData[i]);
         data1.addRow(newData[i]);
     }
 
@@ -327,11 +320,7 @@ function addImportantDates() {
     })
         .then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            console.log(responseContent);
         });
-    //console.log(responseContent.JSON);
-    //console.log(JSON.stringify(theMasterPupData));
-    console.log(JSON.stringify(dateData));
     alert("Changes Saved");
 }
 
@@ -392,12 +381,9 @@ function savePuppy() {
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(theMasterPupData), // body data type must match "Content-Type" header
     })
-        //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            //console.log(responseContent);
         });
-    //console.log(responseContent.JSON);
-    //console.log(JSON.stringify(theMasterPupData));
+
     litterID = document.getElementById("litterIDHolder").innerHTML;
     loadLitterInfoByID(litterID);
     alert("Changes Saved");
@@ -433,7 +419,6 @@ function addPuppy() {
     if (birthDate != null && /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}/.test(birthDate)) {
         birthDate = birthDate + ":00";
         data.birthdate = birthDate;
-        console.log(birthDate);
     } else {
         alert("please enter a valid birthdate: (YYYY-MM-DD HH-MM)");
         return;
@@ -451,7 +436,6 @@ function addPuppy() {
         return;
     }
 
-    console.log(JSON.stringify(data));
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -467,7 +451,6 @@ function addPuppy() {
     })
         //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            console.log(responseContent);
         });
 
     litterID = document.getElementById("litterIDHolder").innerHTML;
@@ -498,7 +481,6 @@ function saveLitterWeightTable() {
         }
         data.push(innerData);
     }
-    //console.log(JSON.stringify(data));
 
 
     var url = "AddLitterWeights.php?session=" + getCookie("session");
@@ -517,7 +499,6 @@ function saveLitterWeightTable() {
     })
         //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            console.log(responseContent);
         });
     alert("Weights Saved");
 }
@@ -711,7 +692,6 @@ function addMed(medication) {
             var data = {};
             data.Note = note;
             data.DogID = getCookie("dogID");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -727,7 +707,6 @@ function addMed(medication) {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                     loadMotherInfo();
                 });
         }
@@ -816,6 +795,9 @@ function loadMotherInfo() {
     var session = getCookie("session");
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
+    var noteTile = document.getElementById("noteTile");
+    noteTile.style.maxHeight = "280px";
+    noteTable.innerHTML = "";
     var dogBreedDiv = document.getElementById("breedDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session, {
@@ -829,7 +811,6 @@ function loadMotherInfo() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
             dogNameDiv.textContent = obj.dogInfo[0].Name;
             dogBreedDiv.textContent = obj.dogInfo[0].Breed;
 
@@ -867,10 +848,8 @@ function loginUser() {
     })
         .then(response => response.json()) // parses response to JSON
         .then((data) => {
-            console.log(data);
             document.cookie = "session=" + data.sessionKey;
             document.cookie = "admin=" + data.admin;
-            console.log(document.cookie);
             if (data.sessionKey != "" && data.sessionKey != null) {
                 window.location.href = "mother.html";
             } else {
@@ -890,7 +869,6 @@ function addDogNote() {
             var data = {};
             data.Note = note;
             data.DogID = getCookie("dogID");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -906,9 +884,7 @@ function addDogNote() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                     loadMotherInfo();
-
                 });
         }
     }
@@ -917,7 +893,6 @@ function addDogNote() {
 function addLitterNote() {
     var d = Date.now();
     var litterID = document.getElementById("litterIDHolder").innerHTML;
-    console.log(litterID);
     if (litterID != "") {
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
@@ -925,7 +900,6 @@ function addLitterNote() {
             var data = {};
             data.Note = note;
             data.LitterID = getCookie("litter");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -941,7 +915,6 @@ function addLitterNote() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                 });
         }
     }
@@ -974,11 +947,9 @@ function getVolunteerInfo() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
             dogName.innerHTML = obj.dogInfo[0].Name;
             dogBreed.innerHTML = obj.dogInfo[0].Breed;
             VolunteerID = obj.dogInfo[0].VolunteerID;
-            console.log(VolunteerID);
         })
 
         .then((v) => {
@@ -986,18 +957,13 @@ function getVolunteerInfo() {
                 .then(response => response.json())
                 .then((data) => {
                     var obj1 = JSON.parse(JSON.stringify(data));
-                    console.log(obj1);
-
                     txtName.value = obj1[0].Name;
                     txtStreet.value = obj1[0].Address;
                     txtCity.value = obj1[0].City;
                     txtState.value = obj1[0].State;
                     txtZIP.value = obj1[0].ZIP;
                     txtPhone.value = obj1[0].Phone;
-
-                    console.log(obj1[0].Name);
                 });
-
         }
         );
 }
@@ -1083,9 +1049,6 @@ function searchForDogs() {
 
             });
         });
-
-    console.log("searched");
-
 }
 
 function getCookie(cname) {

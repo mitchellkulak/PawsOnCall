@@ -250,6 +250,12 @@ article.litter{
 	width:100%;
 }
 
+#noteTable{
+	display:block;
+	max-height:600px;
+	overflow:scroll;
+}
+
 
 .navbar-menu.is-active{
     background-color: #a72cba !important;
@@ -276,13 +282,5 @@ box-shadow: 5px 5px 5px #808080;
 #searchResults.section{
 	padding: 30px 10px !important;
 	height: 120px !important;
-}
-
-.noteInner{
-	max-height: 1500px;
-}
-
-.puppyNote{
-	max-height: 280px;
 }
 
