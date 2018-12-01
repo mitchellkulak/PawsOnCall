@@ -251,9 +251,10 @@ article.litter{
 }
 
 #noteTable{
-	display:inline=block;
+	display:block;
 	max-height:600px;
 	overflow:scroll; 
+	table-layout: fixed;
 }
 
 #noteTable > tr{
