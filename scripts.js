@@ -262,7 +262,7 @@ function loadLitterInfo() {
                 } else {
                     newDeadPuppyInput.checked = false;
                 }
-                newDeadPuppyCell.className = deathDate;
+                newDeadPuppyCell.className = element.Deathdate.replace(" ","%20");
                 newDeadPuppyCell.appendChild(newDeadPuppyInput);
                 if (element.Stillborn == 1) {
                     newStillbornInput.checked = true;
@@ -351,9 +351,9 @@ function savePuppy() {
         collarColor = thisTbody.rows[i].cells[0].textContent.replace('\n', "");
         if (collarColor == "") { alert("Please Enter a Name"); return; }
         sex = thisTbody.rows[i].cells[1].textContent.replace('\n', "");
-        if (sex != /^[MF]/ || sex != /^[A-Z]{1}/) { alert("Enter M or F for Sex"); return; }
+        if (sex != "M" && sex != "F") { alert("Enter M or F for Sex"); return;  }
         DOB = thisTbody.rows[i].cells[2].textContent.replace('\n', "");
-        if (DOB != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+        if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(DOB)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
         dogID = thisTbody.rows[i].id;
         if (thisTbody.rows[i].cells[3].getElementsByTagName("input")[0].checked) {
             stillBorn = 1;
@@ -361,23 +361,24 @@ function savePuppy() {
         else {
             stillBorn = 0;
         }
-        if (thisTbody.rows[i].cells[4].getElementsByTagName("input")[0].checked && thisTbody.rows[i].cells[4].className == "") {
-            deceased = Date.now();
+        if (thisTbody.rows[i].cells[4].getElementsByTagName("input")[0].checked && thisTbody.rows[i].cells[4].className.replace("%20"," ") == "2038-01-01 00:00:00") {
+            deceased = timeConverter(Date.now(),2);
         }else if(thisTbody.rows[i].cells[4].getElementsByTagName("input")[0].checked){
-            deceased = thisTbody.rows[i].cells[4].className;
+            deceased = thisTbody.rows[i].cells[4].className.replace("%20"," ");
         }
         else {
             deceased = "2038-01-01 00:00:00";
         }
-        pupData['dogID'] = dogID;
-        pupData['name'] = collarColor;
-        pupData['sex'] = sex;
-        pupData['birthdate'] = DOB;
-        pupData['stillborn'] = stillBorn;
-        pupDate['deathdate'] = deceased;
+        pupData.dogID = dogID;
+        pupData.name = collarColor;
+        pupData.sex = sex;
+        pupData.birthdate = DOB;
+        pupData.stillborn = stillBorn;
+        pupData.deathdate = deceased;
 
         theMasterPupData.push(pupData);
     }
+    console.log(theMasterPupData);
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -623,7 +624,6 @@ function loadLitterInfoByID(id) {
             // For each litter
             obj.forEach(function (element) {
                 if (element.ID == id) {
-                    console.log(element);
                     litterNameDiv.innerHTML = "Litter of " + element.MotherName;
                     breedHolder.innerHTML = element.MotherBreed;
                     volunteerIDHolder.innerHTML = element.VolunteerID;
@@ -651,7 +651,7 @@ function loadLitterInfoByID(id) {
                         if (element.Stillborn == 1) {
                             stillborn++;
                         }
-                        var newDeadPuppyInput = document.createElement("input");   
+                        var newDeadPuppyInput = document.createElement("input");
                         newDeadPuppyInput.type = "checkbox";
                         var deathDate = new Date(element.Deathdate);
                         if (deathDate < Date.now()) {
@@ -660,7 +660,6 @@ function loadLitterInfoByID(id) {
                         } else {
                             newDeadPuppyInput.checked = false;
                         }
-                        newDeadPuppyCell.className = deathDate;
                         var newRow = document.createElement("tr");
                         newRow.id = element.ID;
                         var newIDCell = document.createElement("td");
@@ -670,12 +669,12 @@ function loadLitterInfoByID(id) {
                         var newDeadPuppyCell = document.createElement("td");
                         var newStillbornInput = document.createElement("input");
                         newStillbornInput.type = "checkbox";
-                        
+
                         newBirthdateCell.innerHTML = element.Birthdate;
                         newIDCell.setAttribute("contenteditable", true);
                         newSexCell.setAttribute("contenteditable", true);
                         newBirthdateCell.setAttribute("contenteditable", true);
-
+                        newDeadPuppyCell.className = element.Deathdate.replace(" ","%20");
                         if (element.Stillborn == 1) {
                             newStillbornInput.checked = true;
                         } else {
@@ -1105,7 +1104,7 @@ function getCookie(cname) {
     return "";
 }
 
-function timeConverter(UNIX_timestamp) {
+function timeConverter(UNIX_timestamp,format) {
     var a = new Date(UNIX_timestamp);
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var year = a.getFullYear();
@@ -1116,7 +1115,23 @@ function timeConverter(UNIX_timestamp) {
     if (a.getMinutes() < 10) {
         min = "0" + a.getMinutes();
     }
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min;
+    var time;
+    if(format == 2){
+        var f2month = a.getMonth();
+        if(f2month < 10){
+            f2month = "0" + f2month;
+        }
+        f2month++;
+        if(date < 10){
+            date = "0" + date;
+        }
+        if(hour < 10){
+            hour = "0" + hour;
+        }
+        time = year + '-' + f2month + '-' + date + ' ' + hour + ':' + min + ':00';
+    }else{
+       time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min; 
+    }
     return time;
 }
 function validateDate(date) {
