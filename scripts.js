@@ -783,6 +783,8 @@ function loadMotherInfo() {
     var session = getCookie("session");
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
+    var noteTile = document.getElementById("noteTile");
+    noteTile.style.maxHeight = "280px";
     noteTable.innerHTML = "";
     var dogBreedDiv = document.getElementById("breedDiv");
 
