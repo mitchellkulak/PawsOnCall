@@ -50,6 +50,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
+	
+	<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
 </head>
 <body onload="loadMotherInfo() , adminShowHide() , getWhelpDates()">
 
@@ -180,9 +194,9 @@ document.addEventListener('DOMContentLoaded', function () {
   
   <!--medications tile-->
   <div id="noteTile" class="tile is-parent">
-    <article class="tile is-child notification is-success">
+    <article class="tile is-child notification is-success noteInner">
       <div class="content">
-        <p class="title">Add Medication/Note</p>
+        <p class="title">Add medicine/note</p>
         <p class="subtitle">
 					<div class="dropdown">
 						<button onclick="myFunction()" class="dropbtn  is-link" onclick="addMedication()"> Add Medication</button>
