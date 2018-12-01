@@ -9,7 +9,7 @@ function authenticate($sessionKey){
 	$sessionKey = mysqli_real_escape_string($db,$sessionKey);
         $session = mysqli_query($db,"SELECT s.*,v.Admin FROM SessionKeys AS s, Volunteer AS v WHERE SessionKey = '$sessionKey' AND v.ID = s.UserID");
         $sessionrow = mysqli_fetch_assoc($session);
-        if(mysqli_num_rows($session) == 1 && strtotime($sessionrow["Time"]) > time() - 3600) && $sessionrow["SessionKey"] != null){ //checks if session key valid and session last use <1hr ago
+        if(mysqli_num_rows($session) == 1 && strtotime($sessionrow["Time"]) > time() - 3600 && $sessionrow["SessionKey"] != null){ //checks if session key valid and session last use <1hr ago
             $userID = $sessionrow["UserID"];
             $time = new DateTime(time());
             $timestamp = $time->format('YYYY-MM-DD HH:MM:SS');
