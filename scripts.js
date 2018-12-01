@@ -865,6 +865,12 @@ function loginUser() {
         });
 }
 
+function loggedInRedirect(){
+    if(getCookie("session")){
+        window.location.href = "mother.html";
+    }
+}
+
 function addDogNote() {
     var d = Date.now();
     var dogID = getCookie("dogID");
@@ -1130,6 +1136,7 @@ function rewriteDate(date) {
         return date;
     }
 }
+
 
 /**
 * Secure Hash Algorithm (SHA1)
