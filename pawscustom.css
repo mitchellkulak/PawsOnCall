@@ -286,3 +286,6 @@ box-shadow: 5px 5px 5px #808080;
 	max-height: 280px;
 }
 
+.navbar-dropdown{
+	background-color: #c553d6 !important;
+}
