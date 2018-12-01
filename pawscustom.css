@@ -278,5 +278,11 @@ box-shadow: 5px 5px 5px #808080;
 	height: 120px !important;
 }
 
+.noteInner{
+	max-height: 1500px;
+}
 
+.puppyNote{
+	max-height: 280px;
+}
 
