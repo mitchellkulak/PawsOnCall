@@ -730,9 +730,9 @@ function myFunction() {
 }
 
 function logout() {
-    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
+    document.cookie = "session=; Max-Age=-99999999;";
+    document.cookie = "dogID=; Max-Age=-99999999;";
+    document.cookie = "litter=; Max-Age=-99999999;";
     fetch("logoff.php", {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin

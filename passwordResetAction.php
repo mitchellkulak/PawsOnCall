@@ -3,28 +3,27 @@
   $session = $_GET['session'];
   $auth = json_decode(authenticate(urldecode($session)), true);
   if ($auth['error'] == 'auth error') {
-      $error = array('error' => 'auth error');
-      echo json_encode($error);
-      echo "<script>window.location.replace('login.php');</script>";
+      $message = "Your session has expired";
   }else{
      $userID = $auth["userID"];
      include 'dbconnect.php';
      $password = mysqli_real_escape_string($db,$_POST["password"]);
      $verpassword = mysqli_real_escape_string($db,$_POST["verpassword"]);
      if($password != $verpassword){
-	$message = "Passwords Must Match";
+        $message = "Passwords Must Match";
      }elseif($password == "da39a3ee5e6b4b0d3255bfef95601890afd80709"){ //SHA1 Hash for a blank password
-	$message = "Password Cannot Be Blank";
+        $message = "Password Cannot Be Blank";
      }elseif($password!=""){
-	$SQL = "UPDATE Volunteer SET Password = '$password' WHERE ID = $userID";
-	if(mysqli_query($db,$SQL)){
-		$message = "Password Updated Successfully, click on the Paws logo to log in";
-	}else{
-		$message = mysqli_error($db);
-	}
-     }else{
-	$message = "<br>";
-     }
+        $password = sha1($auth["Email"].$password); //salts hash using the users email
+        $SQL = "UPDATE Volunteer SET Password = '$password' WHERE ID = $userID";
+        if(mysqli_query($db,$SQL)){
+          $message = "Password Updated Successfully, click on the Paws logo to log in";
+        }else{
+          $message = mysqli_error($db);
+        }
+      }else{
+         $message = "<br>";
+      }
      mysqli_close($db);  
   }
 ?>

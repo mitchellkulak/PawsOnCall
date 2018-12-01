@@ -15,9 +15,9 @@
     		$sessionKey = generateRandomString();
     		$keyMatch = mysqli_query($db,"SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
     	  }while(mysqli_num_rows($keyMatch) > 0); //creates new session key repeatedly, until a unique key is created
-        $timer = date('Y-m-d H:i:s',time())
+        $timer = date('Y-m-d H:i:s',time());
     	  mysqli_query($db,"UPDATE SessionKeys SET SessionKey = '$sessionKey', Time = '$timer' WHERE userID = $userID"); //sets session key in database, time is updated automatically
-          $msg = "Please visit <a href='http://".$domain."/PawsOnCall/passwordResetAction.php?session=".$sessionKey."'>here</a> to reset your password. This link is good for 1 hour.";
+          $msg = "Please visit <a href='http://".$domain."/whelpingJournal/passwordResetAction.php?session=".$sessionKey."'>here</a> to reset your password. This link is good for 1 hour.";
           echo $msg;
           $msg = wordwrap($msg,70);
           if(sendEmail($email,$user["Name"],"do_not_reply@".$domain,"Do Not Reply","Paws Whelping Journal Password Reset",$msg)){
@@ -49,7 +49,7 @@
 		'Reply-To: ' . $fromname . ' <' . $emailfrom . '>' . "\r\n" .
 		'MIME-Version: 1.0' . "\r\n" . 
 		'Content-Transfer-Encoding: 8bit' . "\r\n" . 
-		'Content-Type: text/plain; charset=UTF-8' . "\r\n";
+		'Content-Type: text/html; charset=ISO-8859-1' . "\r\n";
 	$params = '-f ' . $emailfrom;
 	$test = mail($emailto, $subject, $messagebody, $headers, $params);
 	// $test should be TRUE if the mail function is called correctly
