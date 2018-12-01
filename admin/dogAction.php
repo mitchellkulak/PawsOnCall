@@ -26,7 +26,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     }
     $deathdate = mysqli_real_escape_string($db,$_POST["deathdate"]);
     if($deathdate == ""){
-      $deathdatedate = "2038-01-01 00:00:00";
+      $deathdate = "2038-01-01 00:00:00";
     }
     $breed = mysqli_real_escape_string($db,$_POST["breed"]);
     $litterID = mysqli_real_escape_string($db,$_POST["litterID"]);
