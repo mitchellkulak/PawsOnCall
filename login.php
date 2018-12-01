@@ -26,7 +26,7 @@ else {
 				$sessionKey = generateRandomString();
 				$keyMatch = mysqli_query($db,"SELECT * FROM SessionKeys WHERE SessionKey = '$sessionKey'");
 			}while(mysqli_num_rows($keyMatch) > 0); //creates new session key repeatedly, until a unique key is created
-            $timestamp = date('YYYY-MM-DD HH:MM:SS',time());
+            $timestamp = date('Y-m-d H:i:s',time());
 			mysqli_query($db,"UPDATE SessionKeys SET SessionKey = '$sessionKey', Time = '$timestamp' WHERE userID = '$userID'"); //sets session key in database, time is updated automatically
 		}
 		$arr = array('userID' => $userID,'sessionKey' => $sessionKey,'admin' => $admin, 'error' => 'none'); 
