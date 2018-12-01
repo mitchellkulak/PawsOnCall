@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- Navbar, logo, logout button -->
 <nav class="navbar ">
   <div class="navbar-brand">
-    <a href="searchresult.html">
+    <a href="../mother.html">
 			<img src="../images/pawslogo.png" alt="PAWS Logo" >
 		</a>
 
