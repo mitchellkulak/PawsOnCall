@@ -14,10 +14,10 @@
      }elseif($password == "da39a3ee5e6b4b0d3255bfef95601890afd80709"){ //SHA1 Hash for a blank password
         $message = "Password Cannot Be Blank";
      }elseif($password!=""){
-        $password = sha1($auth["Email"].$password); //salts hash using the users email
+        $password = sha1($auth["email"].$password); //salts hash using the users email
         $SQL = "UPDATE Volunteer SET Password = '$password' WHERE ID = $userID";
         if(mysqli_query($db,$SQL)){
-          $message = "Password Updated Successfully, click on the Paws logo to log in";
+          $message = "Password Updated Successfully, click the Paws Logo to login <script>setTimeout(window.location.href='login.html', 3000)</script>";
         }else{
           $message = mysqli_error($db);
         }
