@@ -280,28 +280,28 @@ function loadLitterInfo() {
 }
 
 function addImportantDates() {
-    var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
+       var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
     var whelpStart = rewriteDate(document.getElementById("whelpStart").value);
-    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpStart) || whelpStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpStart)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var whelpEnd = rewriteDate(document.getElementById("whelpEnd").value);
-    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpEnd) || whelpEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpEnd)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanStart = rewriteDate(document.getElementById("weanStart").value);
-    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanStart) || weanStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanStart)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanEnd = rewriteDate(document.getElementById("weanEnd").value);
-    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanEnd) || weanEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanEnd)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormStart = rewriteDate(document.getElementById("dewormStart").value);
-    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormStart) || dewormStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormStart)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormEnd = rewriteDate(document.getElementById("dewormEnd").value);
-    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormEnd) || dewormEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormEnd)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
 
     var dateData = {};
-    dateData['litterID'] = litterID;
-    dateData['startWhelp'] = whelpStart;
-    dateData['endWhelp'] = whelpEnd;
-    dateData['startWean'] = weanStart;
-    dateData['endWean'] = weanEnd;
-    dateData['startDeworm'] = dewormStart;
-    dateData['endDeworm'] = dewormEnd;
+    dateData.litterID = litterID;
+    dateData.startWhelp = whelpStart;
+    dateData.endWhelp = whelpEnd;
+    dateData.startWean = weanStart;
+    dateData.endWean = weanEnd;
+    dateData.startDeworm = dewormStart;
+    dateData.endDeworm = dewormEnd;
 
     var url = "AddImportantDates.php?session=" + getCookie("session");
 
@@ -338,7 +338,6 @@ function savePuppy() {
     for (var i = 0; i < thisTbody.rows.length; i++) {
         var pupData = {};
         collarColor = thisTbody.rows[i].cells[0].textContent.replace('\n', "");
-        if (collarColor == "") { alert("Please Enter a Name"); return; }
         sex = thisTbody.rows[i].cells[1].textContent.replace('\n', "");
         if (sex != "M" && sex != "F") { alert("Enter M or F for Sex"); return;  }
         DOB = thisTbody.rows[i].cells[2].textContent.replace('\n', "");
@@ -1080,11 +1079,10 @@ function timeConverter(UNIX_timestamp,format) {
     }
     var time;
     if(format == 2){
-        var f2month = a.getMonth();
+        var f2month = a.getMonth() + 1;
         if(f2month < 10){
             f2month = "0" + f2month;
         }
-        f2month++;
         if(date < 10){
             date = "0" + date;
         }
