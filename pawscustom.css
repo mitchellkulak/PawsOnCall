@@ -253,9 +253,13 @@ article.litter{
 #noteTable{
 	display:block;
 	max-height:600px;
-	overflow:scroll;
+	overflow:scroll; 
+	table-layout: fixed;
 }
 
+#noteTable > tr{
+	width:100%;
+}
 
 .navbar-menu.is-active{
     background-color: #a72cba !important;
