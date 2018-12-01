@@ -16,11 +16,6 @@ a.navbar-item{
 	padding-right:6px;
 }
 
-/* #noteTile{  //For making the notes table not so damn long (not really working in edge, definitely not working in chrome)
-	max-height: 550px;
-    overflow: auto;
-} */
-
 #navbarDesktop.navbar-brand{
 	width: 100%;
 }
@@ -250,6 +245,15 @@ article.litter{
 	width:100%;
 }
 
+#noteTable{
+	display:block;
+	max-height:620px !important;
+	overflow:scroll; 
+}
+
+#noteTable > tr{
+	width:100%;
+}
 
 .navbar-menu.is-active{
     background-color: #a72cba !important;
@@ -278,14 +282,3 @@ box-shadow: 5px 5px 5px #808080;
 	height: 120px !important;
 }
 
-.noteInner{
-	height: 1500px !important;
-}
-
-.puppyNote{
-	max-height: 280px;
-}
-
-.navbar-dropdown{
-	background-color: #c553d6 !important;
-}

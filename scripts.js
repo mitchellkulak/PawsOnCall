@@ -14,9 +14,7 @@ function addMomDogTemp() {
             var url = "AddMomDogTemps.php?session=" + getCookie("session");
             var data = {};
             data.temp = temp;
-            console.log(temp);
             data.dogID = getCookie("dogID");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -32,7 +30,6 @@ function addMomDogTemp() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                 });
         }
         else {
@@ -60,15 +57,12 @@ function getWhelpDates() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
             obj.forEach(function (element) {
                 var newRow = document.createElement("tr");
                 var startCell = document.createElement("td");
                 var endCell = document.createElement("td");
                 startWhelp = element.StartWhelp;
                 endWhelp = element.EndWhelp;
-                console.log(startWhelp);
-                console.log(endWhelp);
                 startCell.innerHTML = startWhelp;
                 endCell.innerHTML = endWhelp;
                 newRow.appendChild(startCell);
@@ -86,7 +80,6 @@ async function drawChart() {
     newData = await prepareDataForChart();
     var numRows = newData.length;
     for (var i = 0; i < numRows; i++) {
-        console.log(newData[i]);
         data1.addRow(newData[i]);
     }
 
@@ -262,6 +255,7 @@ function loadLitterInfo() {
                 } else {
                     newDeadPuppyInput.checked = false;
                 }
+                newDeadPuppyCell.className = element.Deathdate.replace(" ","%20");
                 newDeadPuppyCell.appendChild(newDeadPuppyInput);
                 if (element.Stillborn == 1) {
                     newStillbornInput.checked = true;
@@ -286,28 +280,28 @@ function loadLitterInfo() {
 }
 
 function addImportantDates() {
-    var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
+       var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
     var whelpStart = rewriteDate(document.getElementById("whelpStart").value);
-    if (whelpStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpStart)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var whelpEnd = rewriteDate(document.getElementById("whelpEnd").value);
-    if (whelpEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpEnd)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanStart = rewriteDate(document.getElementById("weanStart").value);
-    if (weanStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanStart)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanEnd = rewriteDate(document.getElementById("weanEnd").value);
-    if (weanEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(weanEnd)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormStart = rewriteDate(document.getElementById("dewormStart").value);
-    if (dewormStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormStart)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormEnd = rewriteDate(document.getElementById("dewormEnd").value);
-    if (dewormEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+    if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(dewormEnd)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
 
     var dateData = {};
-    dateData['litterID'] = litterID;
-    dateData['startWhelp'] = whelpStart;
-    dateData['endWhelp'] = whelpEnd;
-    dateData['startWean'] = weanStart;
-    dateData['endWean'] = weanEnd;
-    dateData['startDeworm'] = dewormStart;
-    dateData['endDeworm'] = dewormEnd;
+    dateData.litterID = litterID;
+    dateData.startWhelp = whelpStart;
+    dateData.endWhelp = whelpEnd;
+    dateData.startWean = weanStart;
+    dateData.endWean = weanEnd;
+    dateData.startDeworm = dewormStart;
+    dateData.endDeworm = dewormEnd;
 
     var url = "AddImportantDates.php?session=" + getCookie("session");
 
@@ -326,11 +320,7 @@ function addImportantDates() {
     })
         .then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            console.log(responseContent);
         });
-    //console.log(responseContent.JSON);
-    //console.log(JSON.stringify(theMasterPupData));
-    console.log(JSON.stringify(dateData));
     alert("Changes Saved");
 }
 
@@ -342,16 +332,16 @@ function savePuppy() {
     var sex;
     var DOB;
     var stillBorn;
+    var deceased;
     var theMasterPupData = [];
     var url = "UpdatePuppies.php?session=" + getCookie("session");
     for (var i = 0; i < thisTbody.rows.length; i++) {
         var pupData = {};
         collarColor = thisTbody.rows[i].cells[0].textContent.replace('\n', "");
-        if (collarColor == "") { alert("Please Enter a Name"); return; }
         sex = thisTbody.rows[i].cells[1].textContent.replace('\n', "");
-        if (sex != /^[MF]/ || sex != /^[A-Z]{1}/) { alert("Enter M or F for Sex"); return; }
+        if (sex != "M" && sex != "F") { alert("Enter M or F for Sex"); return;  }
         DOB = thisTbody.rows[i].cells[2].textContent.replace('\n', "");
-        if (DOB != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
+        if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(DOB)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
         dogID = thisTbody.rows[i].id;
         if (thisTbody.rows[i].cells[3].getElementsByTagName("input")[0].checked) {
             stillBorn = 1;
@@ -359,14 +349,24 @@ function savePuppy() {
         else {
             stillBorn = 0;
         }
-        pupData['dogID'] = dogID;
-        pupData['name'] = collarColor;
-        pupData['sex'] = sex;
-        pupData['birthdate'] = DOB;
-        pupData['stillborn'] = stillBorn;
+        if (thisTbody.rows[i].cells[4].getElementsByTagName("input")[0].checked && thisTbody.rows[i].cells[4].className.replace("%20"," ") == "2038-01-01 00:00:00") {
+            deceased = timeConverter(Date.now(),2);
+        }else if(thisTbody.rows[i].cells[4].getElementsByTagName("input")[0].checked){
+            deceased = thisTbody.rows[i].cells[4].className.replace("%20"," ");
+        }
+        else {
+            deceased = "2038-01-01 00:00:00";
+        }
+        pupData.dogID = dogID;
+        pupData.name = collarColor;
+        pupData.sex = sex;
+        pupData.birthdate = DOB;
+        pupData.stillborn = stillBorn;
+        pupData.deathdate = deceased;
 
         theMasterPupData.push(pupData);
     }
+    console.log(theMasterPupData);
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -380,12 +380,9 @@ function savePuppy() {
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(theMasterPupData), // body data type must match "Content-Type" header
     })
-        //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            //console.log(responseContent);
         });
-    //console.log(responseContent.JSON);
-    //console.log(JSON.stringify(theMasterPupData));
+
     litterID = document.getElementById("litterIDHolder").innerHTML;
     loadLitterInfoByID(litterID);
     alert("Changes Saved");
@@ -421,7 +418,6 @@ function addPuppy() {
     if (birthDate != null && /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}/.test(birthDate)) {
         birthDate = birthDate + ":00";
         data.birthdate = birthDate;
-        console.log(birthDate);
     } else {
         alert("please enter a valid birthdate: (YYYY-MM-DD HH-MM)");
         return;
@@ -439,7 +435,6 @@ function addPuppy() {
         return;
     }
 
-    console.log(JSON.stringify(data));
     fetch(url, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -455,7 +450,6 @@ function addPuppy() {
     })
         //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            console.log(responseContent);
         });
 
     litterID = document.getElementById("litterIDHolder").innerHTML;
@@ -486,7 +480,6 @@ function saveLitterWeightTable() {
         }
         data.push(innerData);
     }
-    //console.log(JSON.stringify(data));
 
 
     var url = "AddLitterWeights.php?session=" + getCookie("session");
@@ -505,7 +498,6 @@ function saveLitterWeightTable() {
     })
         //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-            console.log(responseContent);
         });
     alert("Weights Saved");
 }
@@ -523,7 +515,14 @@ function loadLitterWeightTable(id) {
         }
     }
 
-    fetch('GetLitterWeights.php?litterID=' + id + "&session=" + getCookie("session")) //Add the file name
+    fetch('GetLitterWeights.php?litterID=' + id + "&session=" + getCookie("session"), {
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
@@ -612,7 +611,6 @@ function loadLitterInfoByID(id) {
             // For each litter
             obj.forEach(function (element) {
                 if (element.ID == id) {
-                    console.log(element);
                     litterNameDiv.innerHTML = "Litter of " + element.MotherName;
                     breedHolder.innerHTML = element.MotherBreed;
                     volunteerIDHolder.innerHTML = element.VolunteerID;
@@ -640,7 +638,7 @@ function loadLitterInfoByID(id) {
                         if (element.Stillborn == 1) {
                             stillborn++;
                         }
-                        var newDeadPuppyInput = document.createElement("input");   
+                        var newDeadPuppyInput = document.createElement("input");
                         newDeadPuppyInput.type = "checkbox";
                         var deathDate = new Date(element.Deathdate);
                         if (deathDate < Date.now()) {
@@ -658,12 +656,12 @@ function loadLitterInfoByID(id) {
                         var newDeadPuppyCell = document.createElement("td");
                         var newStillbornInput = document.createElement("input");
                         newStillbornInput.type = "checkbox";
-                        
+
                         newBirthdateCell.innerHTML = element.Birthdate;
                         newIDCell.setAttribute("contenteditable", true);
                         newSexCell.setAttribute("contenteditable", true);
                         newBirthdateCell.setAttribute("contenteditable", true);
-
+                        newDeadPuppyCell.className = element.Deathdate.replace(" ","%20");
                         if (element.Stillborn == 1) {
                             newStillbornInput.checked = true;
                         } else {
@@ -700,7 +698,6 @@ function addMed(medication) {
             var data = {};
             data.Note = note;
             data.DogID = getCookie("dogID");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -716,7 +713,6 @@ function addMed(medication) {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                     loadMotherInfo();
                 });
         }
@@ -805,6 +801,9 @@ function loadMotherInfo() {
     var session = getCookie("session");
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
+    var noteTile = document.getElementById("noteTile");
+    noteTile.style.maxHeight = "280px";
+    noteTable.innerHTML = "";
     var dogBreedDiv = document.getElementById("breedDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session, {
@@ -818,7 +817,6 @@ function loadMotherInfo() {
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
             dogNameDiv.textContent = obj.dogInfo[0].Name;
             dogBreedDiv.textContent = obj.dogInfo[0].Breed;
 
@@ -856,10 +854,8 @@ function loginUser() {
     })
         .then(response => response.json()) // parses response to JSON
         .then((data) => {
-            console.log(data);
             document.cookie = "session=" + data.sessionKey;
             document.cookie = "admin=" + data.admin;
-            console.log(document.cookie);
             if (data.sessionKey != "" && data.sessionKey != null) {
                 window.location.href = "mother.html";
             } else {
@@ -879,7 +875,6 @@ function addDogNote() {
             var data = {};
             data.Note = note;
             data.DogID = getCookie("dogID");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -895,9 +890,7 @@ function addDogNote() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                     loadMotherInfo();
-
                 });
         }
     }
@@ -906,7 +899,6 @@ function addDogNote() {
 function addLitterNote() {
     var d = Date.now();
     var litterID = document.getElementById("litterIDHolder").innerHTML;
-    console.log(litterID);
     if (litterID != "") {
         var note = prompt("Please add a note", "Date: " + timeConverter(d) + " Note: ");
         if (note != null) {
@@ -914,7 +906,6 @@ function addLitterNote() {
             var data = {};
             data.Note = note;
             data.LitterID = getCookie("litter");
-            console.log(JSON.stringify(data));
             fetch(url, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
@@ -930,7 +921,6 @@ function addLitterNote() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    console.log(responseContent);
                 });
         }
     }
@@ -959,34 +949,41 @@ function getVolunteerInfo() {
     var txtPhone = document.getElementById("hostPhone");
     var dogName = document.getElementById("dogNameDiv");
     var dogBreed = document.getElementById("breedDiv");
-    fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID) //Add the file name
+    fetch("GetMomDogInfo.php?session=" + getCookie("session") + "&dogID=" + dogID, {
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+    }) //Add the file name
         .then(response => response.json())
         .then((data) => {
             var obj = JSON.parse(JSON.stringify(data));
-            console.log(obj);
             dogName.innerHTML = obj.dogInfo[0].Name;
             dogBreed.innerHTML = obj.dogInfo[0].Breed;
             VolunteerID = obj.dogInfo[0].VolunteerID;
-            console.log(VolunteerID);
         })
 
         .then((v) => {
-            fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID) //Add the file name
+            fetch("GetVolunteerInfo.php?session=" + getCookie("session") + "&volunteerID=" + VolunteerID, {
+                method: "GET", // *GET, POST, PUT, DELETE, etc.
+                mode: "cors", // no-cors, cors, *same-origin
+                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: "same-origin", // include, *same-origin, omit
+                redirect: "follow", // manual, *follow, error
+                referrer: "no-referrer", // no-referrer, *client
+            }) //Add the file name
                 .then(response => response.json())
                 .then((data) => {
                     var obj1 = JSON.parse(JSON.stringify(data));
-                    console.log(obj1);
-
                     txtName.value = obj1[0].Name;
                     txtStreet.value = obj1[0].Address;
                     txtCity.value = obj1[0].City;
                     txtState.value = obj1[0].State;
                     txtZIP.value = obj1[0].ZIP;
                     txtPhone.value = obj1[0].Phone;
-
-                    console.log(obj1[0].Name);
                 });
-
         }
         );
 }
@@ -1072,9 +1069,6 @@ function searchForDogs() {
 
             });
         });
-
-    console.log("searched");
-
 }
 
 function getCookie(cname) {
@@ -1093,7 +1087,7 @@ function getCookie(cname) {
     return "";
 }
 
-function timeConverter(UNIX_timestamp) {
+function timeConverter(UNIX_timestamp,format) {
     var a = new Date(UNIX_timestamp);
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var year = a.getFullYear();
@@ -1104,7 +1098,22 @@ function timeConverter(UNIX_timestamp) {
     if (a.getMinutes() < 10) {
         min = "0" + a.getMinutes();
     }
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min;
+    var time;
+    if(format == 2){
+        var f2month = a.getMonth() + 1;
+        if(f2month < 10){
+            f2month = "0" + f2month;
+        }
+        if(date < 10){
+            date = "0" + date;
+        }
+        if(hour < 10){
+            hour = "0" + hour;
+        }
+        time = year + '-' + f2month + '-' + date + ' ' + hour + ':' + min + ':00';
+    }else{
+       time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min; 
+    }
     return time;
 }
 function validateDate(date) {
