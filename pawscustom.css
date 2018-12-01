@@ -16,10 +16,6 @@ a.navbar-item{
 	padding-right:6px;
 }
 
- #noteTile{  
-	height: inherit;
-}
-
 #navbarDesktop.navbar-brand{
 	width: 100%;
 }
@@ -251,7 +247,7 @@ article.litter{
 
 #noteTable{
 	display:block;
-	max-height:600px;
+	max-height:80%;
 	overflow:scroll; 
 }
 
