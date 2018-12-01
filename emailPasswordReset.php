@@ -17,7 +17,7 @@
     	  }while(mysqli_num_rows($keyMatch) > 0); //creates new session key repeatedly, until a unique key is created
         $timer = date('Y-m-d H:i:s',time());
     	  mysqli_query($db,"UPDATE SessionKeys SET SessionKey = '$sessionKey', Time = '$timer' WHERE userID = $userID"); //sets session key in database, time is updated automatically
-          $msg = "Please visit <a href='http://".$domain."/whelpingJournal/passwordResetAction.php?session=".$sessionKey."'>here</a> to reset your password. This link is good for 1 hour.";
+          $msg = "Please visit <a href='https://".$domain."/whelpingJournal/passwordResetAction.php?session=".$sessionKey."'>here</a> to reset your password. This link is good for 1 hour.";
           echo $msg;
           $msg = wordwrap($msg,70);
           if(sendEmail($email,$user["Name"],"do_not_reply@".$domain,"Do Not Reply","Paws Whelping Journal Password Reset",$msg)){
