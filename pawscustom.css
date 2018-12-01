@@ -257,7 +257,7 @@ article.litter{
 	table-layout: fixed;
 }
 
-#noteTable > tr{
+tr{
 	width:100%;
 }
 
