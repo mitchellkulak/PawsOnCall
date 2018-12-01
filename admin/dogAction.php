@@ -21,7 +21,13 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $volunteerID = mysqli_real_escape_string($db,$_POST["volunteerID"]);
     $birthdate = mysqli_real_escape_string($db,$_POST["birthdate"]);
     $adoptiondate = mysqli_real_escape_string($db,$_POST["adoptiondate"]);
+    if($adoptiondate == ""){
+      $adoptiondate = "2038-01-01 00:00:00";
+    }
     $deathdate = mysqli_real_escape_string($db,$_POST["deathdate"]);
+    if($deathdate == ""){
+      $deathdatedate = "2038-01-01 00:00:00";
+    }
     $breed = mysqli_real_escape_string($db,$_POST["breed"]);
     $litterID = mysqli_real_escape_string($db,$_POST["litterID"]);
     $stillborn = mysqli_real_escape_string($db,$_POST["stillborn"]);
