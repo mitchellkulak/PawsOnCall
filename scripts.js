@@ -148,6 +148,16 @@ function resizeChart() {
 }
 
 function loadLitterInfo() {
+    var searchMessage = document.getElementById("searchMessage");
+    var litterContent = document.getElementById("wrapper");
+    if (getCookie("dogID") == "" || getCookie("dogID") == null) {
+        searchMessage.style.display = "block";
+        litterContent.style.display = "none";
+    }
+    else {
+        searchMessage.style.display = "none";
+        litterContent.style.display = "block";
+    }
     var deadpuppies = 0;
     var stillborn = 0;
     var session = getCookie("session");
@@ -197,7 +207,7 @@ function loadLitterInfo() {
             whelpStart.value = validateDate(obj[0].StartWhelp);
             whelpEnd.value = validateDate(obj[0].EndWhelp);
             dewormStart.value = validateDate(obj[0].StartDeworm);
-            dewormEnd.value = validateDate(obj[0].StartDeworm);
+            dewormEnd.value = validateDate(obj[0].EndDeworm);
 
             // For each litter
             obj.forEach(function (element) {
@@ -233,7 +243,10 @@ function loadLitterInfo() {
                 var newSexCell = document.createElement("td");
                 var newBirthdateCell = document.createElement("td");
                 var newStillbornCell = document.createElement("td");
+                var newDeadPuppyCell = document.createElement("td");
                 var newStillbornInput = document.createElement("input");
+                var newDeadPuppyInput = document.createElement("input");
+                newDeadPuppyInput.type = "checkbox";
                 newStillbornInput.type = "checkbox";
                 newIDCell.innerHTML = element.Name;
                 newIDCell.setAttribute("contenteditable", true);
@@ -241,6 +254,13 @@ function loadLitterInfo() {
                 newSexCell.setAttribute("contenteditable", true);
                 newBirthdateCell.innerHTML = element.Birthdate;
                 newBirthdateCell.setAttribute("contenteditable", true);
+                var date = new Date(element.Deathdate);
+                if (date <= Date.now()) {
+                    newDeadPuppyInput.checked = true;
+                } else {
+                    newDeadPuppyInput.checked = false;
+                }
+                newDeadPuppyCell.appendChild(newDeadPuppyInput);
                 if (element.Stillborn == 1) {
                     newStillbornInput.checked = true;
                 } else {
@@ -251,6 +271,7 @@ function loadLitterInfo() {
                 newRow.appendChild(newSexCell);
                 newRow.appendChild(newBirthdateCell);
                 newRow.appendChild(newStillbornCell);
+                newRow.appendChild(newDeadPuppyCell);
                 litterInfoTableBody.appendChild(newRow);
 
             });
@@ -265,17 +286,17 @@ function loadLitterInfo() {
 function addImportantDates() {
     var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
     var whelpStart = rewriteDate(document.getElementById("whelpStart").value);
-    if(whelpStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpStart != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
+    if (whelpStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var whelpEnd = rewriteDate(document.getElementById("whelpEnd").value);
-    if(whelpEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpEnd != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
+    if (whelpEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || whelpEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanStart = rewriteDate(document.getElementById("weanStart").value);
-    if(weanStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanStart != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
+    if (weanStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var weanEnd = rewriteDate(document.getElementById("weanEnd").value);
-    if(weanEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanEnd != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
+    if (weanEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || weanEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormStart = rewriteDate(document.getElementById("dewormStart").value);
-    if(dewormStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormStart != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
+    if (dewormStart != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormStart != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var dewormEnd = rewriteDate(document.getElementById("dewormEnd").value);
-    if(dewormEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormEnd != "2038-01-01 00:00:00"){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
+    if (dewormEnd != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/ || dewormEnd != "2038-01-01 00:00:00") { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
 
     var dateData = {};
     dateData['litterID'] = litterID;
@@ -323,12 +344,12 @@ function savePuppy() {
     var url = "UpdatePuppies.php?session=" + getCookie("session");
     for (var i = 0; i < thisTbody.rows.length; i++) {
         var pupData = {};
-        collarColor = thisTbody.rows[i].cells[0].textContent.replace('\n',"");
-        if(collarColor == ""){alert("Please Enter a Name");return;}
-        sex = thisTbody.rows[i].cells[1].textContent.replace('\n',"");
-        if(sex != /^[MF]/ || sex != /^[A-Z]{1}/){alert("Enter M or F for Sex");return;}
-        DOB = thisTbody.rows[i].cells[2].textContent.replace('\n',"");
-        if(DOB != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/){alert("Enter Date in YYYY-MM-DD HH:MM:SS Format");return;}
+        collarColor = thisTbody.rows[i].cells[0].textContent.replace('\n', "");
+        if (collarColor == "") { alert("Please Enter a Name"); return; }
+        sex = thisTbody.rows[i].cells[1].textContent.replace('\n', "");
+        if (sex != /^[MF]/ || sex != /^[A-Z]{1}/) { alert("Enter M or F for Sex"); return; }
+        DOB = thisTbody.rows[i].cells[2].textContent.replace('\n', "");
+        if (DOB != /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
         dogID = thisTbody.rows[i].id;
         if (thisTbody.rows[i].cells[3].getElementsByTagName("input")[0].checked) {
             stillBorn = 1;
@@ -444,21 +465,21 @@ function saveLitterWeightTable() {
     var data = [];
     var litterWeightTable = document.getElementById("litterWeightTable");
     var numPuppies = (litterWeightTable.rows.length - 2) / 2;
-    for(var i = 1; i <= numPuppies; i++){
+    for (var i = 1; i <= numPuppies; i++) {
         var innerData = {};
         innerData.DogID = String(litterWeightTable.rows[i].className);
-        for(var ir = 1; ir < litterWeightTable.rows[i].cells.length; ir++){
+        for (var ir = 1; ir < litterWeightTable.rows[i].cells.length; ir++) {
             innerData[String(litterWeightTable.rows[i].cells[ir].className)] = litterWeightTable.rows[i].cells[ir].textContent
-            .replace('\n',"")
-            .replace(" ","");
-            if(innerData[String(litterWeightTable.rows[i].cells[ir].className)] == ""){
+                .replace('\n', "")
+                .replace(" ", "");
+            if (innerData[String(litterWeightTable.rows[i].cells[ir].className)] == "") {
                 innerData[String(litterWeightTable.rows[i].cells[ir].className)] = "NULL";
             }
-            innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] = litterWeightTable.rows[i+numPuppies+1].cells[irs].textContent
-            .replace('\n',"")
-            .replace(" ","");
-            if(innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] == ""){
-                innerData[String(litterWeightTable.rows[i+numPuppies+1].cells[ir].className)] = "NULL";
+            innerData[String(litterWeightTable.rows[i + numPuppies + 1].cells[ir].className)] = litterWeightTable.rows[i + numPuppies + 1].cells[ir].textContent
+                .replace('\n', "")
+                .replace(" ", "");
+            if (innerData[String(litterWeightTable.rows[i + numPuppies + 1].cells[ir].className)] == "") {
+                innerData[String(litterWeightTable.rows[i + numPuppies + 1].cells[ir].className)] = "NULL";
             }
         }
         data.push(innerData);
@@ -467,23 +488,23 @@ function saveLitterWeightTable() {
 
 
     var url = "AddLitterWeights.php?session=" + getCookie("session");
-            fetch(url, {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "cors", // no-cors, cors, *same-origin
-                cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: "same-origin", // include, *same-origin, omit
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                    // "Content-Type": "application/x-www-form-urlencoded",
-                },
-                redirect: "follow", // manual, *follow, error
-                referrer: "no-referrer", // no-referrer, *client
-                body: JSON.stringify(data), // body data type must match "Content-Type" header
-            })
-                //.then(response => response.json()) // parses response to JSON
-                .then((responseContent) => {
-                    console.log(responseContent);
-                });
+    fetch(url, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            // "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+    })
+        //.then(response => response.json()) // parses response to JSON
+        .then((responseContent) => {
+            console.log(responseContent);
+        });
     alert("Weights Saved");
 }
 
@@ -510,7 +531,7 @@ function loadLitterWeightTable(id) {
                 newRow1.classList.add(element.DogID);
                 newRow2.classList.add(element.DogID);
                 var keys = Object.keys(element);
-                
+
                 var nameCell1 = document.createElement("td");
                 nameCell1.classList.add("puppyName");
                 nameCell1.innerHTML = element.Name;
@@ -519,16 +540,16 @@ function loadLitterWeightTable(id) {
                 nameCell2.innerHTML = element.Name;
                 newRow1.appendChild(nameCell1);
                 newRow2.appendChild(nameCell2);
-                for(var i = 2; i < 19; i++){
+                for (var i = 2; i < 19; i++) {
                     var cell1 = document.createElement("td");
                     cell1.classList.add(String(keys[i]));
                     cell1.setAttribute("contenteditable", true);
                     cell1.innerHTML = element[String(keys[i])];
                     newRow1.appendChild(cell1);
                     var cell2 = document.createElement("td");
-                    cell2.classList.add(String(keys[i+18]));
+                    cell2.classList.add(String(keys[i + 17]));
                     cell2.setAttribute("contenteditable", true);
-                    cell2.innerHTML = element[String(keys[i+18])];
+                    cell2.innerHTML = element[String(keys[i + 17])];
                     newRow2.appendChild(cell2);
                 }
                 litterWeightHeaders1.insertAdjacentElement('afterend', newRow1);
@@ -539,6 +560,16 @@ function loadLitterWeightTable(id) {
 }
 
 function loadLitterInfoByID(id) {
+    var searchMessage = document.getElementById("searchMessage");
+    var litterContent = document.getElementById("wrapper");
+    if (getCookie("dogID") == "" || getCookie("dogID") == null) {
+        searchMessage.style.display = "block";
+        litterContent.style.display = "none";
+    }
+    else {
+        searchMessage.style.display = "none";
+        litterContent.style.display = "block";
+    }
     document.cookie = "litter=" + id;
     var session = getCookie("session");
     var dogID = getCookie("dogID");
@@ -606,9 +637,14 @@ function loadLitterInfoByID(id) {
                         if (element.Stillborn == 1) {
                             stillborn++;
                         }
+                        var newDeadPuppyInput = document.createElement("input");   
+                        newDeadPuppyInput.type = "checkbox";
                         var deathDate = new Date(element.Deathdate);
                         if (deathDate < Date.now()) {
                             deadpuppies++;
+                            newDeadPuppyInput.checked = true;
+                        } else {
+                            newDeadPuppyInput.checked = false;
                         }
                         var newRow = document.createElement("tr");
                         newRow.id = element.ID;
@@ -616,12 +652,15 @@ function loadLitterInfoByID(id) {
                         var newSexCell = document.createElement("td");
                         var newBirthdateCell = document.createElement("td");
                         var newStillbornCell = document.createElement("td");
+                        var newDeadPuppyCell = document.createElement("td");
                         var newStillbornInput = document.createElement("input");
                         newStillbornInput.type = "checkbox";
+                        
                         newBirthdateCell.innerHTML = element.Birthdate;
                         newIDCell.setAttribute("contenteditable", true);
                         newSexCell.setAttribute("contenteditable", true);
                         newBirthdateCell.setAttribute("contenteditable", true);
+
                         if (element.Stillborn == 1) {
                             newStillbornInput.checked = true;
                         } else {
@@ -630,10 +669,12 @@ function loadLitterInfoByID(id) {
                         newIDCell.innerHTML = element.Name;
                         newSexCell.innerHTML = element.Sex;
                         newStillbornCell.appendChild(newStillbornInput);
+                        newDeadPuppyCell.appendChild(newDeadPuppyInput);
                         newRow.appendChild(newIDCell);
                         newRow.appendChild(newSexCell);
                         newRow.appendChild(newBirthdateCell);
                         newRow.appendChild(newStillbornCell);
+                        newRow.appendChild(newDeadPuppyCell);
                         litterInfoTableBody.appendChild(newRow);
                     });
                     stillbornsDiv.value = stillborn;
@@ -673,10 +714,10 @@ function addMed(medication) {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
+                    loadMotherInfo();
                 });
         }
     }
-    loadMotherInfo();
 }
 
 function addMedi(x) {
@@ -818,7 +859,7 @@ function loginUser() {
             console.log(document.cookie);
             if (data.sessionKey != "" && data.sessionKey != null) {
                 window.location.href = "mother.html";
-            }else{
+            } else {
                 alert("Incorrect Username or Password");
                 passwordInput.value = "";
             }
@@ -852,12 +893,11 @@ function addDogNote() {
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
                     console.log(responseContent);
-
+                    loadMotherInfo();
 
                 });
         }
     }
-    loadMotherInfo();
 }
 
 function addLitterNote() {
