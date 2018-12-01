@@ -148,7 +148,7 @@ div.buttons{
 }
 
 .selectButton{
-	width: 15%;
+	width: 45px;
 }
 
 .policy{
@@ -276,5 +276,13 @@ box-shadow: 5px 5px 5px #808080;
 #searchResults.section{
 	padding: 30px 10px !important;
 	height: 120px !important;
+}
+
+.noteInner{
+	max-height: 1500px;
+}
+
+.puppyNote{
+	max-height: 280px;
 }
 
