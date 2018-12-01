@@ -783,6 +783,7 @@ function loadMotherInfo() {
     var session = getCookie("session");
     var dogNameDiv = document.getElementById("dogNameDiv");
     var noteTable = document.getElementById("noteTable");
+    noteTable.innerHTML = "";
     var dogBreedDiv = document.getElementById("breedDiv");
 
     fetch('GetMomDogInfo.php?dogID=' + dogID + "&session=" + session, {
@@ -869,9 +870,7 @@ function addDogNote() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
-                    alert("Reloading Mother Info");
                     loadMotherInfo();
-
                 });
         }
     }
