@@ -260,6 +260,7 @@ function loadLitterInfo() {
                 } else {
                     newDeadPuppyInput.checked = false;
                 }
+                newDeadPuppyCell.className = deathDate;
                 newDeadPuppyCell.appendChild(newDeadPuppyInput);
                 if (element.Stillborn == 1) {
                     newStillbornInput.checked = true;
@@ -340,6 +341,7 @@ function savePuppy() {
     var sex;
     var DOB;
     var stillBorn;
+    var deceased;
     var theMasterPupData = [];
     var url = "UpdatePuppies.php?session=" + getCookie("session");
     for (var i = 0; i < thisTbody.rows.length; i++) {
@@ -357,11 +359,20 @@ function savePuppy() {
         else {
             stillBorn = 0;
         }
+        if (thisTbody.rows[i].cells[4].getElementsByTagName("input")[0].checked && thisTbody.rows[i].cells[4].className == "") {
+            deceased = Date.now();
+        }else if(thisTbody.rows[i].cells[4].getElementsByTagName("input")[0].checked){
+            deceased = thisTbody.rows[i].cells[4].className;
+        }
+        else {
+            deceased = "2038-01-01 00:00:00";
+        }
         pupData['dogID'] = dogID;
         pupData['name'] = collarColor;
         pupData['sex'] = sex;
         pupData['birthdate'] = DOB;
         pupData['stillborn'] = stillBorn;
+        pupDate['deathdate'] = deceased;
 
         theMasterPupData.push(pupData);
     }
@@ -646,6 +657,7 @@ function loadLitterInfoByID(id) {
                         } else {
                             newDeadPuppyInput.checked = false;
                         }
+                        newDeadPuppyCell.className = deathDate;
                         var newRow = document.createElement("tr");
                         newRow.id = element.ID;
                         var newIDCell = document.createElement("td");
