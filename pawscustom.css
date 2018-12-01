@@ -257,6 +257,9 @@ article.litter{
 	width:100%;
 }
 
+#noteTable > tr{
+	width:100%;
+}
 
 .navbar-menu.is-active{
     background-color: #a72cba !important;
