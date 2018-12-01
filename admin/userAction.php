@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <a class="button is-link admin" href="index.php">Return to admin page</a><br>
 
 </article>
-<?php echo $message;?>
+
 
 </body>
 </html>

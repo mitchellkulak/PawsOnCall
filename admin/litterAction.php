@@ -20,11 +20,29 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
     $motherID = mysqli_real_escape_string($db,$_POST["motherID"]);
     $fatherID = mysqli_real_escape_string($db,$_POST["fatherID"]);
     $startWhelp = mysqli_real_escape_string($db,$_POST["startWhelp"]);
+    if($startWhelp == ""){
+      $startWhelp = "2038-01-01 00:00:00";
+    }
     $endWhelp = mysqli_real_escape_string($db,$_POST["endWhelp"]);
+    if($endWhelp == ""){
+      $endWhelp = "2038-01-01 00:00:00";
+    }
     $startWean = mysqli_real_escape_string($db,$_POST["startWean"]);
+    if($startWean == ""){
+      $startWean = "2038-01-01 00:00:00";
+    }
     $endWean = mysqli_real_escape_string($db,$_POST["endWean"]);
+    if($endWean == ""){
+      $endWean = "2038-01-01 00:00:00";
+    }
     $startDeworm = mysqli_real_escape_string($db,$_POST["startDeworm"]);
+    if($startDeworm == ""){
+      $startDeworm = "2038-01-01 00:00:00";
+    }
     $endDeworm = mysqli_real_escape_string($db,$_POST["endDeworm"]);
+    if($endDeworm == ""){
+      $endDeworm = "2038-01-01 00:00:00";
+    }
 
     if($litterID != 0){
       $SQL = "UPDATE Litter SET
@@ -177,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <a class="button is-link admin" href="index.php">Return to admin page</a><br>
 
 </article>
-<?php echo $message;?>
+
 
 </body>
 </html>

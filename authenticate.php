@@ -11,7 +11,8 @@ function authenticate($sessionKey){
         $sessionrow = mysqli_fetch_assoc($session);
         if(mysqli_num_rows($session) == 1 && strtotime($sessionrow["Time"]) > time() - 3600 && $sessionrow["SessionKey"] != null){ //checks if session key valid and session last use <1hr ago
             $userID = $sessionrow["UserID"];
-            mysqli_query($db,"UPDATE SessionKeys SET Time = CURRENT_TIMESTAMP WHERE userID = '$userID'"); //updates session last used time
+            $timestamp = date('YYYY-MM-DD HH:MM:SS',time());
+            mysqli_query($db,"UPDATE SessionKeys SET Time = '$timestamp' WHERE userID = '$userID'"); //updates session last used time
             //$isadmin = mysqli_query($db,"SELECT Admin FROM Volunteer WHERE id = $userID");
             //$isadminrow = $isadminmysqli_fetch_assoc();
             $arr = array('userID' => $userID, 'sessionKey' => $sessionKey, 'admin' => $sessionrow["Admin"], 'error' => 'none');
