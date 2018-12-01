@@ -254,6 +254,7 @@ article.litter{
 	display:block;
 	max-height:600px;
 	overflow:scroll;
+	width:100%;
 }
 
 
