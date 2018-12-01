@@ -251,16 +251,6 @@ article.litter{
 	overflow:scroll; 
 }
 
-#redTile{
-	max-height:500px !important;
-	overflow:scroll; 
-}
-
-#blueTile{
-	max-height:500px !important;
-	overflow:scroll; 
-}
-
 #noteTable > tr{
 	width:100%;
 }
