@@ -279,7 +279,7 @@ box-shadow: 5px 5px 5px #808080;
 }
 
 .noteInner{
-	height: 1500px;
+	height: 1500px !important;
 }
 
 .puppyNote{
