@@ -17,7 +17,7 @@ a.navbar-item{
 }
 
  #noteTile{  
-	height: 100%;
+	height: inherit;
 }
 
 #navbarDesktop.navbar-brand{
