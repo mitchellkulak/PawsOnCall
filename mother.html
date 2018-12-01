@@ -50,27 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
-	
-	<style>
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-}
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-tr:nth-child(even){background-color: #f2f2f2}
-</style>
 </head>
 <body onload="loadMotherInfo() , adminShowHide() , getWhelpDates()">
 
 
 
 <!-- Navbar, logo, logout button -->
-<nav class="navbar ">
   <div class="navbar-brand">
     <a href="searchresult.html">
 			<img src="images/pawslogo.png" alt="PAWS Logo" >
@@ -194,9 +179,9 @@ tr:nth-child(even){background-color: #f2f2f2}
   
   <!--medications tile-->
   <div id="noteTile" class="tile is-parent">
-    <article class="tile is-child notification is-success noteInner">
+    <article class="tile is-child notification is-success">
       <div class="content">
-        <p class="title">Add medicine/note</p>
+        <p class="title">Add Medication/Note</p>
         <p class="subtitle">
 					<div class="dropdown">
 						<button onclick="myFunction()" class="dropbtn  is-link" onclick="addMedication()"> Add Medication</button>
@@ -220,8 +205,10 @@ tr:nth-child(even){background-color: #f2f2f2}
 				</p>
 
 			<div class="content" id="medHistoryDiv">
-				<table id="noteTable" class="table is-striped">
-						
+				<table>
+						<tbody id="noteTable" class="table is-striped">
+
+            </tbody>
 				<table>
 			</div>
 			</div>
