@@ -250,6 +250,11 @@ article.litter{
 	width:100%;
 }
 
+#noteTable{
+	display:block;
+	max-height:400px;
+}
+
 
 .navbar-menu.is-active{
     background-color: #a72cba !important;
