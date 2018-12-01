@@ -247,7 +247,7 @@ article.litter{
 
 #noteTable{
 	display:block;
-	max-height:100% !important;
+	max-height:620px !important;
 	overflow:scroll; 
 }
 
