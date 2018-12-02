@@ -19,7 +19,21 @@
     	  mysqli_query($db,"UPDATE SessionKeys SET SessionKey = '$sessionKey', Time = '$timer' WHERE userID = $userID"); //sets session key in database, time is updated automatically
           $msg = "Please visit <a href='https://".$domain."/whelpingJournal/passwordResetAction.php?session=".$sessionKey."'>here</a> to reset your password. This link is good for 1 hour.";
           echo $msg;
-          $msg = wordwrap($msg,70);
+          $msg = "<html>
+	<body>
+		<div>
+			<table style='width: 100%; text-align: center;'>
+			  <tr style='width: 100%; text-align:center;'>
+				<td align='center' style=''><img src='https://est.fij.mybluehost.me/whelpingJournal/images/pawslogocolor.jpg'></td>
+			  </tr>
+			  	<tr><td style='font-size: 1.5em; padding: .5em;'>Please click the button below to reset your password. This link is good for 1 hour.</td></tr>
+				<tr style='width: 100%; text-align:center;'>
+					<td align='center'><a href='https://".$domain."/whelpingJournal/passwordResetAction.php?session=".$sessionKey."' style='border-radius: 8px;background-color: #209cee;border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 20px;'>Reset Password</a></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html";
           if(sendEmail($email,$user["Name"],"do_not_reply@".$domain,"Do Not Reply","Paws Whelping Journal Password Reset",$msg)){
 		$message = "Password Reset Email Sent";
 	  }else{

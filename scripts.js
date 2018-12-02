@@ -733,7 +733,7 @@ function logout() {
     document.cookie = "session=; Max-Age=-99999999;";
     document.cookie = "dogID=; Max-Age=-99999999;";
     document.cookie = "litter=; Max-Age=-99999999;";
-    fetch("logoff.php", {
+    fetch("/whelpingJournal/logoff.php", {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -741,7 +741,7 @@ function logout() {
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
     });
-    window.location.href = "/PawsOnCall/login.html";
+    window.location.href = "/whelpingJournal/login.html";
 
 }
 
