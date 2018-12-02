@@ -51,22 +51,55 @@
 
 <body onload="adminShowHide(); loadLitterInfo();">
 	<!-- Navbar, logo, logout button -->
-	<nav class="navbar" role="navigation" aria-label="main navigation">
-		<div id="navbarDesktop " class="navbar-brand">
-			<a href="searchresult.html">
-				<img src="images/pawslogo.png" alt="PAWS Logo">
-			</a>
-			<a class="navbar-item" href="mother.html">Mom</a>
-			<a class="navbar-item" href="puppies.html">Puppies</a>
-			<a class="navbar-item" href="misc.html">Misc</a>
-			<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
-		</div>
-		<div class="buttons">
-			<a class="button is-primary logout" onclick="logout()">
-				Log out
-			</a>
-		</div>
-	</nav>
+	<nav class="navbar ">
+  <div class="navbar-brand">
+    <a href="mother.html">
+			<img src="images/pawslogo.png" alt="PAWS Logo" >
+		</a>
+
+    <div class="navbar-burger burger" data-target="navMenubd-example">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenubd-example" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link  is-active">
+          Menu
+        </a>
+        <div class="navbar-dropdown ">
+          <a class="navbar-item " href="mother.html">
+            Mom
+          </a>
+          <a class="navbar-item " href="puppies.html">
+            Puppies
+          </a>
+          <a class="navbar-item " href="misc.html">
+            Misc
+          </a>
+          <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
+            Admin
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-primary" onclick="logout()">
+              <span>Logout</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
 	<!-- Navbar, logo, logout button -->
 
 	<!-- Searchbar and button-->
@@ -78,6 +111,16 @@
 	</div>
 	<!--sarchbar and button-->
 
+	<!-- search message-->
+<section class="section message" id="searchMessage">
+	<div class="tile">
+	<article class="tile is-child notification is-primary dogname">
+			<p class="title">Please search for a dog.</p>
+		</article>
+</section>
+<!-- search message-->
+
+<div id="wrapper">
 	<section class="section">
 		<div class="tile is-ancestor 1">
 			<div class="tile is-vertical is-8 2">
@@ -115,6 +158,9 @@
 											<tr>
 												<th>ID Color</th>
 												<th>Sex</th>
+												<th>Birthdate</th>
+												<th>Stillborn</th>
+												<th>Deceased</th>
 											</tr>
 										</thead>
 										<tbody id="litterInfoTableBody">
@@ -135,7 +181,7 @@
 					<div class="tile is-parent">
 
 
-						<article class="tile is-child notification is-success">
+						<article class="tile is-child notification is-success puppyNote">
 							<p class="title">Litter Information</p>
 							<form class="form-horizontal">
 								<div class="field is-horizontal">
@@ -289,9 +335,108 @@
 		</div>
 		<!--end 1-->
 		</article>
+		<!-- </div>
+		</div> -->
+		
+		
+		<div class="tile is-ancestor">
+		  <div class="tile is-parent">
+			<div class="tile is-child box has-background-grey-lighter">
+			  <p class="title">Litter Weights (in pounds)</p>
+				<div style="overflow-x:auto;">
+  <table id="litterWeightTable" class="table is-bordered is-hoverable">
+    <tr id="litterWeightHeaders1">
+      <th>Puppy</th>
+      <th>Day 1 AM</th>
+	  <th>Day 1 PM</th>
+      <th>Day 2 AM</th>
+	  <th>Day 2 PM</th>
+      <th>Day 3 AM</th>
+	  <th>Day 3 PM</th>
+      <th>Day 4 AM</th>
+	  <th>Day 4 PM</th>
+      <th>Day 5 AM</th>
+	  <th>Day 5 PM</th>
+      <th>Day 6 AM</th>
+	  <th>Day 6 PM</th>
+      <th>Day 7 AM</th>
+	  <th>Day 7 PM</th>
+      <th>Day 8 AM</th>
+	  <th>Day 8 PM</th>
+      <th>Day 9 AM</th>
+    </tr>
+    <!-- <tr>
+      <td>Smith</td>
+      <td id="w1a" contenteditable='true'></td>
+      <td id="w1b" contenteditable='true'></td>
+      <td id="w2a" contenteditable='true'></td>
+	  <td id="w2b" contenteditable='true'></td>
+      <td id="w3a" contenteditable='true'></td>
+      <td id="w3b" contenteditable='true'></td>
+	  <td id="w4a" contenteditable='true'></td>
+      <td id="w4b" contenteditable='true'></td>
+      <td id="w5a" contenteditable='true'></td>
+	  <td id="w5b" contenteditable='true'></td>
+      <td id="w6a" contenteditable='true'></td>
+      <td id="w6b" contenteditable='true'></td>
+	  <td id="w7a" contenteditable='true'></td>
+      <td id="w7b" contenteditable='true'></td>
+      <td id="w8a" contenteditable='true'></td>
+	  <td id="w8b" contenteditable='true'></td>
+      <td id="w9a" contenteditable='true'></td>
+    </tr> -->
+	<tr id="litterWeightHeaders2">
+      <th>Puppy</th>
+	  <th>Day 9 PM</th>
+	  <th>Day 10 AM</th>
+	  <th>Day 10 PM</th>
+      <th>Day 11 AM</th>
+	  <th>Day 11 PM</th>
+      <th>Day 12 AM</th>
+	  <th>Day 12 PM</th>
+      <th>Day 13 AM</th>
+	  <th>Day 13 PM</th>
+      <th>Day 14 AM</th>
+	  <th>Day 14 PM</th>
+      <th>3 weeks</th>
+	  <th>4 weeks</th>
+      <th>5 weeks</th>
+	  <th>6 weeks</th>
+      <th>7 weeks</th>
+	  <th>8 weeks</th>
+    </tr>
+	<!-- <tr>
+      <td>Smith</td>
+
+      <td id="w9b" contenteditable='true'></td>
+      <td id="w10a" contenteditable='true'></td>
+      <td id="w10b" contenteditable='true'></td>
+	  <td id="w11a" contenteditable='true'></td>
+      <td id="w11b" contenteditable='true'></td>
+      <td id="w12a" contenteditable='true'></td>
+	  <td id="w12b" contenteditable='true'></td>
+	  <td id="w13a" contenteditable='true'></td>
+      <td id="w13b" contenteditable='true'></td>
+      <td id="w14a" contenteditable='true'></td>
+	  <td id="w14b" contenteditable='true'></td>
+      <td id="w3w" contenteditable='true'></td>
+      <td id="w4w" contenteditable='true'></td>
+	  <td id="w5w" contenteditable='true'></td>
+      <td id="w6w" contenteditable='true'></td>
+      <td id="w7w" contenteditable='true'></td>
+      <td id="w8w" contenteditable='true'></td>
+
+    </tr> -->
+  </table>
+<button class="button is-link is-inline-block" onclick="saveLitterWeightTable()">Save</button>
+</div>
+			</div>
+		  </div>
 		</div>
-		</div>
+	</div>
+</div>
 	</section>
+</div>
 </body>
 
 </html>

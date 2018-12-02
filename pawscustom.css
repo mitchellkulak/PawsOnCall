@@ -115,8 +115,9 @@ button.button.is-link.logout{
 
 
 article.tile.notification.is-primary.search{
-	height:40px !important;
-	padding: 10px 25px !important;
+	height:65px !important;
+	padding: 10px 20px !important;
+	width: 100% !important;
 }
 
 input.input.create{
@@ -142,7 +143,7 @@ div.buttons{
 }
 
 .selectButton{
-	width: 15%;
+	width: 45px;
 }
 
 .policy{
@@ -244,6 +245,15 @@ article.litter{
 	width:100%;
 }
 
+#noteTable{
+	display:block;
+	max-height:620px !important;
+	overflow:scroll; 
+}
+
+#noteTable > tr{
+	width:100%;
+}
 
 .navbar-menu.is-active{
     background-color: #a72cba !important;
@@ -251,7 +261,7 @@ article.litter{
 
 .navbar-item,.navbar-link{
 color:#fff !important;
-background-color: #c553d6; !important;
+background-color: #c553d6 !important;
 }
 
 .navbar-link:hover{
@@ -262,3 +272,27 @@ background-color: #c553d6; !important;
 .navbar-burger{
 color: #fff !important;
 }
+
+.is-child.box{
+box-shadow: 5px 5px 5px #808080;
+}
+
+#searchResults.section{
+	padding: 30px 10px !important;
+	height: 120px !important;
+}
+
+
+table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    border: 1px solid #ddd !important;
+}
+
+th, td {
+    text-align: left !important;
+    padding: 8px !important;
+}
+
+tr:nth-child(even){background-color: #f2f2f2 !important}

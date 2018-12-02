@@ -54,11 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
 <body onload="loadMotherInfo() , adminShowHide() , getWhelpDates()">
 
 
-
-<!-- Navbar, logo, logout button -->
 <nav class="navbar ">
+<!-- Navbar, logo, logout button -->
   <div class="navbar-brand">
-    <a href="searchresult.html">
+    <a href="mother.html">
 			<img src="images/pawslogo.png" alt="PAWS Logo" >
 		</a>
 
@@ -144,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
   <div class="tile is-vertical is-8">
     <div class="tile"> 
 	  <!--temp graph tile-->
-      <div class="tile is-parent">
+      <div id="blueTile" class="tile is-parent">
         <article class="tile is-child notification is-info">
 				<p class="title">
 					Temp
@@ -157,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
 	
 	<!--date tile-->
-	<div class="tile is-parent">
+	<div id="redTile" class="tile is-parent">
 		<article class="tile is-child notification is-danger">
         <p class="title">Whelping Dates</p>
         <div class="content" id="importantDatesDiv">
@@ -179,10 +178,10 @@ document.addEventListener('DOMContentLoaded', function () {
   </div>
   
   <!--medications tile-->
-  <div class="tile is-parent">
+  <div id="noteTile" class="tile is-parent">
     <article class="tile is-child notification is-success">
       <div class="content">
-        <p class="title">Add Medication</p>
+        <p class="title">Add Medication/Note</p>
         <p class="subtitle">
 					<div class="dropdown">
 						<button onclick="myFunction()" class="dropbtn  is-link" onclick="addMedication()"> Add Medication</button>
@@ -206,8 +205,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				</p>
 
 			<div class="content" id="medHistoryDiv">
-				<table id="noteTable" class="table is-striped">
-						
+				<table>
+						<tbody id="noteTable" class="table is-striped">
+
+            </tbody>
 				<table>
 			</div>
 			</div>
