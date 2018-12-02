@@ -21,103 +21,52 @@
 
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
-	
-	<style>
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-}
+	<!--forms script-->
+	<script>
+		function editDates() {
+			document.getElementById("whelpStart").removeAttribute("disabled");
+			document.getElementById("whelpEnd").removeAttribute("disabled");
+			document.getElementById("whelpDate").removeAttribute("disabled");
+			document.getElementById("weanStart").removeAttribute("disabled");
+			document.getElementById("weanEnd").removeAttribute("disabled");
+			document.getElementById("deworm").removeAttribute("disabled");
+			document.getElementById('edit').hidden = true;
+			document.getElementById('save').hidden = false;
 
-th, td {
-    text-align: left;
-    padding: 8px;
-}
+			return false;
+		}
 
-tr:nth-child(even){background-color: #f2f2f2}
-</style>
-	
-<script>
-document.addEventListener('DOMContentLoaded', function () {
+		function editLitter() {
+			document.getElementById("father").removeAttribute("disabled");
+			document.getElementById("stillborns").removeAttribute("disabled");
+			document.getElementById("deaths").removeAttribute("disabled");
+			document.getElementById('edit').hidden = true;
+			document.getElementById('save').hidden = false;
 
-  // Get all "navbar-burger" elements
-  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-  // Check if there are any nav burgers
-  if ($navbarBurgers.length > 0) {
-
-    // Add a click event on each of them
-    $navbarBurgers.forEach(function ($el) {
-      $el.addEventListener('click', function () {
-
-        // Get the target from the "data-target" attribute
-        var target = $el.dataset.target;
-        var $target = document.getElementById(target);
-
-        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
-        $el.classList.toggle('is-active');
-        $target.classList.toggle('is-active');
-
-      });
-    });
-  }
-
-});
-</script>
+			return false;
+		}
+	</script>
+	<!--forms script-->
 </head>
 
 <body onload="adminShowHide(); loadLitterInfo();">
 	<!-- Navbar, logo, logout button -->
-	<nav class="navbar ">
-  <div class="navbar-brand">
-    <a href="searchresult.html">
-			<img src="images/pawslogo.png" alt="PAWS Logo" >
-		</a>
-
-    <div class="navbar-burger burger" data-target="navMenubd-example">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-
-  <div id="navMenubd-example" class="navbar-menu">
-    <div class="navbar-start">
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link  is-active">
-          Menu
-        </a>
-        <div class="navbar-dropdown ">
-          <a class="navbar-item " href="mother.html">
-            Mom
-          </a>
-          <a class="navbar-item " href="puppies.html">
-            Puppies
-          </a>
-          <a class="navbar-item " href="misc.html">
-            Misc
-          </a>
-          <a class="navbar-item " id="adminLink" onclick="redirectToAdmin()">
-            Admin
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="field is-grouped">
-          <p class="control">
-            <a class="button is-primary" onclick="logout()">
-              <span>Logout</span>
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+	<nav class="navbar" role="navigation" aria-label="main navigation">
+		<div id="navbarDesktop " class="navbar-brand">
+			<a href="searchresult.html">
+				<img src="images/pawslogo.png" alt="PAWS Logo">
+			</a>
+			<a class="navbar-item" href="mother.html">Mom</a>
+			<a class="navbar-item" href="puppies.html">Puppies</a>
+			<a class="navbar-item" href="misc.html">Misc</a>
+			<a class="navbar-item" id="adminLink" onclick="redirectToAdmin()">Admin</a>
+		</div>
+		<div class="buttons">
+			<a class="button is-primary logout" onclick="logout()">
+				Log out
+			</a>
+		</div>
+	</nav>
 	<!-- Navbar, logo, logout button -->
 
 	<!-- Searchbar and button-->
@@ -138,11 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
 						<!--mother name & litter select-->
 						<!--teal tile-->
 						<article class="tile is-child notification is-primary is-12 dogname">
-							<p class="title" id="litterNameDiv">dog</p>
+							<p class="title" id="litterNameDiv">No litters found. An administrator must create a new litter.</p>
 							<p class="subtitle" id="whelpStartDateDiv"></p>
-							<p id="volunteerIDHolder" style="visibility: hidden; display: none;"></p>
-							<p id="litterIDHolder" style="visibility: hidden; display: none;"></p>
-							<p id="breedHolder" style="visibility: hidden; display: none;"></p>
 							<div class="dropdown">
 								<button onclick="myFunction()" class="dropbtn" id="litterNameDiv">Select a different litter</button>
 								<div id="myDropdown" class="dropdown-content">
@@ -160,26 +106,22 @@ document.addEventListener('DOMContentLoaded', function () {
 							<article class="tile is-child notification is-danger">
 								<p class="title">
 									Litter
+									<button type="submit" class="button is-link inline" id="save" hidden>Save</button>
+									<button type="edit" class="button is-link inline" id="edit" onclick="return editHost()">Edit</button>
 								</p>
-								<div style="overflow-x:auto;">
 								<div class="content">
 									<table class="table is-striped">
 										<thead>
 											<tr>
 												<th>ID Color</th>
 												<th>Sex</th>
-												<th>Birthdate</th>
-												<th>Stillborn</th>
 											</tr>
 										</thead>
 										<tbody id="litterInfoTableBody">
 											
 										</tbody>
 									</table>
-									<button class="button is-link is-inline-block" onclick="savePuppy();">Save</button>
-									<button class="button is-link is-inline-block" onclick="addPuppy();">Add Puppy</button>
 									</p>
-								</div>
 								</div>
 							</article>
 							<!--end red tile-->
@@ -232,10 +174,10 @@ document.addEventListener('DOMContentLoaded', function () {
 										</div>
 									</div>
 								</div>
-								<!-- <div class="form-group">
+								<div class="form-group">
 									<button type="edit" class="button button is-link" id="edit" onclick="return editLitter()">Edit</button>
 									<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
-								</div> -->
+								</div>
 							</form>
 					</div>
 					<!--end blue tile-->
@@ -272,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			<div class="tile is-parent">
 				<article class="tile is-child notification is-warning">
 					<p class="title">Important Dates</p>
-					<!--<form class="form-horizontal">-->
+					<form class="form-horizontal">
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
 								<label class="label">Whelp Start</label>
@@ -280,19 +222,19 @@ document.addEventListener('DOMContentLoaded', function () {
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="whelpStart"  >
+										<input class="input" type="text" id="whelpStart" placeholder="Disabled input" disabled>
 									</p>
 								</div>
 							</div>
 						</div>
 						<div class="field is-horizontal">
-							<div class="field-label is-normal">
+							<div class="field-wlabel is-normal">
 								<label class="label">Whelp End</label>
 							</div>
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="whelpEnd" >
+										<input class="input" type="text" id="whelpEnd" placeholder="Disabled input" disabled>
 									</p>
 								</div>
 							</div>
@@ -304,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="weanStart" >
+										<input class="input" type="text" id="weanStart" disabled>
 									</p>
 								</div>
 							</div>
@@ -316,38 +258,28 @@ document.addEventListener('DOMContentLoaded', function () {
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="weanEnd" >
+										<input class="input" type="text" id="weanEnd" disabled>
 									</p>
 								</div>
 							</div>
 						</div>
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
-								<label class="label">Deworm Start</label>
+								<label class="label">Deworm</label>
 							</div>
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="dewormStart">
+										<input class="input" type="text" id="deworm" placeholder="Disabled input" disabled>
 									</p>
 								</div>
 							</div>
 						</div>
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Deworm End</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-										<input class="input" type="text" id="dewormEnd" >
-									</p>
-								</div>
-							</div>
+						<div class="form-group">
+							<button type="edit" class="button button is-link" id="edit" onclick="return editDates()">Edit</button>
+							<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
 						</div>
-						
 					</form>
-					<button class="button is-link is-inline-block" onclick="addImportantDates();">Save</button>
 				</article>
 
 				<!--important dates tile-->
@@ -358,100 +290,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		<!--end 1-->
 		</article>
 		</div>
-		</div>
-		<div class="tile is-ancestor">
-		  <div class="tile is-parent">
-			<div class="tile is-child box has-background-grey-lighter">
-			  <p class="title">Litter Weights</p>
-				<div style="overflow-x:auto;">
-  <table id="litterWeightTable" class="table is-bordered is-hoverable">
-    <tr id="litterWeightHeaders1">
-      <th>Puppy</th>
-      <th>Day 1 AM</th>
-	  <th>Day 1 PM</th>
-      <th>Day 2 AM</th>
-	  <th>Day 2 PM</th>
-      <th>Day 3 AM</th>
-	  <th>Day 3 PM</th>
-      <th>Day 4 AM</th>
-	  <th>Day 4 PM</th>
-      <th>Day 5 AM</th>
-	  <th>Day 5 PM</th>
-      <th>Day 6 AM</th>
-	  <th>Day 6 PM</th>
-      <th>Day 7 AM</th>
-	  <th>Day 7 PM</th>
-      <th>Day 8 AM</th>
-	  <th>Day 8 PM</th>
-      <th>Day 9 AM</th>
-    </tr>
-    <!-- <tr>
-      <td>Smith</td>
-      <td id="w1a" contenteditable='true'></td>
-      <td id="w1b" contenteditable='true'></td>
-      <td id="w2a" contenteditable='true'></td>
-	  <td id="w2b" contenteditable='true'></td>
-      <td id="w3a" contenteditable='true'></td>
-      <td id="w3b" contenteditable='true'></td>
-	  <td id="w4a" contenteditable='true'></td>
-      <td id="w4b" contenteditable='true'></td>
-      <td id="w5a" contenteditable='true'></td>
-	  <td id="w5b" contenteditable='true'></td>
-      <td id="w6a" contenteditable='true'></td>
-      <td id="w6b" contenteditable='true'></td>
-	  <td id="w7a" contenteditable='true'></td>
-      <td id="w7b" contenteditable='true'></td>
-      <td id="w8a" contenteditable='true'></td>
-	  <td id="w8b" contenteditable='true'></td>
-      <td id="w9a" contenteditable='true'></td>
-    </tr> -->
-	<tr id="litterWeightHeaders2">
-      <th>Puppy</th>
-	  <th>Day 9 PM</th>
-	  <th>Day 10 AM</th>
-	  <th>Day 10 PM</th>
-      <th>Day 11 AM</th>
-	  <th>Day 11 PM</th>
-      <th>Day 12 AM</th>
-	  <th>Day 12 PM</th>
-      <th>Day 13 AM</th>
-	  <th>Day 13 PM</th>
-      <th>Day 14 AM</th>
-	  <th>Day 14 PM</th>
-      <th>3 weeks</th>
-	  <th>4 weeks</th>
-      <th>5 weeks</th>
-	  <th>6 weeks</th>
-      <th>7 weeks</th>
-	  <th>8 weeks</th>
-    </tr>
-	<!-- <tr>
-      <td>Smith</td>
-
-      <td id="w9b" contenteditable='true'></td>
-      <td id="w10a" contenteditable='true'></td>
-      <td id="w10b" contenteditable='true'></td>
-	  <td id="w11a" contenteditable='true'></td>
-      <td id="w11b" contenteditable='true'></td>
-      <td id="w12a" contenteditable='true'></td>
-	  <td id="w12b" contenteditable='true'></td>
-	  <td id="w13a" contenteditable='true'></td>
-      <td id="w13b" contenteditable='true'></td>
-      <td id="w14a" contenteditable='true'></td>
-	  <td id="w14b" contenteditable='true'></td>
-      <td id="w3w" contenteditable='true'></td>
-      <td id="w4w" contenteditable='true'></td>
-	  <td id="w5w" contenteditable='true'></td>
-      <td id="w6w" contenteditable='true'></td>
-      <td id="w7w" contenteditable='true'></td>
-      <td id="w8w" contenteditable='true'></td>
-
-    </tr> -->
-  </table>
-<button class="button is-link is-inline-block" onclick="saveLitterWeightTable()">Save</button>
-</div>
-			</div>
-		  </div>
 		</div>
 	</section>
 </body>
