@@ -172,11 +172,11 @@ document.addEventListener('DOMContentLoaded', function () {
       
       <!--adoption date-->
       <label class="label admin">Adoption Date: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
+      <input type="text" class="input admin" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
       
       <!--death date-->
       <label class="label admin">Deathdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
+      <input type="text" class="input admin" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
       
       <!--breed-->
       <label class="label admin">Breed:</label>

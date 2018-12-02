@@ -13,6 +13,7 @@ else {
     $ar = json_decode(file_get_contents('php://input'), true);
     $user_name = mysqli_real_escape_string($db,$ar['user_name']);
     $hashed_password = mysqli_real_escape_string($db,$ar['hashed_password']);
+    $hashed_password = sha1($user_name.$hashed_password); //salts hash using the users email
     $users = mysqli_query($db,"SELECT email, id, password, admin FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database
 	if(mysqli_num_rows($users) == 1){ //continues if and only if 1 matching user is returned
 		$userrow = mysqli_fetch_assoc($users);//pulls a row from the SQL return value

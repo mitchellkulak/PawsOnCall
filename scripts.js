@@ -730,10 +730,10 @@ function myFunction() {
 }
 
 function logout() {
-    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    document.cookie = "dogID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    document.cookie = "litter=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/PawsOnCall;";
-    fetch("logoff.php", {
+    document.cookie = "session=; Max-Age=-99999999;";
+    document.cookie = "dogID=; Max-Age=-99999999;";
+    document.cookie = "litter=; Max-Age=-99999999;";
+    fetch("/whelpingJournal/logoff.php", {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -741,7 +741,7 @@ function logout() {
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
     });
-    window.location.href = "/PawsOnCall/login.html";
+    window.location.href = "/whelpingJournal/login.html";
 
 }
 
@@ -863,6 +863,12 @@ function loginUser() {
                 passwordInput.value = "";
             }
         });
+}
+
+function loggedInRedirect(){
+    if(getCookie("session")){
+        window.location.href = "mother.html";
+    }
 }
 
 function addDogNote() {
@@ -1130,6 +1136,7 @@ function rewriteDate(date) {
         return date;
     }
 }
+
 
 /**
 * Secure Hash Algorithm (SHA1)
