@@ -145,11 +145,11 @@ document.addEventListener('DOMContentLoaded', function () {
     <!--Name section-->
     <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $userID?>">
     <label class="label admin">Name:</label>
-    <input class="input admin" type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
+    <input class="input admin" required type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
 
     <!--email-->
     <label class="label admin">Email: </label>
-    <input class="input admin" type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
+    <input class="input admin" required type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
 
     <!--phone-->
     <label class="label admin">Phone: <i>Enter as ###-###-####</i></label>

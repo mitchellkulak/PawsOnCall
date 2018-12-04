@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 </head>
-<body onload="loadMotherInfo() , adminShowHide() , getWhelpDates()">
+<body onload=" adminShowHide()">
 
 
 
@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <article class="tile notification is-primary is-vertical admin">
   <?php echo $message;?>
   <a class="button is-link admin" href="index.php">Return to admin page</a><br>
+    <a class="button is-link admin" href="../mother.html">Return to Mother page</a><br>
 
 </article>
 
