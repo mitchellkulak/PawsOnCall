@@ -38,6 +38,28 @@ mysqli_close($db);
   <title>PAWS Motherhood Database</title>
   <link rel="stylesheet" href="../bulma.css">
 	<link rel="stylesheet" href="../pawscustom.css">
+    <style>
+      .asterisk_input:after {
+content:" *"; 
+color: #e32;
+}
+      select {
+  width: 300px;
+  max-width: 100%;
+  /* So it doesn't overflow from it's parent */
+}
+    option {
+  /* wrap text in compatible browsers */
+  -moz-white-space: pre-wrap;
+  -o-white-space: pre-wrap;
+  white-space: pre-wrap;
+  /* hide text that can't wrap with an ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* add border after every option */
+  border-bottom: 1px solid #DDD;
+}
+  </style>
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
@@ -145,25 +167,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <form action="litterAction.php" method="post">
       <input type="text" class="dropbtn" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $litterID?>">
-      <label class="label admin">Volunteer:</label>
+      <label class="label admin asterisk_input">Volunteer:</label>
       <select name="volunteerID" id="volunteerID" class="dropbtn admin">
         <option value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($users)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $volunteerID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
       </select>
 
-      <label class="label admin"> Mother:</label>
+      <label class="label admin asterisk_input"> Mother:</label>
       <select name="motherID" id="motherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($motherdogs)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
 
-      <label class="label admin">Father:</label>
+      <label class="label admin asterisk_input">Father:</label>
       <select name="fatherID" id="fatherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($fatherdogs)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
       
-      <label class="label admin">Start Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <label class="label admin asterisk_input">Start Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
       <input class="input admin" id="startWhelp" type="text" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
 
       <label class="label admin">End Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>

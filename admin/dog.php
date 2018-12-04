@@ -36,6 +36,28 @@ mysqli_close($db);
   <title>PAWS Motherhood Database</title>
   <link rel="stylesheet" href="../bulma.css">
 	<link rel="stylesheet" href="../pawscustom.css">
+    <style>
+      .asterisk_input:after {
+content:" *"; 
+color: #e32;
+ }
+      select {
+  width: 300px;
+  max-width: 100%;
+  /* So it doesn't overflow from it's parent */
+}
+    option {
+  /* wrap text in compatible browsers */
+  -moz-white-space: pre-wrap;
+  -o-white-space: pre-wrap;
+  white-space: pre-wrap;
+  /* hide text that can't wrap with an ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* add border after every option */
+  border-bottom: 1px solid #DDD;
+}
+  </style>
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
@@ -146,11 +168,11 @@ document.addEventListener('DOMContentLoaded', function () {
       <input type="text" class="dropdown-content" name="loadID" id="dogID" style="visibility: hidden; display: none;" value="<?php echo $dogID?>">
       
       <!--enter dog name-->
-      <label class="label admin">Name: </label>
+      <label class="label admin asterisk_input">Name: </label>
       <input type="text" required class="input admin" name="name" value="<?php echo $dogrow['Name']?>"><br>
 
       <!--volunteer dropdown-->
-      <label class="label admin">Volunteer:</label>
+      <label class="label admin asterisk_input">Volunteer:</label>
       <select class="dropbtn" id="volunteerID" name="volunteerID">
         <option value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($users)){
@@ -162,12 +184,12 @@ document.addEventListener('DOMContentLoaded', function () {
       </select><br>
       
       <!--sex input-->
-      <label class="label admin">Sex:</label> 
+      <label class="label admin asterisk_input">Sex:</label> 
       <input type="radio" name="sex" value="F" <?php if($dogrow["Sex"] == "F"){echo "checked";}?>>Female<br>
       <input type="radio" name="sex" value="M" <?php if($dogrow["Sex"] == "M"){echo "checked";}?>>Male<br>
       
       <!--birthday-->
-      <label class="label admin"> Birthdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <label class="label admin asterisk_input"> Birthdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
       <input type="text" class="input admin" name="birthdate" id="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
       
       <!--adoption date-->
@@ -179,16 +201,16 @@ document.addEventListener('DOMContentLoaded', function () {
       <input type="text" class="input admin" name="deathdate" id="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
       
       <!--breed-->
-      <label class="label admin">Breed:</label>
+      <label class="label admin asterisk_input">Breed:</label>
       <input type="text" required class="input admin" name="breed" value="<?php echo $dogrow['Breed']?>"><br>
       
       <!--litter-->
       <label class="label admin">Litter:</label>
-      <select class="dropbtn" name="litterID" id="litterID">
+      <select class="dropbtn asterisk_input" required name="litterID" id="litterID">
         <option value=null>None</option>
         <?php while($sublitter = mysqli_fetch_assoc($litters)){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
-      <label class="label stillborn">Stillborn:</label>
+      <label class="label stillborn asterisk_input">Stillborn:</label>
       <input type="radio" name="stillborn" value="1" <?php if($dogrow["Stillborn"] == 1){echo "checked";}?>>Yes<br>
       <input type="radio" name="stillborn" value="0" <?php if($dogrow["Stillborn"] == 0 || $dogID == 0){echo "checked";}?>> No<br>
       <input class="button is-link admin " type="submit" value="Save" onclick="return validateDog();" name="Save">
