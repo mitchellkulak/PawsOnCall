@@ -21,32 +21,50 @@
 
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
-	<!--forms script-->
-	<script>
-		function editDates() {
-			document.getElementById("whelpStart").removeAttribute("disabled");
-			document.getElementById("whelpEnd").removeAttribute("disabled");
-			document.getElementById("whelpDate").removeAttribute("disabled");
-			document.getElementById("weanStart").removeAttribute("disabled");
-			document.getElementById("weanEnd").removeAttribute("disabled");
-			document.getElementById("deworm").removeAttribute("disabled");
-			document.getElementById('edit').hidden = true;
-			document.getElementById('save').hidden = false;
+	
+	<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
 
-			return false;
-		}
+th, td {
+    text-align: left;
+    padding: 8px;
+}
 
-		function editLitter() {
-			document.getElementById("father").removeAttribute("disabled");
-			document.getElementById("stillborns").removeAttribute("disabled");
-			document.getElementById("deaths").removeAttribute("disabled");
-			document.getElementById('edit').hidden = true;
-			document.getElementById('save').hidden = false;
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
+	
+<script>
+document.addEventListener('DOMContentLoaded', function () {
 
-			return false;
-		}
-	</script>
-	<!--forms script-->
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any nav burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+</script>
 </head>
 
 <body onload="adminShowHide(); loadLitterInfo();">
@@ -130,8 +148,11 @@
 						<!--mother name & litter select-->
 						<!--teal tile-->
 						<article class="tile is-child notification is-primary is-12 dogname">
-							<p class="title" id="litterNameDiv">No litters found. An administrator must create a new litter.</p>
+							<p class="title" id="litterNameDiv">dog</p>
 							<p class="subtitle" id="whelpStartDateDiv"></p>
+							<p id="volunteerIDHolder" style="visibility: hidden; display: none;"></p>
+							<p id="litterIDHolder" style="visibility: hidden; display: none;"></p>
+							<p id="breedHolder" style="visibility: hidden; display: none;"></p>
 							<div class="dropdown">
 								<button onclick="myFunction()" class="dropbtn" id="litterNameDiv">Select a different litter</button>
 								<div id="myDropdown" class="dropdown-content">
@@ -149,9 +170,8 @@
 							<article class="tile is-child notification is-danger">
 								<p class="title">
 									Litter
-									<button type="submit" class="button is-link inline" id="save" hidden>Save</button>
-									<button type="edit" class="button is-link inline" id="edit" onclick="return editHost()">Edit</button>
 								</p>
+								<div style="overflow-x:auto;">
 								<div class="content">
 									<table class="table is-striped">
 										<thead>
@@ -167,7 +187,10 @@
 											
 										</tbody>
 									</table>
+									<button class="button is-link is-inline-block" onclick="savePuppy();">Save</button>
+									<button class="button is-link is-inline-block" onclick="addPuppy();">Add Puppy</button>
 									</p>
+								</div>
 								</div>
 							</article>
 							<!--end red tile-->
@@ -220,10 +243,10 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<button type="edit" class="button button is-link" id="edit" onclick="return editLitter()">Edit</button>
 									<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
-								</div>
+								</div> -->
 							</form>
 					</div>
 					<!--end blue tile-->
@@ -260,7 +283,7 @@
 			<div class="tile is-parent">
 				<article class="tile is-child notification is-warning">
 					<p class="title">Important Dates</p>
-					<form class="form-horizontal">
+					<!--<form class="form-horizontal">-->
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
 								<label class="label">Whelp Start</label>
@@ -268,19 +291,19 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="whelpStart" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="whelpStart"  >
 									</p>
 								</div>
 							</div>
 						</div>
 						<div class="field is-horizontal">
-							<div class="field-wlabel is-normal">
+							<div class="field-label is-normal">
 								<label class="label">Whelp End</label>
 							</div>
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="whelpEnd" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="whelpEnd" >
 									</p>
 								</div>
 							</div>
@@ -292,7 +315,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="weanStart" disabled>
+										<input class="input" type="text" id="weanStart" >
 									</p>
 								</div>
 							</div>
@@ -304,28 +327,38 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="weanEnd" disabled>
+										<input class="input" type="text" id="weanEnd" >
 									</p>
 								</div>
 							</div>
 						</div>
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
-								<label class="label">Deworm</label>
+								<label class="label">Deworm Start</label>
 							</div>
 							<div class="field-body">
 								<div class="field">
 									<p class="control is-expanded">
-										<input class="input" type="text" id="deworm" placeholder="Disabled input" disabled>
+										<input class="input" type="text" id="dewormStart">
 									</p>
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<button type="edit" class="button button is-link" id="edit" onclick="return editDates()">Edit</button>
-							<button type="submit" class="btn btn-default" id="save" hidden>Save</button>
+						<div class="field is-horizontal">
+							<div class="field-label is-normal">
+								<label class="label">Deworm End</label>
+							</div>
+							<div class="field-body">
+								<div class="field">
+									<p class="control is-expanded">
+										<input class="input" type="text" id="dewormEnd" >
+									</p>
+								</div>
+							</div>
 						</div>
+						
 					</form>
+					<button class="button is-link is-inline-block" onclick="addImportantDates();">Save</button>
 				</article>
 
 				<!--important dates tile-->
@@ -335,8 +368,6 @@
 		</div>
 		<!--end 1-->
 		</article>
-		<!-- </div>
-		</div> -->
 		
 		
 		<div class="tile is-ancestor">
@@ -440,3 +471,5 @@
 </body>
 
 </html>
+
+
