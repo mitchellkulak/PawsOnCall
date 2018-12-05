@@ -381,10 +381,11 @@ function savePuppy() {
         body: JSON.stringify(theMasterPupData), // body data type must match "Content-Type" header
     })
         .then((responseContent) => {
+            litterID = document.getElementById("litterIDHolder").innerHTML;
+            loadLitterInfoByID(litterID);
         });
 
-    litterID = document.getElementById("litterIDHolder").innerHTML;
-    loadLitterInfoByID(litterID);
+    
     alert("Changes Saved");
 }
 
@@ -450,11 +451,10 @@ function addPuppy() {
     })
         //.then(response => response.json()) // parses response to JSON
         .then((responseContent) => {
-        });
-
+            
     litterID = document.getElementById("litterIDHolder").innerHTML;
     loadLitterInfoByID(litterID);
-
+        });
 }
 
 function saveLitterWeightTable() {
@@ -927,10 +927,11 @@ function addLitterNote() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
+                    loadLitterInfoByID(litterID);
                 });
         }
     }
-    loadLitterInfoByID(litterID);
+   
 }
 
 function getVolunteerInfo() {
