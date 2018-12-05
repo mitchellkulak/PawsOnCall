@@ -30,14 +30,13 @@ function addMomDogTemp() {
             })
                 //.then(response => response.json()) // parses response to JSON
                 .then((responseContent) => {
+                    loadMotherInfo();
                 });
         }
         else {
             alert("please enter a number between 90 and 110");
         }
     }
-    loadMotherInfo();
-
 }
 
 function getWhelpDates() {
@@ -191,7 +190,6 @@ function loadLitterInfo() {
             document.cookie = "litter=" + obj[0].ID;
             litterNameDiv.innerHTML = "Litter of " + obj[0].MotherName;
             whelpStartDateDiv.innerHTML = "Whelp started " + obj[0].StartWhelp;
-           // breedHolder.innerHTML = obj[0].MotherBreed;
             volunteerIDHolder.innerHTML = obj[0].VolunteerID;
             litterIDHolder.innerHTML = obj[0].ID;
             txtFather.value = obj[0].FatherName;
@@ -269,7 +267,6 @@ function loadLitterInfo() {
                 newRow.appendChild(newStillbornCell);
                 newRow.appendChild(newDeadPuppyCell);
                 litterInfoTableBody.appendChild(newRow);
-
             });
             stillbornsDiv.value = stillborn;
             deathsDiv.value = deadpuppies;
@@ -280,7 +277,7 @@ function loadLitterInfo() {
 }
 
 function addImportantDates() {
-       var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
+    var litterID = rewriteDate(document.getElementById("litterIDHolder").innerHTML);
     var whelpStart = rewriteDate(document.getElementById("whelpStart").value);
     if (!/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}/.test(whelpStart)) { alert("Enter Date in YYYY-MM-DD HH:MM:SS Format"); return; }
     var whelpEnd = rewriteDate(document.getElementById("whelpEnd").value);
