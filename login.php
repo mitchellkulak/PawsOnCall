@@ -1,5 +1,10 @@
 <?php
 header("Content-Type: application/json");
+header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 header("Access-Control-Allow-Origin: *");
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -11,7 +16,7 @@ if (mysqli_connect_error($db))
 }
 else {
     $ar = json_decode(file_get_contents('php://input'), true);
-    $user_name = mysqli_real_escape_string($db,$ar['user_name']);
+    $user_name = strtolower(mysqli_real_escape_string($db,$ar['user_name']));
     $hashed_password = mysqli_real_escape_string($db,$ar['hashed_password']);
     $hashed_password = sha1($user_name.$hashed_password); //salts hash using the users email
     $users = mysqli_query($db,"SELECT email, id, password, admin FROM Volunteer WHERE email = '$user_name' AND password = '$hashed_password'"); //checks for user in database

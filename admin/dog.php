@@ -1,5 +1,10 @@
 <?php
 session_start();
+header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 include '../authenticate.php';
 $session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
@@ -185,8 +190,8 @@ document.addEventListener('DOMContentLoaded', function () {
       
       <!--sex input-->
       <label class="label admin asterisk_input">Sex:</label> 
-      <input type="radio" name="sex" value="F" <?php if($dogrow["Sex"] == "F"){echo "checked";}?>>Female<br>
-      <input type="radio" name="sex" value="M" <?php if($dogrow["Sex"] == "M"){echo "checked";}?>>Male<br>
+      <input type="radio" name="sex" id="sexF" value="F" <?php if($dogrow["Sex"] == "F"){echo "checked";}?>>Female<br>
+      <input type="radio" name="sex" id="sexM" value="M" <?php if($dogrow["Sex"] == "M"){echo "checked";}?>>Male<br>
       
       <!--birthday-->
       <label class="label admin asterisk_input"> Birthdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
@@ -210,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <option value=null>None</option>
         <?php while($sublitter = mysqli_fetch_assoc($litters)){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
-      <label class="label stillborn asterisk_input">Stillborn:</label>
+      <label class="label stillborn">Stillborn:</label>
       <input type="radio" name="stillborn" value="1" <?php if($dogrow["Stillborn"] == 1){echo "checked";}?>>Yes<br>
       <input type="radio" name="stillborn" value="0" <?php if($dogrow["Stillborn"] == 0 || $dogID == 0){echo "checked";}?>> No<br>
       <input class="button is-link admin " type="submit" value="Save" onclick="return validateDog();" name="Save">
@@ -229,8 +234,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var birthdate = document.getElementById("birthdate").value;
     var adoptiondate = document.getElementById("adoptiondate").value;
     var volunteerID = document.getElementById("volunteerID").value;
+    var sexM = document.getElementById("sexM").checked;
+    var sexF = document.getElementById("sexF").checked;
     if(!re.test(deathdate) && deathdate != ""){
       errors.push("Deathdate must be in valid format, or blank");
+    }
+    if(!sexM && !sexF){
+      errors.push("Please select a sex");
     }
     if(!re.test(birthdate) && birthdate != ""){
       errors.push("Birthdate must be in valid format, or blank");
