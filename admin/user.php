@@ -26,7 +26,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
       $user = mysqli_query($db,"SELECT * FROM Volunteer WHERE id = $userID");
       $userrow = mysqli_fetch_assoc($user);
     }
-    $users = mysqli_query($db,"SELECT ID, Name FROM Volunteer");
+    $users = mysqli_query($db,"SELECT ID, Name FROM Volunteer ORDER BY Name");
   }
 }
 mysqli_close($db);
