@@ -1,5 +1,10 @@
 <?php
 session_start();
+header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 include '../authenticate.php';
 $session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
@@ -33,6 +38,28 @@ mysqli_close($db);
   <title>PAWS Motherhood Database</title>
   <link rel="stylesheet" href="../bulma.css">
 	<link rel="stylesheet" href="../pawscustom.css">
+  <style>
+    .asterisk_input:after {
+content:" *"; 
+color: #e32;
+ }
+    select {
+  width: 300px;
+  max-width: 100%;
+  /* So it doesn't overflow from it's parent */
+}
+    option {
+  /* wrap text in compatible browsers */
+  -moz-white-space: pre-wrap;
+  -o-white-space: pre-wrap;
+  white-space: pre-wrap;
+  /* hide text that can't wrap with an ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* add border after every option */
+  border-bottom: 1px solid #DDD;
+}
+  </style>
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="../scripts.js"></script>
@@ -144,16 +171,16 @@ document.addEventListener('DOMContentLoaded', function () {
     
     <!--Name section-->
     <input type="text" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $userID?>">
-    <label class="label admin">Name:</label>
-    <input class="input admin" type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
+    <label class="label admin asterisk_input">Name: <i>enter as Lastname, firstname</i></label>
+    <input class="input admin" required type="text" name="name" value="<?php echo $userrow['Name']?>"><br>
 
     <!--email-->
-    <label class="label admin">Email: </label>
-    <input class="input admin" type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
+    <label class="label admin asterisk_input">Email: </label>
+    <input class="input admin" required type="email" name="email" value="<?php echo $userrow['Email']?>"><br>
 
     <!--phone-->
-    <label class="label admin">Phone: <i>Enter as ###-###-####</i></label>
-    <input class="input admin" type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" value="<?php echo $userrow['Phone']?>"><br>
+    <label class="label admin asterisk_input">Phone: <i>Enter as ###-###-####</i></label>
+    <input class="input admin" type="text" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="phone" value="<?php echo $userrow['Phone']?>"><br>
 
 
     <!--address-->
@@ -165,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <input class="input admin" type="text" name="city" value="<?php echo $userrow['City']?>"><br>
 
     <!--state-->
-    <label class="label admin">State: </label>
+    <label class="label admin asterisk_input">State: </label>
     <select class="dropbtn admin" name="state" id="state">
       <option value="AL">Alabama</option>
       <option value="AK">Alaska</option>
@@ -221,8 +248,8 @@ document.addEventListener('DOMContentLoaded', function () {
     </select>	
 
     <!--zip-->
-    <label class="label admin">ZIP: <i>Enter as #####</i> </label>
-    <input class="input admin" type="text" pattern="[0-9]{5}" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
+    <label class="label admin asterisk_input">ZIP: <i>Enter as #####</i> </label>
+    <input class="input admin" type="text" required pattern="[0-9]{5}" name="zip" value="<?php echo $userrow['ZIP']?>"><br>
     
     <!--admin buttons-->
     <label class="label admin">Admin:</label>

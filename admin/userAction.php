@@ -1,6 +1,11 @@
 <?php
 include '../authenticate.php';
 session_start();
+header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 $session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
 
@@ -18,7 +23,7 @@ if ($auth['error'] == 'auth error' || !$auth['admin']) {
   elseif(isset($_POST["Save"])) {
 
     $name = mysqli_real_escape_string($db,$_POST["name"]);
-    $email = mysqli_real_escape_string($db,$_POST["email"]);
+    $email = strtolower(mysqli_real_escape_string($db,$_POST["email"]));
     $phone = mysqli_real_escape_string($db,$_POST["phone"]);
     $address = mysqli_real_escape_string($db,$_POST["address"]);
     $city = mysqli_real_escape_string($db,$_POST["city"]);
@@ -116,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 </head>
-<body onload="loadMotherInfo() , adminShowHide() , getWhelpDates()">
+<body onload="adminShowHide()">
 
 
 
@@ -173,7 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- Navbar, logo, logout button -->
 <article class="tile notification is-primary is-vertical admin">
   <?php echo $message;?>
-  <a class="button is-link admin" href="index.php">Return to admin page</a><br>
+  <a class="button is-link admin" href="index.php">Return to Admin page</a><br>
+  <a class="button is-link admin" href="../mother.html">Return to Mother page</a><br>
 
 </article>
 

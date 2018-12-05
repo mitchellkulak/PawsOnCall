@@ -1,5 +1,11 @@
 <?php
 session_start();
+header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 include '../authenticate.php';
 $session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
@@ -38,6 +44,28 @@ mysqli_close($db);
   <title>PAWS Motherhood Database</title>
   <link rel="stylesheet" href="../bulma.css">
 	<link rel="stylesheet" href="../pawscustom.css">
+    <style>
+      .asterisk_input:after {
+content:" *"; 
+color: #e32;
+}
+      select {
+  width: 300px;
+  max-width: 100%;
+  /* So it doesn't overflow from it's parent */
+}
+    option {
+  /* wrap text in compatible browsers */
+  -moz-white-space: pre-wrap;
+  -o-white-space: pre-wrap;
+  white-space: pre-wrap;
+  /* hide text that can't wrap with an ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* add border after every option */
+  border-bottom: 1px solid #DDD;
+}
+  </style>
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
@@ -145,46 +173,96 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <form action="litterAction.php" method="post">
       <input type="text" class="dropbtn" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $litterID?>">
-      <label class="label admin">Volunteer:</label>
-      <select name="volunteerID" class="dropbtn admin">
+      <label class="label admin asterisk_input">Volunteer:</label>
+      <select name="volunteerID" id="volunteerID" class="dropbtn admin">
         <option value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($users)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $volunteerID){echo " selected";}echo ">".$subuser["Name"]."</option>";}?>
       </select>
 
-      <label class="label admin"> Mother:</label>
-      <select name="motherID" class="dropbtn admin">
+      <label class="label admin asterisk_input"> Mother:</label>
+      <select name="motherID" id="motherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($motherdogs)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $motherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
 
-      <label class="label admin">Father:</label>
-      <select name="fatherID" class="dropbtn admin">
+      <label class="label admin asterisk_input">Father:</label>
+      <select name="fatherID" id="fatherID" class="dropbtn admin">
         <option class="dropbtn admin" value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($fatherdogs)){echo "<option value=".$subuser["ID"];if($subuser["ID"] == $fatherID){echo " selected";}echo ">".$subuser["Name"]." ".$subuser["Breed"]."</option>";}?>
       </select><br>
       
-      <label class="label admin">Start Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
+      <label class="label admin asterisk_input">Start Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input class="input admin" id="startWhelp" type="text" name="startWhelp" value="<?php echo $litterrow['StartWhelp']?>"><br>
 
       <label class="label admin">End Whelp: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
+      <input class="input admin" id="endWhelp" type="text" name="endWhelp" value="<?php echo $litterrow['EndWhelp']?>"><br>
 
       <label class="label admin">Start Wean: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
+      <input class="input admin" id="startWean" type="text" name="startWean" value="<?php echo $litterrow['StartWean']?>"><br>
 
       <label class="label admin">End Wean: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
+      <input class="input admin" id="endWean" type="text" name="endWean" value="<?php echo $litterrow['EndWean']?>"><br>
       
       <label class="label admin">Start Deworm: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="startDeworm" value="<?php echo $litterrow['StartDeworm']?>"><br>
+      <input class="input admin" id="startDeworm" type="text" name="startDeworm" value="<?php echo $litterrow['StartDeworm']?>"><br>
       
       <label class="label admin">End Deworm: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" type="text" name="endDeworm" value="<?php echo $litterrow['StartDeworm']?>"><br>
+      <input class="input admin" id="endDeworm" type="text" name="endDeworm" value="<?php echo $litterrow['StartDeworm']?>"><br>
       
-      <input class="button is-link admin" type="submit" name="Save" value="Save">
+      <input class="button is-link admin" type="submit" name="Save" onclick="return validateLitter();" value="Save">
       <input class="button is-link admin" name="Delete" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this litter?');">
     </form>
     <a href="index.php">Return to admin page</a>
   </article>
 </body>
 <html>
+  <script>
+  function validateLitter(){
+    var errors = [];
+    var re = new RegExp("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}");
+    var volunteerID=document.getElementById('volunteerID').value;
+    var motherID=document.getElementById('motherID').value;
+    var fatherID=document.getElementById('fatherID').value;
+    var startWhelp=document.getElementById('startWhelp').value;
+    var endWhelp=document.getElementById('endWhelp').value;
+    var startWean=document.getElementById('startWean').value;
+    var endWean=document.getElementById('endWean').value;
+    var startDeworm=document.getElementById('startDeworm').value;
+    var endDeworm=document.getElementById('endDeworm').value;
+    if(volunteerID == 0){
+      errors.push("Volunteer cannot be blank");
+    }
+    if(motherID == 0){
+      errors.push("Mother cannot be blank");
+    }
+    if(fatherID == 0){
+      errors.push("Father cannot be blank");
+    }
+    if(!re.test(startWhelp) || startWhelp == ""){
+      errors.push("Start whelp must be in valid format, and not blank");
+    }
+    if(!re.test(endWhelp) && endWhelp != ""){
+      errors.push("End whelp must be in valid format, or blank");
+    }
+    if(!re.test(startWean) && startWean != ""){
+      errors.push("Start wean must be in valid format, or blank");
+    }
+    if(!re.test(endWean) && endWean != ""){
+      errors.push("End wean must be in valid format, or blank");
+    }
+    if(!re.test(startDeworm) && startDeworm != ""){
+      errors.push("Start deworm must be in valid format, or blank");
+    }
+    if(!re.test(endDeworm) && endDeworm != ""){
+      errors.push("End deworm must be in valid format, or blank");
+    }
+    if(errors.length > 0){
+      var errorsString = errors.join('\n');
+      alert("Please correct the following errors:\n\n" + errorsString);
+      return false;
+    }else{
+      return true;
+    }
+    
+  }
+</script>

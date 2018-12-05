@@ -1,6 +1,11 @@
 <?php
 include '../authenticate.php';
 session_start();
+header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 $session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
 
@@ -123,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 </head>
-<body onload="loadMotherInfo() , adminShowHide() , getWhelpDates()">
+<body onload="adminShowHide()">
 
 
 
@@ -181,6 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <article class="tile notification is-primary is-vertical admin">
   <?php echo $message;?>
   <a class="button is-link admin" href="index.php">Return to admin page</a><br>
+    <a class="button is-link admin" href="../mother.html">Return to Mother page</a><br>
 
 </article>
 

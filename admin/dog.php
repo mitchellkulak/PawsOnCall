@@ -1,5 +1,10 @@
 <?php
 session_start();
+header("Expires: on, 01 Jan 1970 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 include '../authenticate.php';
 $session = $_SESSION['session'];
 $auth = json_decode(authenticate(urldecode($session)), true);
@@ -36,6 +41,28 @@ mysqli_close($db);
   <title>PAWS Motherhood Database</title>
   <link rel="stylesheet" href="../bulma.css">
 	<link rel="stylesheet" href="../pawscustom.css">
+    <style>
+      .asterisk_input:after {
+content:" *"; 
+color: #e32;
+ }
+      select {
+  width: 300px;
+  max-width: 100%;
+  /* So it doesn't overflow from it's parent */
+}
+    option {
+  /* wrap text in compatible browsers */
+  -moz-white-space: pre-wrap;
+  -o-white-space: pre-wrap;
+  white-space: pre-wrap;
+  /* hide text that can't wrap with an ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* add border after every option */
+  border-bottom: 1px solid #DDD;
+}
+  </style>
 	
 	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 	<script src="scripts.js"></script>
@@ -143,15 +170,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <form action="dogAction.php" method="post">
       <!--pick dog from listed dogs-->
-      <input type="text" class="dropdown-content" name="loadID" style="visibility: hidden; display: none;" value="<?php echo $dogID?>">
+      <input type="text" class="dropdown-content" name="loadID" id="dogID" style="visibility: hidden; display: none;" value="<?php echo $dogID?>">
       
       <!--enter dog name-->
-      <label class="label admin">Name: </label>
+      <label class="label admin asterisk_input">Name: </label>
       <input type="text" required class="input admin" name="name" value="<?php echo $dogrow['Name']?>"><br>
 
       <!--volunteer dropdown-->
-      <label class="label admin">Volunteer:</label>
-      <select class="dropbtn" name="volunteerID">
+      <label class="label admin asterisk_input">Volunteer:</label>
+      <select class="dropbtn" id="volunteerID" name="volunteerID">
         <option value="0">select</option>
         <?php while($subuser = mysqli_fetch_assoc($users)){
           echo "<option value=".$subuser["ID"];
@@ -162,36 +189,36 @@ document.addEventListener('DOMContentLoaded', function () {
       </select><br>
       
       <!--sex input-->
-      <label class="label admin">Sex:</label> 
-      <input type="radio" name="sex" value="F" <?php if($dogrow["Sex"] == "F"){echo "checked";}?>>Female<br>
-      <input type="radio" name="sex" value="M" <?php if($dogrow["Sex"] == "M"){echo "checked";}?>>Male<br>
+      <label class="label admin asterisk_input">Sex:</label> 
+      <input type="radio" name="sex" id="sexF" value="F" <?php if($dogrow["Sex"] == "F"){echo "checked";}?>>Female<br>
+      <input type="radio" name="sex" id="sexM" value="M" <?php if($dogrow["Sex"] == "M"){echo "checked";}?>>Male<br>
       
       <!--birthday-->
-      <label class="label admin"> Birthdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input type="text" class="input admin" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}" name="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
+      <label class="label admin asterisk_input"> Birthdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
+      <input type="text" class="input admin" name="birthdate" id="birthdate" value="<?php echo $dogrow['Birthdate']?>"><br>
       
       <!--adoption date-->
       <label class="label admin">Adoption Date: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input type="text" class="input admin" name="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
+      <input type="text" class="input admin" name="adoptiondate" id="adoptiondate" value="<?php echo $dogrow['Adoptiondate']?>"><br>
       
       <!--death date-->
       <label class="label admin">Deathdate: <i>Enter in YYYY-MM-DD HH:MM:SS Format</i></label>
-      <input type="text" class="input admin" name="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
+      <input type="text" class="input admin" name="deathdate" id="deathdate" value="<?php echo $dogrow['Deathdate']?>"><br>
       
       <!--breed-->
-      <label class="label admin">Breed:</label>
+      <label class="label admin asterisk_input">Breed:</label>
       <input type="text" required class="input admin" name="breed" value="<?php echo $dogrow['Breed']?>"><br>
       
       <!--litter-->
       <label class="label admin">Litter:</label>
-      <select class="dropbtn" name="litterID">
+      <select class="dropbtn asterisk_input" required name="litterID" id="litterID">
         <option value=null>None</option>
         <?php while($sublitter = mysqli_fetch_assoc($litters)){echo "<option value=".$sublitter["ID"];if($sublitter["ID"]==$dogrow["LitterID"]){echo " selected";} echo ">".$sublitter["Name"]." ".$sublitter["StartWhelp"]."</option>";}?>
       </select>
       <label class="label stillborn">Stillborn:</label>
       <input type="radio" name="stillborn" value="1" <?php if($dogrow["Stillborn"] == 1){echo "checked";}?>>Yes<br>
       <input type="radio" name="stillborn" value="0" <?php if($dogrow["Stillborn"] == 0 || $dogID == 0){echo "checked";}?>> No<br>
-      <input class="button is-link admin " type="submit" value="Save" name="Save">
+      <input class="button is-link admin " type="submit" value="Save" onclick="return validateDog();" name="Save">
       <input class="button is-link admin " type="submit" name="Delete" value="Delete" onclick="return confirm('Are you sure you want to delete this dog?');">
     </form>
     <a href="index.php">Return to admin page</a>
@@ -199,3 +226,38 @@ document.addEventListener('DOMContentLoaded', function () {
   </article>
 </body>
 <html>
+<script>
+  function validateDog(){
+    var errors = [];
+    var re = new RegExp("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}");
+    var deathdate = document.getElementById("deathdate").value;
+    var birthdate = document.getElementById("birthdate").value;
+    var adoptiondate = document.getElementById("adoptiondate").value;
+    var volunteerID = document.getElementById("volunteerID").value;
+    var sexM = document.getElementById("sexM").checked;
+    var sexF = document.getElementById("sexF").checked;
+    if(!re.test(deathdate) && deathdate != ""){
+      errors.push("Deathdate must be in valid format, or blank");
+    }
+    if(!sexM && !sexF){
+      errors.push("Please select a sex");
+    }
+    if(!re.test(birthdate) && birthdate != ""){
+      errors.push("Birthdate must be in valid format, or blank");
+    }
+    if(!re.test(adoptiondate) && adoptiondate != ""){
+      errors.push("Adoption date must be in valid format, or blank");
+    }
+    if(volunteerID == 0){
+      errors.push("Volunteer cannot be blank");
+    }
+    if(errors.length > 0){
+      var errorsString = errors.join('\n');
+      alert("Please correct the following errors:\n\n" + errorsString);
+      return false;
+    }else{
+      return true;
+    }
+    
+  }
+</script>
