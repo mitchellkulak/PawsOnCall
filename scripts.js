@@ -1010,6 +1010,7 @@ function redirectToSearch() {
 }
 
 function searchForDogs() {
+    verifySessionCookie();
     const urlParams = new URLSearchParams(window.location.search);
     const dogName = urlParams.get('search');
     var searchResultSection = document.getElementById("searchResults");
