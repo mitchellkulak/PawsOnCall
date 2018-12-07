@@ -62,7 +62,7 @@ function getWhelpDates() {
                 var startCell = document.createElement("td");
                 var endCell = document.createElement("td");
                 startWhelp = element.StartWhelp;
-                endWhelp = element.EndWhelp;
+                endWhelp = validateDate(element.EndWhelp);
                 startCell.innerHTML = startWhelp;
                 endCell.innerHTML = endWhelp;
                 newRow.appendChild(startCell);
